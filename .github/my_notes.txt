@@ -1,0 +1,7 @@
+Topic: Introduction - What is the Internet
+- The Internet is just a huge network of wires (incl. undersea fiber-optic cables) connecting computers worldwide.
+- Server = always-on computer that serves data/files on request. Client = the device requesting them.
+- ISP (Internet Service Provider) relays your request to a DNS server.
+- DNS server = phone book that translates a domain name (google.com) into an IP address.
+- IP address = unique numeric "postal code" for every device on the Internet.
+- Flow: Browser -> ISP -> DNS (resolves IP) -> Browser requests directly from that IP -> server responds with page data.

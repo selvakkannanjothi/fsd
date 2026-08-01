@@ -1,6 +1,6 @@
 # Practice Tasks: What is the Internet?
 
-Based on: `course_content/Introduction/what_is_internet.txt` · Notes: `my_notes/Introduction/what_is_internet_notes.md`
+Based on: `course_content/Introduction/what_is_internet.txt` · Notes: `.github/my_tasks/concepts/concept_what_is_internet.md`
 
 ## Warm-up (no coding required)
 
