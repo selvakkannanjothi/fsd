@@ -47,7 +47,8 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - [ ] Domain names, hosting, and web servers
 
 ### Phase 2: Frontend
-- [ ] HTML — structure, semantic tags, forms
+- [x] HTML — core elements: headings, paragraphs, void elements (hr/br), lists, nesting/indentation, anchor tags & attributes, images (see EX 2.1–EX 3.4)
+- [ ] HTML — semantic tags, forms, tables
 - [ ] CSS — selectors, box model, flexbox, grid, responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
@@ -92,3 +93,9 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - **HTML/CSS/JS roles**: HTML = content (bricks), CSS = styling (paint), JavaScript = functionality (electricity/appliances) — house analogy.
 - **Browser render order**: HTML loads first (raw content) → CSS applied (styled) → JavaScript runs (interactive).
 - **Chrome DevTools**: Right-click → Inspect opens live HTML/CSS view; edits are local-only and reset on refresh since the browser re-fetches the real files from the server.
+- **HTML tag vs. element**: tag = the `<bracketed>` piece; element = opening tag + content + closing tag together.
+- **Heading hierarchy (h1–h6)**: only one `h1` per page, don't skip levels — convention, not enforced by the browser.
+- **Void elements** (`<hr />`, `<br />`, `<img />`): self-closing, no separate closing tag; don't use `<br />` in place of a new `<p>` (breaks screen-reader paragraph navigation).
+- **Lists**: `<ul>` = unordered (bullets), `<ol>` = ordered (numbers, has a `start` attribute); nested lists live inside a parent `<li>`, before that `<li>`'s closing tag.
+- **Attributes**: live in the opening tag as `name="value"`; some are element-specific (`href` on `<a>`), some are global (`draggable` on anything).
+- **Images**: `<img src="..." alt="...">` is a void element; `alt` text is read aloud by screen readers — always add it for meaningful images.

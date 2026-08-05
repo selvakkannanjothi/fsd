@@ -11,3 +11,14 @@ Topic: Introduction - How Do Websites Actually Work
 - House analogy: HTML = bricks, CSS = paint/decor, JS = electricity/appliances.
 - Browser render order: HTML first (raw content) -> CSS applied (styled) -> JS runs (interactive).
 - Chrome DevTools (right-click -> Inspect) lets you view/edit the live HTML locally; edits are lost on refresh since the browser re-fetches the real files from the server.
+
+Topic: HTML - Elements (Headings, Paragraphs, Void Elements, Lists, Nesting, Anchors, Images)
+- Tag = the <bracketed> bit; Element = opening tag + content + closing tag together.
+- Headings h1-h6 show hierarchy (like a book TOC); convention: only one h1, don't skip levels.
+- Paragraph <p> separates text blocks and lets screen readers navigate paragraph-by-paragraph.
+- Void elements (<hr />, <br />, <img />) self-close, no separate closing tag; don't use <br /> as a substitute for a new <p> (breaks accessibility).
+- Lists: <ul> = bullets (order doesn't matter), <ol> = numbered (order matters); both need <li> children; <ol start="n"> changes starting number.
+- Nesting: a sub-list goes inside its parent <li>, before that <li>'s closing tag; indentation is for humans, not the browser, but VS Code auto-indent doubles as a bug-finder.
+- Attributes live in the opening tag (name="value"); href is anchor-specific, draggable is a global attribute usable on any element.
+- <img src="..." alt="...">: alt text is read by screen readers - always add it for meaningful images.
+- Practiced across EX 2.1-3.4, capped by EX 3.4 Birthday Invite Project combining headings + image + list + link.
