@@ -5,3 +5,9 @@ Topic: Introduction - What is the Internet
 - DNS server = phone book that translates a domain name (google.com) into an IP address.
 - IP address = unique numeric "postal code" for every device on the Internet.
 - Flow: Browser -> ISP -> DNS (resolves IP) -> Browser requests directly from that IP -> server responds with page data.
+
+Topic: Introduction - How Do Websites Actually Work
+- Server sends back 3 file types: HTML (content), CSS (styling), JavaScript (functionality).
+- House analogy: HTML = bricks, CSS = paint/decor, JS = electricity/appliances.
+- Browser render order: HTML first (raw content) -> CSS applied (styled) -> JS runs (interactive).
+- Chrome DevTools (right-click -> Inspect) lets you view/edit the live HTML locally; edits are lost on refresh since the browser re-fetches the real files from the server.

@@ -42,7 +42,7 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 
 ### Phase 1: Web Fundamentals
 - [x] What is the Internet — client/server, ISP, DNS, IP addresses
-- [ ] How websites work (HTTP requests/responses, browsers rendering pages)
+- [x] How websites actually work — HTML/CSS/JS roles, browser render order, Chrome DevTools
 - [ ] HTTP methods, status codes, headers
 - [ ] Domain names, hosting, and web servers
 
@@ -89,3 +89,6 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - **IP address**: a unique numeric identifier ("postal code") for every device connected to the Internet.
 - **Request flow**: Browser → ISP → DNS server (resolves IP) → Browser requests directly from that IP → server responds with page data.
 - **Physical Internet**: undersea fiber-optic cables physically connect continents, carrying data via lasers at very high speeds (see submarinecablemap.com).
+- **HTML/CSS/JS roles**: HTML = content (bricks), CSS = styling (paint), JavaScript = functionality (electricity/appliances) — house analogy.
+- **Browser render order**: HTML loads first (raw content) → CSS applied (styled) → JavaScript runs (interactive).
+- **Chrome DevTools**: Right-click → Inspect opens live HTML/CSS view; edits are local-only and reset on refresh since the browser re-fetches the real files from the server.
