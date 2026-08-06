@@ -1,0 +1,219 @@
+All right.
+
+Well done on making it to the end of the section.
+
+And it's time for your project.
+
+In this project, we're going to be building your very first Web Developer Portfolio.
+
+It's a website where you're going to be able to show off all of your work.
+
+Most web developers and designers out there will have their own website where they actually show people
+
+what they've built before and link to those websites that they've created so that if somebody wanted
+
+to hire you, they would be able to look at this page, see what you've done, and then maybe contact
+
+you or learn more about you.
+
+And this is the website we're going to make, but we're going to make a very simple version of it using
+
+just HTML.
+
+What you need to learn in order to do this and hopefully you already know how to do this, but we need
+
+to be able to take screenshots.
+
+Now on your computer, it will be different whether if you're on Windows or if you're on a Mac or if
+
+you're on Linux.
+
+What I want you to do if you don't know how to take screenshots on your particular computer, is just
+
+to go into Google and search for how to take screenshot on Windows Mac or Linux, depending on what
+
+system you're working on.
+
+Once you've figured that out, then we can proceed to download the Portfolio Project zip file and extract
+
+it and open it inside VS Code.
+
+There's quite a lot of files I've got in here.
+
+If you take a look inside the goal.png, this is what we're trying to create, a very simple HTML
+
+only portfolio website.
+
+It's got a title, it's got a subtitle, it's got some horizontal rules, but we've also got the two
+
+projects that we've built so far: the Movie Ranking Project from Section 2 and the Birthday Invite
+
+Project from Section 3.
+
+What we're going to do is we're going to add an image which is a screenshot of each of those projects,
+
+and we're also going to link to each of those projects,
+
+and also an About Me and Contact Me page.
+
+If you look inside the public folder, I've actually already got the movie-ranking.html and the
+
+birthday-invite.html.
+
+Notice that the code here is the project code that you've written before,
+
+what I recommend is to actually replace the code here with your own code because it will probably be
+
+a little bit different.
+
+You might have customized it, you might have made it look a lot better than the standard version,
+
+and your birthday is probably not on the 12th of May.
+
+Similar with the Movie Ranking, your top three movies is probably different and I want you to take
+
+the code that you've previously written because we're taking this portfolio website seriously, right?
+
+We're actually going to show off what we've done so far, which is actually a lot already.
+
+And I want you to customize the About page, the Contact Me page, basically make it your own web page
+
+because later on we're going to be putting this live on the Internet, which you can share with anybody
+
+in the world.
+
+So let's take this project seriously.
+
+What I mentioned about screenshots, the reason why we're doing it is so that when we look at our website,
+
+we can see a little preview of the project that it's going to link to so that people can see which ones
+
+they actually want to go and take a closer look at.
+
+And in order to do this, we're going to right-click on the files that you've got, say, the birthday-
+
+invite, Show Preview,
+
+and once our preview is up, we're going to take a screenshot of it using whichever method you've discovered.
+
+And once you've got that screenshot, then you can go ahead and drag it into the assets folder.
+
+And inside the asset folder there's the images folder.
+
+So there you have your screenshot and then you can go ahead and rename it to a sensible name, whatever
+
+it is you want.
+
+And this is how we're going to end up with some preview images for our website.
+
+Now you can see there's already some images I've got in there, so in case your screenshot doesn't work
+
+or you can't figure out how to use it, or you simply just want to do this project quickly, then you
+
+can of course use the images I've already included for you.
+
+But what you need to do is a seven-step process and I've added seven to-do's in there.
+
+Just like any real web developer working professionally, you would split your big task, creating this
+
+portfolio website into smaller tasks such as here are seven TODO's.
+
+So first step, create the HTML boilerplate using what you learned from the last lesson.
+
+Change the title to whatever it is you want.
+
+Add your previous projects' HTML into the public folder, so replace the code in here with your own.
+
+Then take screenshots of your projects and add it to the images folder here.
+
+Rename them and make sure you've got them
+
+ready to go.
+
+Then go ahead and add some titles or subtitles, your portfolio, you're a web developer, whatever it is
+
+you want to do, using what you've learned from previous lessons, then add a link to the project pages.
+
+For example, the Movie Ranking Project link here,
+
+this is an anchor tag.
+
+This is the Birthday Invite Project anchor tag, and these two should link to their respective web pages,
+
+so birthday-invite.html or movie-ranking.html.
+
+And then we want to add the images in order to show off the previews.
+
+Now, I've got a hint in here because you might find that when you take a screenshot, the image ends
+
+up being massive and it doesn't really render properly like what we see in the goal here.
+
+So a small, tiny image instead it might take up the entire page and it will look very, very awkward.
+
+So one of the things you can do is set an attribute on the image element, which is the height, and
+
+you can set it to 200, which means it'll be 200 pixels high and it will automatically figure out the
+
+width.
+
+And if you want to learn more about this, I've included a link to the Developer Documentation so you
+
+can read up on that attribute and see how it works.
+
+Now, once you've made the image show up and made it smaller, the final thing to do is to add the Contact
+
+Me and About Me page links at the very bottom down here.
+
+So maybe add a horizontal rule.
+
+You can add whichever HTML elements you like because this is your project, this is your portfolio.
+
+And of course, in later lessons, when we learn more about styling and CSS, we can jazz this up,
+
+but at this stage, we're just aiming for a very simple HTML-only project page like this.
+
+So I'm going to leave you to it and I want you to really put some time and energy into this portfolio
+
+because it's going to be shown off to the entire world.
+
+Pause the video and give that a go.
+
+Now, I want to briefly run through my solution with you,
+
+but remember, this is just an example.
+
+It's your website and you can make it however you like.
+
+But a couple of things to note is firstly, I've got my HTML boilerplate here.
+
+I've removed the unnecessary meta tags, I've changed my title, I've added in some h1's and h2's,
+
+and horizontal rules just to separate some of the content,
+
+but more importantly, I've got my anchor tags in. This anchor tag links to the movie-ranking html,
+
+and this is embedded inside an h3 so that it will be a little bit bigger.
+
+And I've got an image that will show off the preview of that particular web page.
+
+And at the very bottom, I've got my two other pages, my About and Contact.
+
+In this case, what the preview looks like is like this.
+
+When I click on this link, it goes to one of my projects.
+
+This link goes to one of my other projects and at the bottom, I've got the About Me and Contact Me pages
+
+that will tell people a little bit more about myself.
+
+Hopefully you've created something similar and in the next lesson there's a bonus lesson where I want
+
+to show you how to put this live onto the Internet so that you can share it with your friends and share
+
+it with us; the other students and myself,
+
+so we can see the beautiful portfolio website that you've built.
+
+So for all of that and more, I'll see you on the next lesson.
+
+

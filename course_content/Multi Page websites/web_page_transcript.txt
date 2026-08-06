@@ -1,0 +1,327 @@
+Hey, guys.
+
+So now that you know all about file paths, we're going to use that important knowledge to help us build
+
+multi-page websites.
+
+And we're going to be introducing you to this concept of web pages.
+
+If we think of the websites that we've created so far, it looks something like this.
+
+It's pretty simple.
+
+Normally we'll have a Project folder that contains the entire website, and inside there we'll have
+
+our starting file, which is our index.html.
+
+And this is where we've been writing all our code.
+
+Now there's other subsidiary files that we've had, like an Images folder with images or other folders.
+
+et cetera.
+
+But in order to create a multi-page website, what we'll need is multiple web pages, right?
+
+So maybe we'll have an "About page" that tells people who visit our website all about ourselves.
+
+Maybe we'll have a "Contact Us page" so that people who visit our personal website, they can send us
+
+an email or they can call us if we want them to.
+
+All of these web pages then go into the same project folder and it becomes our multi-page website and
+
+it might look something like this.
+
+We could have our index.html.
+
+We could have our about.html.
+
+We can have many, many others if we want to, but we have to refer to them in our anchor tags and using
+
+our links in order for the user to be able to navigate to it.
+
+If we're trying to show a link to the, "about page," on our home page, which remember is our "index.html",
+
+then we can use what we learned about the file path in order to get there.
+
+The path to take us to the "about page"
+
+if we're creating this anchor tag inside the index.html would look something like this.
+
+We have our href which is set to ./, which remember means that we should look inside the current
+
+directory.
+
+So inside our Project folder.
+
+And then we're going to go to a file called about.html, which takes us to this particular page.
+
+And that means that when the user actually clicks on this link that links to the about page, then it
+
+should go ahead and redirect to this web page.
+
+And this is what it would look like if this anchor tag was rendered in a browser.
+
+When you click on the link, then it redirects you to the about.html and then you end up seeing
+
+this HTML page instead of the home page.
+
+Now I've got a quiz for you and this is a little bit of revision on how file paths work.
+
+We are located currently within the index.html and we're trying to navigate all the way to this
+
+cat.png.
+
+We want to show this image on our home page.
+
+I've got four options for you here for how we would structure that image element.
+
+What I want you to do is to take out your mobile phone, open up your camera, and for you to scan the
+
+QR code of the solution that you think is correct.
+
+If you don't know how to scan your QR code, it's super simple.
+
+All you do is on Android,
+
+simply open up the camera application and just point it at the QR code and the same thing in iPhone,
+
+open up the camera application, choose the normal photo mode and then point it at the QR code.
+
+And when you point it, it should show up the URL either here on Android or here on iOS and just simply
+
+tap on it and you'll be taken to an animated gif that should tell you whether if you got it right or
+
+if you got the answer wrong.
+
+So let's go through the solution together one by one and see which one is correct.
+
+Now, if you picked option one, then unfortunately this would have been the wrong answer.
+
+And the reason is because the path starts off with two dots (..),
+
+and what this means is to go into the previous directory.
+
+This index.html is inside our Project folder and the double slash will go one level higher to this next
+
+folder, right here.
+
+Now, we don't actually want to go into that folder,
+
+we want to go into the Project folder.
+
+That's why this is wrong, unfortunately.
+
+Now the next one is this one, and the reason why this one is also incorrect is because the image tag
+
+uses an attribute called source, "src," and not the "href".
+
+The href is only for the anchor tags and not for the image tag.
+
+And because in this case we want to display our cat image, then this is also unfortunately wrong.
+
+Now the third one I'm going to go through is here, so you'll probably know what the correct answer
+
+is.
+
+And the reason why this is wrong is because we have an anchor tag here
+
+instead of an image tag.
+
+An anchor tag will give us a link to a web page or a website or somewhere on the Internet, but it will
+
+not display our image.
+
+So this is also incorrect.
+
+Finally, what we have is this one where we have an image element with a source (src) set to the correct file
+
+path, which is the current directory using ./.
+
+So that means go into the project folder.
+
+That's what the ./ will do for us.
+
+And then from there, navigate to the assets folder and then from there navigate into images and then
+
+into cat.png.
+
+So this is the correct answer.
+
+Did you get it right?
+
+If not, be sure to revise the section on file paths because this is a really important topic for the
+
+up and coming lessons that we'll need to do.
+
+But if you did get it right, then congratulations.
+
+Well done on completing the quiz.
+
+So now that you've seen how to create multi-page websites using file paths, then it's time to use this
+
+knowledge in an exercise.
+
+Go ahead and download the zip file from this current lesson and then go ahead and extract it and open
+
+it inside VS Code.
+
+Once you've got that extracted and open inside your Web Development Project, you should see a file
+
+and folder structure that looks like this.
+
+Let's go ahead and expand everything so I can explain what's going on here.
+
+Here we've got our index.html located inside the 4.1 Webpages folder, and then we've also got some
+
+image assets, this cat image, which is inside a folder called images,
+
+and this folder is inside a folder called assets.
+
+So it actually looks something like what we had previously, which is the assets folder, contains the
+
+images folder, which contains the cat.png.
+
+So just keep that in mind when you're working through it because on VS Code when a folder doesn't
+
+actually contain any files, but it does contain other folders, it can display it like this, which
+
+looks a little bit different from what you're used to.
+
+The other aspect we've got here is our public folder here, and this public folder normally contains
+
+all of the HTML files
+
+that is not our home page.
+
+So apart from our index.html, everything else usually gets organized into the same folder which is
+
+called public.
+
+Now, the challenge for you here is pretty simple.
+
+If you take a look inside the goal.png, it'll show you how to see the challenge.
+
+What I want you to do is to right-click on the solution.html file here, and then go ahead and click
+
+Show Preview.
+
+Now what this is going to do is it's going to show you the preview of what you're trying to achieve
+
+without showing you the solution code, which you will see if you click on this file.
+
+So make sure you don't just click on it, but you right-click on it to see the preview.
+
+Now, once you're here, you can see what we've got is an h1 that's already been created for you in
+
+the starting code,
+
+and then the next part that I want you to do is to add an image of yourself that links to the "about
+
+page".
+
+So this is very important. Here
+
+this is obviously not myself,
+
+I could be a cat teaching you, but I am not.
+
+But what I've done for this image is I've embedded it inside a link.
+
+So when I click on this image, you can see it goes to the about.html page.
+
+Now, if I go back, then I'll go back to my home page and at the very bottom here, I've got the second
+
+challenge, which is add a link to your "Contact Me page."
+
+So here, if you click on this link, then you should be taken to the contacts.html, which is inside
+
+the public folder right here.
+
+So these are your two web pages that you're going to link to, but you're going to do them a little
+
+bit differently.
+
+What I recommend is to start with this one, start with the Contact Me page, which is a little bit
+
+simpler.
+
+And then once you've got that working, then go ahead and do the second challenge up here.
+
+I think you should be able to do this.
+
+You might have to do a little bit of thinking, especially figuring out how to get an image that works
+
+as a link, but I think you will be able to do it.
+
+I'm rooting for you.
+
+Pause the video and complete the challenge.
+
+All right.
+
+So how did that go?
+
+Well, let's see if we can get it working.
+
+Firstly, I'm going to go ahead and switch to Show Preview so that I see my existing index.html slide,
+
+so I can see if what I'm doing is actually working.
+
+Now, my first challenge is to add a link, so an anchor tag to my contact me page.
+
+So I'll need to set the href to the Contact Me page from the index.html. In order to get to the Contact
+
+Me,
+
+I first have to go into the directory which contains my index.html using ./ and then here I can
+
+see my public folder and then I can go into my contact.html.
+
+Now I can add the text for my link, which I'll say, "Contact Me" and let's test it out.
+
+If I click on it, it goes to the contact.html page and if I go back, I go to my home page.
+
+So that's one challenge check.
+
+Next one is this one, which is a little bit harder,
+
+but let's start with what we know.
+
+We know how to create an anchor tag, which we know we need to link to the "about page."
+
+So let's set the href to go up into the current folder that contains my index.html and then go into
+
+public and about.html. Instead of having text in here,
+
+what we can have is an image tag and hopefully, this is what you've worked out. For our image to work,
+
+we need to set a source (src) and if you have your own image, then you could drop it into the image folder
+
+here,
+
+but if you don't, or in this case, in my example, I'm going to link to that cat image.
+
+So again, I'm going to go into the current working directory, the current folder, and here I'm going
+
+to go to "/.assets/images/cat.png".
+
+And now we have an image that links to the about page.
+
+Did you manage to get this to work?
+
+And if you did get it to work with the cat.png, I recommend taking your own photos somewhere from
+
+your computer, dropping it into this images folder and try getting your own face up into this website.
+
+I think that will be super cool and it's very achievable.
+
+So if you haven't done that, give that a go now and once you're done, then head over to the next lesson
+
+where we're going to learn about the HTML boilerplate and how to structure a website HTML in the proper
+
+fashion.
+
+So for all of that and more, I'll see you there.
+
+

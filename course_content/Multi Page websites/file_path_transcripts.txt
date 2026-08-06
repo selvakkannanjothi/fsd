@@ -1,0 +1,461 @@
+Hey, guys.
+
+In this lesson, we're going to be introducing a concept that is related to computing but is also super
+
+important for web development, and that's this idea of file paths.
+
+The Absolute and Relative paths, what they are, and how they work.
+
+You can think of a file path as a unique location for a file or folder on your computer.
+
+So similarly, if you wanted to tell somebody about a unique location in the world, then I tell you
+
+well, go to this particular path.
+
+And what it would look like is I would tell you to zoom in on the UK and then go into London and then
+
+inside London, I want you to go into Westminster.
+
+And then in Westminster there's this place called Page Street and there's a really nice cafe on it.
+
+And through this path I've directed you to a unique location.
+
+Similarly, we can use a file path on a computer to direct the computer to look inside a specific location
+
+in the hard drive.
+
+If you're a normal computer user, you often don't even need to think about file paths because it's
+
+all done graphically.
+
+If you want to navigate to a particular file, then you could just go into your Project folder, go
+
+into your Images folder and you find your cat image and then you can open it up.
+
+But similarly, we could use this concept of paths to go to exactly the same location and navigate to
+
+the same files.
+
+A file path can direct someone to a file or a folder.
+
+As you can see here, we've got a very simple structure of the storage on a computer.
+
+The Root is usually the starting point of your computer filing system, and this is usually called
+
+your Hard Drive.
+
+So this could be your C: drive on a Windows or it could be your Macintosh HD, which is on a Mac.
+
+If this is the organizational structure of your files, then you'd have a very clean computer,
+
+but also it'd be very simple for us to run through the example.
+
+I could direct the computer to this particular file, or I could direct them towards this particular
+
+folder, and I would do both of those things using a file path.
+
+We've seen what a file path looks like and we can see what the destination can be,
+
+but if you remember at the beginning of the lesson, I told you there are two types of file paths.
+
+There are absolute file paths and relative file paths.
+
+So what's the difference?
+
+Well, an Absolute File Path is probably the simplest to understand,
+
+it's a file path that is relative to the root of the computer.
+
+Remember, that is the C: drive or it is the Macintosh HD.
+
+And then we can use the file path to direct to a specific location,
+
+in this case, this cat.png , using the absolute file path.
+
+And this is what it would look like on Windows, and this is what our file path would look like on a Mac.
+
+In both of these cases, we're traversing a journey effectively and we're taking people from the very
+
+beginning, which is the root of the hard drive, and we're navigating them firstly into the Project
+
+folder and then into the Images folder,
+
+and then finally we reach our final destination, which is the cat.png.
+
+And that's effectively all that these two things describe, right?
+
+They are simply a path in order to get to our desired final destination.
+
+An absolute file path is really useful when you're navigating on a computer because no matter where
+
+you are currently within the file structure. You could be currently in the Project folder, you could
+
+be in the index.html, you can be at any part of the computer,
+
+you can always tell them this absolute file path and the computer would know how to go from the very
+
+beginning into that destination that you specified.
+
+Now, however, for web development, a more useful type of file path is a Relative File Path. As the
+
+name suggests, it's relative to something,
+
+right?
+
+So what is it relative to? In this case, we are not in the root folder,
+
+we're writing our code, for example, inside the index.html, and we want to pull up an image on our
+
+website.
+
+So we have to specify the path,
+
+but in this case, we can specify it relative to the location where we are writing our code,
+
+this particular file. If you think of your starting point as this file, then relative to it, how
+
+do we get to this cat.png?
+
+Well, we
+
+can first go into the Images folder and then inside the Images folder we direct to the cat.png .
+
+So usually relative file paths are a little bit shorter,
+
+and also more importantly, it doesn't matter if you move your folders around, it's always going to
+
+be valid.
+
+For example, if this project folder got moved into a different folder or if it became nested inside
+
+another folder, then this particular relative file path, this short journey is still always going
+
+to be valid.
+
+In web development, when we're referring to a particular resource, say we want to bring up an image,
+
+or sound, or a movie, or another HTML file for that matter,
+
+we usually will use a relative file path.
+
+Now, one of the things that's really helpful for us in writing relative file paths is there are these
+
+special characters that can make it easier for us to navigate the file structure.
+
+One such character is the two double dots (..), and when we write two double dots (..) at the beginning of our
+
+relative file path, what it means is to go up a level.
+
+Basically, that's all it means.
+
+It just means go up a level and then go into whichever resource or whichever path you want to navigate.
+
+In this case, we are starting off in our index.html and this file is located inside the Project folder.
+
+So this is where our starting point is.
+
+If we go up a level using those two double dots (..), then what that enables us to do is to go into the
+
+Root folder.
+
+Now, relative to this Root folder, in order to navigate to the essay.docx, all we have to write is
+
+essay.docx and this enables us to travel up through the folder tree.
+
+Another special character is the single dot(.), and what this single dot(.) does is it tells us to stay within
+
+the current directory and look over there.
+
+So where is the current directory?
+
+Well, relative to our starting point here, the current directory is of course our Project folder right
+
+here.
+
+Relative to this Project folder,
+
+we can navigate using that dot slash (./)to start right here and then we can go into the dog.png simply
+
+by using this more direct file path.
+
+Now one thing you might see out there in the wild is in order to access something within the current
+
+directory, current directory means the folder that your file is directly located in.
+
+So in this case, again, it's the Project folder.
+
+But whenever you want to access anything in the current directory, so anything along the same hierarchy
+
+here.
+
+So this one, or this one, or this one, you can also omit the dot slash (./).
+
+So you can actually just simply write dog.png and it will look within the current Project folder
+
+in order to find that.
+
+But sometimes using this direct method doesn't actually work.
+
+So I recommend whenever you're trying to access something within the current directory to go ahead and
+
+use this dot slash (./) notation.
+
+This way it's going to work 100% of the time.
+
+So now it's time to try and exercise and see if you've understood some of the important concepts that
+
+we covered in terms of file paths.
+
+Once you've downloaded and extracted the folder that we've set up for you, you should have it open
+
+in VS Code inside your Web Development Projects folder.
+
+And here, if you expand the Project folder, you will see many folders.
+
+There's Folder0, Folder1, Folder2, and Folder3.
+
+Now, if you go inside the index.html, you can see there is a very simple setup here where we've got
+
+a website that's going to display an image of all the animals.
+
+So that includes the rabbit, the cat, the dog, the fish and the bird.
+
+Now, you'll notice that these image files exist within this unnecessarily complex folder structure.
+
+And the reason why it's unnecessarily complex is because I really want to make sure that you understand
+
+how file paths work.
+
+So I want you to look very, very carefully at how it's structured.
+
+And your goal is to write the image tags underneath the h2's so that
+
+we actually display the correct animals under each heading.
+
+If you take a look at the goal image, you'll see that the final project should look something like
+
+this.
+
+You've got all the animals and then under each h2 heading, you've got the rabbit, the cat, the dog,
+
+the fish and the bird being displayed.
+
+And these images come from these locations.
+
+I want you to use relative file paths in order to pull up the images as the source for your image elements.
+
+You already know how to create image elements from a previous lesson, so all you need to do is use
+
+what you've learned about file paths in this lesson to complete this challenge.
+
+And while you're working on it, remember to use the Preview to see if your code is actually working.
+
+And if it doesn't display and it has this broken sort of look like this, then it means your file path
+
+is not correct and you should rethink what you've put in there.
+
+Pause the video now and give this challenge a go.
+
+Once you're done, come back and we'll go through the solution all together.
+
+But I want you to really give it a good go before you come back and try if you can solve your own problems,
+
+because they will inevitably come up.
+
+File paths are a very complex topic, so give it enough time.
+
+Really try to get the images showing that is your challenge.
+
+Pause the video now.
+
+All right, so let's start off with Rabbit.
+
+And I don't know if you've noticed, but I've got them in order of pretty much difficulty.
+
+The first one, the rabbit should be the easiest to pull up because it's right inside the same directory.
+
+Right?
+
+In fact, we can just use the ./ and we'll get to our rabbit.png because remember what I said
+
+about the special character single dot forward slash (./),
+
+it allows us to access anything that's within the same directory as where we are.
+
+Now here we can see that our index.html is located inside a Folder0.
+
+So this is the parent folder for this file.
+
+Now the reason we know that is because when we collapse this folder, we can no longer see that file.
+
+Whereas if we collapse this folder three, for example, we can still see index.html but we can't see
+
+cat.png anymore.
+
+So it means this folder contains this file and when we close it then we no longer see it. In order to
+
+navigate up from the index.html, which is where we are currently located because that's where we are
+
+writing our code,
+
+then we can use that ./ in order to navigate into the parent folder, which is Folder0 and
+
+then inside Folder0,
+
+then we can go into one of the contents in this folder, which is our rabbit.png.
+
+Now remember, with image elements, it's always good practice to add an alt text so that people who
+
+can't see the website know what this image is all about.
+
+So that's pretty simple.
+
+Now let's move on to the next one.
+
+Let's do the cat.
+
+Where is the cat relative to our current location?
+
+We are currently inside index.html.
+
+That's where we are writing our code, right here,
+
+as you can see. In order to get hold of our cat.png, if we're starting from the index.html, then
+
+we can navigate up to our current parent folder using ./,
+
+and then once we're there we can navigate into this Folder3, by simply adding Folder3 after
+
+the slash, then after that we can go into the cat.png.
+
+So this is what our entire path would look like. Here
+
+let's go ahead and do ./ and then you can see automatically VS Code is already recommending to
+
+you which options you have.
+
+We want to go into Folder3 and then inside Folder3, there's only one item, so we can only
+
+suggest one thing and it's cat.png.
+
+One of my recommendations for working with File Paths is when you're not getting the right recommendations
+
+when you start typing,
+
+for example, if I accidentally typed two dots (..) instead of one (.), then I'm getting dog, Folder0, Folder1 and
+
+I'm not getting Folder3 at all,
+
+I should already have alarm bells ringing in my mind.
+
+Something's not right here.
+
+It's not quite doing the right thing.
+
+So then I have to check my code and make sure that I'm actually using the correct special characters,
+
+which in this case is, of course, the ./.
+
+And I recommend actually using the VS Code Autosuggest because then you're making less typing errors
+
+because even if you type it slightly wrong, let's say I add an extra T in here by accident, then our
+
+file path is going to break and we're not going to see our image at all.
+
+That's why I recommend using the dropdown selection. In order to complete this,
+
+finally, let's add an alt text and then close off our self-closing image tag.
+
+So now we've got Rabbit,
+
+Cat, all we have left is Dog, Fish and Bird.
+
+So let's go ahead and add the source (src) for dog.
+
+If you're looking at this and you're confused, where exactly is dog located?
+
+Then you can use that method I showed you previously by collapsing some of the folders in order to see
+
+it.
+
+So if we collapse all the folders, you can see that it's still visible.
+
+So it must be under the very, very parent folder, 4.0 File Paths.
+
+And this indeed is where it's located.
+
+So now we have to map a path from the file where we're writing our code, which is our index.html,
+
+and we have to go all the way to the dog.
+
+If we start here, we go up one level into the parent folder and then we go up one more level into 4.0
+
+File Path.
+
+Then from here we can navigate to our
+
+dog.png.
+
+Let's translate that file path into actual text.
+
+First, we use the ../ to go up a level and this means that we get into the File Paths.
+
+Remember, the ./ gets us into our parent directory,
+
+so in this case it will be Folder0 and the ../ takes us up a level, so we can actually
+
+get into this 4.0 File Paths.
+
+If you take a look here, you can see it now shows our dog.png as an option, and if we hit Enter,
+
+you can see our dog show up.
+
+Let's add our alt text and then let's go to the next one, which is our fish.
+
+And our fish is located inside Folder1
+
+as you can see right here. We can follow a similar path to how we got to dog, by using the ../
+
+to go into the 4.0 File Paths parent directory.
+
+From here we can go into Folder1 and inside Folder1 is fish.png and let's add our alt text,
+
+which is "fish".
+
+And finally, let's do our bird.
+
+Bird is just one level further from fish.
+
+So we can actually in fact copy much of the file path of fish and then simply extend it.
+
+So it's inside Folder1 and inside Folder1, there's a Folder2 and inside Folder2, there's
+
+our bird.png.
+
+And there you have it.
+
+That's all the code we need in order to show up all of our animals.
+
+And as I mentioned in web development, in most of the cases, you will be using these relative paths
+
+and not the absolute file paths.
+
+And when you're navigating around the folders, these special characters, the ./ and the
+
+../ is very important in order to navigate to the correct location.
+
+And it's important that you understand from this exercise what is the difference between the ./
+
+and the ../.
+
+And hopefully, if you managed to get all the images to show up, then you know exactly what you're doing
+
+and you've learned the important parts of this lesson.
+
+Now, in the next lesson, I'm going to show you how to use these file paths in order to get hold of
+
+different HTML files, and we can start building out a multi-page website.
+
+So for all of that and more, I'll see you there.
+
+
