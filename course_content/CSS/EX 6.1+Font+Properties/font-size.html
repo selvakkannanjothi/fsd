@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,10 +27,35 @@
       html {
         font-size: xx-large;
       }
+
+      /* h2 {
+        font-family: "Sekuya", system-ui;
+        font-weight: 400;
+        font-style: normal;
+      } */
+
+      .mycustomfont {
+        font-family: "Bitcount Prop Single", system-ui;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+        font-variation-settings:
+          "slnt" 0,
+          "CRSV" 0.5,
+          "ELSH" 0,
+          "ELXP" 0;
+      }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
+    <h2 class="mycustomfont">My Fonts</h2>
     <p id="pixel">1 Pixel is 1/96 of an Inch</p>
     <p id="point">1 Point is 1/72 of an Inch</p>
     <footer>
