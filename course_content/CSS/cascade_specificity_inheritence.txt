@@ -1,0 +1,656 @@
+Hey, guys.
+
+Today we're going to learn all about the CSS Cascade and you're going to understand why it's actually
+
+called a Cascading Style Sheet after completing this lesson.
+
+So what exactly is the meaning of the cascading part of the cascading style sheet?
+
+Well, it's really only relevant when we think about multiple different conflicting CSS rules.
+
+So if you have different rules that target the same element, for example, an h1, then we have to
+
+determine which one is higher up in the hierarchy.
+
+And this method of working out which of the rules actually get applied and which ones get ignored is
+
+how our cascade comes to be.
+
+Imagine if you have a cascade where there is a pool at the top and then there is another one at the
+
+bottom.
+
+If we think about how the rule gets applied, then the browser is going to look at the water level.
+
+Imagine if this rule gets applied first, and then as the water falls down the cascade, it sees another
+
+rule that's applying to the same element.
+
+Then you will see this style, number one being applied.
+
+So multiple styles can be applied to the same thing, but because of the order of importance, the one
+
+that is the most important once you've finished the cascade is the one the user actually sees on screen.
+
+Here's an example.
+
+Let's say we've got an ordered list which has three list items, and then in our styles.css we set all
+
+of the list items to have a green color.
+
+Now, once you run the code at this point, everything is going to turn green.
+
+And now we have a list of three ordered-list items, all with green text.
+
+Now, however, if one of those list items happened to have an inline style where we've got the style
+
+attribute being set and we set it to a different color in this case, red, what do you think will happen
+
+when we run this updated code?
+
+Well, that is where our cascade comes in.
+
+The first level of applying style comes from the external stylesheet, and then it's going to look to
+
+see, well, maybe there are internal styles being applied via the style tag, and if there aren't any,
+
+then it's going to look at the next level and see that, "Oh, are there any inline styles being applied?"
+
+And this is the final style that gets applied to this particular list item.
+
+And so in the end we end up with everything being green.
+
+But then in the last minute this one gets changed to red because of the way the Cascade works.
+
+There are four broad categories which we look at when we're determining the overall level of importance
+
+of a CSS rule,
+
+and these categories are Position, Specificity, Type and importance.
+
+And I'm going to go through each of these with a code example.
+
+The first thing we look at at the very top of the cascade is whether if a rule is at a higher or lower
+
+position in the CSS relative to other rules.
+
+Notice here I've got two rules applying to the same thing and setting the same property.
+
+I'm trying to set the color of the text red, but I'm also trying to set it blue.
+
+Well, in fact they both happen,
+
+but the one that is lower down simply replaces the previous one.
+
+So first it becomes red and then immediately becomes blue.
+
+So this is what you're going to see on screen.
+
+The position of a CSS rule can apply to the position within the curly braces of a selector, but it
+
+could also be that you target the same element lower down in this.
+
+So I could target the li again down here and I could set the color to green.
+
+And in this case, because this is even lower down than these two positions.
+
+So this is one, two and three, then this one is going to be the final one that will see. The lower
+
+down in a CSS external file or in an internal style element
+
+the more important it is. If we're looking at this cascade, a rule that gets applied here will then
+
+be replaced by a rule that gets applied here and finally here.
+
+So the lower down the file, the rule is, the more
+
+more important, it is. Now the next category is the Specificity.
+
+And CSS specificity refers to how specific a selector is in terms of the elements that you're applying the
+
+CSS rule to.
+
+As an example, let's say we create a list item element and we give it an ID that's equal to " first-id",
+
+and then we give it a class that's equal to "first-class,"
+
+and then finally we give it the attribute of "draggable" as well.
+
+And this is our opening tag for our list item element.
+
+Now, if we look at this element and we think about the different ways that we can target this element,
+
+then these four CSS rules will all target this particular element,
+
+but they have different Specificity and they're listed in order.
+
+The first one selects all the list-item elements, so there could be many other list-item elements in
+
+our HTML file.
+
+So this is the least specific.
+
+It's the element selector.
+
+The next level of Specificity is the class selector.
+
+Remember, the class selector starts with a dot (.) and this will select all the other list elements that
+
+have this class name, "first-class".
+
+And because we can have multiple different elements with the same class for this reason it is more specific
+
+than element, but it's also not the most specific way of selecting an element.
+
+The next one is selecting an attribute. Even though most sources will tell you that attribute and class
+
+are actually the same level of specificity if you try it out,
+
+in most cases, the attribute will override the class.
+
+In this case, we're selecting on this attribute of "draggable" and we're turning the list-item that has
+
+that attribute set to the color of purple.
+
+And at this point of our code, if we didn't go any further, our text would look purple.
+
+So the final level of Specificity and the most specific is the ID selector, which is denoted by the
+
+pound sign or the hashtag sign (#).
+
+And this is the most specific because theoretically on a single web page you should only have one particular
+
+ID name.
+
+So it essentially targets only one element on the page.
+
+So the order of specificity is ID, attribute, class and element.
+
+If we think about our cascade starting up here, firstly we look to see if there are any element selectors
+
+that target a particular element,
+
+then we look at class, then we look at attribute and finally we look at ID, and if we applied the
+
+CSS rules in this order, then the final one will be the one that will be applied.
+
+So if all of these rules were applied to this particular element, then finally what we would see is
+
+the text would be orange.
+
+Now the next category is the type.
+
+We know that there are three different ways that we can apply CSS to a particular file.
+
+We can use the external stylesheet which is done using the link element, linking to a particular file
+
+in our project folder.
+
+Then there is internal CSS, which is done through the style element and putting the CSS in between
+
+the open and closing brackets of the style element.
+
+And finally there is the inline style where the CSS is applied through the style attribute inside the
+
+opening tag of an actual HTML element.
+
+In terms of the cascade, the most important are the styles that are applied inline because this targets
+
+only one specific element.
+
+It's just this h1.
+
+It doesn't matter if you have ten other h1's.
+
+This style is only going to be applied to this particular element.
+
+The next one is the internal, because the internal stylesheet only exists inside one web page, whereas
+
+the external stylesheet can actually be applied across many different HTML files
+
+as long as you all link to the same CSS file. In this order of our cascade,
+
+first, we check if there are any styles relevant from the external stylesheet,
+
+then we check whether if there are any from the internal stylesheet, and finally if there are any inline
+
+styles.
+
+So then going down the cascade, this is the order where the CSS will get applied.
+
+If you had the same thing,
+
+so targeting the h1, setting its color here, here and here,
+
+if they all target the same element and they're all trying to change the same property, say the text
+
+color, then this is going to be the one that will be shown on screen after you cascade through the
+
+different levels.
+
+The final thing, which is a keyword that you can apply to any CSS rule, is the "important" keyword.
+
+So you could have a color property set and we know how we set it normally by simply adding a value after
+
+the property,
+
+but if you add a space and then you add this keyword, exclamation mark and then the important word (!important),
+
+then this is going to ensure that this is going to be the most important rule relative to that element.
+
+It doesn't matter how important this previous rule is, it could have been inline or it could have been
+
+in an ID selector, or it could have been at the very bottom of the page,
+
+this rule is going to come out as the Top Trump. If you haven't already, I recommend taking notes of
+
+this page because you can actually use this as a very handy way of working out why your CSS is not working
+
+or when you're trying to do something specific and you're trying to make sure that a CSS rule gets applied.
+
+You can work your way from the top of the cascade all the way down.
+
+And there is, obviously the higher level, which is the categories, position, specificity, type and
+
+importance.
+
+And then within each cascade you can imagine there's almost a mini-cascade level where you determine
+
+which one is most important.
+
+Now we're going to try out some quizzes to enforce these rules, and I recommend taking a photo of this
+
+page and having it side by side while you do the quiz, because remember, we're programmers.
+
+We're not here to memorize things.
+
+You can always look at this page when needed.
+
+This is the first quiz,
+
+here we have a h1 element, and it's got a class as well as an ID, and there are two different
+
+CSS rules and you can assume that they are both on an external style sheet,
+
+so our style.css.
+
+Now I want you to pick what will be the final color of this h1?
+
+Will it be blue or will it be green?
+
+And once you've made your selection, go ahead and use your QR code reader to scan the QR code that
+
+corresponds to your answer, blue or green,
+
+and then you will see a gif to tell you whether you got it right or wrong.
+
+So you have 30s starting now. (Background music)
+
+All right.
+
+So did you get it right?
+
+So in this case, we have a specificity battle because this is a class selector and this is an ID selector.
+
+When we're looking at the specificity, the most specific always wins.
+
+So in this case, the ID will trump the class.
+
+And that's why if this code was run, which you can test out yourself, the color of the text will be
+
+green.
+
+So this was the correct answer.
+
+Did you get that right?
+
+If not, don't worry.
+
+We've got more questions coming up.
+
+This is our next quiz question.
+
+Again, we've got an h1 element, but notice this time it's got two classes applied "a-class" and "another-
+
+class."
+
+You can apply multiple classes to the same element as long as you add a space in between them.
+
+Now, your job is to determine what is the final color of this h1.
+
+Is it going to be blue or is it going to be green?
+
+You have 30s starting now. (Background music)
+
+In this case, what's relevant is the position of CSS rule, because notice that they both have the
+
+same specificity.
+
+This is a class selector, and this is also a class selector,
+
+and they both select the same element, right here. And we're assuming that they're in the same file,
+
+so no difference in terms of external, internal or inline.
+
+So then the only thing that matters is the order where they appear in the file.
+
+So remember that the cascade goes from the top to the bottom and the ones at the bottom will be the
+
+ones that replace the ones at the top.
+
+So in this case, the final color of the h1 will be blue. When all other things are equal, for example,
+
+Specificity, Type and Importance,
+
+then we look at a specific category and see which one comes out trumps.
+
+Here's the final quiz question for today.
+
+Here we have an HTML file and I want you to figure out what will be the final color of the h1.
+
+Will it be blue or will it be green?
+
+You have 30s clock starts now. (Background music)
+
+All right.
+
+So in this case, what we've got is an ID called "an-id", and we have an inline style being applied.
+
+So remember, in terms of specificity, ID selectors are the most important.
+
+However, the CSS specificity as a category is not as important as the type of CSS being applied.
+
+This is going to be higher in terms of importance than this.
+
+Our final color for our h1 will in fact be blue.
+
+Remember that the cascade goes from here to here to here to here.
+
+Even if something that has won out on specificity, it can also lose because of the type.
+
+So you have to keep in mind the order of importance of the big categories, but also the order of importance
+
+of the small categories.
+
+So now it's time to try an exercise and write the code yourself so that we really solidify this knowledge
+
+in our minds and really get to grips with it.
+
+Go ahead and download the zipped starting code for the exercise from this lesson.
+
+Once you've extracted and opened it up inside VS Code, I want you to go inside the index.html and look
+
+at the starting code that we've created here.
+
+The goal is to not change any of the HTML, but actually write your code inside the style.css.
+
+And what we're trying to achieve is to turn this into this.
+
+And notice I've given you some little bits of hint,
+
+for example, the fact that every box has 10px of padding on all four sides.
+
+And also notice that in the CSS code there's already some existing code that basically just gets rid
+
+of some of the defaults and sets you up for the rest of the challenge.
+
+So don't change any of the existing code, either the CSS or the HTML.
+
+Look at the goal image, see what it's got, and you're going to need to write some code to change a
+
+number of things.
+
+So the first thing is these pieces of text should be white,
+
+as you can see here. It might be a little bit too difficult in terms of the contrast, but these should
+
+be white.
+
+And then notice how this text is actually inside a div that should be red.
+
+And similarly, down here, the final thing is that there should be a div that encloses everything and
+
+it should be colored purple.
+
+And notice that there is 10px of padding here,
+
+there is 10px of padding here, and there's 10px of padding here.
+
+There's a number of things that you have to do using CSS and using what you've learned about the CSS
+
+cascade in order to achieve this.
+
+And the reason why the cascade is really important is because you can't add any additional classes.
+
+You can't change any of the HTML.
+
+So you're going to have to use everything that you've got access to in order to achieve this outcome.
+
+This is a tricky challenge, and I want you to spend some time thinking about it and thinking about
+
+what you've learned, and referring back to maybe the previous parts of the video and revising what you've
+
+learned in this lesson.
+
+Pause the video now and complete this challenge.
+
+All right.
+
+I'm going to go through the solution so that you can check your work and make sure that you understand
+
+everything that's going on.
+
+So I'm going to pull up the goal image.
+
+So have it side by side with the current preview of the index.html.
+
+That way I can compare to see I've reached the goal or not.
+
+Now the first thing I need to do is change this text to white, which is the easiest because notice
+
+that these are in a particular class, whereas these don't have any class applied.
+
+So the class is "white-text", so I can go ahead and do that right here.
+
+Use a class selector, choose the class I want "white-text," and then go ahead and set the color of the
+
+text to white.
+
+There we go.
+
+So that's the first part.
+
+So I'm getting closer to the final outcome.
+
+Now,
+
+the next thing I need to do is to make this box red.
+
+So this box is the box that encloses the white text.
+
+So it's this particular div and notice that it's got two classes applied to it, "box" and "inner-box."
+
+So this "inner-box" isn't actually present as a class on any of the rest of the divs,
+
+so I can select that quite easily.
+
+Up here next to my other box, I'm going to select the "inner-box" class and I'm going to set
+
+background-color to red.
+
+Now if we look inside our preview, you can see we're getting pretty close.
+
+Now, the next difference is this final outside box, which I want to be purple.
+
+This is the div that encloses everything, which is this one that has an ID of "outer-box."
+
+This is really the only thing that differentiates this div from any of the other divs 'cause they all
+
+share the class of "box."
+
+This red div has a class of "box."
+
+This blue div has the class of "box" and this outer div also has that same class, which is why we're
+
+able to apply the 10px of padding to all three simply using the original code of box.
+
+If I want to target this outer box, then I have to use the thing that's unique to it, which is the
+
+ID.
+
+So now I'm going to select the ID called outer-box and I'm going to set its background color to purple.
+
+And now you can see I have achieved the final goal outcome.
+
+The important thing here to realize is firstly, we don't need to add any padding to the inner box or
+
+the outer box because all three of those divs share a class called box and that 10px of padding
+
+is already applied there.
+
+Notice if I go ahead and go in here and set the padding, it doesn't change anything because it's already
+
+got 10px of padding,
+
+but because the ID selector is more specific, if I say change the padding to 50px, then it would
+
+actually be the one that will come out trumps.
+
+The second thing that I wanted you to realize is that the ID selector is more specific than the class
+
+selector.
+
+So even though for all three divs, I've set the background-color to blue, because this selects an ID,
+
+this will override it.
+
+Now the other thing you had to realize is in order to set the "inner-box" background-color to red, this
+
+rule actually has to be below this rule because watch as I move it up.
+
+Now, in this case, we don't have a red box anymore because these two have the same specificity.
+
+They're both selecting a class here.
+
+We're setting it to red.
+
+But later on we set all the divs with a "box" class to blue.
+
+So this refers to the position of our CSS rule.
+
+Hopefully, this will have given you some practical experience with the CSS cascade and reinforce some of the
+
+lessons that we learned earlier.
+
+In the next lesson, we're going to learn how to combine different selectors so that we narrow down
+
+on a particular element that we want to select on-screen rather than simply broad stroke, setting the
+
+CSS of everything. For all of that and more,
+
+I'll see you on the next lesson.
+
+
+Stop
+Play
+Play
+Play
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+25:09
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+position of styles in the style.css. heirarchy. last one will apply.
+
+18:19
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css cascade
+
+11:41
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css rules - overrides
+
+9:45
+6. CSS Properties
+41. The CSS Box Model - Margin, Padding and Border
+understand margin, border and padding.
