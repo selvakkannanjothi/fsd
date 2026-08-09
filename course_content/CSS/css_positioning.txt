@@ -1,0 +1,740 @@
+Now, so far we've seen a lot of different intermediate concepts already in this section,
+
+now I want to talk about something that is related to the positioning of elements on screen.
+
+And there are four different types that we're going to go through Relative, Absolute, Fixed, and Static
+
+positioning.
+
+When developers don't understand positioning or in this case, when building developers don't understand
+
+positioning, something like this might happen either on your building, which is terrible, or on your
+
+website, which is also not great.
+
+So we're going to understand this concept in order for this to not happen.
+
+Now, if you're doing renovation work in your builders are doing this, then I'm not sure this video
+
+is going to help, but it's definitely going to help us position our items in our websites a lot better.
+
+As I mentioned, there are four different values for that property position.
+
+It's static, relative, absolute and fixed.
+
+And I want to show you how each of these values work and consider when you would need them.
+
+So the first one is Static positioning, and this is actually the HTML default.
+
+As soon as you insert any piece of HTML by default, they're going to have this particular positioning
+
+applied to them.
+
+And this basically means that each item flows as they would in our HTML.
+
+Now, if you head over to this website appbrewery.github.io/css-positioning, then you
+
+can see that I've created a demo website for you to interactively see what each of these different styles
+
+of positioning would look like.
+
+Now, if the font here is too small because I needed to get enough space in here to scroll, feel free
+
+to go to view and then click on zoom in and press the plus button until it fits whichever size your
+
+eyes require.
+
+Once you're here, you can click on the different styles of positioning, and the first style is static
+
+positioning.
+
+We can set the position property to a value of static, but we also don't have to,
+
+this is just applied by default.
+
+In this case, this is just what default HTML does when you add another item here,
+
+so, in this case, I've got a div here which I've colored green,
+
+once this has been added, it just goes at the bottom of whatever previous element there is and you
+
+can see this quite easily if you've installed the pesticide Chrome plugin.
+
+Previously I showed you how to get hold of the pesticide chrome extension and now if we hold down our
+
+control key, you can see we've got an "h2" here, and then we've got a "code" element here,
+
+and then finally we've got a div element here.
+
+So notice how that div just goes right at the end of whatever previous element there is.
+
+And we can also inspect the code here to see this is where it is, and it simply just continues in the
+
+default positioning.
+
+This is what static does.
+
+It's just what you've seen so far.
+
+Now what's more interesting are the other three different types and one of the most common ones you're
+
+going to come across that you're probably going to use is Relative positioning.
+
+And this is where an item gets positioned relative to its default position.
+
+Remember, previously in our static positioning, I told you that HTML just makes your items go one on top
+
+of the other with almost no space in between unless there is some sort of default.
+
+Well, relative positioning, basically takes that original position and you can apply some changes to
+
+it.
+
+So you can move it relative to where it should be.
+
+So in this case, where the purple box is, is where it should be and where the blue boxes, it's been
+
+shifted to be pushed from the left and from the top.
+
+So that gets this new relative position.
+
+Again, coming back to our website, if we select relative positioning, notice how these two other
+
+parts of our code now is relevant.
+
+We've got a push from the left and a push from the top.
+
+Whereas originally this box was supposed to be somewhere here-ish.
+
+I'm just going to draw a dashed line for where it was when we had the static positioning.
+
+This is where it's supposed to be.
+
+Instead, we've moved it 50px from the left using this line, and then we've moved it 50px
+
+from the top using this line.
+
+And this works because it is positioned relative to the original supposed location.
+
+So now if we select this box, you can see it has position, relative left 50px, top 50px.
+
+And this box, if we select it, you can see it has position static, which means that the left and
+
+the top, it doesn't actually do anything because it's static position.
+
+So it's just default position.
+
+It doesn't matter if you add these properties, which you can, it just doesn't do anything.
+
+That's the difference between relative and static positioning.
+
+Relative positioning takes the static position and then you can move it relative to that location.
+
+Now, remember, relative does not mean relative to anything else,
+
+it's relative to its supposed location.
+
+Some people get that confused and they think it's relative to something else on screen,
+
+no, no.
+
+We're going to remember this when you use relative positioning.
+
+Now, the next type is Absolute positioning, and this makes the position relative to the nearest positioned
+
+ancestor.
+
+Now, this sentence is a little bit confusing, but remember, in the previous lesson we spoke about
+
+the ancestors.
+
+So for example, if I had a div here that is a purple box and inside that purple box I put in another
+
+div, which is a blue box.
+
+Well, in this case the blue box is a descendant and the purple box is an ancestor.
+
+If this particular div has the position property set, for example, if we set this as relative and
+
+we set the blue box to have a position as absolute, then this blue box is then going to be positioned
+
+relative to its positioned ancestor.
+
+And notice the wording here,
+
+the nearest ancestor, it could have multiple ancestors with position relative, but it's the nearest
+
+one that matters.
+
+If it doesn't have a positioned ancestor, then the second rule becomes valid,
+
+where it gets positioned relative to the top left corner of the web page, which is right here.
+
+Now, if you go and select the absolute positioning, notice how this box is now wildly weird in terms
+
+of its position,
+
+and this is because it has no ancestor that has the position property set.
+
+If we select our div right here, you can see this is where it is, and its ancestor is this div.
+
+And then going further up we've also got this "main" element which is also another ancestor and then we've
+
+got the body, and then the HTML.
+
+So this is the flow of how we get to this descendant.
+
+Now, because neither this div, nor this "main", nor the body, nor the HTML have the position property
+
+set, well then in that case, this box is positioned relative to the top left of the web page.
+
+And what we said is position: absolute;
+
+top: 50px;
+
+left: 50px;
+
+And that's exactly what it has done for us.
+
+It's pushed it from the top by 50px and it's pushed it from the left by 50px,
+
+and this is relative to the top left corner of the web page.
+
+Remember that the first part of the absolute positioning rule is that if it had a positioned ancestor,
+
+then it would be positioned relative to that ancestor.
+
+So we can actually change our code here inside the inspector for let's say we're going to take this
+
+box.
+
+So make sure you've actually selected the right box that has the absolute positioning, as you can see
+
+here.
+
+And let's find its ancestor.
+
+The first one I can see is this one.
+
+So we're going to select it and then we're going to add a CSS rule.
+
+So we're going to go inside the element.style, which is going to add an inline style to this element
+
+we've selected, and I'm going to set its position to relative.
+
+Now notice how as soon as I've done that, our box has moved, and now what it's done is it's moved so
+
+that these rules that we've applied to this box, namely push it down from the top and push it down
+
+from the left, is now relative to its nearest positioned ancestor, which is this div right here.
+
+And if you look at this, you can see it has followed that rule.
+
+It's pushed it 50px from the top of this div and 50px from the left of this div.
+
+And it makes this true.
+
+And that's because we've got that code here on the box.
+
+The tricky thing about the absolute positioning is you have to make sure if you want it positioned relative
+
+to another item, you have to set that ancestor to have position relative because otherwise it's going
+
+to default to positioning relative to the top left of the web page.
+
+Now another aspect of absolute positioning that's important to mention while we're here is the z-index (zed),
+
+as we would say in the UK, or if you're an American, it would be the z-index (zee).
+
+Now what this does is it determines which elements go on top of which in the Z-axis.
+
+If we think of our web page as a graph where we have the Y-axis going this way,
+
+the X-axis going horizontally this way, then we can also have a Z-axis, which actually goes in the
+
+third dimension, and that's the Z-axis.
+
+This basically just determines which one goes on top of which.
+
+If A has a higher z-index, let's set it to 100
+
+and B had a lower z-index,
+
+let's say it was 50, then this one is going to come out trumps and A is going to sit on top of B.
+
+And you can see this already happening with our absolute positioned box.
+
+You can see it's sitting on top of everything else.
+
+If we wanted to not do that, say we wanted to make this box go behind everything, well then we can
+
+set this property called z-index and we can make it even negative if we wanted to.
+
+Everything on screen has a default z-index of zero.
+
+But notice how even if I set the z-index of this box to zero, it still doesn't fit in with everything
+
+else,
+
+and that's because when you set something with absolute position, it actually takes the element out
+
+of the original HTML flow and puts it on another layer.
+
+This is why we can quite easily change it to a negative z-index to push it behind or use the default,
+
+which will take it above, but we can't actually have it inside the flow anymore.
+
+For that to happen, we need to go back to static position or relative position.
+
+Now, the final type of positioning I want to talk about today is Fixed positioning.
+
+And this is a position that is going to be relative to the top left corner of the browser window.
+
+Remember how absolute position defaults to the top left of the web page, But in this case, when it's
+
+fixed, it's going to be defaulted to the browser.
+
+And what that means is that even if you scroll up and down on the web page, it's still going to be
+
+located in the same location relative to the browser.
+
+So this is where a demo comes in really handy.
+
+Let's go into fixed positioning and notice it looks the same as our absolute position until you start
+
+scrolling and notice how it's just staying right there with 50px are pushed down from the top and
+
+from the left.
+
+And it doesn't matter where you scroll to, it's always going to hover right there.
+
+Whereas with absolute positioning, you can see it's relative to the web page and it moves with the
+
+web page.
+
+So have a think about this when you're using these different position styles in terms of what you want.
+
+Notice how in all four different positional values, I've set it to have a top and a left, and this is
+
+how we position things in addition to that "position property."
+
+So you can also change this and set it to instead of left.
+
+You can change that to right and it would just move it to the right instead and have 50px from
+
+the right.
+
+But in addition, you can also add extra margin.
+
+So notice how position actually goes outside of margin in the box model.
+
+So I can add an extra 50px of margin and it will push it even further
+
+over here. The position is actually separate from the margin, which in turn is separate from the padding,
+
+which in turn is separate from the width and the height.
+
+But the really nice thing about position is notice how it's calculating these other values for you so
+
+that you maintain these positional values of 50 from the top and 50 from the right.
+
+And as I move it around, you can see how it's reacting to it,
+
+it's just changing the left side automatically to keep it in that position.
+
+If all of that seemed a little bit confusing, don't worry, we're going to solidify our knowledge by
+
+practicing it and writing it in code in an exercise.
+
+So go ahead and download the exercise from this lesson, CSS Positioning and extract it.
+
+And then once you open it, go ahead and open the index.html and then preview it on the right hand side
+
+right here.
+
+You'll notice that it's an absolutely blank page because all we have in the HTML is a single div that
+
+contains another div.
+
+But by the end of this exercise, what we're aiming to do is to create a rectangle with a circle inside.
+
+Before you start, I first want to show you how you can create a circle using CSS.
+
+This is something that we haven't seen yet, so if I go ahead and target this ".red-circle", using the class
+
+selector, I can give it a background-color of red so that we can actually see it on screen.
+
+And I'm also going to give it a width and a height.
+
+So it's going to be 200px across and 200px high.
+
+And once I've done that, you can see I've now got a square on the screen.
+
+So without a width and a height, of course it's not visible and this is stuff that you should already
+
+know.
+
+So there's nothing new here.
+
+But if I go ahead and add a border-radius which will define the radii of the outer border.
+
+Notice what happens here.
+
+Let's go ahead and give it a 5px border-radius,
+
+makes the corners a little bit rounded. So we can extend this,
+
+let's try 50px and you can see it now
+
+looks like an app icon almost, a little rounded square.
+
+But I can also use percentages.
+
+So if I set it to have a 50% border radius, then I create a perfect circle.
+
+And this is how we create circles in CSS.
+
+Now that you've got this red circle, it's only a matter of time before you get to the final outcome,
+
+which is a circle positioned on top of a rectangle.
+
+Now notice some things here,
+
+we want the rectangle to be 300px tall and 500px wide, and we also want it to be positioned
+
+not using any margins, but using the position properties to be pushed down 200 from the top, 200 from
+
+the left.
+
+In addition, we want this circle to be positioned relative to the rectangle and 250 from the left,
+
+150 from the top.
+
+This is going to test what you've learned and if you can't figure out how to do it, I recommend instead
+
+of going forwards and looking at
+
+the solution, go backwards in the video and revise what we learned about positioning and you will eventually
+
+be able to get there.
+
+I promise you it's not too difficult, but you do have to do a little bit of thinking.
+
+Pause the video and try to complete this challenge.
+
+All right.
+
+So let's go through the solution.
+
+But before we do, I want to make sure you really try to understand the lesson, because pushing through
+
+with the code is not going to help you unless you actually understand what you're doing.
+
+Coding is all about thinking.
+
+It's not about memorizing things,
+
+tt's not about knowing the answer because you're going to get a different situation in the future and
+
+you need to make sure you know why things happen,
+
+and that requires a little bit of struggle.
+
+Let's go through the solution.
+
+So I'm going to create this rectangle which has a class of ".blue-box", and I'm going to give it a background-color
+
+of blue, and we see it show up because it contains a child element that has a height and width.
+
+So the parent obviously then has to have a height and width, but that's not the height and width that
+
+we want.
+
+We want it to be 300px in height
+
+and we want it to have 500px in width.
+
+So now we have our rectangle and our circle correctly sized.
+
+Now it's all about positioning.
+
+Firstly, let's position this rectangle.
+
+We want it 200px from the top, 200px from the left.
+
+We can either do this using absolute positioning because it will be relative to the top left if we don't
+
+set any of the other elements to have a position, or we can set it using relative positioning.
+
+Because remember that the default location is also going to be at the top left corner.
+
+I'm going to use relative positioning and you're going to see very quickly why,
+
+but let's go ahead and set the position to relative and then let's set it to have a top of 200px
+
+to push it down 200px here, and then let's give it a left of 200px so that it's pushed 200px
+
+from the left.
+
+And now we have this sort of image, which is already pretty close.
+
+Now we just have to move the circle and this is where that relative positioning is going to come in
+
+handy because we want to position this circle relative to the box.
+
+Notice how all of these sizes I've given are relative to this blue box.
+
+So 150px from the top, 250px from the left.
+
+And this is easily achieved if we set the position to absolute and then we set the top to push down
+
+by 150px and the left to push by 250px.
+
+And now you can see we have exactly the same thing as our goal.
+
+Now notice these numbers that I've given here 150px, 250px,
+
+basically they are half, 250 is half of 500
+
+and 150 is half of 300.
+
+Essentially, I wanted the top left corner of this circle to be right in the middle of the rectangle.
+
+Alternatively to setting these pixel values, you could have also set it to 50% from the top and 50%
+
+from the left.
+
+It would achieve exactly the same thing.
+
+But notice how this doesn't place it in the middle of the rectangle, as some people would think, because
+
+this is the point that we're defining the top left corner of this div now, even though the corners
+
+are rounded, it doesn't mean that this div isn't a box, it's still a box.
+
+It's the CSS box model.
+
+All we've done is we've said the top left corner should be 50% of the width from the left of the rectangle
+
+and 50% from the top of the rectangle.
+
+So if you wanted this circle to be bang in the middle, you would actually have to specify different
+
+values for the top and the left.
+
+Now you could have actually solved this challenge in many different ways,
+
+this didn't have to be relative and this didn't have to be absolute.
+
+You could have, for example, set this position to be absolute because then it would make this blue
+
+box relative to the top left corner because it doesn't have any other ancestors which have a position.
+
+Alternatively, you could have set this to fixed because in this case we don't have any other content
+
+on our website, so it doesn't actually scroll.
+
+And so you won't see that movement relative to the browser.
+
+As you can see, there's many ways of doing the same thing,
+
+but the important thing is when your code gets more complex when there's more items in your HTML that
+
+you understand what your CSS is doing, and how to resolve any conflicts or when it's not doing what you
+
+expect it to.
+
+So
+
+that you understand what code you're actually writing and how it's behaving.
+
+Now that we know a little bit more about positioning, we can head over to the next lesson where I've
+
+got a final project for this section where we're going to create the flag of Laos using everything we've
+
+learned so far.
+
+For all of that and more, I'll see you there.
+
+
+Play
+Play
+Play
+Play
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14:06
+7. Intermediate CSS
+45. CSS Positioning
+understand the map da Raaja
+
+position is beyond the margin.
+
+13:17
+7. Intermediate CSS
+45. CSS Positioning
+Fixed positioning - interesting guy:-
+
+seems similar to the position:static until you scroll.
+
+
+
+positioned to the browser window not the page. even if you scroll horizontally or vertically, the position will same --- looks like its glued to the monitor screen !!!
+
+12:10
+7. Intermediate CSS
+45. CSS Positioning
+z-index --- all bout z axis,
+
+by default all z-index is 0, when all are zero, the element with position:absolute will be moved to the top - thats the behaviour by default.
+
+But if you want to override that make z-index -1.
+
+note: if you are changing this using dev console inspect, refer element.syle --> which is nothing but the inline style element.
+
+7:07
+7. Intermediate CSS
+45. CSS Positioning
+Absolue positioning --->
+
+1st priority:
+
+Position relative to nearest positioned ancestor - must have this --> position : relative
+And target will have position: absolute and align based on the ancestor.
+
+
+
+2nd priority:
+
+if no ancestor have the position: relative, the alignment fall backs to top left corner of the web page. if target has left 50 top 50, the target will move from the top 50 and left 50.
+
+3:14
+7. Intermediate CSS
+45. CSS Positioning
+as said, Relative Position ---> position relative to default position. compared to its original static positive, how much it should move or align with the given inputs like left 50 top 100.
+
+0:56
+7. Intermediate CSS
+45. CSS Positioning
+static - one after other !!!! defaut behaviour - no need to mention it position: static
+19:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+combining combiners !!!!
+15:08
+7. Intermediate CSS
+44. Combining CSS Selectors
+CHAINING !!!!
+
+13:07
+7. Intermediate CSS
+44. Combining CSS Selectors
+descendent selector !!!!
+
+9:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+parent child selector !!!!
+
+5:25
+7. Intermediate CSS
+44. Combining CSS Selectors
+you can group different selectors !!!!
+
+25:09
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+position of styles in the style.css. heirarchy. last one will apply.
+
+18:19
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css cascade
+
+11:41
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css rules - overrides
+
+9:45
+6. CSS Properties
+41. The CSS Box Model - Margin, Padding and Border
+understand margin, border and padding.
