@@ -1,0 +1,421 @@
+It's now time for the final project.
+
+And in this project, we're going to be building a flag of Laos using only CSS and HTML.
+
+If you take a look at this image, it looks like an oil painting, right?
+
+But actually, if you look behind the scenes, this is created completely just with HTML and CSS, which
+
+is completely crazy.
+
+If you head over to this URL (https://diana-adrianne.com/purecss-lace/), you'll see the portfolio of Diana Adrian, who is a CSS artist.
+
+And if you right-click on this image and you inspect it, you can see that all aspects of this painting
+
+is all created using CSS, which is completely mind blowing.
+
+For example, if we take a look at something really simple, the hair here, you can see there are like
+
+a million divs in here, each strand having a div.
+
+And then if you look inside each strand, you can see they've got border-radius set, width, height,
+
+different colors, etcetera.
+
+And it's this crazy complex CSS art.
+
+If you're not into oil paintings, then maybe you're into The Simpsons.
+
+These images of The Simpsons were all created using CSS, and if you head over to this URL (https://pattle.github.io/simpsons-in-css/), then you
+
+can actually click on each of these characters and you can see the CSS that was used to create them.
+
+And it's not surprising that it's a ton of CSS to write.
+
+So don't worry, this is not your challenge.
+
+We're not going to be creating something crazy like Krusty the Clown with 875 lines of CSS.
+
+It's just for you to be aware of the power of CSS.
+
+And once we learn the different ways of combining selectors, of the specificity of CSS selectors,
+
+positioning things, different properties, you can in fact eventually create crazy stuff like this,
+
+if you have a ton of time and probably an artistic streak as well. Most of the time when I work with
+
+CSS, my results look like this weird Pikachu where things are not positioned correctly and everything's
+
+just moving in the wrong directions.
+
+So you're not alone.
+
+Most people write CSS code that creates weird pikachus.
+
+The important thing is we understand why we get weird pikachus and why the eyeballs are so far down.
+
+So we're going to consolidate what we learned in this lesson by creating the flag of Laos.
+
+And this is going to test everything you've learned about combining different CSS selectors about CSS
+
+specificity, the CSS cascade, and also about positioning.
+
+And in the end, we will have this beautiful picture of the flag of Laos.
+
+Go ahead and download the starting project files and extract it.
+
+Now here, if you open up the index.html, you will see some very simple HTML that I've already set
+
+up for you.
+
+And if you preview it on the right, you'll see it has pretty much nothing, which is a great starting
+
+point for your project.
+
+The important thing is you don't change any of the HTML, so don't touch the index.html file at all.
+
+It's purposely vague in terms of classes and IDs and nothing is really tagged with anything.
+
+Right?
+
+And this is because we're doing a challenge, right?
+
+You can of course add loads of classes, loads of IDs and make this project super, super easy,
+
+but I want to test you on what you've learned so far.
+
+So that's why the initial index.html has basically nothing for you to be able to target with your selectors.
+
+Instead, you have to be a little bit more crafty.
+
+What we're aiming for is this. The flag doesn't have to be centered or positioned in any sort of particular
+
+way.
+
+This is going to be the top left corner, right here, and then there going to be a sort of rectangle that
+
+occupies part of your website,
+
+but the important thing is that it has these different aspects to it.
+
+It's got a red section here, which is 50% of this blue section here, and then it's got another red
+
+section down here, which is also similar in terms of how much it occupies and how it works is there
+
+is a big red div right here and above it there is this blue div on top.
+
+So that should already help you in terms of how this layout should look.
+
+Now the next thing is we've got a paragraph element that's located at the top and we've got another
+
+paragraph element that has to be inside a white circle.
+
+If you take a look inside the index.html, you'll notice that there are some hints in here, for example,
+
+the width and height of the flag and also the width and height of the circle.
+
+If you want to get hold of the precise colors.
+
+Remember previously we learned about CSS inspection and I've added a URL in here for you to be able
+
+to inspect on
+
+the actual image of the flag of Laos.
+
+This will test you on something you've learned previously as well.
+
+Remember, you can also right-click on the solution without opening the file and show it as a preview.
+
+And you can of course take the URL from VS Code and paste it inside your browser in order to see what
+
+the final outcome should look like
+
+so you can better compare your version versus this version.
+
+You can do this in many, many different ways.
+
+And the main thing I want to know is that you know how to combine selectors, you know, about CSS specificity
+
+and you know how to position things roughly on screen.
+
+Once you're ready, pause the video and complete the project.
+
+All right, let's go through the solution together.
+
+The first thing is to style the outermost div, which has a class of ".flag".
+
+So this is probably going to be the easiest part of this whole project.
+
+We can target that div and set it to be 900px wide and 600px high so that we have a rectangle.
+
+Now next we're going to have to set the background color so we can actually see it so that it's not
+
+white.
+
+In order to get the colors of the flag, remember I said we should inspect on it and then we can go
+
+into the three dots, more tools, CSS overview,
+
+and if we capture the overview, we'll get our hex codes.
+
+So the red, which is our first box, has this hex code, which I'm going to copy and then paste into
+
+here.
+
+And now we have a very large rectangle in our preview.
+
+Now the next step is to add this second rectangle on top of it.
+
+If we take a look at our HTML, you can see we've got a div with class flag as the highest, most div
+
+and then we've got as its children a paragraph element and another div and then we've got finally another
+
+div and a paragraph element.
+
+So this second div enclosed is going to be the one that we're going to turn blue.
+
+Remember I said we can't change any HTML so we can't add any classes or IDs to it.
+
+Instead, we're going to combine some selectors to select this particular div.
+
+So what is an identifying feature of it?
+
+Well, it is the direct descendant, the immediate child of this div class, so we can use the child
+
+combination by saying let's get the class ".flag" and then the angle bracket and then the child div.
+
+And in this div we're going to go ahead and give it a width and a height.
+
+The width, we want it to be 100% of its parent.
+
+So I'm just going to write 100% and it should end up being 900px.
+
+Alternatively, you can write the pixel number.
+
+Next, we're going to give it a height and I'm going to say 300px.
+
+This way it takes up exactly half the height of the big red pot.
+
+Now we just need to give it a background color in order to see it.
+
+And the color is going to be this blue color.
+
+And there we have it.
+
+We have a blue rectangle inside a red rectangle.
+
+Before we get busy positioning things, let's just make sure that we've got everything on screen first.
+
+So I want the circle to show up.
+
+And coming back to our HTML, you can see we've got one div.
+
+This is the red rectangle.
+
+Inside there's another div which is the blue rectangle.
+
+And finally inside that we've got another div which we're going to turn into the circle.
+
+How do we get hold of this one?
+
+Well, we could use the descendant selector because this div is the immediate child of this div, which
+
+is then a child of this div.
+
+So we're saying it's three levels down and we can do that by saying the ".flag" class has a child, which
+
+is a div which has another child, which is a div and this particular div we're going to give it a width
+
+of 200px and a height of 200px and we're going to give it a background color of white.
+
+And we should now see a little square here.
+
+And in order to turn it into a circle, we set the border-radius to 50%.
+
+So now we've got all three shapes on screen and it's time to try and position them so they look a bit
+
+more like this.
+
+Notice that this blue rectangle is not only half the size of the rectangle, but it's also shifted down
+
+by a quarter.
+
+So we want to set its position.
+
+Now, as I mentioned, in order to set the position of an element relative to a parent, what you need
+
+is for the child element,
+
+so in this case, this rectangle that's inside this blue rectangle that's inside the red rectangle, to
+
+have a position type of absolute.
+
+And then if its parent has a position type of relative, then we can now set this blue rectangle relative
+
+to this red rectangle.
+
+So we can say from the top, let's shift it down by 150px, which is a quarter of 900px,
+
+even though we set this red rectangle to have position relative and we didn't move it at all,
+
+by setting it to relative, it enables us to modify the children's position relative to that parent.
+
+And this is why you'll very commonly see this structure, a parent having position relative and a child
+
+having position absolute.
+
+And then we move it relative to the parent using the same strategy,
+
+we can do the same thing for our circle.
+
+Because our circle basically has to be in the middle of the red rectangle if we set the position of
+
+this white circle.
+
+To be positioned relative, then we can set it relative to its parent, which is the blue rectangle.
+
+So in order to move it to the center of the blue rectangle, we have to shift it down so from the top
+
+by 50px, because if we know that this height is 300px,
+
+then half of it is going to be 150.
+
+So then if we know that the radius of the circle is 100px because it's got a total height of 200
+
+and a width of 200, then we know that in order for it to be in the center, it needs to be 50px
+
+from the top.
+
+And by similar calculation, we can work out that it needs to be 350px from the left.
+
+Even though we did all our calculations correctly, you can see this white circle doesn't quite look
+
+like it's right in the middle of this blue rectangle, right?
+
+It's a little bit shifted to the lower part so we can diagnose our issues using pesticide.
+
+In this case, you can see that we've got a div here, but we've also got a box above it and this is
+
+the paragraph element.
+
+And if we go ahead and inspect it inside the Chrome inspector, you can see that paragraph element has
+
+a margin top and margin bottom.
+
+If I go ahead and delete both of those margins,
+
+then you can see our circle shifts bang into the middle.
+
+So it's actually the margin around the paragraph element that's actually pushing the circle down because
+
+it is within the flow of the HTML because by default, all elements are statically placed in the flow
+
+of HTML.
+
+Let's go ahead and implement that in our code.
+
+We can select all the paragraph elements and set their margin to zero.
+
+And you can see immediately our circle is now centered in the screen.
+
+In addition, if we look at the goal image, we want to have the text super large.
+
+You can play around with the font size, but the one that I used is 5rem and this will get you pretty
+
+much the same size that you see here.
+
+In addition, the text is centered both inside the circle and at the top.
+
+So we need to set our text align to center and that gets it pretty much where it needs to be.
+
+Now, the very last thing we need to do is to change the color of this part to white and this part to
+
+black.
+
+One way that we could do it is to simply set the color for all the text to white, and this will turn
+
+everything white and will no longer be able to see this text even though it does exist.
+
+And if we wanted to select that particular paragraph element, we don't have a good way of selecting
+
+it with class or ID because we're not letting you change this HTML.
+
+But you can of course use different combinations to get there.
+
+For example, this paragraph element is a child of a div of another div of another div of a body.
+
+There's actually a cheat code to doing this.
+
+If we open up the inspector and find that paragraph element, we want to select right click on it,
+
+go to copy and then copy selector.
+
+And once you paste it in here, you'll see it's actually the selector that will allow us to target that
+
+exact bit that we wanted to.
+
+I don't recommend blindly copy and pasting things, so this is a little bit of a cheat code, but because
+
+we now understand how this works, we can actually simplify this massively.
+
+We know that what it's saying is find the body, find its child, that's a div, find its child, that's
+
+div and then another child and then three levels deep,
+
+there should be a paragraph tag which needs to be black. Because we understand this, we can vastly simplify
+
+it by getting rid of that body,
+
+or we could change this to the class ".flag", which would do exactly the same.
+
+And we can even swap out these child symbols and keep it as a descendant selector.
+
+So a paragraph element that is a child of this div, a grandchild of another div and a great-grandchild
+
+of something that has this class, we'll select it and make it black.
+
+This is a little bit of a roundabout way of achieving the goal.
+
+You might have done something completely different.
+
+For example, we know that by default everything is black.
+
+So you could have also selected this paragraph element and turn it white instead.
+
+But I just wanted to demo to you a neat feature of Chrome Inspector show you the cheat code after you've
+
+done the exercise and let you know that this is also a possible way that you could try out in the future.
+
+So now if we compare our flag with the solution flag, you can see it's completely identical.
+
+Now, it might not be for you because maybe you've used a different method for positioning.
+
+Maybe you've changed the font size to a different font size, but essentially you should be close to
+
+this layout and hopefully in the process you've managed to use some of the skills that you learned in
+
+this section.
+
+The inspiration for this project comes from a website I came across by Michael Lascarides, and he basically
+
+classified world flags in order of difficulty to draw.
+
+So you can see all the way down here there is Serbia, which is pretty much the most complex flag to
+
+draw because of the shield.
+
+And there are other countries like Croatia or Mexico.
+
+But at the very top there are the simplest flags, for example, Palau or Nigeria or Peru.
+
+So if you want to have a go drawing your own country's flag, hopefully you're not in Serbia.
+
+If you are, then good luck.
+
+But if you're based in Austria or Bangladesh, then this should be quite doable using the skills that
+
+you've learnt with CSS.
+
+Enjoy, and I'll see you on the next section.
+
+
