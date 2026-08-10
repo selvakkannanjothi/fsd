@@ -1,0 +1,277 @@
+Hey, guys.
+
+In this section we're going to be diving deeper into CSS for website layout.
+
+Now, we did a little bit of this when we touched upon CSS positioning in the last section, but we're
+
+going to look at some other aspects of layout and we're going to start with the CSS Display Property.
+
+Previously we've seen that when we create a paragraph element, if we examine the full border of the
+
+element with a tool like Pesticide, then you can see that it actually takes up the entire full width
+
+of the web page.
+
+If we didn't want this to be the case, for example, if we wanted any paragraphs which are short enough
+
+to have the next line wrap up, then we would need to use a different element.
+
+Another type of element is something called a "span", a nd normally you'll see the span element in the
+
+middle of another element.
+
+In this case, I've got a span open tag (&lt;span&gt;), and then I've got the content of it, which is the word, Beautiful,
+
+and then I've got the closing tag of the span (&lt;/span&gt;).
+
+And this span is in between the paragraph element here.
+
+So we've got the "Hello," and then we've got the span and then we've got the "World," and then we've got the
+
+end of the paragraph element.
+
+So that's what the code for this line looks like.
+
+And the unique thing about the span element that's really cool is that it's by default has a different
+
+value for the display property.
+
+There are three common types of display values that we're going to look at.
+
+The span has that value set to something called "inline".
+
+Here's an example where we've got two h2's and because they are set to be display: inline, then they
+
+will literally display, inline with each other without needing the second one to go on to a new line.
+
+By default, most elements have this display set to a value called "block", and a block is exactly what
+
+it sounds like.
+
+It's a full width block.
+
+But as you can see here, we can change that value in order to change the layout of our element.
+
+This is how we would set that CSS value.
+
+We would have the property which is display, which actually has many, many different possible values.
+
+But the three that we're going to examine today is block, inline,
+
+and finally a mixture of the two, which is called inline-block.
+
+Let's take a look at each of these in turn.
+
+As I mentioned, when an element has display set to block, then it's going to take up the entire full
+
+width.
+
+Now, this means that if you have another element, then it's going to go below it and it's not going
+
+to go onto the same line.
+
+Now, however, if the display was inline, then it means that if we had one element here, for example,
+
+a span element, and then we add another element, that's another span, then they're both going to
+
+go into the same line until we can no longer fit any more onto the width of the web page, in which
+
+case they would go to the next line.
+
+Now, one of the important things to remember about elements which are inline in their display is you
+
+can't actually set the size of these elements.
+
+You can't set the width and the height.
+
+The reason for this is because they will default to the size of their content.
+
+If you only had the word hello, then it would only be as wide as it would need to allow that element
+
+to display.
+
+And if you had a much longer sentence then your inline element would stretch to fit that size.
+
+Keeping in mind this, if we go on to the very last type that I want to talk about, which is the
+
+inline-block, what's unique about this, which is a sort of halfway point between the inline and the block,
+
+is the block element allows us to set the height and width,
+
+and the inline aspect of the setting allows us to have elements that go on to the same line.
+
+What that means is if we have two elements which are both inline-block and we have one that say,
+
+200 by 200 and we have another that's maybe 20 by 100,
+
+then in this case, what will happen is because they're both inline-block, then we can set their height
+
+and width.
+
+And because they are inline-block, they can actually go on to the same horizontal line as long as there
+
+is enough space on the width of the web page.
+
+By changing this display property to block-inline or inline-block, we can actually determine the layout
+
+of our website.
+
+And the final one that I want to mention in the same breath is when you set the display property to
+
+"none", then what that's going to do is it's going to make any element on the screen basically disappear.
+
+And sometimes this is useful when you have a button that say, hides an element or when you check-off
+
+an item in the to-do list and you want it to disappear,
+
+this might be the property that you'll need.
+
+So the display property can change many, many different things.
+
+And these are just some of the values that you're going to see set on the display property quite frequently.
+
+In order to better understand this, I've created an example website for you at this address
+
+appbrewery.github.io/css-display
+
+And here I've got three elements a Block Paragraph, an Inline Paragraph and an Inline-Block Paragraph.
+
+So they're all paragraph elements, but you can actually change the height and width of all of these
+
+elements and see what happens to the blocks.
+
+So, for example, we know that our block elements can change in height and width, but no matter how
+
+much you change the width, it's not going to bring the next line up.
+
+We know that our inline elements cannot be changed in terms of height and width because they fit to
+
+the width and height of their content.
+
+And we know that our inline-block element is the one that gives us the powers of both, essentially
+
+allowing us to change the height and width,
+
+but also if the width was large, then it might need to occupy its own line,
+
+but if it's small enough, then it could fit on the same line as another inline element or an
+
+inline-block element.
+
+Have a play around with this on this website to better understand this concept of these three display
+
+values.
+
+And then once you're done, I've got an exercise for you to practice writing the code and setting the
+
+CSS display property.
+
+Go ahead and download the starting file for 8.0 CSS Display, extract it, and open it inside VS Code
+
+and then open up the index.html.
+
+Here
+
+I've got two TODOs for you.
+
+There's two steps to this challenge.
+
+The first challenge is by changing only the display property in the CSS,
+
+so I've got a style tag here with all the CSS and this is what you're going to change.
+
+If we take a look at the preview for the code as it is, you can see we've got three paragraph elements
+
+on screen and at the beginning it looks pretty much the same as the example website we were playing
+
+around with just now.
+
+But the only difference is we have the width and height set to 200px on each of the squares.
+
+What I want you to do is to change only the display property in the CSS code right here in the index.html,
+
+and by doing that, I want you to create a web page where all three of these squares line up horizontally
+
+in the same way as the goal image.
+
+Remember, you're going to have to think about which type of display you're going to need in order to
+
+get all three of these to show up in the same size and horizontally lined up.
+
+So pause the video and give this a go now.
+
+All right.
+
+So the first thing we know is that when we have a display set to inline, it's not going to respect
+
+the height and width.
+
+First thing we have to change is this display value.
+
+So I'm going to change it to an inline-block.
+
+And notice how as soon as I've changed that it is now a 200 by 200 square.
+
+The other thing you notice is that the two inline-blocks, so the green one and the blue one allow this
+
+layout where they line up next to each other,
+
+whereas this red box which is set to block does not, because it wants to occupy the full width of the
+
+page.
+
+So that is the one that we're going to have to change in order to achieve our desired goal.
+
+So let's change this to an inline-block.
+
+And notice
+
+now, if I stretch my page so that there's enough width, then everything will actually line up onto
+
+the same horizontal.
+
+If you had a little bit more narrow then because it's an inline-block, it will move to the next page
+
+so that it actually can show the full width of each element, but on a normal viewing screen,
+
+so if you actually opened this in a website, then you should see them lining up perfectly horizontally.
+
+The next part of this challenge is to change only the display property again, and we're going to make
+
+all three of them line up vertically like this one.
+
+Now this is cut off at the end, but you can imagine if you scroll, they're just three equal size squares
+
+which are all lined up vertically.
+
+And we do that by changing the display property.
+
+Pause the video and see if you can make that happen.
+
+All right.
+
+So the thing that we know about the vertical layout is in order for them to not go on to the same line
+
+horizontally, they can't have anything to do with inline.
+
+In order to achieve that vertical layout.
+
+We need to change everything to have a block display value,
+
+because what this is telling our website is each of these elements wants all of the width to itself.
+
+Don't let it share the width with any other element.
+
+And by doing this we end up with this vertical stacking of our elements and we've achieved two dramatically
+
+different layouts just by understanding the difference between display: block, display: inline, and
+
+display: inline-block.
+
+So how to play around with that if you fancy,
+
+but otherwise head over to the next lesson where we're going to learn about another way of laying out
+
+elements using the float property. For all of that and more, I'll see you there.
+
+
