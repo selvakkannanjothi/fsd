@@ -48,8 +48,10 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 
 ### Phase 2: Frontend
 - [x] HTML — core elements: headings, paragraphs, void elements (hr/br), lists, nesting/indentation, anchor tags & attributes, images (see EX 2.1–EX 3.4)
+- [x] HTML — multi-page websites: file paths (absolute/relative, `./` & `../`), linking pages, HTML boilerplate, portfolio project, hosting on GitHub Pages (see EX 4.0–EX 4.3)
 - [ ] HTML — semantic tags, forms, tables
-- [ ] CSS — selectors, box model, flexbox, grid, responsive design
+- [x] CSS — adding CSS (inline/internal/external), selectors, combining selectors, cascade/specificity/inheritance, colors, fonts, box model, DevTools inspection, display, positioning; projects: Color Vocab, Flag of Laos, Motivational Poster (see EX 5.1–5.4, 8.0)
+- [ ] CSS — flexbox, grid, responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
 
@@ -99,3 +101,13 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - **Lists**: `<ul>` = unordered (bullets), `<ol>` = ordered (numbers, has a `start` attribute); nested lists live inside a parent `<li>`, before that `<li>`'s closing tag.
 - **Attributes**: live in the opening tag as `name="value"`; some are element-specific (`href` on `<a>`), some are global (`draggable` on anything).
 - **Images**: `<img src="..." alt="...">` is a void element; `alt` text is read aloud by screen readers — always add it for meaningful images.
+- **File paths**: unique location of a file/folder. **Absolute** = from the root (`C:\`/`Macintosh HD`); **Relative** = from the file you're editing (preferred in web dev — shorter, survives moving the project). `./` = current directory, `../` = up one level.
+- **Multi-page sites**: multiple `.html` files linked via `<a href="./public/page.html">`; convention is `index.html` at top level, other pages in `public/`, assets in `assets/images/`. `href` is for `<a>`, `src` is for `<img>` — never swap them.
+- **HTML boilerplate**: `<!DOCTYPE html>` (HTML5) → `<html lang>` (root) → `<head>` (invisible info: `meta charset`, `viewport`, `title`) + `<body>` (visible content). VS Code Emmet shortcut: `!` + Enter (in `.html` files only).
+- **Web hosting / GitHub Pages**: hosting = files on an always-on web server (vs local development). Deploy: public repo + README → upload folder *contents* → Settings › Pages › Branch `main`. Home page must be named exactly `index.html`.
+- **CSS basics**: Cascading Style Sheets = the styling layer. Rule = `selector { property: value; }`. Add via inline (`style=""`), internal (`<style>`), or external (`.css` + `<link>` — preferred for multi-page). Selectors: element, `.class` (reusable), `#id` (unique), `[attr]`, `*` — same syntax as Selenium/Cypress CSS locators.
+- **CSS combinators**: `A, B` group · `A > B` direct child · `A B` descendant (any depth) · `AB` chain (no spaces, element first).
+- **The cascade** (resolves conflicts): Position (lower wins) → Specificity (ID > attribute > class > element) → Type (external < internal < inline) → Importance (`!important` beats all). Some properties inherit (e.g. `font-family`).
+- **Colors / fonts**: colours as named / hex / `rgb()`; `color` = text, `background-color` = background. Font sizes: `px`/`pt` static, `em` = parent-relative, `rem` = root-relative (preferred). `font-family` needs a generic backup; Google Fonts via `<link>`.
+- **Box model** (inside→out): content → padding → border → margin. Border/padding grow the box *outward*. `<div>` = invisible grouping container.
+- **Layout**: `display` = `block` / `inline` (can't size) / `inline-block` / `none`. `position` = `static` / `relative` (to itself) / `absolute` (to nearest positioned ancestor) / `fixed` (to window). Idiom: parent `relative` + child `absolute`. `border-radius: 50%` = circle. DevTools: Styles (struck-out = overridden), Computed (final values), CSS Overview (grab a site's colours/fonts).

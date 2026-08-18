@@ -22,3 +22,30 @@ Topic: HTML - Elements (Headings, Paragraphs, Void Elements, Lists, Nesting, Anc
 - Attributes live in the opening tag (name="value"); href is anchor-specific, draggable is a global attribute usable on any element.
 - <img src="..." alt="...">: alt text is read by screen readers - always add it for meaningful images.
 - Practiced across EX 2.1-3.4, capped by EX 3.4 Birthday Invite Project combining headings + image + list + link.
+
+Topic: Multi Page websites - File Paths, Web Pages, Boilerplate, Portfolio & Hosting
+- File path = unique location of a file/folder; root = the hard drive (C:\ on Windows, Macintosh HD on Mac).
+- Absolute path = from the root (C:\Project\Images\cat.png); works anywhere but breaks if the project moves.
+- Relative path = from the file you're writing in; USE THIS in web dev (shorter + survives moving the project).
+- Special chars: ./ = current directory (always write it for same-folder files), ../ = go up one level (chain ../../ for more).
+- Multi-page site = several .html files linked with <a href="./public/about.html">; keep index.html at top level, other pages in public/, assets in assets/images/.
+- href is for <a> (links); src is for <img> (resources) - never swap them. An <img> can be nested inside an <a> to make an image a link.
+- HTML boilerplate: <!DOCTYPE html> (HTML5) -> <html lang="en"> (root) -> <head> (invisible info: meta charset UTF-8, viewport, title=tab text) + <body> (all visible content). VS Code: type ! + Enter to auto-generate (only in .html files).
+- Portfolio project (EX 4.3): 7-step build (boilerplate -> title -> move projects to public/ -> screenshots -> titles -> project links -> preview images + About/Contact). Use height="200" to shrink big screenshots.
+- Web hosting = putting files on an always-on web server so anyone can reach them 24/7 (vs local development = files only on your machine).
+- GitHub Pages deploy: public repo + README -> Upload files (drag folder CONTENTS, not the folder) -> Commit -> Settings > Pages > Branch = main -> Save -> wait 1-10 min for live URL. Home page MUST be named exactly index.html (lowercase i).
+
+Topic: CSS - Styling, Selectors, Cascade, Box Model, Layout & Projects
+- CSS = Cascading Style Sheets = the styling layer (paint/decor); "cascades" from general to specific. Separation of concerns from HTML content.
+- Every rule = property: value; (e.g. color: blue;). Internal/external rules also need a selector + { }.
+- 3 ways to add CSS: inline (style="..." attr, one element), internal (<style> in <head>, one page), external (.css file via <link rel="stylesheet" href="./style.css">, multi-page - most common).
+- Selectors: element (tag), .class (reusable), #id (unique, one per page), [attr] / [attr="val"], * (universal/all). Same syntax as Selenium/Cypress CSS locators.
+- Combining: A, B = group; A > B = direct child (one level); A B = descendant (any depth); AB (e.g. li.done) = chain (no spaces, element first).
+- Cascade (decides conflicts): 1.Position (lower wins) -> 2.Specificity (ID > attribute > class > element) -> 3.Type (external < internal < inline) -> 4.Importance (!important beats all). Some props (font-family) inherit.
+- Colors: named (cornflowerblue), hex (#5D3891), rgb(93,56,145). color=text, background-color=background. colorhunt.co for palettes.
+- Fonts: font-size units px/pt (static), em (rel to parent), rem (rel to root <html> - PREFERRED). font-weight normal/bold/100-900. font-family: "Name", genericBackup; (sans-serif/serif/monospace/cursive/fantasy) - quote multi-word names. Google Fonts via <link> in <head>. text-align left/right/center/start/end.
+- Box model (inside->out): content(width/height) -> padding (inside border) -> border (thickness style color; grows OUTWARD, doesn't change size) -> margin (outside). Shorthand clockwise T R B L; 2 vals = TB LR; 1 val = all. <div> = invisible grouping container. <p> has default 1em margin - zero it when needed.
+- DevTools: Inspect / Ctrl+Shift+I. Styles tab (struck-out = overridden), Computed tab (final values + inherited), CSS Overview (grab a site's colors/fonts). Edits are local-only, reset on refresh.
+- display: block (full width, stacks below - default), inline (same line, CAN'T set w/h), inline-block (same line + settable w/h), none (hidden). <span> is inline by default.
+- position: static (default flow), relative (to its own original spot), absolute (to nearest positioned ancestor, else page top-left; leaves flow), fixed (to browser window, stays on scroll). Idiom: parent position:relative + child position:absolute. z-index = stacking (default 0, higher on top, -1 behind). border-radius:50% = circle.
+- Projects: Color Vocab (link external CSS at right path, id selectors, shared class, size imgs in CSS); Flag of Laos (class-less HTML -> target with combined selectors + cascade + relative/absolute + border-radius:50%; reset <p> margins; hex via CSS Overview); Motivational Poster (5px border, black bg, Google font Libre Baskerville, simple centering via width:50% + margin-left:20% + margin-top; learn text-transform:uppercase from docs).
