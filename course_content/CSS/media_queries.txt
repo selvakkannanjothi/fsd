@@ -1,0 +1,235 @@
+So now that we've looked at some of the different ways that we can create responsive websites, we're
+
+going to do a deep dive into one of those first methods through the use of media queries.
+
+And media queries are actually pretty simple to understand, as you've seen before.
+
+Essentially, instead of the selector, we have the "@media" keyword and here you can define what's
+
+called a breakpoint.
+
+This essentially says that at this particular width, anything that is less than or equal to 600px,
+
+then you should use this styling in here, instead.
+
+For example, change the h1 to have a smaller font size when it's on a mobile phone instead of a full
+
+width desktop website.
+
+Let's look at some demo code.
+
+If we have a div here that's completely empty, but we give it a height and a width and we change it
+
+to a blue background color, but then we go ahead and add a media query as you saw in the demo website
+
+in the last lesson, we can change the div's height and width when it's in this media query's brackets.
+
+This is saying when the website is a lot narrower, such as on a mobile phone, we should actually have
+
+a smaller square.
+
+So instead of 200 by 200px, maybe it should be 100 by 100px instead so that it makes better
+
+use of the screen real estate and it's scaled to fit to that screen size.
+
+We're using that media query max-width in order to define any screen size that is 600px or below.
+
+So anything that is smaller or equal to 600px, then it should have this particular kind of styling
+
+and we provide an override to the default styling.
+
+Now alternatively, you can use a different keyword here.
+
+You can use the min-width, which is the minimum width, and by changing that from max to min, essentially
+
+you're going the other direction of responsiveness.
+
+So you're saying anything that is from 600px upwards, then we should have a different styling.
+
+So you're basically targeting bigger screens with this min-width.
+
+So if you think about the total possible size of a website, so from 0 to say, I don't know, 2400px,
+
+if you have a screen that is say only 600px right here, then you can use the max-width
+
+to target this direction.
+
+But if you want to target all the screens that are bigger, then you could use the min-width to target
+
+in this direction.
+
+So you're essentially targeting different screen sizes and providing different styles for those different
+
+screen sizes.
+
+Now you can also combine different breakpoints to target something that is a specific size.
+
+So in this case, you're saying anything that is bigger than 600px,
+
+using this particular line here.
+
+So minimum width for this style is 600px and then maximum width for this style is 900px.
+
+So anything that's less than 900px. And in between these two points is where your specific style
+
+is going to be applied. In here.
+
+So this means the screens, which are between 600 and 900, will be targeted using this combination
+
+system by adding that "and" keyword between these two breakpoints.
+
+Now if you flip that around and you change the smaller size to a max-width, then you're taking a different
+
+approach.
+
+You're saying anything that is less than 600px and anything that is greater than 900px on
+
+those screen sizes,
+
+let's apply these styles. So you can combine things in many different ways.
+
+You can chop it and change it however you like.
+
+But the important thing is to understand this wording max-width and min-width, the maximum width where
+
+this style will be applied and the minimum width where this style will be applied.
+
+So when you read it that way, it becomes much simpler to understand.
+
+In addition to max-width and min-width, you might also see this "screen" keyword being used, which is
+
+not really necessary by default because it's going to apply it to all screens,
+
+but if we think about the alternative to screen is a keyword called "print".
+
+And what this allows you to do is to use the media query to target only when your website is being printed
+
+and to give it a different layout.
+
+I don't normally recommend adding the screen keyword if you're just writing a normal media query, but
+
+when you do see it out there in the wild, then you'll know what that means,
+
+it's just saying targeting screens, or targeting print.
+
+For more on media queries and all of the different properties that you can change using media queries,
+
+head over to the Developer Docs and take a look at, "Using media queries."
+
+You can see under the Syntax section, there are a lot of things that we've mentioned, such as orientation,
+
+or device-height, device-width, or height and width, and Targeting different media types or Targeting
+
+different features.
+
+And there's a lot more that you can do with media queries and you can have very complex media queries,
+
+but most of the time you're going to be using pretty simple media queries such as max-width and
+
+min-width, and you won't use a lot of these other features.
+
+But as always, it's good to be aware that they exist.
+
+So have a quick read of this and see if there's anything else there that you want to pick up.
+
+And once you're done, let's go ahead and try an exercise and practice what we learned.
+
+Open up the index.html for the starting file that you've just extracted and you can see I've got some
+
+TODOs here.
+
+Here, I've included some of the common breakpoints for the different devices that you're probably going
+
+to want to target.
+
+Mobile devices tend to be between 319 and 480px.
+
+iPads and tablets tend to have this kind of screen width range (481px-1200px) and then laptops (1201px-1600px) and desktops (1601 and more).
+
+I want you to create media queries for this web page so that in these different sizes, the background
+
+color of the body will be different.
+
+So by default, I've set it to an aquamarine and you can see it just looks like this.
+
+It's a very simple website, but I want you to be able to change the width of this website, such as
+
+when you right-click on solution and Show Preview, you can see it actually has different colors depending
+
+on how we change it and if we take it out of VS Code and into the browser, then you can see there's
+
+actually four different possible colors.
+
+You've got desktop, which is the seagreen, and then you've got laptop which is limegreen, iPads, tablets,
+
+this kind of powderblue and finally mobile devices which has this salmon, orange or red.
+
+So you can do that.
+
+Now another way of testing out the responsiveness using the Chrome Developer Tools is to open up the
+
+Chrome Developer Tools,
+
+if you don't remember how to do that, remember you can go to... here and then go to More Tools and then
+
+you can go to Developer Tools.
+
+That's how you open up this pane.
+
+And if you click on this little button right here, then you can change the dimensions to, for example,
+
+an iPhone SE or to an iPhone 12 or an iPad air and
+
+it doesn't really do a lot of the bigger screens, but you can change it to responsive and then you
+
+can change the size however you like.
+
+And you can also type it in here if you want.
+
+So this is a really neat way of testing out responsiveness in Chrome.
+
+Pause the video and go ahead and complete this exercise.
+
+All right.
+
+So let's take a look at the solution code together.
+
+Now, notice how essentially all we need is just four different media queries.
+
+For the first one, I said that mobile devices are usually between 319 and 480px,
+
+now, you could simply just target a max-width of 480,
+
+or if you really want to, you can also have a minimum width in there, so that you actually are specific
+
+about that mobile device size.
+
+So we could put 319 right in here, but normally you're not really going to display your website on
+
+anything that's less than mobile size, right?
+
+Like there's not that many things that are narrower than 320px.
+
+So you could do it either way.
+
+It doesn't really matter, but this is one option.
+
+Now, the next breakpoint we've got is the iPad and tablet size between 481px and 1200px.
+
+So we're using that min-width and max-width combo that you see right here to find that particular size
+
+and turn it powderblue.
+
+And then we do the same for the laptop size.
+
+And finally, we simply define a min-width for our desktop so that anything that's larger than 1601 pixels
+
+gets a color of seagreen.
+
+Hope that was easy enough, and if you had any problems, have a look at the solution code,
+
+but most importantly, it should work when you test it out.
+
+That's all for media queries.
+
+In the next lesson, we've got a final project for this section, so head over there once you're ready.
