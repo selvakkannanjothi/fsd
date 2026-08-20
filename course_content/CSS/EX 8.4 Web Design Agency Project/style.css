@@ -19,3 +19,35 @@ footer {
   color: midnightblue;
 }
 
+.card > img {
+  width: 299.8px;
+  height: 200px;
+  float: left;
+  margin-right: 50px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.card{
+  width: 45%;
+}
+
+div.main{
+  display: block;
+}
+
+p{
+  margin: 16 0;
+}
+
+span#creative{
+  color: midnightblue;
+}
+
+
