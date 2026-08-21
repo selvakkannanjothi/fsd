@@ -49,3 +49,16 @@ Topic: CSS - Styling, Selectors, Cascade, Box Model, Layout & Projects
 - display: block (full width, stacks below - default), inline (same line, CAN'T set w/h), inline-block (same line + settable w/h), none (hidden). <span> is inline by default.
 - position: static (default flow), relative (to its own original spot), absolute (to nearest positioned ancestor, else page top-left; leaves flow), fixed (to browser window, stays on scroll). Idiom: parent position:relative + child position:absolute. z-index = stacking (default 0, higher on top, -1 behind). border-radius:50% = circle.
 - Projects: Color Vocab (link external CSS at right path, id selectors, shared class, size imgs in CSS); Flag of Laos (class-less HTML -> target with combined selectors + cascade + relative/absolute + border-radius:50%; reset <p> margins; hex via CSS Overview); Motivational Poster (5px border, black bg, Google font Libre Baskerville, simple centering via width:50% + margin-left:20% + margin-top; learn text-transform:uppercase from docs).
+
+Topic: FLEXBOX - Display Flex & Flex Direction (EX 9.0, EX 9.1)
+- Problem: old layout used hacks - <table> for styling (semantically wrong), inline-block (fiddly), position:absolute (inflexible), float (designed for wrapping text around images, not page layout). Flexbox is built for laying boxes out in a row/column.
+- Turn it on with display:flex on the CONTAINER (the parent wrapping the items) - never on the children.
+- Once a container is flex, children's own default display values (block/inline/list-item) are IGNORED - Flexbox takes over. Think of it as a separate system from display:block/inline/inline-block.
+- Default: items sit in a horizontal row, each sized to fit its content.
+- gap adds spacing between items: gap:10px (static) or gap:1rem (scales with root font size).
+- display:flex = container is full width (like block). display:inline-flex = container shrinks to fit its content and other things can sit on the same line (like inline-block). Children layout is identical either way.
+- flex-direction:column stacks items vertically (row is the default).
+- Selecting flex items: .container div = all div descendants (any depth); .container > div = direct child divs; .container > * = ALL direct children regardless of tag (safest for "style every flex item"); .container > :is(div,p) = composable version.
+- EX 9.0: turned an <li> list into a nav bar with display:flex + gap on .container (list-style:none removes bullets).
+- EX 9.1: 7 coloured divs, .container display:inline-flex + flex-direction:column, .container > * { flex-basis:100px; }.
+- Modern layout tools = Flexbox, Grid, Bootstrap. Keep float for its original job (text wrapping around an image).

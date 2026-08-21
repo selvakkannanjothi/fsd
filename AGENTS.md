@@ -51,7 +51,8 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - [x] HTML — multi-page websites: file paths (absolute/relative, `./` & `../`), linking pages, HTML boilerplate, portfolio project, hosting on GitHub Pages (see EX 4.0–EX 4.3)
 - [ ] HTML — semantic tags, forms, tables
 - [x] CSS — adding CSS (inline/internal/external), selectors, combining selectors, cascade/specificity/inheritance, colors, fonts, box model, DevTools inspection, display, positioning; projects: Color Vocab, Flag of Laos, Motivational Poster (see EX 5.1–5.4, 8.0)
-- [ ] CSS — flexbox, grid, responsive design
+- [x] CSS — Flexbox basics: `display: flex` / `inline-flex`, `gap`, `flex-direction`, direct-child selectors for flex items (see EX 9.0, EX 9.1)
+- [ ] CSS — flexbox (advanced: axis, wrap, align/justify, sizing), grid, responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
 
@@ -111,3 +112,4 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - **Colors / fonts**: colours as named / hex / `rgb()`; `color` = text, `background-color` = background. Font sizes: `px`/`pt` static, `em` = parent-relative, `rem` = root-relative (preferred). `font-family` needs a generic backup; Google Fonts via `<link>`.
 - **Box model** (inside→out): content → padding → border → margin. Border/padding grow the box *outward*. `<div>` = invisible grouping container.
 - **Layout**: `display` = `block` / `inline` (can't size) / `inline-block` / `none`. `position` = `static` / `relative` (to itself) / `absolute` (to nearest positioned ancestor) / `fixed` (to window). Idiom: parent `relative` + child `absolute`. `border-radius: 50%` = circle. DevTools: Styles (struck-out = overridden), Computed (final values), CSS Overview (grab a site's colours/fonts).
+- **Flexbox**: `display: flex` goes on the **container**, and its children's own default display values are ignored — it's a separate layout system from block/inline. Default = horizontal row, items sized to content. `gap` spaces items (`px` or `rem`). `flex` = full-width container (like `block`); `inline-flex` = shrink-to-fit container (like `inline-block`). `flex-direction: column` stacks vertically (`row` is default). Style flex items with `.container > *` (all direct children, tag-agnostic) rather than `.container div` (any depth). Replaces the legacy `<table>`/`inline-block`/`absolute`/`float` layout hacks — `float` should go back to its real job of wrapping text around images.

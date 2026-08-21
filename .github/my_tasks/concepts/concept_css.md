@@ -113,6 +113,18 @@ ul p.done   { font-size: 0.5rem; }   /* combos mix freely */
 - Preference: use the **descendant** (space) over child (`>`) unless you specifically need only direct
   children.
 
+### Direct-child selector alternatives (Flexbox `EX 9.1 Flex Direction`)
+
+When a rule should only touch **direct children** (e.g. `.container div { flex-basis: 100px; }` matching
+only the first-level `<div>`s, not any nested ones), these all work:
+
+| Selector | What it targets |
+|---|---|
+| `.container div` | All `div` descendants (any depth) — the loose/default version |
+| `.container > div` | Only **direct child** `div`s — most precise, matches the intent here |
+| `.container > *` | All direct children regardless of tag — uses the universal selector |
+| `.container > :is(div)` | Same as `> div` but composable — extend to more tags: `:is(div, p)` |
+
 ---
 
 ## 5. The Cascade, Specificity & Inheritance (`cascade_specificity_inheritence.txt`)

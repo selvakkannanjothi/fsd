@@ -1,0 +1,309 @@
+ey, guys.
+
+So in the last lesson, we saw how Flexbox can be declared on a container and how it can start already
+
+doing its thing based on the automatic default values,
+
+but in this lesson, I want to talk to you about something called "flex-direction" so that we can actually
+
+learn how to modify our Flexbox in order to achieve the layouts that we want.
+
+When we think about HTML default flow, normally items get laid out like this, so if they're inline,
+
+they'll continue stacking inline until there is no more space,
+
+if they are block, they will stack one on top of each other and they will continue like this,
+
+and this is the sort of default HTML flow.
+
+It goes from top to bottom. As you saw previously with our Flexbox.
+
+as soon as we put everything inside a flexible container, all of the items that are contained gets
+
+put onto this row.
+
+It gets lined up all along like this, and they go one after the other from left to right.
+
+And the reason for this is because there is a property in Flexbox called the flex-direction.
+
+And by default, this flex-direction is set to row.
+
+So it means that things will be laid out along a row,
+
+and it's a little bit confusing because you might think, well, actually I'm creating columns here.
+
+Right?
+
+But I want you to think about it in terms of how the next item is going to be stacked onto the page
+
+and it's going to be stacked on one after the other onto the same row until there is no more space and
+
+it's still going to try and continue to stack it from left to right. In Flexbox,
+
+that means when you have a flex-direction set to row, then you're setting something called the
+
+"main axis".
+
+In this case, this is the main axis.
+
+It's going from left to right and it's on the horizontal.
+
+When flex-direction is row, main axis is horizontal from left to right.
+
+And then there's something called the "cross-axis".
+
+The cross axis goes perpendicular to the main axis.
+
+That means in the case where flex-direction is row, the cross axis goes from top to bottom.
+
+Bear with me here,
+
+I'm going to show you the other option.
+
+If we didn't set the flex-direction, it would default to row,
+
+but if we had set the flex-direction to column, then what it's going to do is it's going to make all
+
+of the items inside this flexible container go from top to bottom.
+
+So now what we've done is we've changed the main axis. The main axis is now from top to bottom,
+
+and that means that the cross-axis is the one that's now from left to right.
+
+Now, why does all of these main-axis and cross-axis even matter?
+
+Well, it matters when we want to continue to customize our Flexbox items.
+
+Let's take an example
+
+property, for example, the flex-basis.
+
+Now, you can imagine this property almost like setting the height
+
+in this case, if we go ahead and increase this height to 100px, then what's going to happen is
+
+it will expand along the main axis to satisfy that requirement of the flex-basis, 100px.
+
+Now, this is the thing about the flex-basis,
+
+if instead of having the main axis along this way, if the main axis was this way,
+
+so in the case of flex-direction set to row, then remember the main axis is now this way.
+
+And so now when we set the flex-basis to a larger flex-basis, instead of setting the height as we did
+
+previously, it's now actually setting the width.
+
+When this happens, we're again going to use flex-basis 100 and when the code runs, it changes the
+
+width of each of the items inside the container to satisfy that requirement.
+
+As you can see, along with flex-basis and a number of other properties, essentially they are flexing
+
+along the main axis when it's a row, the flex-basis is the width and when it's a column, the
+
+flex-basis is the height.
+
+Essentially, we are flexing along the main axis.
+
+That's why the main axis and the cross-axis matters when it comes
+
+to flex-direction.
+
+Let's go ahead and try an exercise to see if you can apply a different flex-direction to the code that
+
+we've set up for you.
+
+So go ahead and extract the Flex Direction folder and open up index.html and then go ahead and show
+
+it inside preview.
+
+Now you'll see I've created all the colors of a rainbow inside a container.
+
+Now, in this case, we've already set it to display: flex,
+
+and remember by default, the flex-direction will be a row.
+
+So it's flexing along this direction, left or right, as the main axis.
+
+Now, the goal or what it is that you're trying to solve is to change the layout so that not only are
+
+they taller, but also they are aligned along this top to bottom axis.
+
+And I can tell you that this height of each item is 100px high.
+
+You're going to have to learn to use the flex-direction,
+
+also what we learned about the flex-basis in order to get this outcome.
+
+Now, there is one thing that you might need to be able to achieve this, because remember, the
+
+flex-basis is set on the child element.
+
+So each of these elements and not on the container like with display: flex or with gap, they're all
+
+going on to the container or the parent.
+
+But the flex-basis has to actually go on to the child.
+
+So I want you to take a look at the Developer Docs that I've linked to, to see which selector you need
+
+to use and how to combine the selectors in order to target all of these divs. Now because all of these
+
+divs don't really share anything in common,
+
+for example, they don't have the same class or they're not a different type of element,
+
+I don't want you to change any of the HTML,
+
+I want you to use CSS to target just these divs.
+
+And we've learned about some of this before when we learned about combining selectors.
+
+So if you want to do a quick recap of that lesson, this might be a good moment.
+
+Alternatively, you can do what every developer does when they forget how to do something, which is
+
+take a look at the documentation.
+
+This is a sort of a two part challenge, but essentially the end outcome is to achieve something that
+
+looks like this without changing any of the HTML.
+
+Pause the video, have a read through the docs, see if you can figure this out.
+
+All right.
+
+So let's go ahead and try to solve this.
+
+The first thing we know we need to do in order to turn it from this left to right and instead go from
+
+top to bottom is we need to change the flex-direction.
+
+So as I mentioned, the flex-direction is a property that goes onto the parent and we can change it
+
+to column so that instead of lining up like this, it lines up from top to bottom.
+
+Now, unfortunately, you can see by default, everything is occupying 100% of the width.
+
+And we don't really want that.
+
+We want it to only occupy as much width as we have content for.
+
+This is a little bit of a challenge, but this is something that we mentioned in the last lesson.
+
+Instead of having display as flex, where the entire container is going to occupy the full width, we
+
+can change it to inline-flex, which is going to make it occupy only as much width as it needs to fit
+
+the widest bit of content contained in the container.
+
+That was a little bit of a revision for you there, trying to catch you out to see if you remember what
+
+we learned in the last lesson.
+
+The next thing we have to do in order to achieve this goal is to try and make it a little bit taller.
+
+And I mentioned that we can do that by using the flex-basis property.
+
+But I also mentioned that you can't set the flex-basis on the container.
+
+See what happens if I try to do this, flex-basis on the parent container, let's set it to 100px
+
+and then once it reloads, pretty much nothing happens.
+
+This is not a property that's intended for the parent.
+
+And remember, when it comes to Flexbox, the container that contains the elements, this is the parent.
+
+And each of these items in here, these are the children, or normally we just call them items.
+
+How do we target all of the items inside this div?
+
+We've got a div called container and we want to get all of its children.
+
+Well, if we take a look at this hint, then you can see that we once upon a time learned about, Combinators,
+
+different ways of combining CSS selectors.
+
+There's the Descendant combinator.
+
+There's also something called the Child combinator. That is done using this greater-than (>) sign between
+
+two selectors, and it matches only the elements where the second selector are the direct children,
+
+that's matched by the first.
+
+This basically says if we have a selector that selects the parent and then we have a selector for the
+
+child, then we're only going to select the direct children.
+
+And in this case, that's pretty much exactly what we want to do.
+
+Now, I also linked to this other MDN Doc, which is about the universal selector (*).
+
+So remember using the asterisks, we can select all the elements.
+
+If in this case, what we're trying to select is to select all the elements that are the direct children
+
+of the .container class...
+
+The .container class is our Flexbox container,
+
+and in order to get hold of all the children using what we just read from the MDN Docs, we can select that
+
+container using that right angle bracket (>) as the combinator,
+
+and then the children selector, what we're going to use is simply an asterisk (*) and this is going to select
+
+all of the direct children.
+
+So not the grandchildren or, you know, two levels down, three levels down.
+
+So if we had a div inside this div because this is not a direct child, this is actually a grandchild,
+
+then it's not going to be selected by this combination.
+
+All the direct children of the .container class is all of our flexible items,
+
+and then we're going to change the flex-basis to 100px.
+
+And because our main axis is from top to bottom, because we've set the flex-direction to column, then
+
+our flex-basis, 100px will get applied to each of these child items and we're able to achieve
+
+the final goal outcome.
+
+So there were quite a few bits in this challenge, but hopefully you got there in the end, maybe with
+
+a few hints from me, but I want you to play around with this flex-direction.
+
+See what happens when you change it.
+
+See what happens when you change, say the flex-basis and you change the flex-direction.
+
+See what happens when you change the display: inline-flex
+
+to something else.
+
+See what happens when you have a flex-basis on but there's not enough widths and all of these things.
+
+For now,
+
+don't worry too much about how sizing is handled in Flexbox because it is one of the weirdest parts
+
+of Flexbox,
+
+and there's going to be a lesson that I'm going to dedicate to Flexbox sizing.
+
+But for now, you can see how lovely our Flexbox flexes along the different axis and how useful this
+
+is for creating different layouts.
+
+And once you're done playing around with flex-direction, head over to the next lesson and we're going
+
+to learn more about the different properties that we can apply to the parent Flexbox container.
+
+For all of that and more.
+
+I'll see you there.
