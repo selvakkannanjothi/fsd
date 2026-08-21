@@ -1,0 +1,583 @@
+Hey, guys, welcome to this module on CSS, Flexbox.
+
+We're going to learn all about it, how it works and how we can use it to create complex, flexible
+
+layouts using this CSS tool.
+
+As we mentioned, a lot of the web layout was originally inspired by newspapers and magazine articles,
+
+which is where all these display: inline, display: block, float all comes from,
+
+and over the years, the layout of the web has become more and more complex to the extent where it's
+
+no longer really that similar to a magazine and a website has become far more complex and far more interactive.
+
+Over the years, there have been many ways of implementing HTML and CSS to layout a website.
+
+One of the earliest ways was actually using HTML.
+
+We had these things called tables, so you could create a "table" element with table rows (tr) and table data (td)
+
+to create something like this, a three column layout for your website.
+
+And if you set the width of these three columns to different amounts, then you can lay out your web
+
+page like this with three boxes or cards or whatever you like to call it.
+
+The table element is still very much in use in modern web design, but because it's in the HTML, it
+
+should really only be used when semantically you're actually trying to create a table.
+
+So in this case, if you were using this to represent some data, like I don't know how many car tires
+
+were sold on your website or how many visitors you had in May, then that is probably tabular data and
+
+should be represented with a table element.
+
+But if you're using table just the layout, the styling of your website, then this is very much a no
+
+no in modern web design.
+
+And as you'll see, there are much, much better tools to do this nowadays.
+
+So you're not left in the dark.
+
+After people stopped using tables for layout, they started using what we've explored previously, which
+
+is using the Display Property.
+
+For example, you could set three divs to have inline-block so that they will all show up on the same
+
+line,
+
+and then if you set them to have a specific amount of width, then as long as there is enough for the
+
+entire horizontal, they will be stacked up next to each other like this in different columns.
+
+There are some problems with this though, because as you can see, the layout doesn't look great,
+
+right?
+
+Like, why are they not all on one line at the top?
+
+And in order to control this and move these blocks up and to have them all lined up, it's actually
+
+really fiddly,
+
+and it's quite a painful process.
+
+And people have undergone this process just in order to have a specific styling that they want.
+
+You could, for example, use position: absolute. So you could take these blocks out of the normal flow
+
+of HTML and instead have them be floating above the other content using absolute and then with absolute,
+
+you can of course set how much you want it to go from the left.
+
+And then this way you can set up a relatively complex layout, but it's a very inflexible layout because
+
+as soon as anything else gets added to this, that's not absolute, say at the bottom, then you're going
+
+to have to fiddle around with it to get the right layout.
+
+And it's really not responsive and it's just not a great idea.
+
+But if you have no other tools, then a hammer is going to do everything, right?
+
+But we do have other tools and one of the most relied-on tools in the sort of 2005 to 2010 era, was using
+
+float and as we saw, float is a very useful tool for floating images to get text to wrap around it,
+
+but people realized that you can actually use float to create more complex layouts as well.
+
+For example, we could make all three of these float left so that they stack up next to each other.
+
+Alternatively, we could make something on the right, float to the right, and we could have something
+
+float to the left,
+
+and as you saw before, we could clear a footer and use float and clear to basically create a more complex
+
+layout.
+
+And there are so many float related tips and hacks.
+
+For example, there's something called "The Clearfix Hack" and there's different hacks to use, float
+
+and clear to create complex layouts that you would want.
+
+But again, you know, it's kind of hacky and it's not that simple to reason about, especially
+
+when something goes wrong or something doesn't look quite right.
+
+It's really hard to fix.
+
+And I saw this great thing on puns, which you can Google for where they had this #titanic,
+
+float: none,
+
+that kind of describes how float is considered these days for complex layout.
+
+Don't use float for that.
+
+Float is great when you want to float an image to the left or the right of a block of text to wrap the
+
+text around it,
+
+but don't use floats for layout. Instead
+
+use something else like what
+
+we're going to explore Flexbox, Grid, Bootstrap, something that is designed specifically for creating
+
+an overall page structure.
+
+And within each of these blocks you could continue to use your float and your clear,
+
+but we're keeping to the original intent of that tool and we're not doing any sort of crazy hacks because
+
+Flexbox is also incredibly easy to use. In order to create that layout that we've been coveting using
+
+all these different tricks and different hacks, with Flexbox, all you need to do is to wrap your divs
+
+inside a container and then target that container in your CSS and set the display to "flex".
+
+That's pretty much it.
+
+All you need to do in order to get them to be displayed in columns like this, as you would expect on
+
+a modern website.
+
+Now it's also got these great additional properties like, for example, "gap", where you can add in
+
+a gap between each of these items and there's a whole lot more that we're going to cover in this module,
+
+and you're going to see just how flexible and easy it is to use Flexbox to create more complex layouts
+
+on our website.
+
+Now, one of the things that you might realize at this stage is this flex is set on the Display property,
+
+and we know that previously we've looked at display: inline, display: block, display: inline-block
+
+and all of that and display: none.
+
+This particular set, I want you to think of it as a completely different system.
+
+When we're thinking about Flexbox, we have to throw all of this out of the window.
+
+That doesn't mean we're not going to use it, because as you see, websites still continue to use these
+
+different things,
+
+but when you make something flex, it no longer abides by any of these rules.
+
+Instead, it's a different system with different rules
+
+and we have to learn about it and think about it as a separate entity.
+
+And essentially what happens when we declare something display: flex, is we give a little bit of the control
+
+to Flexbox to layout our content in a reasonable and commonly desired way,
+
+but we have all of these different modifiers in order to tweak it, to have the exact layout that we
+
+want.
+
+Again, just to reiterate, remember previously we mentioned that different elements by default have
+
+different display values,
+
+a div is by default going to be full width block.
+
+A span is by default going to be an inline element.
+
+Well, when you use Flexbox and you enclose all of the elements that you want to display inside a flexible
+
+container, then what happens is all of these previous display values will be ignored,
+
+and instead, we're going to have everything laid out by Flexbox. And the width of each of the elements
+
+inside the Flexbox will normally be based on the content size.
+
+So it's going to try and let you have all of your content displayed in one line.
+
+And it doesn't matter what type of element you've got inside the Flexbox,
+
+it's going to apply the Flexbox rules to each of them.
+
+As we saw, we could use that property called gap in order to add a gap.
+
+So you could, for example, set it to be 10px, which would be pretty static.
+
+Or if you want it to be more responsive, you could set it to 1rem, which remember from previous
+
+lessons we learned, is a unit that is going to adapt based on the top-level size of your content.
+
+By default, when you declare a container to be display: flex, it's going to create a container that
+
+is going to be actually more or less like a block element.
+
+It's going to be 100% full width.
+
+But there's also this thing where instead of setting the container to be display: flex, you can actually
+
+set it to be display: inline-flex, and similarly to the inline-block,
+
+what it does is it allows this Flexbox to occupy as much space as it needs, but it means that other
+
+things can also go and occupy that same line.
+
+So this is just two different versions of creating a Flexbox container.
+
+So in this lesson, we looked very briefly at what happens when you set a container to be display: flex.
+
+So now we're going to try and exercise and see if we've taken on some of the ideas that we've learned
+
+in this lesson.
+
+Go ahead and download the starting folder and extract it and open it inside VS Code, select index.html
+
+and go ahead and show it in preview mode.
+
+You can see I've got a couple of different page layout methods that I mentioned in the lesson and it's
+
+linked to in this home page.
+
+So I showed you how an HTML table would look like and you can look at the code for that layout by going
+
+over to html-table.html.
+
+You can see we've set different values on the table data or the actual table itself and the different
+
+table rows.
+
+And we've created a reasonable sort of layout and then you can see how we can create a similar layout
+
+using inline-block and how this is also more or less responsive.
+
+We've set different widths, but you can see how the layout is actually all defaulting down to squish
+
+at the bottom.
+
+And I want you to just explore some of these different ways of laying out content on a web page.
+
+Now, finally, I want you to take a look at flex.html and see how easy it was to create that layout and
+
+how few lines of code it actually required.
+
+Now, once you've done that, it's time for your challenge, which
+
+is to take the index.html page which looks like this, and it's created using a whole bunch of
+
+list items.
+
+Now I've gotten rid of the bullet points by setting list-style to none, which you can switch on and
+
+off to see what happens,
+
+and this basically just gets rid of the bullet points,
+
+but I want you to turn this into a navigation bar.
+
+So I want everything to be on the horizontal.
+
+And if you take a look inside the goal image, this is what you're looking for.
+
+So you want all of these things to go up so that they are kind of laid out like this.
+
+You want to have a gap between them.
+
+You can set how big this gap you want it to be, but essentially this is the sort of outcome you're looking
+
+for, and I want you to do it using Flexbox.
+
+Pause the video now and see if you can complete this challenge.
+
+All right.
+
+So this should be a relatively simple challenge.
+
+So we've got our preview on the right and then we've got our index on the left.
+
+If you remember, Flexbox is declared on the container that contains all the elements that you want
+
+to flex.
+
+So in this case, we've got a div with a class of ".container" that contains all the things we want.
+
+Let's go into this class selector and then go ahead and change the display to flex.
+
+And you can see almost immediately everything is now on the same line, looking pretty much like a
+
+nav-bar that you would see out in the wild.
+
+The only thing we need to do is add a little bit of a gap between each of those items.
+
+So we could either add a 10px gap, which looks pretty good, or you could use the rem system.
+
+If you don't remember what the rem is about, go back,
+
+there is a lesson where we covered font sizes where we talk about this in more detail, but no matter
+
+which way you do, you should be able to achieve this layout relatively easily.
+
+And if you want to take a look at the solution, you can see as well that the only thing that's really
+
+added are these two things in order to achieve this final goal outcome.
+
+Hopefully, you managed to do that and you managed to see what declaring display as Flex does to our HTML
+
+elements.
+
+And in the next lesson, we're going to dive deeper into Flexbox and we're going to learn more about
+
+the "Flexbox axis" and the "direction of flex."
+
+So for all of that and more, I'll see you there.
+
+
+Completed
+Stop
+Not completed
+Play
+Not completed
+Play
+Not completed
+Play
+Not completed
+Play
+Not completed
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12:07
+9. Flexbox
+54. Display: Flex
+list-style: none -----> remove bullet points
+
+
+
+10:06
+9. Flexbox
+54. Display: Flex
+other display properties such as inline, block, inline-block, none are completely different
+
+think flex in a different perspective,
+
+
+
+when apply flex, whatever the elements inside the container with the properties such as block, inline..... will be ignored. rules meera padum.
+
+
+
+normal flex go on x axis.
+
+
+
+normal flex is a 100 percent block and occupies complete width.
+
+
+
+we have one more property called inline-flex. acts like a inline-block.
+
+5:29
+9. Flexbox
+54. Display: Flex
+use float only for floating the images around the text.
+
+not for the layouts !!!!
+10:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about flex is here !!!
+
+7:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about grid is here !!!
+
+2:12
+8. Advanced CSS
+50. How to Create Responsive Websites
+4 ways of doing the responsiveness.
+
+11:34
+8. Advanced CSS
+49. CSS Float
+important concept to learn. but dont use in real time - we have other options such as flexbox, grid & bootstrap. only use when you want to wrap the para p around the image.
+
+14:06
+7. Intermediate CSS
+45. CSS Positioning
+understand the map da Raaja
+
+position is beyond the margin.
+
+13:17
+7. Intermediate CSS
+45. CSS Positioning
+Fixed positioning - interesting guy:-
+
+seems similar to the position:static until you scroll.
+
+
+
+positioned to the browser window not the page. even if you scroll horizontally or vertically, the position will same --- looks like its glued to the monitor screen !!!
+
+12:10
+7. Intermediate CSS
+45. CSS Positioning
+z-index --- all bout z axis,
+
+by default all z-index is 0, when all are zero, the element with position:absolute will be moved to the top - thats the behaviour by default.
+
+But if you want to override that make z-index -1.
+
+note: if you are changing this using dev console inspect, refer element.syle --> which is nothing but the inline style element.
+
+7:07
+7. Intermediate CSS
+45. CSS Positioning
+Absolue positioning --->
+
+1st priority:
+
+Position relative to nearest positioned ancestor - must have this --> position : relative
+And target will have position: absolute and align based on the ancestor.
+
+
+
+2nd priority:
+
+if no ancestor have the position: relative, the alignment fall backs to top left corner of the web page. if target has left 50 top 50, the target will move from the top 50 and left 50.
+
+3:14
+7. Intermediate CSS
+45. CSS Positioning
+as said, Relative Position ---> position relative to default position. compared to its original static positive, how much it should move or align with the given inputs like left 50 top 100.
+
+0:56
+7. Intermediate CSS
+45. CSS Positioning
+static - one after other !!!! defaut behaviour - no need to mention it position: static
+19:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+combining combiners !!!!
+15:08
+7. Intermediate CSS
+44. Combining CSS Selectors
+CHAINING !!!!
+
+13:07
+7. Intermediate CSS
+44. Combining CSS Selectors
+descendent selector !!!!
+
+9:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+parent child selector !!!!
+
+5:25
+7. Intermediate CSS
+44. Combining CSS Selectors
+you can group different selectors !!!!
+
+25:09
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+position of styles in the style.css. heirarchy. last one will apply.
+
+18:19
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css cascade
+
+11:41
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css rules - overrides
+
+9:45
+6. CSS Properties
+41. The CSS Box Model - Margin, Padding and Border
+understand margin, border and padding.
