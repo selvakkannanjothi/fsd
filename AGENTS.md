@@ -15,6 +15,7 @@ Every new lesson follows this exact pattern - always follow it proactively:
 2. **Concepts** → Save full revision notes to `.github/my_tasks/concepts/concept_<lesson>.md`
 3. **Tasks** → Create practice tasks (Problem Statements + Q&A + Self Assignments) to `.github/my_tasks/tasks/<lesson>_tasks.md`
 4. **Quick Notes** → Append one-liner summary to `.github/my_notes.txt` under `Topic: <TopicName>`
+5. **Links** → Append any reference/important links found in the lesson to `imp_links.md` (repo root), under the matching topic section
 
 `course_content/` is source material (raw lesson transcripts) and is never edited by the agent.
 
@@ -32,6 +33,7 @@ Every new lesson follows this exact pattern - always follow it proactively:
 course_content/
     Introduction/
         what_is_internet.txt                  # Raw lesson transcript (source, not edited)
+imp_links.md                                  # Running collection of important links, by topic
 AGENTS.md                                     # This file - agent memory
 CLAUDE.md                                     # Pointer to AGENTS.md, kept in sync
 ```
@@ -52,7 +54,8 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - [ ] HTML — semantic tags, forms, tables
 - [x] CSS — adding CSS (inline/internal/external), selectors, combining selectors, cascade/specificity/inheritance, colors, fonts, box model, DevTools inspection, display, positioning; projects: Color Vocab, Flag of Laos, Motivational Poster (see EX 5.1–5.4, 8.0)
 - [x] CSS — Flexbox basics: `display: flex` / `inline-flex`, `gap`, `flex-direction`, direct-child selectors for flex items (see EX 9.0, EX 9.1)
-- [ ] CSS — flexbox (advanced: axis, wrap, align/justify, sizing), grid, responsive design
+- [x] CSS — Flexbox layout: `order`, `flex-wrap`, `justify-content`, `align-items`, `align-self`, `align-content` (main vs cross axis); Flexbox Froggy game (see `flexlayout_transcript.txt`)
+- [ ] CSS — Flexbox sizing (`flex-grow`/`flex-shrink`/`flex-basis`), Grid, responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
 
@@ -113,3 +116,4 @@ CLAUDE.md                                     # Pointer to AGENTS.md, kept in sy
 - **Box model** (inside→out): content → padding → border → margin. Border/padding grow the box *outward*. `<div>` = invisible grouping container.
 - **Layout**: `display` = `block` / `inline` (can't size) / `inline-block` / `none`. `position` = `static` / `relative` (to itself) / `absolute` (to nearest positioned ancestor) / `fixed` (to window). Idiom: parent `relative` + child `absolute`. `border-radius: 50%` = circle. DevTools: Styles (struck-out = overridden), Computed (final values), CSS Overview (grab a site's colours/fonts).
 - **Flexbox**: `display: flex` goes on the **container**, and its children's own default display values are ignored — it's a separate layout system from block/inline. Default = horizontal row, items sized to content. `gap` spaces items (`px` or `rem`). `flex` = full-width container (like `block`); `inline-flex` = shrink-to-fit container (like `inline-block`). `flex-direction: column` stacks vertically (`row` is default). Style flex items with `.container > *` (all direct children, tag-agnostic) rather than `.container div` (any depth). Replaces the legacy `<table>`/`inline-block`/`absolute`/`float` layout hacks — `float` should go back to its real job of wrapping text around images.
+- **Flexbox layout**: `order` (child, default `0`, lower first, ties break by HTML order) reorders items visually only — doesn't touch the DOM. `flex-wrap`: `nowrap` (default, overflows) / `wrap` (new line) / `wrap-reverse`. `justify-content` spaces items along the **main** axis (`flex-start`/`flex-end`/`center`/`space-between`/`space-around`/`space-evenly`). `align-items` positions items along the **cross** axis (`flex-start`/`flex-end`/`center`/`baseline`/`stretch`, default `stretch`) — needs container height to actually be visible. `align-self` overrides `align-items` for one child. `align-content` spaces the gaps *between wrapped lines* — only works with `flex-wrap: wrap` and 2+ lines.

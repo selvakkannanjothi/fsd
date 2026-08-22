@@ -1,0 +1,821 @@
+Now that we've seen that we can create a Flexbox, we can set the flex-direction,
+
+in this lesson, I want to dive deeper into probably the biggest topic of Flexbox, which is creating
+
+layout and how you create flexible layout.
+
+What is the automatic or default behavior of Flexbox and what can you change to make it what you want
+
+it to be?
+
+One of the first things to differentiate when we're talking about the different properties to set is,
+
+is this property going to go onto the child, which is the flex item?
+
+So in this case, each of these items that are contained within the flexible container is a child or
+
+is the property going on to the parent?
+
+So the container. And it's important when you're learning Flexbox to really differentiate between these
+
+two things because as we saw earlier, if you set a property that's intended for the child on the parent
+
+selector, it's not going to work.
+
+So the first thing I want to mention is that, and this property is called "order", as you can imagine,
+
+what it sets is the order of your child items.
+
+Normally, this is the color of the rainbow,
+
+and you might remember the acronym ROYGBIV.
+
+Red, orange, yellow, green, blue, indigo, violet.
+
+Now, funnily enough, when I learned the rainbow, for some reason in my mind, blue and indigo were
+
+always the other way round.
+
+What if you wanted to rearrange these colors of the rainbow?
+
+Well, you would use the order property. By default,
+
+everything has an order of 0, so they're arranged by their order in the HTML.
+
+The red div is above the orange div and this is where the order comes from.
+
+What if you wanted to change that?
+
+Well, you could set the order.
+
+For example, if I selected the green div and I said, well, let's set its order property to 1.
+
+Well, immediately it's going to go right to the end of the Flexbox.
+
+It's going to be the one at the end.
+
+Now you could change that to 1 or you could have it as 5 or 10 or 20, whatever it is,
+
+as long as there's nothing set between that number and any of these other ones which are all defaulting
+
+to 0, then it's just going to look at which one's bigger, right?
+
+10 is bigger than 0.
+
+So 10 is going to go here.
+
+But if this was 9, then obviously 10 is greater than 9.
+
+9 is greater than 0.
+
+But say this was, I don't know, 20, then the 20 is going to get moved over here.
+
+So this is just a really easy way of picking out a specific element that is a Flexbox item and then
+
+setting the order property on it to be whichever it is you want to be to set up the order.
+
+So pretty simple so far.
+
+The next one I want to mention is something called the "flex-wrap" property,
+
+and this is really useful when you run out of space on the horizontal.
+
+Here we've got a row-based Flexbox.
+
+The main axis is from left to right.
+
+New items gets added on here at the right.
+
+But what happens if you have too many items or some of these items are a bit longer?
+
+Well, it's just going to be pushed to the end
+
+and once we run out of space, it's not going to go on to the next line.
+
+This is the default behavior of Flexbox and the flex-wrap property is normally set to nowrap.
+
+Don't ask me why there is no hyphen between no and wrap like a good CSS value should be,
+
+but this is just how it is.
+
+And every single time I look at that property, I always see the words now wrap and I think about Snoop
+
+Dogg rapping to my Flexbox,
+
+but remember, no hyphen,
+
+that's just the default behavior.
+
+Let's say we have a new item and everything is set to nowrap,
+
+then it's just going to continue pushing until you can't collapse any of these items anymore and things
+
+get pushed off the page.
+
+Now you can change this property to wrap instead, but this is not a very responsive layout because
+
+when you shrink the width of your window, then all the items that don't fit are going to be pushed
+
+off the screen and the user won't be able to see it.
+
+If you want this to actually continue on to the next line instead of being invisible, then you could
+
+change this property flex-wrap to wrap instead.
+
+And what this will do is it'll move all the elements that don't have enough space to fit in its full
+
+minimum width onto the top line.
+
+It'll just go to the next line and continue wrapping.
+
+Now remember this flex-wrap is a property on the parent,
+
+so this is set onto the Flexbox container itself and it tells how all of the children should behave,
+
+namely, they should wrap around.
+
+Now, it's a really good idea to play around with some of these properties to see how they work, which
+
+is why I've created a demo website for you at appbrewery.github.io/flex-layout.
+
+So if you go to this website, you'll see we've got our rainbow colors and we've got some selectors
+
+down here.
+
+We just learned about flex-wrap, which can be changed on the container,
+
+and the container is this orange box that you see around the entire border here.
+
+If we turned this container into, say, a flex-wrap: wrap, then you can see what will happen is when
+
+I decrease the width of the screen, all of those child flex items go on to the next line, which is
+
+pretty neat.
+
+Now, there's also something called wrap-reverse, and it means that things are wrapped, but it goes
+
+from the bottom-right corner to the top-left corner instead of the normal version, which is from the
+
+top-left to the bottom-right.
+
+It's sort of like an axis, I guess because we're now in two dimensions when we're wrapping. Have
+
+a play around with that and then once you're done, let's learn about another property.
+
+This one is called "justify-content", and again, it's set on the parent container.
+
+Justify- content basically sets the distribution of our items along the main axis.
+
+This concept of main axis and cross axis is going to come back,
+
+but remember what we learned when we learned about the flex-direction. When we have a row, the main
+
+axis is from left to right and the cross axis is from top to bottom.
+
+So here we have a row based Flexbox.
+
+So that's how it's set up.
+
+And if it was a column based setup, then the main and the cross axis would flip.
+
+In this particular example, if we set the justify-content to flex-start, then this is exactly what
+
+you're going to see,
+
+everything is going to be bunched up to the left.
+
+And on the opposite end of that is flex- end, where everything gets bunched up all to the end.
+
+And this is of course provided that when all the items are expanded to their maximum width, there is
+
+still space left for us to actually justify the content.
+
+If all the items have already taken up all this space, then this is not going to behave like this.
+
+Now the next one is justify-content: center, which is a pretty easy way of centering items in CSS. Compared
+
+to all of the other ways that we can center using traditional CSS,
+
+this is a really, really almost like a godsend of a property.
+
+Very easy to horizontally center,
+
+or if you had the main axis going that way, you could vertically center as well.
+
+And then there's also different properties which allow you to have spacing between the different elements.
+
+And this is something that's used really commonly because when you're creating a website layout, you
+
+kind of want everything to use up the available space and create some gaps between each other to distribute.
+
+Coming back to our demo website on flex layout, then if we take a look at the Justify Content, you
+
+can see we've got Flex Start, Flex End, and I want you to just play around with some of these different
+
+versions.
+
+So Space Between makes sure that the first and last items are stuck to the edges of the container and
+
+then Space Around makes sure that this gap between the left and the right, and the center, add up to the
+
+space between each of the items and then there is Space Evenly, where each of the gaps are equal.
+
+So Flexbox does all of the math and calculations for us in order to achieve the layout that we want,
+
+and if you play around with some of these different versions, then you can see what is it that you
+
+want to achieve and which value you'll need to set for Justify Content.
+
+The next property is called "align-items" and align-items is a little bit different from justify items,
+
+even though some of the values might seem really similar.
+
+This is the position of the item,
+
+so remember, this is a row-based Flexbox,
+
+so here is our main axis and this is what we use justify-content to set the distribution.
+
+Now, in this case, we've got align-items which actually sets the distribution along the cross-axis.
+
+And again, this is a property that's set on our container.
+
+But if you notice here, our container is only taking up the height of our items. For align-items to
+
+really work, we actually need to set the height of the container.
+
+So in this case, we're setting it to 70vh and vh is short for viewport height.
+
+It's basically the height of the window that you're viewing the page.
+
+If this was the window size, then this would be 100vh,
+
+and then if we're setting it to, this is not quite 70, this is more like maybe 60, but this height
+
+is what we're setting when we set the height of our container.
+
+So once our container is a little bit bigger, then we actually have the ability to align our items,
+
+align-items: flex-start
+
+is going to make it all bunch up to the top and then we've got flex-end, which makes everything
+
+bunch up to the bottom.
+
+And similarly to justify content, we've got center and we've also got some other stuff. To demonstrate
+
+align-items,
+
+I want you to change the Flex Wrap back to No Wrap if you've changed this, and then if you see Flex Start,
+
+Flex End, Center, Baseline or Stretch, they all work pretty much as you would expect.
+
+Now, if Wrap was enabled, then you're going to see that the behavior is not going to be quite what
+
+you expect.
+
+And we're going to talk about this a little bit later on when we talk about Align Content.
+
+But for now, keep the Wrap set to No Wrap and then play around with Align Items.
+
+Now, what if you wanted to align everything in the container to the center?
+
+So you use align-items: center, but then you wanted one particular item,
+
+for example this one, to be right at the top,
+
+well, it would need a different align value, right?
+
+In this case, what you can do is all of these properties that we've set over here are on the container,
+
+so on the parent.
+
+But you can reach into the actual item itself and set a property called "align-self".
+
+So this is saying let's be an independent item and let's think for ourselves,
+
+if we set this property to start or end or whichever it is that you want, then it'll actually make
+
+this item separate from the groupthink and do its own thing.
+
+At this point, you might already be a little bit overwhelmed by all of the different options,
+
+you think, "Oh, what if I don't remember all of these?"
+
+"Do I have to memorize everything?"
+
+No.
+
+We are programmers.
+
+We don't memorize anything because we have the internet and the computer at our fingertips.
+
+A good resource I want to point you to is the CSS Flexbox cheat sheet from CSS tricks, and I will link
+
+to it in the course resources for this lesson.
+
+So you can either download the entire poster or you can just look through it in the web page.
+
+Notice how they differentiate between properties for the parent and the properties for the children.
+
+When we look at something that we've talked about just now, for example, flex-wrap, it tells you
+
+all of the different possible options.
+
+So you wouldn't set all three, you would pick one and it tells you what each of these values will do.
+
+Similarly, we've got our justify-content
+
+it shows you what each of them does and also describes what each of them does, and then align-items.
+
+And then what we saw just now was a property for the children, which is the align-self property.
+
+And you can see all of the different possible variations that you could use.
+
+Now, the final property I want to talk about today is the "align-content".
+
+And I said I would come back to this, align-content is similar to align-items, but it only works when
+
+you have the flex-wrap set to wrap.
+
+So when you've made your items wrap and then you want to specify how the content should align, then
+
+that's when you would set align content.
+
+If we applied, align-content to center and we made our Flexbox wrap, then when the width of our window
+
+reduces, everything will bunch up together.
+
+If they need a second line, they'll go on to the second line and then it's going to look at this
+
+align-content value to see how it should be spaced on the screen.
+
+One of the things you might be wondering at this stage, well, what exactly is the difference between
+
+Align Items and Align Content?
+
+Because when everything is Nowrap, when we set Align Content, it doesn't really do anything,
+
+but when we set our items to Wrap and then there's not enough width to have everything on one line,
+
+that's when our Align Content starts working so we can set it to Center, we can set it to Flex End,
+
+to Flex Start. Have a play around with the different properties and take a look at the cheat sheet
+
+here.
+
+Remember, you don't need to memorize anything as long as you know where to go and find help.
+
+So when you want to align something and you don't remember what justify-content does, go over here,
+
+just read the different values and pick the one that you want.
+
+And I'm a really big believer in the sort of just-in-time recap.
+
+So when you're learning stuff like you are now, I'm trying to tell you all the things that are possible
+
+and then when you actually need to apply it for your own projects, you remember the fact that this
+
+is possible and all you need to do is just to refresh yourself on how to do it precisely.
+
+And that way you don't have to memorize any of the things.
+
+Now, in order to complete this lesson, I want you to complete the Flexbox Froggy game.
+
+This is an interactive game and it's a really, really brilliant concept created by Thomas Park where
+
+you can apply your knowledge of everything that you've learned just now in order to move the frog to
+
+the lily pad.
+
+Head over to appbrewery.github.io/flexboxfroggy,
+
+and I want you to go into the settings and I want you to go ahead and select Intermediate.
+
+Now, notice here, there are also different languages if you need that.
+
+You can also change the colorblind mode to on or off.
+
+But I want you to complete the challenges in intermediate mode. So there's no directions,
+
+but remember, you have the cheat sheet and you have what you've learned in this lesson.
+
+And the goal is to write the code that's going to move our frog onto the lily pad.
+
+So, for example, in this case we've got display: flex,
+
+so we know that this is a default row-based Flexbox,
+
+if I want to move my frog from the start to the end, all I have to do is use justify-content and set
+
+it to flex-end.
+
+And once I've done that, you can see my frog is on the lily pad and the next button becomes active.
+
+That's just a demo,
+
+the rest you're going to have to figure out yourself.
+
+If you get stuck, you can go back to the beginner difficulty where they're going to give you a lot
+
+more hints,
+
+but ideally, I want you to stay on intermediate with no directions.
+
+Do as a professional developer would, to read either MDN Docs or in this case probably easier to
+
+just go to the cheat sheet and figure out what will help you and maybe even use the demo page to help
+
+you figure out what it is you need in order to move your frogs.
+
+Go ahead and try and complete all of the different levels and if you get stuck, you can always change
+
+the difficulty and you will probably be able to solve everything much more easily.
+
+Pause the video and give that a go now.
+
+And once you're done, head over to the next lesson where we're going to continue learning about how
+
+sizing works in Flexbox.
+
+
+Completed
+Play
+Completed
+Play
+Completed
+Play
+Not completed
+Play
+Not completed
+Play
+Not completed
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+19:11
+9. Flexbox
+56. Flex Layout
+align-content ---> determines the spaces between the wrap lines.
+
+
+
+can be applied when there is a wrap.
+
+
+
+cannot be applied at the single line.
+
+19:10
+9. Flexbox
+56. Flex Layout
+understand clearly the diffrence between the align-content and the align items.
+12:54
+9. Flexbox
+56. Flex Layout
+align-items controls how flex items are aligned along the cross axis (vertical, in a row-direction container).
+
+flex-start — items aligned to the start of the cross axis (top, in a row).
+
+flex-end — items aligned to the end of the cross axis (bottom, in a row).
+
+center — items centered along the cross axis.
+
+baseline — items aligned so their text baselines line up with each other, regardless of box size.
+
+stretch — items stretch to fill the container's cross-axis size (default, if no fixed height is set on items).
+
+flex-start vs baseline — the key difference:
+
+flex-start aligns the top edge (box) of every item, ignoring what's inside them.
+
+baseline aligns the text baseline (the invisible line text "sits" on) of every item, ignoring box edges.
+
+They look identical only when all items have the same font-size/padding, so their box-tops happen to match their baselines too.
+
+10:46
+9. Flexbox
+56. Flex Layout
+understand the diff between the justify-content & align-items.
+
+justify contents ----> main axis
+
+align-items ---> perpendicular to the main axis
+
+
+
+9:59
+9. Flexbox
+56. Flex Layout
+justify-content controls how flex items are spaced along the main axis (horizontal by default, in a row).
+
+flex-start — items packed at the start of the container. Default behavior.
+
+flex-end — items packed at the end of the container.
+
+center — items packed together in the center, equal space on both sides of the whole group.
+
+space-between — first item touches the start, last item touches the end, remaining space split evenly between items. No space at the edges.
+
+space-around — each item gets equal space on both its sides. So gaps between items look double the gap at the edges (since two items' side-spaces combine there).
+
+space-evenly — all gaps (including edges) are exactly equal — start, between each item, and end.
+
+Quick visual (container with 3 boxes):
+
+flex-start:     [A][B][C]____________
+flex-end:       ____________[A][B][C]
+center:         _____[A][B][C]_____
+space-between:  [A]______[B]______[C]
+space-around:   __[A]____[B]____[C]__
+space-evenly:   ___[A]___[B]___[C]___
+7:10
+9. Flexbox
+56. Flex Layout
+flex-wrap: nowrap/wrap; -------> container property -- not the child ones
+5:05
+9. Flexbox
+56. Flex Layout
+flex-wrap: nowrap/wrap;
+
+this is similar to the wordwrap in the wordpad.
+
+3:05
+9. Flexbox
+56. Flex Layout
+its important to know the difference where the changes are applicable to : either parent or child
+
+
+
+in this case, the property order is applied to the child elements.
+
+
+
+lower values comes first-------------higher value comes last
+
+9:35
+9. Flexbox
+55. Flex Direction
+flex basis is intended for the child class of the container
+5:01
+9. Flexbox
+55. Flex Direction
+flexing along main axis
+4:29
+9. Flexbox
+55. Flex Direction
+flex basis ----> width of elements if main axis is row
+
+
+
+flex basis ----> heightof elements if main axis is column
+
+3:19
+9. Flexbox
+55. Flex Direction
+undertstand main axis and the cross axis.
+
+
+
+1:25
+9. Flexbox
+55. Flex Direction
+default -----> flex-directoion:row
+
+
+
+12:07
+9. Flexbox
+54. Display: Flex
+list-style: none -----> remove bullet points
+
+
+
+10:06
+9. Flexbox
+54. Display: Flex
+other display properties such as inline, block, inline-block, none are completely different
+
+think flex in a different perspective,
+
+
+
+when apply flex, whatever the elements inside the container with the properties such as block, inline..... will be ignored. rules meera padum.
+
+
+
+normal flex go on x axis.
+
+
+
+normal flex is a 100 percent block and occupies complete width.
+
+
+
+we have one more property called inline-flex. acts like a inline-block.
+
+5:29
+9. Flexbox
+54. Display: Flex
+use float only for floating the images around the text.
+
+not for the layouts !!!!
+10:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about flex is here !!!
+
+7:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about grid is here !!!
+
+2:12
+8. Advanced CSS
+50. How to Create Responsive Websites
+4 ways of doing the responsiveness.
+
+11:34
+8. Advanced CSS
+49. CSS Float
+important concept to learn. but dont use in real time - we have other options such as flexbox, grid & bootstrap. only use when you want to wrap the para p around the image.
+
+14:06
+7. Intermediate CSS
+45. CSS Positioning
+understand the map da Raaja
+
+position is beyond the margin.
+
+13:17
+7. Intermediate CSS
+45. CSS Positioning
+Fixed positioning - interesting guy:-
+
+seems similar to the position:static until you scroll.
+
+
+
+positioned to the browser window not the page. even if you scroll horizontally or vertically, the position will same --- looks like its glued to the monitor screen !!!
+
+12:10
+7. Intermediate CSS
+45. CSS Positioning
+z-index --- all bout z axis,
+
+by default all z-index is 0, when all are zero, the element with position:absolute will be moved to the top - thats the behaviour by default.
+
+But if you want to override that make z-index -1.
+
+note: if you are changing this using dev console inspect, refer element.syle --> which is nothing but the inline style element.
+
+7:07
+7. Intermediate CSS
+45. CSS Positioning
+Absolue positioning --->
+
+1st priority:
+
+Position relative to nearest positioned ancestor - must have this --> position : relative
+And target will have position: absolute and align based on the ancestor.
+
+
+
+2nd priority:
+
+if no ancestor have the position: relative, the alignment fall backs to top left corner of the web page. if target has left 50 top 50, the target will move from the top 50 and left 50.
+
+3:14
+7. Intermediate CSS
+45. CSS Positioning
+as said, Relative Position ---> position relative to default position. compared to its original static positive, how much it should move or align with the given inputs like left 50 top 100.
+
+0:56
+7. Intermediate CSS
+45. CSS Positioning
+static - one after other !!!! defaut behaviour - no need to mention it position: static
+19:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+combining combiners !!!!
+15:08
+7. Intermediate CSS
+44. Combining CSS Selectors
+CHAINING !!!!
+
+13:07
+7. Intermediate CSS
+44. Combining CSS Selectors
+descendent selector !!!!
+
+9:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+parent child selector !!!!
+
+5:25
+7. Intermediate CSS
+44. Combining CSS Selectors
+you can group different selectors !!!!
+
+25:09
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+position of styles in the style.css. heirarchy. last one will apply.
+
+18:19
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css cascade
+
+11:41
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css rules - overrides
+
+9:45
+6. CSS Properties
+41. The CSS Box Model - Margin, Padding and Border
+understand margin, border and padding.
+
+
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+https://appbrewery.github.io/flex-layout/
+https://appbrewery.github.io/flexboxfroggy/

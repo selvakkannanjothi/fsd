@@ -62,3 +62,13 @@ Topic: FLEXBOX - Display Flex & Flex Direction (EX 9.0, EX 9.1)
 - EX 9.0: turned an <li> list into a nav bar with display:flex + gap on .container (list-style:none removes bullets).
 - EX 9.1: 7 coloured divs, .container display:inline-flex + flex-direction:column, .container > * { flex-basis:100px; }.
 - Modern layout tools = Flexbox, Grid, Bootstrap. Keep float for its original job (text wrapping around an image).
+
+Topic: FLEXBOX - Flex Layout (order, flex-wrap, justify-content, align-items, align-self, align-content)
+- order (child prop): default 0 for every item; lower number goes first, ties break by HTML source order; purely visual - doesn't change DOM/accessibility order.
+- flex-wrap (container prop): nowrap (default, no hyphen - items squeeze then overflow) vs wrap (drops to a new line) vs wrap-reverse (new lines stack bottom-to-top instead of top-to-bottom).
+- justify-content (container prop, MAIN axis spacing): flex-start/flex-end/center/space-between/space-around/space-evenly - only visible once items don't already fill all the space.
+- align-items (container prop, CROSS axis spacing): flex-start/flex-end/center/baseline/stretch (default); needs the container to have extra height (e.g. height:70vh) to actually see it working; baseline aligns text baselines not box edges (only differs from flex-start when items' font-size/padding differ).
+- align-self (child prop): same values as align-items but overrides just one item, letting it opt out of the container's align-items.
+- align-content (container prop): spaces the GAPS BETWEEN WRAPPED LINES; only has any effect with flex-wrap:wrap/wrap-reverse AND 2+ lines - easy to confuse with align-items (which positions items within one line, not the lines themselves).
+- Resources: CSS-Tricks Flexbox cheat sheet (separates parent vs child properties - look up, don't memorize), Flexbox Froggy game (Intermediate difficulty) and the flex-layout demo playground.
+- Next lesson: Flexbox sizing (flex-grow/flex-shrink/flex-basis).
