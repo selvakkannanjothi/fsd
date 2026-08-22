@@ -72,3 +72,18 @@ Topic: FLEXBOX - Flex Layout (order, flex-wrap, justify-content, align-items, al
 - align-content (container prop): spaces the GAPS BETWEEN WRAPPED LINES; only has any effect with flex-wrap:wrap/wrap-reverse AND 2+ lines - easy to confuse with align-items (which positions items within one line, not the lines themselves).
 - Resources: CSS-Tricks Flexbox cheat sheet (separates parent vs child properties - look up, don't memorize), Flexbox Froggy game (Intermediate difficulty) and the flex-layout demo playground.
 - Next lesson: Flexbox sizing (flex-grow/flex-shrink/flex-basis).
+
+Topic: FLEXBOX - Flex Sizing (flex-basis vs max-width)  *** WEAK AREA - REVISE EVERY TIME ***
+- flex-basis = the REQUESTED/starting size of a flex item. max-width = a HARD CEILING, min-width = a HARD FLOOR. They are not the same kind of property.
+- Order of operations: browser sizes the item first (flex-basis, then flex-grow/flex-shrink), THEN clamps it between min-width and max-width. Clamping happens last.
+- Scenario 1: flex-basis:200px + max-width:100px -> basis BREAKS the ceiling, so flex-basis is overruled -> FINAL WIDTH = 100px.
+- Scenario 2: flex-basis:50px + max-width:200px -> basis RESPECTS the ceiling, so max-width never kicks in -> FINAL WIDTH = 50px.
+- Scenario 3: flex-basis:200px + min-width:300px -> basis BREAKS the floor, so flex-basis is overruled -> FINAL WIDTH = 300px.
+- Scenario 4: flex-basis:400px + min-width:300px -> basis RESPECTS the floor, so min-width never kicks in -> FINAL WIDTH = 400px.
+- Careful: swap scenario 4's min-width for max-width:300px and the answer flips to 300px. Always name the limit first - ceiling or floor?
+- Say it out loud: max-width = the item's potential to EXTEND (how big it's ALLOWED to get). min-width = the item's potential to SHRINK (how small it's ALLOWED to get). Neither is a goal - they only draw the allowed range; flex-basis is the only one actually ASKING for a size.
+  * flex-basis does NOT respect the limit -> the limit steps in and becomes the final width (basis>max-width -> max-width wins; basis<min-width -> min-width wins).
+  * flex-basis DOES respect the limit -> the limit stays out of it and flex-basis becomes the final width (basis<max-width or basis>min-width -> basis wins).
+- Shortcut: final width = clamp(min-width, size-from-flex-basis/grow/shrink, max-width) -> vs max-width the SMALLER wins, vs min-width the LARGER wins.
+- Traps: (1) max-width also caps flex-grow (item grows into free space then stops dead at the ceiling); (2) min-width BEATS max-width (min-width:300px + max-width:100px -> 300px, floor is applied last).
+- Full notes: .github/my_tasks/concepts/concept_flex_sizing.md
