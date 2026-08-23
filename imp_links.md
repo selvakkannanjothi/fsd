@@ -22,6 +22,13 @@ Running collection of reference/useful links gathered while working through the 
 - [Can I Use — Flexbox](https://caniuse.com/flexbox) — browser support check
 - Local cheat sheet poster: `course_content/FLEXBOX/css-flexbox-poster.png` · course formula slide: `course_content/FLEXBOX/flexbox_sizing_formula.png`
 
+### EX 9.4 Pricing Table Project (section capstone)
+- [MDN: `list-style`](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style) — bullets live on the `<ul>`; so does the default `padding-left: 40px`
+- [MDN: CSS values and units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units) — `px` / `em` / `rem` / `%` / `vw` / `vh`, and why axes matter
+- [MDN: `min-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height) — `min-height: 100vh` is the safer idiom than `height: 100vh` for full-screen sections
+- [MDN: Centering in CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_alignment/Box_alignment_in_flexbox) — box alignment in flexbox, the "centre anything" recipe
+- [Google Font: Sono](https://fonts.google.com/specimen/Sono) — the font used by the pricing table starter file
+
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
 - [MDN: `<img>` element (height attribute)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height) — from `EX 4.3 HTML Portfolio Project`

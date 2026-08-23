@@ -117,3 +117,24 @@ Topic: FLEXBOX - Flex Sizing (flex-grow / flex-shrink / flex-basis)  *** WEAK AR
 - Other gotchas: flex-basis sizes the CONTENT BOX (use box-sizing:border-box); flex-basis:50% is a % of the CONTAINER's main size; images don't shrink politely (min-width:0 + max-width:100%); margin-left:auto shoves an item to the far end (navbar trick).
 - Patterns: equal columns .row>*{flex:1} | sidebar .sidebar{flex:0 0 250px}+.content{flex:1;min-width:0} | responsive cards {flex:1 1 250px}+flex-wrap:wrap | centering justify-content:center + align-items:center.
 - Full notes: .github/my_tasks/concepts/concept_flex_sizing.md | Tasks: .github/my_tasks/tasks/flex_sizing_tasks.md | Hard copy: flexbox_master_notes.pdf
+
+Topic: FLEXBOX - EX 9.4 Pricing Table Project (section capstone, built 2026-08-23)
+- Brief: 3 pricing cards. Only hard requirement = the flexbox part: cards adapt their width in a row, and STACK vertically below a breakpoint via a media query. Everything else is personal preference. Starter gave all the HTML + the Sono font + an EMPTY @media (max-width:1250px){} block as the hint.
+- THE WHOLE PROJECT IS 4 IDEAS: (1) centring cheat code (2) flex:1 + max-width card (3) kill the ul bullets+indent (4) media query flex-direction:column.
+- CENTRING CHEAT CODE: display:flex + justify-content:center + align-items:center + a height on the container = centred vertically AND horizontally. Genuinely hard before flexbox.
+- THE CARD PATTERN TO MEMORISE: .pricing-plan { flex: 1; max-width: 400px; } -> "share the row equally and stay fluid, but never get wider than this". Fluid AND capped. The max-width clamps the grow result at the end (flex-sizing step 4).
+- *** TRAP 1 - height:100vh MUST become height:100% when the cards stack. *** Measured at 760x900: with 100vh the container is locked to 804px but the stacked content needs 895px -> the first card's top edge sits at -82px, ABOVE the top of the page. With height:100% the container grows to 967px and nothing is cut.
+  * WHY IT'S WORSE THAN NORMAL OVERFLOW: justify-content:center splits the overflow BOTH ways. You can scroll to the bottom half. You can NEVER scroll to the top half. The "Basic" heading was permanently unreachable.
+  * The instructor demos this on purpose: "when you scroll to the top and the bottom, it actually cuts off a bunch of stuff."
+  * RULE: 100vh = "exactly one screen, no more". Right for a row that fits one screen, wrong the moment content stacks. Prefer min-height:100vh (one screen MINIMUM, free to grow).
+- *** TRAP 2 - padding:0 on the <li> does NOTHING. *** Both the bullet and the indent belong to the <ul>: the browser default padding-left:40px is on the ul only. Measured: li{padding:0} -> ul padding-left still 40px; .plan-features{padding:0} -> 0px. With text-align:center a ul that's 40px narrower on the left centres its text 20px too far right - that was the subtle misalignment.
+  * How to catch it: DevTools -> select the <ul> -> Computed tab -> read padding-left. Don't guess which element owns a default.
+- TRAP 3 - selector hygiene: the HTML already gave me .plan-features and .plan-button. Bare li{} / button{} selectors leak to every list/button on the page and throw away work already done for me.
+- TRAP 4 - media query hygiene: only override what CHANGES (flex-direction + height). Re-declaring display/justify-content/align-items/gap hides the intent and gives you two places to edit gap later.
+- CSS UNITS (the questions this project raised): px = absolute (borders, precise nudges) | rem = root font-size, default 16px so 1rem=16px (layout spacing, gap - scales with zoom) | em = PARENT font-size, compounds | % = parent's matching dimension | vw = 1% of viewport WIDTH | vh = 1% of viewport HEIGHT.
+- AXIS DISCIPLINE: height:100vh OK / max-width:400px OK / max-width:30vw OK / max-width:50vh WRONG - a width capped by the screen HEIGHT. No syntax error warns you, it just behaves oddly as the window changes shape. (That was my submission #2.)
+- 30vw is ~384px on a 1280px screen, so not "wrong" - but max-width:400px wins because a card has a READABLE width, which is a property of the text, not of the window.
+- gap:2rem vs 32px: same pixels today, but rem stays proportional if the user zooms or html{font-size} changes. Spacing tied to type = design system; px = fixed guess.
+- MY ITERATION LOG: #1 flex-basis:440px (rigid) -> #2 flex:1 + max-width:50vh (right idea, wrong axis) -> #3 flex:1 + max-width:400px (sizing correct) -> final: + height:100%, .plan-features reset, scoped selectors, border-radius:5px.
+- PATTERN IN MY OWN MISTAKES: the layout thinking was right every time. What tripped me up was WHICH ELEMENT owns a property (ul vs li) and WHICH AXIS a unit belongs to (vh vs width). Both are "read the property, not the vibe" errors.
+- Full notes: .github/my_tasks/concepts/concept_pricing_table_project.md | Tasks: .github/my_tasks/tasks/pricing_table_project_tasks.md

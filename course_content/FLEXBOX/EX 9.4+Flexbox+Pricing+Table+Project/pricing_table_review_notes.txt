@@ -1,0 +1,377 @@
+================================================================================
+EX 9.4 - FLEXBOX PRICING TABLE PROJECT
+Code Review + Q&A Session Notes
+Date: 2026-08-23
+================================================================================
+
+This file captures the full review thread: my submitted code, the comparison
+against the official solution, the marks given, and every follow-up question
+about CSS units (rem, vh, vw, px).
+
+--------------------------------------------------------------------------------
+SECTION 1 - MY FIRST SUBMISSION
+--------------------------------------------------------------------------------
+
+.pricing-plan {
+  background-color: #f2f2f2;
+  flex-basis: 440px;
+  text-align: center;
+  padding: 20px;
+}
+
+.pricing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 2rem;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #ff6600;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+}
+
+@media (max-width: 1250px) {
+  .pricing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 2rem;
+  }
+}
+
+--------------------------------------------------------------------------------
+SECTION 2 - THE OFFICIAL SOLUTION (key parts)
+--------------------------------------------------------------------------------
+
+.pricing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 2rem;
+}
+
+.pricing-plan {
+  flex: 1;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plan-features li {
+  margin-bottom: 20px;
+}
+
+.plan-button {
+  padding: 10px;
+  background-color: #ff6600;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+}
+
+@media (max-width: 1250px) {
+  .pricing-container {
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+--------------------------------------------------------------------------------
+SECTION 3 - REVIEW #1 (first submission)
+--------------------------------------------------------------------------------
+
+WHAT MATCHED THE SOLUTION
+  - Flex container done correctly:
+      display: flex
+      justify-content: center
+      align-items: center
+      gap: 2rem
+  - Mobile-friendly media query at max-width: 1250px
+  - Centered layout with full-height viewport (100vh)
+  - Card styling and button styling heading in the right direction
+
+WHAT WAS WEAKER THAN THE SOLUTION
+  1. Used `flex-basis: 440px` instead of `flex: 1` + `max-width: 400px`.
+     -> Cards were more rigid and less flexible across screen sizes.
+  2. Styled `li` globally instead of `.plan-features li`.
+     -> Works, but leaks styles to every list on the page. Less reusable.
+  3. Styled `button` globally instead of `.plan-button`.
+     -> Same problem: global selector where a class was available.
+  4. Media query repeated `display: flex` (redundant).
+     -> The solution only changes what needs changing: flex-direction + height.
+
+SMALL ISSUES
+  - No `padding: 0` / `margin: 0` reset on the list, so browser default
+    padding stayed. The solution is more polished.
+  - Layout could be more responsive with `flex: 1` + `max-width`.
+
+MARKS - REVIEW #1
+  Overall: 8.5 / 10
+    Layout structure ............... 9/10
+    Responsiveness ................. 8/10
+    CSS quality and specificity .... 8/10
+    Match with expected solution ... 9/10
+
+  Verdict: Good submission, clearly understands Flexbox. Main improvements
+  are cleaner selector targeting and better responsiveness.
+
+--------------------------------------------------------------------------------
+SECTION 4 - Q: HOW DOES `gap: 2rem` WORK? WHY NOT PIXELS?
+--------------------------------------------------------------------------------
+
+WHAT rem IS
+  - `rem` = "root em" = based on the font size of the ROOT element (<html>).
+  - Browser default root font size is 16px.
+  - So:  1rem = 16px  ->  2rem = 32px
+
+WHY rem IS A GOOD FIT FOR `gap`
+  - `gap` is spacing BETWEEN flex items (not padding inside a box), so it is a
+    layout decision. Tying it to the typography scale keeps it consistent.
+  - It scales with browser zoom and with any global font-size change.
+
+  Example - if you later set:
+      html { font-size: 20px; }
+  then:
+      gap: 2rem;   ->   2 x 20px = 40px
+  The spacing stays proportional to the text automatically.
+
+WHY NOT JUST PIXELS?
+  gap: 32px;  works, but:
+    - fixed and absolute, does not scale with user zoom / accessibility settings
+    - can feel too big or too small on different screens
+    - less consistent with a typography-based design system
+
+IN SIMPLE WORDS
+  rem  = "spacing relative to the text size" -> consistent, maintainable
+  px   = "exactly this fixed size"           -> precise, but rigid
+
+WHEN TO USE WHICH
+  Use rem for:  spacing between flex items, layout margins/padding,
+                typography-based spacing systems
+  Use px  for:  very precise small adjustments, borders, things that should
+                NOT scale with text size
+
+IN MY CASE
+  .pricing-container { gap: 2rem; }
+  Good choice: the three cards get a comfortable, consistent gap that stays
+  visually balanced if typography or browser scaling changes.
+
+--------------------------------------------------------------------------------
+SECTION 5 - MY SECOND SUBMISSION (updated)
+--------------------------------------------------------------------------------
+
+.pricing-plan {
+  background-color: #f2f2f2;
+  flex: 1;
+  max-width: 50vh;      <-- the problem line
+  text-align: center;
+  padding: 20px;
+}
+
+Also added `padding: 0;` to the `li` rule.
+
+--------------------------------------------------------------------------------
+SECTION 6 - REVIEW #2 (second submission)
+--------------------------------------------------------------------------------
+
+GOOD PARTS
+  - `flex: 1;` is a good choice and matches the intent of the solution.
+  - `text-align: center;` is correct.
+  - `padding: 20px;` is fine.
+  - Layout is still a centered Flexbox row.
+
+MAIN PROBLEM
+      max-width: 50vh;
+  - `vh` = viewport HEIGHT unit.
+  - `max-width` controls WIDTH.
+  - So `50vh` means "max width = 50% of the SCREEN HEIGHT" - mixing axes.
+  - The solution uses `max-width: 400px;` which controls card width directly.
+  - The logic (cap the card width) was right; the UNIT was wrong.
+
+COMPARISON TABLE
+  Part                     | My code   | Solution | Verdict
+  -------------------------|-----------|----------|-------------
+  Flex container           | Good      | Good     | OK
+  Card sizing              | flex: 1   | flex: 1  | OK
+  Card max width           | 50vh      | 400px    | NOT IDEAL
+  Card styling             | Good      | Good     | OK
+  Responsive media query   | Good      | Good     | OK
+  Clean code               | Less refined | Cleaner | Improve
+
+MARKS - REVIEW #2
+  Overall: 7.5 / 10
+
+  Reason:
+    - Core Flexbox idea understood
+    - Structure close to the required design
+    - But `max-width: 50vh` is a logic mistake for a width-based layout
+
+  Teacher note: "You understand Flexbox and the layout structure, but the
+  width rule is based on the wrong CSS unit."
+
+--------------------------------------------------------------------------------
+SECTION 7 - Q: WHY CAN'T I USE 50vh?
+--------------------------------------------------------------------------------
+
+  1vh = 1% of the viewport HEIGHT
+
+  max-width: 50vh;  means "maximum width = 50% of the screen height"
+
+  Example: screen height 900px  ->  50vh = 450px
+  The card is then allowed to be 450px wide even if the screen is only
+  500-600px wide. That distorts the layout and makes card widths inconsistent
+  because they are driven by an unrelated dimension.
+
+WHY vh IS NOT SUITABLE HERE
+  - This layout is horizontal: cards sit side by side, WIDTH matters.
+  - For a card width use instead:
+        max-width: 400px
+        width: 100%
+        flex: 1
+        or percentages like 25% / 33%
+
+BETTER
+  .pricing-plan {
+    flex: 1;          /* share space in the flex row */
+    max-width: 400px; /* never get wider than 400px  */
+  }
+
+ONE-LINE RULE
+  `vh` is for height, not width, so using it for `max-width` is logically
+  incorrect for this layout.
+
+--------------------------------------------------------------------------------
+SECTION 8 - Q: vh vs vw - SHOULD I USE 50vw INSTEAD?
+--------------------------------------------------------------------------------
+
+  vw = 1% of viewport WIDTH
+  vh = 1% of viewport HEIGHT
+
+  So `max-width: 50vw;` = "maximum width = 50% of screen width".
+  That IS more relevant than 50vh.
+
+BUT IS 50vw A GOOD IDEA HERE?
+  Not really:
+    - 50vw is a very large width for a pricing card
+    - it can make cards too wide on desktop
+    - less controlled than a fixed max-width like 400px
+  The issue is not only vh vs vw - the card should be limited to a sensible
+  reading width, not just "half the screen".
+
+BEST PATTERN FOR THIS PROJECT
+  .pricing-plan {
+    flex: 1;
+    max-width: 400px;
+  }
+
+RULE OF THUMB
+  - use `vw` for width-related sizing
+  - use `vh` for height-related sizing
+  - but for a readable card, prefer a `max-width` in px over a half-screen value
+
+DIRECT ANSWER
+  - Yes, 50vw is more logical than 50vh for width
+  - No, 50vw is still not the best choice for this particular card layout
+
+--------------------------------------------------------------------------------
+SECTION 9 - Q: IS 30vw CLOSE TO 400px?
+--------------------------------------------------------------------------------
+
+  Yes, approximately.
+
+  1vw = 1% of viewport width, so 30vw = 30% of viewport width.
+
+  On a common desktop width of 1280px:
+      30% x 1280 = 384px      -> very close to 400px
+
+  On other widths:
+      1280px screen  ->  30vw = 384px
+      1440px screen  ->  30vw = 432px
+
+  It changes with screen width - that is exactly why vw is "responsive".
+
+IS 30vw BETTER THAN 400px HERE?
+  - 30vw  = more responsive
+  - 400px = more fixed and predictable
+  The solution used 400px because it is simple and reliable for a card.
+
+SUMMARY
+  - 30vw is not "wrong" for width, it is "responsive"
+  - but it is less precise than max-width: 400px
+  - 30vw is close to 400px on many desktops; 400px is more predictable
+
+--------------------------------------------------------------------------------
+SECTION 10 - KEY TAKEAWAYS (revision cheat sheet)
+--------------------------------------------------------------------------------
+
+CSS UNITS
+  px   - absolute, fixed. Best for borders and tiny precise adjustments.
+  rem  - relative to ROOT font size (default 16px). Best for layout spacing,
+         margins, padding, gap. Scales with zoom / global font-size.
+  em   - relative to the PARENT font size (compounds when nested).
+  %    - relative to the parent element's corresponding dimension.
+  vw   - 1% of viewport WIDTH.  Use for width-ish sizing.
+  vh   - 1% of viewport HEIGHT. Use for height-ish sizing (e.g. height: 100vh).
+
+  Quick conversions (16px root):
+      1rem = 16px   |   2rem = 32px   |   0.5rem = 8px
+  Quick vw math on a 1280px screen:
+      10vw = 128px  |  20vw = 256px  |  30vw = 384px  |  40vw = 512px
+
+AXIS DISCIPLINE
+  Do not mix axes: width properties take width-based units,
+  height properties take height-based units.
+      GOOD: height: 100vh;   max-width: 400px;   max-width: 30vw;
+      BAD : max-width: 50vh;
+
+FLEX ITEM SIZING FOR CARDS
+  flex: 1            -> grow 1, shrink 1, basis 0%  (equal, fluid cards)
+  max-width: 400px   -> ceiling, stops cards getting too wide
+  Together = fluid but capped. This is the professional pattern.
+
+SELECTOR HYGIENE
+  Prefer class-scoped selectors over bare element selectors:
+      BAD : li { ... }            button { ... }
+      GOOD: .plan-features li { } .plan-button { }
+  Reason: bare element selectors leak into every list/button on the page.
+
+MEDIA QUERY HYGIENE
+  Inside a media query, only override what CHANGES. Do not repeat rules
+  already declared in the base styles.
+      BAD : re-declaring display: flex, justify-content, align-items, gap
+      GOOD: @media (max-width: 1250px) {
+              .pricing-container { flex-direction: column; height: 100%; }
+            }
+  Note: the solution switches height from 100vh to 100% in the column layout,
+  so the stacked cards are not squeezed into one screen height.
+
+MARKS PROGRESSION
+  Review #1 (flex-basis: 440px)  ->  8.5 / 10
+  Review #2 (max-width: 50vh)    ->  7.5 / 10
+  Target   (flex: 1 + max-width: 400px + class-scoped selectors + lean
+            media query)         ->  10 / 10
+
+================================================================================
+END OF NOTES
+================================================================================

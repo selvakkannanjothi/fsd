@@ -65,6 +65,7 @@ Regenerate the flexbox PDF after editing the HTML:
 - [x] CSS — Flexbox basics: `display: flex` / `inline-flex`, `gap`, `flex-direction`, direct-child selectors for flex items (see EX 9.0, EX 9.1)
 - [x] CSS — Flexbox layout: `order`, `flex-wrap`, `justify-content`, `align-items`, `align-self`, `align-content` (main vs cross axis); Flexbox Froggy game (see `flexlayout_transcript.txt`)
 - [x] CSS — Flexbox sizing: priority ladder, `flex-basis` vs `width` vs `min`/`max-width`, the four grow/shrink scenarios, the `flex` shorthand & ratios (⚠️ weak area — see `concept_flex_sizing.md` + `flexbox_master_notes.pdf`)
+- [x] CSS — **Flexbox section COMPLETE** — capstone `EX 9.4 Flexbox Pricing Table Project` built and corrected (centring recipe, `flex: 1` + `max-width` card pattern, media query `flex-direction: column`; see `concept_pricing_table_project.md`)
 - [ ] CSS — Grid, responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
@@ -140,3 +141,9 @@ Regenerate the flexbox PDF after editing the HTML:
   - **Ratios:** grow/shrink are ratios, not pixels. `flex: 1 / 2 / 3` in 600px → **100 / 200 / 300**, and they grow & shrink together keeping 1:2:3.
   - **Algorithm:** lay down basis → free space = container − Σbasis − gaps → share by grow ratio (or claw back by **shrink × basis**) → clamp → `justify-content` positions the rest. Shrink is weighted by basis; grow isn't.
   - **#1 real bug:** flex items carry a hidden `min-width: auto` (= min-content), so they refuse to shrink past their longest word/image. Fix: `min-width: 0` (or `overflow: hidden`). Behind most "ellipsis doesn't work" issues.
+- **Flexbox capstone — EX 9.4 Pricing Table** (built & corrected 2026-08-23; full notes in `.github/my_tasks/concepts/concept_pricing_table_project.md`): the whole project is 4 ideas — the centring recipe (`justify-content: center` + `align-items: center` + a container height), the **`flex: 1` + `max-width: 400px`** card pattern (fluid but capped), resetting the `<ul>`, and one media query flipping `flex-direction: column`.
+  - **⚠️ `height: 100vh` must become `height: 100%` (or `min-height: 100vh`) once content stacks.** Measured at 760×900: `100vh` locked the container to 804px while the stacked cards needed 895px → first card's top edge at **−82px**, *above* the page. `justify-content: center` splits overflow **both ways** and the top half is **unreachable by scrolling** — strictly worse than a normal overflow. The lesson demos this deliberately.
+  - **⚠️ `padding: 0` on the `<li>` does nothing.** The list indent is the **`<ul>`'s** default `padding-left: 40px`. Verified: `li{padding:0}` → still 40px; `.plan-features{padding:0}` → 0px. With `text-align: center` that pushed the whole list 20px right. Check DevTools → Computed to find which element owns a default.
+  - **Axis discipline for units:** `max-width: 50vh` (a *width* capped by screen *height*) was a real submission — valid CSS, wrong axis, no warning. `vh` for height, `px`/`%`/`vw` for width. `rem` for spacing/`gap` so it scales with zoom.
+  - Selector hygiene: use the classes the HTML already provides (`.plan-features`, `.plan-button`), not bare `li` / `button`. Media-query hygiene: override only what changes.
+  - **Selva's own error pattern here:** layout thinking was right every time; the misses were *which element owns a property* and *which axis a unit belongs to*. Worth probing on future projects.

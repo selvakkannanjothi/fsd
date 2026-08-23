@@ -811,15 +811,13 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
 
   <div class="box b-warn avoid">
     <span class="t">🐛 #1 — "My item refuses to shrink" / "my text overflows" / "ellipsis doesn't work"</span>
-    Every flex item silently carries <b><code>min-width: auto</code></b>, which resolves to its
-    <b>min-content size</b> — the longest unbreakable word, or an image's intrinsic width.
-    <b><code>flex-shrink</code> cannot cross that floor.</b>
+    Every flex item silently carries <b><code>min-width: auto</code></b> = its <b>min-content size</b> (the
+    longest unbreakable word, or an image's intrinsic width). <b><code>flex-shrink</code> cannot cross that floor.</b>
     <div class="cols2" style="margin-top:4px">
       <div>
 <pre style="background:#fff;margin-top:0"><span class="k">.item</span> {
   <span class="k">flex</span>: <span class="v">1</span>;
-  <span class="k">min-width</span>: <span class="v">0</span>;        <span class="c">/* ✅ THE FIX */</span>
-  <span class="c">/* overflow: hidden; also unlocks it */</span>
+  <span class="k">min-width</span>: <span class="v">0</span>;  <span class="c">/* ✅ or overflow:hidden */</span>
 }</pre>
       </div>
       <div style="font-size:8.6pt">
@@ -851,6 +849,13 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
         not of the viewport. Handy: <code>flex: 1 1 50%</code> + <code>flex-wrap: wrap</code> = a 2-column
         responsive grid.
       </div>
+      <div class="box b-warn">
+        <span class="t">🐛 #8 — <code>height: 100vh</code> + centring hides content ABOVE the page</span>
+        <code>100vh</code> is a <b>hard cap</b> — fine for a row that fits one screen, wrong once content
+        <b>stacks</b>. <code>justify-content: center</code> splits the overflow <b>both ways</b> and the top
+        half <b>can't be scrolled to</b>. Measured on EX 9.4: container locked at 804px, content needed 895px
+        → first card's top at <b>−82px</b>. Fix: <code>height: 100%</code> or <code>min-height: 100vh</code>.
+      </div>
     </div>
     <div>
       <div class="box b-tip" style="margin-top:0">
@@ -862,16 +867,21 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
       </div>
       <div class="box b-tip">
         <span class="t">💡 #6 — Debug with DevTools</span>
-        In the Elements panel, every flex container has a little <span class="kbd">flex</span> badge.
-        Click it to overlay the axes, the gaps and the free space. The <b>Computed</b> tab shows the real
-        resolved <code>flex-grow</code>/<code>shrink</code>/<code>basis</code> — the fastest way to catch a
-        shorthand that reset your basis to <code>0</code>.
+        Every flex container gets a <span class="kbd">flex</span> badge in the Elements panel — click it to
+        overlay the axes, gaps and free space. The <b>Computed</b> tab shows the real resolved
+        grow/shrink/basis — the fastest way to catch a shorthand that reset your basis to <code>0</code>.
+      </div>
+      <div class="box b-warn">
+        <span class="t">🐛 #9 — The <code>&lt;ul&gt;</code> owns the indent, not the <code>&lt;li&gt;</code></span>
+        A centred list sitting slightly off-centre is the browser default
+        <b><code>padding-left: 40px</code> on the <code>&lt;ul&gt;</code></b> — <code>padding: 0</code> on the
+        <code>li</code> does <b>nothing</b> (verified: still 40px). Reset the list itself, and use
+        <b>Computed</b> to find which element owns a default.
       </div>
       <div class="box b-tip">
         <span class="t">💡 #7 — Flexbox is 1-dimensional</span>
-        It lays out a <b>row</b> or a <b>column</b>. When you need rows <b>and</b> columns to line up with
-        each other in a real 2-D grid, that's <b>CSS Grid's</b> job — the next topic. They're partners,
-        not rivals.
+        A <b>row</b> or a <b>column</b>. Real 2-D grids, where rows <i>and</i> columns align, are
+        <b>CSS Grid's</b> job — the next topic. Partners, not rivals.
       </div>
     </div>
   </div>
@@ -879,8 +889,9 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
   <h2><span class="n">P</span>The patterns you'll actually type</h2>
   <div class="cols2">
     <div>
-<pre><span class="c">/* Equal-width columns */</span>
+<pre><span class="c">/* Equal columns · fluid-but-capped card */</span>
 <span class="k">.row</span> &gt; * { <span class="k">flex</span>: <span class="v">1</span>; }
+<span class="k">.card</span>    { <span class="k">flex</span>: <span class="v">1</span>; <span class="k">max-width</span>: <span class="v">400px</span>; }
 
 <span class="c">/* Fixed sidebar + fluid content */</span>
 <span class="k">.sidebar</span> { <span class="k">flex</span>: <span class="v">0 0 250px</span>; }
@@ -916,7 +927,8 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     <b>5.</b> Does the container have a <b>height</b> for <code>align-items</code>? &nbsp;·&nbsp;
     <b>6.</b> Is <code>align-content</code> waiting on a <b>wrap</b>? &nbsp;·&nbsp;
     <b>7.</b> Did a shorthand reset your <b>basis to 0</b>? &nbsp;·&nbsp;
-    <b>8.</b> Is <code>min-width: auto</code> blocking the shrink?
+    <b>8.</b> Is <code>min-width: auto</code> blocking the shrink? &nbsp;·&nbsp;
+    <b>9.</b> Is a <b>hard <code>100vh</code></b> capping a container whose content now stacks?
   </div>
 
   <div class="foot"><span>Flexbox Master Notes · page 8 of 9</span><span>gotchas · patterns · debugging</span></div>

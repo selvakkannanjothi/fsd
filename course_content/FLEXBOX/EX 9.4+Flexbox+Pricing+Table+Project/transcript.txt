@@ -1,0 +1,261 @@
+All right.
+
+It's time to put all of our knowledge into action by building a project together.
+
+And we're going to use everything we learned about Flexbox to build a pricing table.
+
+You've probably seen pricing table out on the Internet before.
+
+It's usually three categories small, medium, large, and it shows the customers which features they'll
+
+get based on which tier they're going to subscribe to.
+
+This is pretty much what we're going to build, although a little bit simplified.
+
+And the great thing about our version, because we now know about Flexbox, is we can make the width
+
+of each of these pricing cards change dynamically based on the width that's available.
+
+And we can also make it responsive in the way that when the window goes below a certain size, it actually
+
+stacks these vertically rather than having them horizontally.
+
+You should have enough knowledge now to be able to complete this project.
+
+Go ahead and download the starting files for our Pricing Table Project, extract it, and open it up inside
+
+VS Code.
+
+Now, once you're here, I want you to go ahead and look inside the index.html and show it in preview.
+
+You can see that we've got all of the HTML for you, all of the text and all of the boring parts out
+
+of the way,
+
+but in the CSS it's a little bit lacking.
+
+The only thing I've done is I've applied a Google font called "Sono" and it gives it this fun styling
+
+for our font.
+
+Now what you're aiming for is determined by the goal-large.
+
+So this is what it should look like when it's large in terms of the width of your screen and when the
+
+width of your screen is small, this is what it should look like.
+
+Have a think about how you might do this, how you might apply the different types of CSS styling.
+
+So things like background or maybe a corner radius or maybe getting rid of borders around the buttons
+
+or thinking about how you might use Flexbox to achieve this kind of transition from large width to small
+
+width and see how far you can get.
+
+Again, remember, this is a project, so it's totally up to you.
+
+You don't have to style it like this at all.
+
+You can style it however you like,
+
+but the most important thing is our Flexbox aspect.
+
+I want you to make sure that these items are inside a Flexbox so that they adapt to the width and they
+
+are responsive on mobile in this case.
+
+So when the width is very small, they get stacked up one on top of the other.
+
+That is the very simple criteria.
+
+Everything else is totally up to you.
+
+Now, there's one hint I'm going to add in here, which is a media query.
+
+And I want you to think about what can you do using a media query and Flexbox to achieve this type of
+
+responsiveness.
+
+Pause the video and give this challenge a go.
+
+Once you're done, you can come back and I'll run through my solution with you,
+
+but remember, your solution is as good as mine as long as you're happy with it.
+
+The important thing is to apply the skills that you've learned.
+
+So pause the video.
+
+Give that a go now.
+
+All right.
+
+I'm going to walk through my version of this pricing table that's in the solution.html.
+
+And I'm going to walk through the code one section at a time.
+
+The first section is our pricing container,
+
+and this basically just applies Flexbox to each of our container items, makes it justified to the center,
+
+so that's all grouped towards the center, and gives it a little bit of a gap between each item and sets
+
+the height of the pricing container.
+
+And then when we set the justify-content to center, align-items to center, and the height of this flexible
+
+container to full height,
+
+so 100vh, then it's going to make everything centered vertically and horizontally.
+
+This is a really easy, almost cheats way of centering anything vertically and horizontally.
+
+You might know this, you might not,
+
+but using just normal CSS without Flexbox or Grid or one of the other frameworks is actually
+
+not that simple to set something to the middle of the screen.
+
+So this is an incredibly easy way of achieving that.
+
+And I hope by this point you understand why it's able to do that.
+
+The next thing we're going to do is to set our pricing plan.
+
+Our pricing plan
+
+corresponds to each of the items in our container,
+
+and what I've done is I've set the flex to 1 so that they are equal in width and that they are allowed
+
+to grow and shrink.
+
+I've set the maximum width to 400 and this is probably a little bit easier to see on the full-width
+
+screen.
+
+So that means that they don't go all the way.
+
+And by setting that maximum width, basically I'm saying each of these cards should limit themselves
+
+to that 400px size so that they don't take up the full-width
+
+and then our centering kind of becomes moot because it's taking up the full width.
+
+And I think this just looks a little bit better in my opinion. And that's achieved using the max-width.
+
+Now I've added a little bit of padding inside each of these boxes just so that they're not right up
+
+to the edge on all sides.
+
+And I've added a sort of gray background color to differentiate it from the background.
+
+I've given it a border-radius of 5px, which just makes these corners a little bit rounded,
+
+which I think looks nice.
+
+And I've aligned the text to the center.
+
+The next four sections are pretty much all just for styling.
+
+Let's go ahead and talk through each of them.
+
+The ".plan-title" I've made super large, so I increased the font-size, made the font-weight bold, and
+
+also set a little bit of margin at bottom to move everything away from it so that it's not sticking
+
+right next to it.
+
+This is all personal preference.
+
+It depends on your eye,
+
+whatever you think is right is right.
+
+And then I've set the ".plan-price" to an even bigger size so that it's really standout, tells people what
+
+it's all about, set it to bold, also gave it a little bit of margin at the bottom. Then I've set the
+
+".plan-features" and this one you might remember from previous lessons, you might not, you might have to Google
+
+for this, but essentially what it does is it gets rid of those bullet points because we've got an unordered
+
+list (ul) here, and list items by default have the bullet,
+
+if we set that list-style to none, it gets rid of it, which is really nice.
+
+Then I've set the padding and margin to get rid of the default padding and margin to get them all closer
+
+to each other.
+
+And finally, I've added a small margin-bottom at the bottom of this section so that it pushes the button
+
+down a little bit.
+
+And then I added some styling to the button, which turns it orange, makes the text white, makes the
+
+border 5px, have the curved edges,
+
+and then I got rid of the border, which is this sort of black or gray default thing, which I don't
+
+really like the look of,
+
+so I can set that border to simply none.
+
+Now the final thing, which is quite interesting and I don't know if this is something that you actually
+
+realized you could do, but this combines a lot of the things that we learned previously, which is
+
+the use of a media query.
+
+I said that when the width of the screen is under 1250px, I'm going to target the pricing container,
+
+which remember is our Flexbox container,
+
+and instead of having the flex-direction be a row by default, I'm going to change it to have a
+
+flex-direction of column.
+
+And what that does is when this gets under 1250px, then it goes into a vertical Flexbox, which
+
+is really nice.
+
+It makes more use of the space.
+
+And I've set that height to 100% because remember previously, we had the height set to 100 viewport height,
+
+which means the height of our container is going to try and be as high as our viewport, which is only
+
+the space that we have here now because we have more content than viewport height, it's actually better
+
+to set it to 100% so that it's not limited.
+
+And I'll show you what happens if I don't have this.
+
+You'll see that it's actually not quite right.
+
+When you scroll to the top and the bottom, it actually cuts off a bunch of stuff.
+
+That's the one final sort of modification that I've got.
+
+I hope you managed to get somewhere close to this,
+
+and if not, don't worry, be sure to review some of the previous content, like the lesson on media
+
+queries or the lesson on Flexbox sizing, and just make sure that you understand at least all of the
+
+code in the solution code and you understand what's going on.
+
+It doesn't matter if you didn't manage to style it exactly the same.
+
+You know, a lot of this stuff is kind of personal preference and maybe you've made something that's
+
+even better than what I've got here.
+
+If you have,
+
+be sure to share a screenshot in the Q&A section,
+
+I would love to see what you guys have created.
+
+That's all from me for this section and I'll see you in the next section.
