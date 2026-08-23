@@ -125,6 +125,7 @@
          border-radius: 3px; padding: 0 4px; background: #fff; font-family: Consolas, monospace;
          font-size: 8pt; }
 
+  .tight td, .tight th { padding: 1.7px 5px; }
   .answer { color: var(--green); font-weight: 700; }
   .wrong  { color: var(--red); text-decoration: line-through; }
   .foot { margin-top: 7px; padding-top: 4px; border-top: 1px solid var(--line);
@@ -214,7 +215,7 @@
     </div>
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 1 of 8</span><span>Property map &amp; axes</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 1 of 9</span><span>Property map &amp; axes</span></div>
 </div>
 
 <!-- ══════════════════════════════ PAGE 2 ══════════════════════════════ -->
@@ -327,7 +328,7 @@
     <code>space-evenly</code> ignores that and just makes <b>every gap identical</b>.
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 2 of 8</span><span>display:flex · order · flex-wrap · justify-content</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 2 of 9</span><span>display:flex · order · flex-wrap · justify-content</span></div>
 </div>
 
 <!-- ══════════════════════════════ PAGE 3 ══════════════════════════════ -->
@@ -433,7 +434,7 @@
     <tr><td>perfectly centre something</td><td><code>justify-content: center</code> + <code>align-items: center</code></td><td class="c">parent</td></tr>
   </table>
 
-  <div class="foot"><span>Flexbox Master Notes · page 3 of 8</span><span>align-items · align-self · align-content</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 3 of 9</span><span>align-items · align-self · align-content</span></div>
 </div>
 
 <!-- ══════════════════════════════ PAGE 4 ══════════════════════════════ -->
@@ -461,6 +462,45 @@
     <code>width</code> only speaks when <code>flex-basis</code> stays silent · and <b>content is the last man standing</b>.
   </div>
 
+  <h2 style="font-size:11pt"><span class="n">F+</span>"Content width" is a RANGE, not a number</h2>
+  <p style="margin-top:0">The piece that makes the rest click — <b>every element has TWO natural sizes</b>:</p>
+  <div class="cols2">
+    <div>
+      <table style="margin-top:0">
+        <tr><th style="width:96px"></th><th>What it is</th><th>The lesson's words</th></tr>
+        <tr><td><b>max-content</b><br><span style="font-size:7.6pt;color:var(--muted)">the "ideal" width</span></td>
+            <td>all the text fits on <b>ONE line</b></td><td><i>"all the content lined up, occupying the ideal estate"</i></td></tr>
+        <tr><td><b>min-content</b><br><span style="font-size:7.6pt;color:var(--muted)">the floor</span></td>
+            <td>the width of the single <b>longest WORD</b>, at the current font-size</td><td><i>"the minimum width looks at the longest word"</i></td></tr>
+      </table>
+    </div>
+    <div>
+<pre>  min-content              max-content
+ (longest word)         (all on one line)
+      |◄── item lives here ──►|
+  overflows              won't pass this
+  off-screen             unless it can grow</pre>
+      <p style="margin:2px 0 0;font-size:8.6pt">With <b>no sizing properties at all</b>, an item starts at
+      <b>max-content</b> and shrinks toward <b>min-content</b>.</p>
+    </div>
+  </div>
+  <div class="cols2" style="margin-top:4px">
+    <div>
+      <div class="box b-key" style="margin:0">
+        <span class="t">🔑 Shrinking is NOT uniform</span>
+        Each item has its <b>own</b> floor, because each has its own longest word. In the lesson's demo the
+        box containing <b>"programming"</b> stays visibly widest — flexbox refuses to break a word across lines.
+      </div>
+    </div>
+    <div>
+      <div class="box b-warn" style="margin:0">
+        <span class="t">⚠️ Past the floor it does NOT keep shrinking</span>
+        It <b>overflows</b>: the content is <i>"pushed off the page and will not be visible on screen anymore."</i>
+        This floor is exactly what <code>min-width: auto</code> resolves to (gotcha #1).
+      </div>
+    </div>
+  </div>
+
   <h2><span class="n">G</span><code>flex-basis</code> vs <code>width</code> — basis wins</h2>
   <div class="cols2">
     <div>
@@ -469,10 +509,19 @@
   <span class="k">flex-basis</span>: <span class="v">100px</span>;  <span class="c">/* ✅ the size used */</span>
 }</pre>
       <ul>
-        <li>If <code>flex-basis</code> is set, <b><code>width</code> is completely ignored.</b></li>
+        <li>If <code>flex-basis</code> is set, <b><code>width</code> is completely ignored.</b> The lesson is
+            blunt: <i>"there's not even any point in setting it"</i> — delete the <code>width</code>.</li>
         <li>If the basis <b>can't be honoured</b> (no room), the item falls back down the ladder to its
             <b>minimum content width</b> and stops there.</li>
       </ul>
+      <div class="box b-key" style="margin:4px 0 0">
+        <span class="t">🔑 <code>width</code> and <code>flex-basis</code> behave IDENTICALLY under pressure</span>
+        Whichever wins the lookup is only a <b>preferred</b> size — abandoned the moment there isn't room:
+<pre style="background:#fff;margin:3px 0 0">4 items × width:100px + gap:10px → needs ~430px
+ ≥ 430px → every item is exactly 100px  ✅
+ &lt; 430px → the 100px is ABANDONED; each item
+           shrinks toward its OWN min-content</pre>
+      </div>
     </div>
     <div>
       <div class="box b-warn" style="margin-top:0">
@@ -488,7 +537,12 @@
     </div>
   </div>
 
-  <h2><span class="n">H</span><code>flex-basis</code> vs <code>min-width</code> / <code>max-width</code> — 4 scenarios, 1 rule</h2>
+  <div class="foot"><span>Flexbox Master Notes · page 4 of 9</span><span>Priority ladder · content range · basis vs width</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 5 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">H</span><code>flex-basis</code> vs <code>min-width</code> / <code>max-width</code> — 4 scenarios, 1 rule</h2>
   <p style="margin-top:0">The browser sizes the item <b>first</b> (basis → grow/shrink), <b>then</b> clamps it. Clamping is the last step:</p>
 <pre>final size = <span class="k">clamp</span>( min-width , size-from-basis/grow/shrink , max-width )</pre>
 
@@ -530,12 +584,7 @@
     <code>min-width:300px; max-width:100px</code> → <b>300px</b>, because the floor is checked last.
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 4 of 8</span><span>Priority ladder · basis vs width · basis vs limits</span></div>
-</div>
-
-<!-- ══════════════════════════════ PAGE 5 ══════════════════════════════ -->
-<div class="page">
-  <h2 style="margin-top:0"><span class="n">I</span>The three levers</h2>
+  <h2><span class="n">I</span>The three levers</h2>
   <table class="avoid">
     <tr><th style="width:88px">Property</th><th>The question it answers</th><th class="c" style="width:120px">Default</th><th class="c" style="width:105px">Unit</th></tr>
     <tr><td><code>flex-grow</code></td><td><i>"If there's spare space, do I take a share of it?"</i></td><td class="c"><code>0</code> — <b>no</b></td><td class="c">ratio (unitless)</td></tr>
@@ -545,7 +594,32 @@
   <p style="margin-top:2px"><b>All three are CHILD properties.</b> And grow/shrink are <b>ratios, not pixels</b> —
   <code>flex-grow: 5</code> means <i>"give me 5 shares of the leftover while a <code>1</code> item gets 1 share"</i>, not "5px".</p>
 
-  <h2><span class="n">J</span>The four grow/shrink scenarios — all with <code>flex-basis: 100px</code></h2>
+  <div class="cols2" style="margin-top:5px">
+    <div>
+      <div class="box b-tip" style="margin:0">
+        <span class="t">🔍 The 3 questions — steal the instructor's debugging method</span>
+        <i>"Resize the window and see how the green box behaves. <b>Does it grow? Does it shrink? What's the
+        size that it wants to be?</b>"</i>
+        <p style="margin-bottom:0">Those three questions <b>are</b> the three properties. Run them on any
+        layout you're copying or debugging <b>before writing a single line of CSS</b>.</p>
+      </div>
+    </div>
+    <div>
+      <table style="margin-top:0">
+        <tr><th>Grab the window edge and ask…</th><th class="c" style="width:104px">…you've found</th></tr>
+        <tr><td><b>Does it grow</b> when I widen the window?</td><td class="c"><code>flex-grow</code></td></tr>
+        <tr><td><b>Does it shrink</b> when I narrow it?</td><td class="c"><code>flex-shrink</code></td></tr>
+        <tr><td><b>What size does it want</b> when there's room?</td><td class="c"><code>flex-basis</code></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 5 of 9</span><span>basis vs limits · the 3 levers · the 3 questions</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 6 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">J</span>The four grow/shrink scenarios — all with <code>flex-basis: 100px</code></h2>
   <p style="margin-top:0">Only grow and shrink change. The whole <b>behaviour</b> of the item changes with them.</p>
 
   <table class="avoid">
@@ -574,9 +648,12 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     <div>
       <div class="box b-warn" style="margin-top:2px">
         <span class="t">⚠️ gs-4 and "DUMMY PIECE BAAVA" — the honest version</span>
-        With <code>flex: 1 1 100px</code> the item grows <i>and</i> shrinks, so the <code>100px</code> never
-        survives as a final width. Calling it a dummy piece is the right instinct — <b>with one correction that
-        matters on the very next page:</b>
+        Straight from the lesson: <i>"the flex-basis is <b>pretty much</b> completely ignored because flex-grow
+        and flex-shrink are both on. It's going to grow to the max-width and shrink to the minimum width — and
+        if those aren't set, it infers them from the content."</i> So the range becomes
+        <code>min-width/min-content ◄──► max-width/available</code>.
+        <p style="margin:3px 0 0">Calling it a dummy piece is the right instinct — but note the hedge
+        <i>"pretty much"</i>, and <b>one correction that matters two pages on:</b></p>
         <p style="margin-bottom:0">👉 <b><code>flex-basis</code> is a dummy as a FINAL WIDTH. It is still very much
         alive as the STARTING LINE.</b> Free space is measured <i>after</i> every basis is laid down, then shared out.
         That's why <code>flex: 1 1 0</code> and <code>flex: 1 1 auto</code> give <b>completely different</b> results.</p>
@@ -616,7 +693,7 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     </div>
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 5 of 8</span><span>3 levers · gs-1…gs-4 · basis auto vs 0</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 6 of 9</span><span>gs-1…gs-4 · basis auto vs 0</span></div>
 </div>
 
 <!-- ══════════════════════════════ PAGE 6 ══════════════════════════════ -->
@@ -648,16 +725,20 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
         <b><code>1</code></b>, and <code>flex-basis</code> becomes <b><code>0%</code></b>.
 <pre style="margin:5px 0 3px;background:#fff"><span class="wrong">flex: 2  →  grow 2, shrink 2, basis 0</span>
 <span class="answer">flex: 2  →  grow 2, shrink 1, basis 0%</span></pre>
-        <p style="margin-bottom:0">Verified with <code>getComputedStyle</code> in Chrome. It doesn't change the
+        <p style="margin:0 0 3px">Verified with <code>getComputedStyle</code> in Chrome. It doesn't change the
         1:2:3 result at all — with a basis of <code>0</code> there's <b>nothing to shrink</b> — but say it right in an interview.</p>
+        <p style="margin-bottom:0">🎧 <b>Not a mis-hearing — the video says it too:</b> <i>"in this case, it's a
+        grow of 2 and <b>a shrink of 2</b>."</i> A slip in the lesson. (<code>flex: 1</code> → grow 1 / shrink 1
+        is right only because the <b>default</b> shrink already is 1.) <b>A single number never touches
+        <code>flex-shrink</code>.</b></p>
       </div>
       <div class="box b-warn">
         <span class="t">⚠️ The shorthand quietly resets the basis</span>
 <pre style="margin:3px 0;background:#fff"><span class="k">.a</span> { <span class="k">flex-grow</span>: <span class="v">1</span>; }  <span class="c">/* basis stays AUTO */</span>
 <span class="k">.b</span> { <span class="k">flex</span>: <span class="v">1</span>; }       <span class="c">/* basis becomes 0% */</span></pre>
-        <p style="margin:2px 0">→ <code>.a</code> gives <b>content-weighted</b> widths, <code>.b</code> gives <b>equal</b> widths.</p>
-        Same intent, different result. <b>Any omitted <code>flex-basis</code> in the shorthand defaults to
-        <code>0</code>, not <code>auto</code>.</b> This one line explains most <i>"why aren't my columns equal?"</i> bugs.
+        <code>.a</code> gives <b>content-weighted</b> widths, <code>.b</code> gives <b>equal</b> ones.
+        <b>Any omitted <code>flex-basis</code> in the shorthand defaults to <code>0</code>, not <code>auto</code>.</b>
+        This one line explains most <i>"why aren't my columns equal?"</i> bugs.
       </div>
     </div>
   </div>
@@ -671,9 +752,9 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
       <ul>
         <li>Total shares = <b>1 + 2 + 3 = 6</b>. In a <b>600px</b> container (basis <code>0</code>, so all 600px is up for grabs) one share = <b>100px</b>.</li>
         <li><b>The ratios are respected: 1x : 2x : 3x.</b></li>
-        <li>Resize the window and they <b>grow and shrink together, still 1:2:3</b>. The <code>3</code> item moves
-            <b>3px for every 1px</b> the <code>1</code> item moves.</li>
-        <li>Add a 4th <code>flex: 1</code> item → 7 shares → <code>600/7</code> each. The ratio re-balances by itself.</li>
+        <li>Resize and they <b>grow and shrink together, still 1:2:3</b> — the <code>3</code> item moves
+            <b>3px for every 1px</b> the <code>1</code> item moves. Add a 4th <code>flex: 1</code> item →
+            7 shares → <code>600/7</code> each; the ratio re-balances by itself.</li>
       </ul>
     </div>
     <div>
@@ -721,7 +802,7 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     </div>
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 6 of 8</span><span>shorthand · ratios · the algorithm</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 7 of 9</span><span>shorthand · ratios · the algorithm</span></div>
 </div>
 
 <!-- ══════════════════════════════ PAGE 7 ══════════════════════════════ -->
@@ -838,7 +919,7 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     <b>8.</b> Is <code>min-width: auto</code> blocking the shrink?
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 7 of 8</span><span>gotchas · patterns · debugging</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 8 of 9</span><span>gotchas · patterns · debugging</span></div>
 </div>
 
 <!-- ══════════════════════════════ PAGE 8 ══════════════════════════════ -->
@@ -847,7 +928,7 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     <span class="sub">Cover the right-hand column. Target: all 20 in under 3 minutes, no notes.</span></h1>
   <div class="hdr-rule"></div>
 
-  <div class="cols2">
+  <div class="cols2 tight">
     <div>
       <table>
         <tr><th class="c" style="width:26px">#</th><th>Question</th><th style="width:96px">Answer</th></tr>
@@ -880,33 +961,68 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     </div>
   </div>
 
-  <h2><span class="n">Q</span>Write it from memory — the blank-page drill</h2>
-  <p style="margin-top:0">Once a week, on a blank sheet, reproduce these five things <b>without looking</b>. If you can do all five, you own flexbox.</p>
-  <table class="avoid">
-    <tr><th class="c" style="width:26px">1</th><td>The <b>priority ladder</b>, weakest to strongest, all four levels.</td></tr>
-    <tr><th class="c">2</th><td>The <b>gs-1 → gs-4</b> table: grow, shrink, allowed range, and what the basis acts as. Circle the default.</td></tr>
-    <tr><th class="c">3</th><td>All six <b><code>justify-content</code></b> values as ASCII sketches, plus all five <b><code>align-items</code></b> values.</td></tr>
-    <tr><th class="c">4</th><td>The <b>five presets</b>: <code>flex: 1</code> / <code>2</code> / <code>auto</code> / <code>none</code> / <code>initial</code> in longhand.</td></tr>
-    <tr><th class="c">5</th><td>The <b>5-step algorithm</b>, and the one place <code>gap</code> is subtracted.</td></tr>
-  </table>
-
-  <h2><span class="n">R</span>Keep practising</h2>
+  <h2><span class="n">Q</span>The course exercise <span style="font-weight:400;font-size:9pt;color:var(--muted)">— appbrewery.github.io/flexbox-sizing-exercise</span></h2>
+  <p style="margin-top:0">Make the <b>blue</b> flexbox match the <b>green</b> one. Ideal widths <b>200 · 200 · 400px</b>. Run the 3 questions on each item <i>separately</i>.</p>
   <div class="cols2">
     <div>
-      <table>
-        <tr><th>Resource</th><th>Why</th></tr>
-        <tr><td><b>Flexbox Froggy</b><br><span class="mono" style="font-size:7.4pt">appbrewery.github.io/flexboxfroggy</span></td><td>24 levels, Intermediate difficulty (no hints)</td></tr>
-        <tr><td><b>Flexbox Defense</b><br><span class="mono" style="font-size:7.4pt">flexboxdefense.com</span></td><td>Drills alignment under time pressure</td></tr>
-        <tr><td><b>Flex Layout playground</b><br><span class="mono" style="font-size:7.4pt">appbrewery.github.io/flex-layout</span></td><td>Toggle every property live</td></tr>
+      <table style="margin-top:0">
+        <tr><th>Item</th><th class="c">Grows?</th><th class="c">Shrinks?</th><th class="c">Wants to be</th></tr>
+        <tr><td>Item 1</td><td class="c">no</td><td class="c answer">yes</td><td class="c">200px</td></tr>
+        <tr><td>Item 2</td><td class="c">no</td><td class="c answer">no</td><td class="c">200px</td></tr>
+        <tr><td>Item 3</td><td class="c">no</td><td class="c answer">no</td><td class="c">400px</td></tr>
       </table>
+<pre style="margin-top:3px"><span class="k">.container</span> { <span class="k">justify-content</span>: <span class="v">space-between</span>; }
+<span class="k">.item1</span> { <span class="k">flex-basis</span>: <span class="v">200px</span>; }
+<span class="k">.item2</span> { <span class="k">flex-basis</span>: <span class="v">200px</span>; <span class="k">flex-shrink</span>: <span class="v">0</span>; }
+<span class="k">.item3</span> { <span class="k">flex-basis</span>: <span class="v">400px</span>; <span class="k">flex-shrink</span>: <span class="v">0</span>; }</pre>
     </div>
     <div>
-      <table>
-        <tr><th>Reference</th><th>Why</th></tr>
-        <tr><td><b>CSS-Tricks — Complete Guide to Flexbox</b><br><span class="mono" style="font-size:7.4pt">css-tricks.com/snippets/css/a-guide-to-flexbox</span></td><td>The lookup sheet. Splits parent vs child properties</td></tr>
-        <tr><td><b>Josh Comeau — Interactive Guide to Flexbox</b><br><span class="mono" style="font-size:7.4pt">joshwcomeau.com/css/interactive-guide-to-flexbox</span></td><td>Best visual explanation of grow/shrink anywhere</td></tr>
-        <tr><td><b>MDN — Controlling ratios of flex items</b></td><td>The authoritative grow/shrink/basis page</td></tr>
-      </table>
+      <div class="box b-warn" style="margin:0">
+        <span class="t">⚠️ The two traps</span>
+        <b>1. The edge spacing isn't a sizing property</b> — it's <code>justify-content: space-between</code>
+        from the previous lesson. Always separate <i>"how are they spaced"</i> from <i>"how big are they"</i>.
+        <p style="margin-bottom:0"><b>2. <code>flex-shrink: 0</code> is the only non-default here.</b> Everything
+        shrinks by default, so items 2 and 3 need it switched <b>off</b>. Nothing needs <code>flex-grow</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">R</span>Write it from memory — the blank-page drill
+    <span style="font-weight:400;font-size:9pt;color:var(--muted)">— once a week, blank sheet, no notes</span></h2>
+  <div class="cols2 avoid">
+    <div>
+      <ol style="margin-top:0">
+        <li>The <b>priority ladder</b>, weakest → strongest, all four levels.</li>
+        <li>The <b>gs-1 → gs-4</b> table: grow, shrink, allowed range, what the basis acts as. Circle the default.</li>
+        <li>All six <b><code>justify-content</code></b> values as ASCII sketches, plus all five <b><code>align-items</code></b> values.</li>
+      </ol>
+    </div>
+    <div>
+      <ol start="4" style="margin-top:0">
+        <li>The <b>five presets</b>: <code>flex: 1</code> / <code>2</code> / <code>auto</code> / <code>none</code> / <code>initial</code> in longhand.</li>
+        <li>The <b>5-step algorithm</b>, and the one place <code>gap</code> is subtracted.</li>
+        <li><i>Bonus:</i> the <b>two</b> content sizes — max-content and min-content — and which one is the floor.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2><span class="n">S</span>Keep practising</h2>
+  <div class="cols2">
+    <div>
+      <p style="margin:0"><b>🎮 Practice</b></p>
+      <ul style="margin-top:1px">
+        <li><b>Flexbox Froggy</b> — <span class="mono" style="font-size:7.6pt">appbrewery.github.io/flexboxfroggy</span><br>24 levels, Intermediate difficulty (no hints)</li>
+        <li><b>Flexbox Defense</b> — <span class="mono" style="font-size:7.6pt">flexboxdefense.com</span><br>drills alignment under time pressure</li>
+        <li><b>Flex Layout playground</b> — <span class="mono" style="font-size:7.6pt">appbrewery.github.io/flex-layout</span></li>
+      </ul>
+    </div>
+    <div>
+      <p style="margin:0"><b>📖 Reference</b></p>
+      <ul style="margin-top:1px">
+        <li><b>CSS-Tricks — Complete Guide to Flexbox</b> · the lookup sheet, splits parent vs child properties</li>
+        <li><b>Josh Comeau — Interactive Guide to Flexbox</b> · best visual explanation of grow/shrink anywhere</li>
+        <li><b>MDN — Controlling ratios of flex items</b> · the authoritative grow/shrink/basis page</li>
+      </ul>
     </div>
   </div>
 
@@ -921,7 +1037,7 @@ gs-4   flex: 1 1 100px  ◄────[====100px====]───────►  
     </ol>
   </div>
 
-  <div class="foot"><span>Flexbox Master Notes · page 8 of 8</span><span>Self test · drills · resources</span></div>
+  <div class="foot"><span>Flexbox Master Notes · page 9 of 9</span><span>Self test · the course exercise · drills</span></div>
 </div>
 
 </body>

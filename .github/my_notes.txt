@@ -75,6 +75,13 @@ Topic: FLEXBOX - Flex Layout (order, flex-wrap, justify-content, align-items, al
 
 Topic: FLEXBOX - Flex Sizing (flex-grow / flex-shrink / flex-basis)  *** WEAK AREA - REVISE EVERY TIME ***
 - PRIORITY LADDER (course formula slide): Content width < width < flex-basis < min-width/max-width. Rightmost = strongest, applied last.
+- The lesson phrases it as a LOOKUP: "first it looks at whether min-width/max-width is set; if not, is there a flex-basis?; if not, the width (or height on a column); if none of those, the actual content width." Walk down the list until you hit something that IS set.
+- "CONTENT WIDTH" IS NOT ONE NUMBER - IT'S A RANGE: max-content = all the text on ONE line (the "ideal estate"); min-content = the single LONGEST WORD at that font-size. With no sizing props at all, an item starts at max-content and shrinks toward min-content.
+- SHRINKING IS NOT UNIFORM: each item has its OWN floor because each has its own longest word. In the demo the box containing "programming" stays widest - flexbox refuses to break a word across lines.
+- PAST THE FLOOR IT DOESN'T KEEP SHRINKING - it overflows: the content "gets pushed off the page and will not be visible on screen anymore".
+- width and flex-basis behave IDENTICALLY under pressure - both are only a PREFERRED size, abandoned when there's no room. 4 items x width:100px + gap:10px needs ~430px; above that every item is exactly 100px, below it the 100px is dropped and each item shrinks to its own min-content. Only difference between them: who wins the lookup.
+- The lesson on setting both: "there's actually not even any point in setting it [width], because it's going to be looking at the more important property" - delete the width.
+- THE 3 QUESTIONS (instructor's debugging method - use before writing any CSS): drag the window edge and ask (1) Does it grow? -> flex-grow (2) Does it shrink? -> flex-shrink (3) What size does it want to be? -> flex-basis.
 - flex-basis = the REQUESTED/starting size of a flex item. max-width = a HARD CEILING, min-width = a HARD FLOOR. They are not the same kind of property.
 - If flex-basis is set, WIDTH IS COMPLETELY IGNORED - but only on the MAIN axis. Row container -> basis = width (height still works). Column container -> basis = HEIGHT (width still works).
 - If the basis can't be honoured, the item falls back down the ladder to its MINIMUM CONTENT WIDTH and stops there.
@@ -100,6 +107,8 @@ Topic: FLEXBOX - Flex Sizing (flex-grow / flex-shrink / flex-basis)  *** WEAK AR
 - SHORTHAND: flex: <grow> <shrink> <basis>;  e.g. grow1/shrink1/basis0 -> flex: 1 1 0 -> shortened further to just flex: 1 (most commonly used).
 - Presets: flex:1 = 1 1 0% | flex:2 = 2 1 0% | flex:auto = 1 1 auto | flex:none = 0 0 auto | flex:initial = 0 1 auto (default) | flex: 0 0 250px = hard 250px sidebar.
 - CORRECTION worth remembering: flex:2 is NOT "2 2 0". One number sets flex-GROW only; shrink stays 1 and basis becomes 0%. (Verified in Chrome.) The 1:2:3 result is unaffected because with basis 0 there is nothing to shrink.
+  * NOT a mis-hearing - the transcript itself says "in this case, it's a grow of 2 and a shrink of 2". That is a slip in the video (flex:1 -> grow 1/shrink 1 is right only because the DEFAULT shrink already is 1). Trust the browser: a single number never touches flex-shrink.
+- COURSE EXERCISE: https://appbrewery.github.io/flexbox-sizing-exercise/ - make the blue flexbox behave like the green one. Ideal widths 200/200/400. Solution = justify-content:space-between on the container + flex-basis 200/200/400 + flex-shrink:0 on items 2 AND 3 (item 1 keeps the default shrink). Trap: the edge spacing is justify-content, not a sizing property.
 - GOTCHA: the shorthand resets basis to 0, the longhand doesn't. flex-grow:1 alone -> basis stays auto (content-weighted widths). flex:1 -> basis 0% (equal widths). This explains most "why aren't my columns equal" bugs.
 - RATIOS: flex:1 / flex:2 / flex:3 in a 600px row -> 100px / 200px / 300px (6 shares total). They grow AND shrink together, always keeping 1x : 2x : 3x.
 - The 5-step algorithm: (1) lay down every basis (2) free space = container - sum(basis) - GAPS - margins (3) positive free space -> share by grow ratio; negative -> claw back by shrink x basis (4) clamp to min/max-width (5) justify-content positions whatever is left.

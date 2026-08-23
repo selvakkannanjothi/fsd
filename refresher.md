@@ -144,6 +144,24 @@ This file is the persistent store for the FSD self-quiz. It is NOT study notes.
 **Correct:** B — the automatic minimum size. `min-width: 0` unlocks it (verified: 190px → 100px). This is the single most common flexbox bug in real code.
 **Missed on:** Self-flagged as a weak area (not yet quizzed)
 
+### WQ15 · 🔴 Difficult · Topic: Flexbox Sizing — content width is a range ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** A flex item has **no** sizing properties at all. What width does it start at, and what stops it shrinking?
+- A. It starts at `0` and grows to fit its content
+- B. It starts at **max-content** (all text on one line) and shrinks down to **min-content** (its longest word)
+- C. It starts at 100% of the container and shrinks to 50%
+- D. It starts and stays at its content width — flex items don't shrink unless told to
+**Correct:** B — with nothing set, an item's preferred size is max-content and its floor is min-content (the longest unbreakable word at that font-size). Push past the floor and it **overflows off-screen** rather than shrinking further. Shrinking is also **not uniform** — each item has its own longest word, so its own floor.
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
+### WQ16 · 🔴 Difficult · Topic: Flexbox Sizing — the course exercise ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** In the [Flexbox Sizing Exercise](https://appbrewery.github.io/flexbox-sizing-exercise/), the items sit at the container's edges and items 2 & 3 refuse to shrink while item 1 shrinks freely. Which set of rules reproduces this?
+- A. `flex-grow: 0` on items 2 and 3, plus `justify-content: center` on the container
+- B. `flex-shrink: 0` on items 2 and 3, plus `justify-content: space-between` on the container, with `flex-basis` 200/200/400
+- C. `flex: none` on all three items, plus `gap: auto` on the container
+- D. `min-width` set on items 2 and 3, plus `align-content: space-between`
+**Correct:** B — the edge spacing is `justify-content: space-between` (**not** a sizing property — the classic trap), and since all items shrink by default (`flex: 0 1 auto`), items 2 and 3 need shrink switched **off** explicitly. Nothing needs `flex-grow` — none of the boxes grow.
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
 ---
 
 ## Resolved (previously wrong, now answered correctly)

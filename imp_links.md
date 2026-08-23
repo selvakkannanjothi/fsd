@@ -10,6 +10,7 @@ Running collection of reference/useful links gathered while working through the 
 - [Flexbox Froggy](https://appbrewery.github.io/flexboxfroggy/) — interactive game to practice flex properties, from `flexlayout_transcript.txt`
 
 ### Flex Sizing (grow / shrink / basis) — ⚠️ weak area, keep these handy
+- [Flexbox Sizing Exercise (appbrewery)](https://appbrewery.github.io/flexbox-sizing-exercise/) — **the lesson's own exercise**: make the blue flexbox behave like the green one (items 200/200/400), from `flexsizing_transcript.txt`
 - [MDN: `flex` shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/flex) — the authoritative list of what `flex: 1` / `auto` / `none` / `initial` expand to
 - [MDN: `flex-basis`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis) · [`flex-grow`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow) · [`flex-shrink`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink)
 - [MDN: Controlling ratios of flex items along the main axis](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Controlling_ratios_of_flex_items_along_the_main_axis) — the single best page on grow/shrink/basis

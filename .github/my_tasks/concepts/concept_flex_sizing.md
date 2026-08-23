@@ -1,7 +1,8 @@
 # Flex Sizing — `flex-grow` / `flex-shrink` / `flex-basis`
 
 > ⚠️ **SELF-FLAGGED WEAK AREA — this is the "read me every revision" file.**
-> Source: lesson `9. Flexbox → 57. Flex Sizing` · formula slide: `course_content/FLEXBOX/flexbox_sizing_formula.png`
+> Source transcript: `course_content/FLEXBOX/flexsizing_transcript.txt` · formula slide: `course_content/FLEXBOX/flexbox_sizing_formula.png`
+> Exercise: [Flexbox Sizing Exercise](https://appbrewery.github.io/flexbox-sizing-exercise/) (solution in the tasks file)
 > Printable hard copy: `flexbox_master_notes.pdf` (repo root)
 
 ---
@@ -40,6 +41,45 @@ Read it top-down as **"1 beats 2 beats 3 beats 4"**:
 **Selva-speak:** *the item asks (`flex-basis`), the law answers (`min`/`max`), `width` only speaks when
 `flex-basis` stays silent, and content is the last man standing.*
 
+### How the lesson phrases it — walk the list top-down
+
+> *"The first thing it looks at is whether there is a min-width and max-width set on the item. If this is
+> not set, it looks at the next thing: is there a flex-basis set? If there's no flex-basis either, it looks
+> at the width — or the height on a column-based flexbox. The final one, if none of those are set, is the
+> actual content width."*
+
+So: **walk down the list until you hit something that's actually set — that's your size.** (The real CSS
+engine also *clamps* with `min`/`max-width` at the very end, which is precisely why they sit at the top
+of the list: whether you meet them first or last, they always win.)
+
+---
+
+## 1b. "Content width" is not one number — it's a RANGE
+
+This is the piece that makes everything else click. Every element has **two** natural content sizes:
+
+| | What it is | The lesson's words |
+|---|---|---|
+| **max-content** (the "ideal" width) | the width where **all the text fits on ONE line** | *"all of the content lined up, occupying the ideal estate"* |
+| **min-content** (the floor) | the width of the **single longest WORD**, at the current font-size | *"the minimum width looks at the longest word"* |
+
+With **no sizing properties at all**, a flex item **starts at max-content and shrinks toward min-content.**
+
+- 🔑 **Shrinking is NOT uniform.** Each item has its **own** floor, because each has its own longest word.
+  In the lesson's demo, the box containing the word **"programming"** stays visibly the widest — flexbox
+  refuses to break a word across lines.
+- 🔑 **Past the floor, it stops shrinking and overflows.** Keep narrowing the window and the content is
+  *"pushed off the page and will not be visible on screen anymore."* It does **not** keep shrinking.
+- This min-content floor is exactly what `min-width: auto` resolves to — see gotcha #1 in §10.
+
+```text
+        min-content                                   max-content
+        (longest word)                                (all on one line)
+             |◄───────── the item lives in here ─────────►|
+      overflows                                      won't grow past this
+      off-screen                                     unless you let it grow
+```
+
 ---
 
 ## 2. `flex-basis` vs `width` — basis wins
@@ -52,8 +92,28 @@ Read it top-down as **"1 beats 2 beats 3 beats 4"**:
 ```
 
 - If `flex-basis` exists → **`width` is completely ignored** (on the main axis only).
+- The lesson is blunt about it: *"there's actually not even any point in setting it, because it's going to
+  be looking at the more important property."* Setting both is just noise — delete the `width`.
 - If the basis can't be honoured (no room), the item falls back down the ladder to its
   **minimum content width** and stops there.
+
+### `width` and `flex-basis` behave *identically* under pressure
+
+Whichever one wins the lookup, it is only a **preferred** size — it gets abandoned the moment there
+isn't room. Worked example from the lesson:
+
+```text
+4 items × width: 100px  +  gap: 10px × 3   →  the container needs ~430px
+
+container ≥ 430px  →  every item is exactly 100px  ✅ preference respected
+container < 430px  →  the 100px is ABANDONED; each item shrinks toward its OWN min-content
+```
+
+> *"As soon as there's not enough space in the container to accommodate all of the items that have the set
+> width, it's going to ignore this and dynamically shrink each of the items until it reaches that minimum
+> width for each item."* — and the same sentence is true word-for-word if you swap `width` for `flex-basis`.
+
+**The only difference between `width` and `flex-basis` is who wins the lookup, not how they behave.**
 - 🔑 **"Main axis only"** is the catch: in `flex-direction: row`, `flex-basis` = width, and `height`
   still works normally. In `flex-direction: column`, `flex-basis` = **height**, and `width` works
   normally again. `flex-basis` never fights the cross axis.
@@ -117,6 +177,23 @@ All three are **child (flex item) properties** — never on the container.
 > 🧠 grow/shrink are **ratios**, not pixels. `flex-grow: 5` doesn't mean "5px" or "500%", it means
 > *"give me 5 shares of the leftover, while a `1` item gets 1 share."*
 
+### 🔍 The 3 questions — steal the instructor's debugging method
+
+When the lesson sets the exercise, it tells you exactly what to look for:
+
+> *"Resize the window and see how the green box behaves. **Does it grow? Does it shrink? What's the size
+> that it wants to be?**"*
+
+Those three questions **are** the three properties, in order:
+
+| Grab the window edge and ask… | …and you've found |
+|---|---|
+| **Does it grow** when I widen the window? | `flex-grow` |
+| **Does it shrink** when I narrow it? | `flex-shrink` |
+| **What size does it want to be** when there's plenty of room? | `flex-basis` |
+
+Run this on any layout you're copying or debugging **before writing a single line of CSS.**
+
 ---
 
 ## 5. The 4 grow/shrink scenarios (`gs-1` … `gs-4`)
@@ -148,8 +225,17 @@ until you hand out a `flex-grow`.
 
 ### gs-4 and "DUMMY PIECE BAAVA" — the honest version
 
+Straight from the lesson: *"the flex-basis is pretty much completely ignored because flex-grow and
+flex-shrink are both on. It's going to grow to the max-width and shrink to the minimum width — and if
+those two aren't set, it infers them from the content."* So the item's range becomes:
+
+```text
+min-width  (or min-content)  ◄────────────────►  max-width  (or the available space)
+```
+
 With `flex: 1 1 100px` the item shrinks *and* grows, so the `100px` never survives as a final width.
-Calling it a dummy piece is the right instinct — **but with one correction that matters later:**
+Calling it a dummy piece is the right instinct — **but note the lesson's hedge, "pretty much", and the
+one correction that matters later:**
 
 > `flex-basis` is a dummy as a **final width**. It is still very much alive as the **starting line**.
 
@@ -215,6 +301,15 @@ flex-basis: 0;                    flex: 1;
 >
 > (Confirmed with `getComputedStyle` in Chrome.) It doesn't change the 1:2:3 ratio result at all —
 > with a basis of `0` there's nothing to shrink anyway — but say it correctly in an interview.
+
+**🎧 Your note was NOT a mis-hearing — the lesson says it too.** Transcript, on the `flex: 2` box:
+
+> *"…essentially what we're doing here is we're setting the grow to 1 and the shrink to 1. And in this
+> case, it's a grow of 2 and **a shrink of 2**."*
+
+That last bit is a slip in the video. `flex: 1` → grow 1 / shrink 1 is correct (coincidence: the default
+shrink already *is* 1), which is probably what carried it over to `flex: 2`. Trust the browser:
+**a single number never touches `flex-shrink`.**
 
 ### ⚠️ The shorthand quietly resets the basis
 
@@ -366,3 +461,7 @@ Handy: `flex: 1 1 50%` + `flex-wrap: wrap` = a 2-column responsive grid.
 | 12 | `flex: 1` / `flex: 2` / `flex: 3` in 600px | **100 / 200 / 300** |
 | 13 | `flex-grow: 1` alone vs `flex: 1` | basis `auto` (content-weighted) vs `0` (equal) |
 | 14 | `flex: 1` on a long unbreakable word | won't shrink past min-content → add `min-width: 0` |
+| 15 | An item with **no** sizing properties at all | starts at **max-content** (all on one line), shrinks to **min-content** (longest word) |
+| 16 | Narrowed past min-content | stops shrinking → **overflows off-screen** |
+| 17 | Why do 4 items shrink at *different* rates? | each has its **own** longest word = its own floor |
+| 18 | 4 items × `width: 100px`, `gap: 10px`, container 400px | `100px` abandoned (needs ~430px) → each shrinks to its own min-content |

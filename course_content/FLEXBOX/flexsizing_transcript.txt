@@ -1,0 +1,557 @@
+Hey, guys.
+
+So in the last lesson, we looked at the various Flexbox properties that determine the layout of our
+
+items in a Flexbox container.
+
+We looked at the things that we can change about the flex items and the things that we can change about
+
+the flex container.
+
+In this lesson, we're going to talk about how to size the items in a Flexbox container shrinking and
+
+growing and how it should behave when it's in a responsive situation.
+
+Let's say we had a web page with four paragraph elements, so we know that paragraph elements are going
+
+to be full width because they are all block elements and they have a default amount of sort of margin
+
+and also padding.
+
+If we go ahead and put all of those paragraph elements into a Flexbox container, even if that container
+
+is invisible, it's going to turn each of these paragraph elements into flex items.
+
+And by default, as you might remember, the main axis is along a row,
+
+and we can of course change that,
+
+but it stacks each of these items based on the size of their content,
+
+one next to each other without any gaps between.
+
+At this stage, even without writing any sizing properties, this has a default behavior where if we
+
+go ahead and change the width of our window or our viewport, if this is shrunken, then you'll see
+
+these blocks shrink in response.
+
+And Flexbox does most of this automatically having a behavior that in most cases is what we would want,
+
+but sometimes you're going to need to customize this and to be able to customize how each of the items
+
+inside a Flexbox is sized,
+
+we're going to need to learn a little bit about how it actually gets worked out,
+
+and what is the algorithm essentially, that Flexbox uses to determine each of the flex item's size.
+
+And the way that it works it out is basically a priority list.
+
+The first thing it looks at is whether if there is a minimum width and a maximum width that's set on
+
+the item. If this is not set, then it's going to look at the next thing, which is, "Is there a
+
+flex-basis set?"
+
+And previously we looked at this property flex-basis as a way to set the width on a row-based Flexbox
+
+or the height on a column-based Flexbox.
+
+Essentially whichever direction is the main axis, the size is going to follow that axis.
+
+If there's no flex-basis set either, it's going to look at the width or in the case of a column-based
+
+Flexbox, it's going to look at the height property.
+
+And we've already previously set the height property and the width property, and you can set that on
+
+any HTML element
+
+so there's nothing new there.
+
+Now, the final one it looks at if none of those are set is the actual content width.
+
+Let's say you had an item that contained a paragraph with the word App Brewery.
+
+The content width,
+
+the ideal width is basically the width that allows that text to be lined up next to each other.
+
+If the flexible box had to shrink, then it will go down to the minimum size, which is where the text
+
+wraps and they are stacked one on top of each other.
+
+This is now pretty much the minimum content width.
+
+So I'm going to show you example of all four ways of setting the sizing and we'll see with real examples
+
+of how this actually works in code format.
+
+Let's first create a flex container that is just set to display: flex.
+
+Has a gap of 10px.
+
+Inside this flex container, I've got four items and each of those are paragraph items similar to what
+
+we saw before.
+
+Each of these paragraph items obviously contain texts that have different lengths.
+
+If we go ahead and just by default, put these items inside a flex container such as here, then when
+
+we go ahead and shrink the size of this window, then what's going to happen is each of these items
+
+are going to automatically shrink until they reach the minimum content size.
+
+Notice that this box is the largest, and that's because the longest word in that entire line of text
+
+is this word programming.
+
+So that determines
+
+the minimum width of this box because it doesn't want to put words onto different lines.
+
+So it's going to set this as the minimum width that it will shrink down to. When this is sort of in
+
+real life,
+
+let's go ahead and animate it,
+
+this is what you'll actually see.
+
+It's going to shrink and shrink and shrink until it's reached that minimum width for the content.
+
+And then you'll see afterwards all of that content gets pushed off the page and it will not be visible
+
+on screen anymore.
+
+This is the default behavior of Flexbox without us setting any of the sizing properties.
+
+And as I mentioned, by default, the max-width looks at the longest possible line of the text, and
+
+the minimum width looks at the longest word to determine the minimum width.
+
+Now, let's take a look at what happens if we decide to set manually the width of each of the items.
+
+Notice here that the flex container still has the same code as before.
+
+It has a gap of 10px,
+
+it's set to display: flex,
+
+but now for each of these green items, we've now targeted them inside our CSS and we've decided that
+
+we want each of them to have a width of 100px.
+
+And that's exactly what you see here.
+
+Each of these have the same size and they are all 100px wide.
+
+So now when the container gets shrunk, what happens is it's going to try and respect that width until
+
+there is not enough overall width of the container.
+
+So if we had four items which are 100px each, then this container has to be 400px, right?
+
+If this width becomes less than 400px, then it's going to continue using the same algorithm to
+
+shrink each of the items.
+
+Now again, notice that the shrinking is not uniform.
+
+It's still trying to conform to that minimum size of the content so that even though the text goes on
+
+two different lines, the longest word is still kept intact.
+
+When there is enough space, it's going to respect this width,
+
+but as soon as there's not enough space in the container to accommodate all of the items that have the
+
+set width, it's going to ignore this and dynamically shrink each of the items until it reaches that
+
+minimum width for each item.
+
+Whereas initially, if we had nothing set on the items, it's going to look at the length of the entire
+
+line when it's all on one line,
+
+so that is going to be the content width.
+
+If, however, you have a width property set, then it's going to look at that instead, instead of the
+
+content width.
+
+So instead of everything being all on one line, it's going to look at, well, what is the width that
+
+you've set?
+
+So if we set, it's going to be 100px, then it's going to try and make it 100px wide until
+
+you have shrunken the container where it can no longer fit everything as 100px
+
+then it starts shrinking the box.
+
+Now the next thing that we can try adding is the flex-basis.
+
+Notice how I've got a width set, but I've also got a flex-basis set and because I've got a row-based
+
+flex container, because I haven't changed it to column, remember we said the flex-basis is effectively
+
+determining the width of each of the items.
+
+What does this look like then?
+
+Well, when you actually run this code, you're going to see that it's going to completely ignore this
+
+width because you have a flex-basis set and it's going to set each of the items to that flex-basis,
+
+which in this case is 200px.
+
+And you can see it's a little bit wider than the previous example.
+
+However, this again is in the situation where the container has plenty of space to fill, even though
+
+you've got 200px for each item, there's still space left,
+
+but if you shrink everything down where there's no more space and there's not enough space to give each
+
+item 200px, then exactly the same thing happens.
+
+It's going to look at that minimum width again, and it works pretty much the same as it did with width.
+
+When we animate this, you'll see that it will give it 200px if it can,
+
+and if it can't, then it's going to shrink it to the minimum width.
+
+So remember that when we have a flex-basis, it will completely ignore the width.
+
+So there's actually not even any point in setting it because it's going to be looking at the more important
+
+property, which is the flex-basis in this case.
+
+We've seen how we've gone from the content width, which is the default to a set width, to a flex-basis,
+
+and now we're going to see what happens with the minimum width and the maximum width.
+
+As I mentioned, there is a default max-width and min width that's set based on the content.
+
+So the maximum width is all of the content lined up, occupying the ideal estate, which in the form
+
+of text is to have everything on one line and the minimum width is determined by the longest word and
+
+it's going to be the width of that word at the font size that's set.
+
+You can also manually set each of these properties and completely ignore the content, and in some cases
+
+that might be useful.
+
+Let's say that we had a flex-basis of 200px set on each of these items, but we go ahead and also
+
+set a maximum width of 100px.
+
+Notice that in this case, 100px is less than 200px,
+
+so the flex-basis is actually larger than the maximum width.
+
+So what happens?
+
+Well, instead of respecting the flex-basis, which is 200px, even when there's plenty of space,
+
+it's going to look at that max-width and it's only going to give each item 100px.
+
+So this max-width determines how much the maximum width that the item is allowed to grow to.
+
+Even if you give it all the space in the world, how wide can it possibly be?
+
+Well, it's going to look at the max-width.
+
+And if that max-width is smaller than the flex-basis, then it's going to take this value.
+
+But if the flex-basis was smaller than the max-width, for example, if we had a flex-basis instead
+
+of 200, it was, I don't know, 50px,
+
+well then in that case each of these items will actually be 50px
+
+instead. The maximum width is the maximum possible.
+
+It's going to try and respect
+
+the flex-basis unless the max-width happens to be smaller.
+
+And if we take a look at this in animation, you'll see that as I shrink this container, each of the
+
+items shrink.
+
+And as I grow the container, each of the items grow in size, but only up until that maximum width.
+
+The max-width determines the growth potential of each of the items.
+
+On the other hand, there is the minimum width.
+
+As I said, the maximum width determines how big each of the items can grow to, and the minimum width
+
+determines how small each of the items can shrink to.
+
+Now, let's go back to that situation where we have a flex-basis of 200px, but in addition, we
+
+set the minimum width to 300px.
+
+So notice in this case, 300px is bigger than 200px, what's going to happen when our website
+
+gets rendered?
+
+Well, it's going to look like this.
+
+This is 200px and this is 300px.
+
+As you'll notice, it's actually respecting the minimum width, even though we have a flex-basis that's
+
+set. When the minimum width is larger than the flex-basis, it's going to respect that minimum width,
+
+but in addition, when we try to shrink our container down, it's only going to shrink until the minimum
+
+width is reached.
+
+So if your minimum width is very large, then it's not going to shrink beyond this size.
+
+So I've talked a little bit about growing and shrinking, and this is a really important concept to
+
+understand in Flexbox because a lot of that flexibility, the flexible part of the flexible box comes
+
+from this ability to grow and to shrink.
+
+It's probably easier to understand these properties by switching both of them off first. So we can switch
+
+each of these property off by setting it to 0.
+
+So let's set flex-grow to 0 and flex-shrink to 0 and see what happens to our boxes.
+
+They start out being 100px wide,
+
+and then when we go ahead and try to grow and shrink it, namely trying to increase and decrease the
+
+width of the window, you can see that our items don't actually change in their size at all.
+
+They just stay exactly the same size as before because it can't grow and it can't shrink.
+
+So this doesn't even look like a Flexbox anymore,
+
+right?
+
+Let's go ahead and switch some of those things on.
+
+If we go ahead and change the flex-grow to 1, which means that flex-grow is on, but flex-shrink
+
+is off, then what's going to happen is each of these items will first start out at 100px,
+
+remember the flex-basis is the initial starting value.
+
+It tries to be 100px wide, but then because it's allowed to grow and there is plenty of space
+
+to grow, there's way more than 400px to fit our four items,
+
+then it's going to increase the width of each of these items until the entire width of the container
+
+is filled up by each of our items.
+
+So when we adjust the width of our container, this is where you can see that when the width is reduced,
+
+it gets reduced to that flex-shrink amount, which is 100px, but it doesn't go any further than
+
+that.
+
+Any further than that, the items start going off the screen.
+
+But when there's more than 100px, for example, when we're widening the amount of space like here,
+
+it will continue to grow until it can fill up all of the space.
+
+Now, what if we switch that around?
+
+Let's turn off flex-grow and turn on flex-shrink.
+
+What happens here is by default, it is going to set everything to the flex-basis.
+
+So 100px, and it's not going to grow to fill the space, but it is going to shrink beyond the flex-basis
+
+size until you reach that minimum width.
+
+And because that's not set in this case, then it's just going to look at the minimum width of the content.
+
+So this is actually the default setting of Flexbox items.
+
+It's going to not grow, but it is going to shrink.
+
+Even if you didn't set these two properties, you would see this behavior by default.
+
+Now, the next example I've got is where flex-grow and flex-shrink are both on,
+
+and as you can imagine, what's going to happen is it's going to try and take up as much width as possible,
+
+and then when you shrink it, it's going to try and be as small as possible.
+
+So in this case, the flex-basis is pretty much completely ignored because flex-grow and flex-shrink
+
+are both on.
+
+It's actually going to grow to the max-width,
+
+and it's going to shrink to the minimum width.
+
+And if these two are not set, then it's going to infer that from the content of those items.
+
+Now, the default for flex-basis is actually auto and auto is a little bit of a complex one because
+
+it's going to look at the amount of content in each of the items.
+
+So it's going to give more flex-basis to the items with more content.
+
+For example, this last item with the most words and it's going to give less width to the ones that
+
+have smaller content.
+
+If you don't want that and instead you want everything to be equal width, then you simply switch it
+
+off by giving it a 0.
+
+There's actually a shorthand way of writing this without having to write out flex-basis, flex-grow,
+
+flex-shrink,
+
+and we've seen this style of shorthand before in CSS.
+
+The first value is the grow.
+
+The second value is the shrink.
+
+And the third value is the basis.
+
+So it's exactly the same, but it's obviously a lot quicker to write.
+
+And because this particular set is so commonly used, you can actually shorten this even further by
+
+simply just writing flex: 1.
+
+And that means a grow of 1, a shrink of 1 and a basis of 0 to keep everything equal.
+
+We've actually seen this before where we created containers with different size ratios; a red item
+
+that is half the size of the blue container, which has a flex of 2, and the blue one is two-thirds
+
+the size of the one with a flex of 3,
+
+and essentially what we're doing here is we're setting the grow to 1 and the shrink to 1.
+
+And in this case, it's a grow of 2 and a shrink of 2.
+
+In this way, we're able to set a ratio for how our elements will respond responsively.
+
+So no matter if you grow or shrink, it's going to try and keep these ratios and it's going to try and
+
+respect that even while it's being responsibly resized.
+
+That was quite a lot of information on how Flexbox sizing works.
+
+Let's go ahead and try an exercise to see if you can apply this in code and see if you've understood
+
+a lot of the principles that we talked about in this lesson.
+
+So head over to this URL where I've prepared an exercise for you.
+
+You can simply just write your code inside this text box and then when you click "Apply CSS," the goal
+
+is that your CSS rules will allow this blue Flexbox to behave the same way as this green one.
+
+So I want you to resize the window and see how the green box behaves.
+
+Does it grow?
+
+Does it shrink?
+
+What's the size that it wants to be?
+
+And I want you to use what you see on screen.
+
+So notice how I've told you what each of these should be in terms of their ideal width,
+
+and I want you to write your code down here, whatever it is that you need.
+
+Maybe you don't need to write any code under some of the brackets,
+
+maybe you need to write more code,
+
+but essentially once you click, "Apply CSS," the blue boxes which you control with your code should have
+
+the same behavior as the green ones.
+
+Pause the video now,
+
+head over here and give that exercise a go.
+
+All right.
+
+So the first thing that you might notice is something that's actually completely unrelated to sizing,
+
+which is the fact that each of our items are distributed along this container and that if you remember
+
+from a previous lesson,
+
+so a little bit of revision here is done using justify-content.
+
+And this particular style of justify content is actually space between.
+
+So if I click, "Apply CSS," you can see it's now spaced between.
+
+Now the next thing we need to change is the fact that each of these items actually should have different
+
+ideal widths.
+
+And we know we can set that by using the flex-basis.
+
+Let's go ahead and set the flex-basis for each of our items based on those widths.
+
+So it's 200px for the Item 1, 200px for Item 2 and 400px for Item 3.
+
+Let's apply our CSS and you can see they're now equal width and it looks like everything's the same,
+
+we've achieved our goal
+
+but remember I said you have to resize things and notice how they don't behave the same at all.
+
+Now when we resize this, you'll notice that Item 1, actually shrinks in our green Flexbox,
+
+but Item 2 and 3 don't shrink at all.
+
+So we can tell that 2 and 3 probably have shrink disabled and item 1 is left to shrink. Now by
+
+default,
+
+I mentioned that all items in a Flexbox are allowed to shrink and you can see our blue 1, 2 and
+
+3, all in fact, do that shrink to fit the space.
+
+Now, that is probably a more useful behavior in reality,
+
+but in this case, because we're trying to do an exercise, let's go ahead and match it.
+
+So let's turn the flex-shrink off on Item 2 by setting it to 0 and let's do the same for Item 3.
+
+Let's apply our CSS and see it now behaves exactly the same.
+
+So that is the solution to this simple exercise.
+
+But even though it's simple, it's actually quite difficult to work out exactly what needs to be changed.
+
+And hopefully through doing this exercise, you've had to review some content from before, such as
+
+justify-content, and also you've had to think hard about how flex-shrink, flex-basis and all of these
+
+different things we learned in today's lesson actually works.
+
+Have a play around with the code.
+
+Try writing some stuff yourself and once you're ready, go ahead to the next lesson where we have our
+
+final section project.
