@@ -9,6 +9,18 @@ Running collection of reference/useful links gathered while working through the 
 - [Flex Layout demo playground (appbrewery)](https://appbrewery.github.io/flex-layout/) — play with order/wrap/justify/align live, from `flexlayout_transcript.txt`
 - [Flexbox Froggy](https://appbrewery.github.io/flexboxfroggy/) — interactive game to practice flex properties, from `flexlayout_transcript.txt`
 
+### Flex Sizing (grow / shrink / basis) — ⚠️ weak area, keep these handy
+- [MDN: `flex` shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/flex) — the authoritative list of what `flex: 1` / `auto` / `none` / `initial` expand to
+- [MDN: `flex-basis`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis) · [`flex-grow`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow) · [`flex-shrink`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink)
+- [MDN: Controlling ratios of flex items along the main axis](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Controlling_ratios_of_flex_items_along_the_main_axis) — the single best page on grow/shrink/basis
+- [MDN: `min-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width) — note the `auto` value, the hidden shrink floor on flex items
+- [Josh Comeau — An Interactive Guide to Flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/) — best visual explanation of the grow/shrink algorithm anywhere
+- [CSS-Tricks — Flexbox and Truncated Text](https://css-tricks.com/flexbox-truncated-text/) — the `min-width: 0` bug, written up properly
+- [Flexbox Defense](http://www.flexboxdefense.com/) — tower-defense game, drills `justify-content`/`align-items` under pressure
+- [What The Flexbox?! (Wes Bos, free)](https://flexbox.io/) — 20 short videos, good second pass
+- [Can I Use — Flexbox](https://caniuse.com/flexbox) — browser support check
+- Local cheat sheet poster: `course_content/FLEXBOX/css-flexbox-poster.png` · course formula slide: `course_content/FLEXBOX/flexbox_sizing_formula.png`
+
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
 - [MDN: `<img>` element (height attribute)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height) — from `EX 4.3 HTML Portfolio Project`

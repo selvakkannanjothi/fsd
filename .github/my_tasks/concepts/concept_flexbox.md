@@ -77,6 +77,34 @@ care what tag each child happens to be.
 
 ---
 
+---
+
+## 3. Main axis vs cross axis — the mental model everything else hangs off
+
+```text
+flex-direction: row (DEFAULT)          flex-direction: column
+  main axis  ──────────────►             main axis  │
+  cross axis      │                                 ▼
+                  ▼                      cross axis ──────────►
+```
+
+- **Main axis** = the direction items flow in. **Cross axis** = perpendicular to it. Both flip the
+  moment you change `flex-direction`.
+- `flex-basis` follows the **main axis**: it's the **width** in a `row`, the **height** in a `column`.
+- `flex-basis` is a **child** property — it goes on the items, not on the container.
+- Handy extras from the exercises: `list-style: none` kills the bullets when you flex a `<ul>` into a
+  nav bar.
+
+### 🗣️ Selva-speak (the versions that actually stick)
+
+- **"Rules meera padum."** The second a parent becomes `display: flex`, the children's own
+  `block` / `inline` / `list-item` rules are *overruled and discarded*. Flexbox is a separate system —
+  don't reason about it with block/inline instincts.
+- **Normal `flex` = 100% block**, takes the full width. **`inline-flex` = inline-block**, hugs its content.
+- **Float is for floating images around text — NOT for layouts.** That's the one job it was designed for.
+
+---
+
 ## Key takeaways
 
 - Flexbox = declare `display: flex` (or `inline-flex`) on a **container**; its children get laid out by

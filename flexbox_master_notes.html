@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flexbox — Master Revision Notes</title>
+<style>
+  /* ============================================================
+     PRINT SETUP
+     ============================================================ */
+  @page { size: A4; margin: 11mm 10mm 12mm 10mm; }
+
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  :root {
+    --ink:      #111827;
+    --muted:    #4b5563;
+    --line:     #d1d5db;
+    --blue:     #1d4ed8;
+    --blue-bg:  #eff6ff;
+    --red:      #b91c1c;
+    --red-bg:   #fef2f2;
+    --green:    #047857;
+    --green-bg: #ecfdf5;
+    --amber:    #b45309;
+    --amber-bg: #fffbeb;
+    --purple:   #6d28d9;
+    --demo-bg:  #ede9fe;
+    --demo-it:  #f59e0b;
+    --code-bg:  #f3f4f6;
+  }
+
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.2pt;
+    line-height: 1.36;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  code, pre, .mono { font-family: "Cascadia Mono", Consolas, "Courier New", monospace; }
+  code { background: var(--code-bg); padding: 0.5px 3px; border-radius: 3px; font-size: 0.93em; }
+  pre  { background: var(--code-bg); border-left: 3px solid var(--blue); padding: 5px 8px;
+         margin: 4px 0; border-radius: 0 4px 4px 0; font-size: 8.3pt; line-height: 1.36;
+         white-space: pre; overflow: hidden; }
+  pre .c { color: #6b7280; }        /* comment */
+  pre .k { color: var(--blue); }    /* property */
+  pre .v { color: var(--purple); }  /* value */
+
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .avoid { break-inside: avoid; page-break-inside: avoid; }
+
+  /* ---------- Headings ---------- */
+  h1 { font-size: 20pt; margin: 0 0 2px; letter-spacing: -0.5px; }
+  h1 .sub { display: block; font-size: 9.2pt; font-weight: 400; color: var(--muted);
+            letter-spacing: 0; margin-top: 2px; }
+  h2 { font-size: 12pt; margin: 9px 0 4px; padding-bottom: 2px;
+       border-bottom: 2px solid var(--ink); }
+  h2 .n { display: inline-block; background: var(--ink); color: #fff; border-radius: 3px;
+          padding: 0 6px; margin-right: 6px; font-size: 9.6pt; }
+  h3 { font-size: 9.8pt; margin: 6px 0 3px; color: var(--blue); }
+  h3.plain { color: var(--ink); }
+
+  .hdr-rule { height: 4px; background: linear-gradient(90deg,#1d4ed8 0 25%,#6d28d9 25% 50%,#b45309 50% 75%,#047857 75% 100%);
+              margin: 6px 0 7px; border-radius: 2px; }
+
+  /* ---------- Tables ---------- */
+  table { border-collapse: collapse; width: 100%; margin: 4px 0; font-size: 8.5pt; }
+  th, td { border: 1px solid var(--line); padding: 2.6px 5px; text-align: left; vertical-align: top; }
+  th { background: #f9fafb; font-weight: 700; }
+  td.c, th.c { text-align: center; }
+  tbody tr:nth-child(even) td { background: #fcfcfd; }
+
+  /* ---------- Callouts ---------- */
+  .box { border: 1px solid var(--line); border-left-width: 4px; border-radius: 0 5px 5px 0;
+         padding: 5px 9px; margin: 5px 0; background: #fff; }
+  .box .t { font-weight: 700; display: block; margin-bottom: 1px; font-size: 9.1pt; }
+  .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+  .box p:first-of-type { margin-top: 0; }
+  .b-key  { border-color: var(--blue);   background: var(--blue-bg);  }
+  .b-key .t  { color: var(--blue); }
+  .b-warn { border-color: var(--red);    background: var(--red-bg);   }
+  .b-warn .t { color: var(--red); }
+  .b-tip  { border-color: var(--green);  background: var(--green-bg); }
+  .b-tip .t  { color: var(--green); }
+  .b-you  { border-color: var(--amber);  background: var(--amber-bg); }
+  .b-you .t  { color: var(--amber); }
+
+  ul, ol { margin: 3px 0 4px; padding-left: 16px; }
+  li { margin: 0.5px 0; }
+  p { margin: 3px 0; }
+
+  .cols2 { display: flex; gap: 11px; }
+  .cols2 > * { flex: 1; min-width: 0; }
+  .cols3 { display: flex; gap: 9px; }
+  .cols3 > * { flex: 1; min-width: 0; }
+
+  /* ---------- Live flexbox demos ---------- */
+  .demo { background: var(--demo-bg); border-radius: 4px; padding: 4px; display: flex; }
+  .demo > i { background: var(--demo-it); border-radius: 3px; height: 17px; font-style: normal;
+              color: #422006; font-size: 7pt; display: flex; align-items: center;
+              justify-content: center; font-weight: 700; }
+  .demo > i.w1 { width: 30px; } .demo > i.w2 { width: 46px; } .demo > i.w3 { width: 62px; }
+  .demolabel { font-family: Consolas, monospace; font-size: 7.6pt; color: var(--muted);
+               margin: 3px 0 1px; font-weight: 700; }
+
+  .bar { position: relative; height: 20px; background: var(--demo-it); border-radius: 3px;
+         color: #422006; font-size: 7.5pt; font-weight: 700; display: flex; align-items: center;
+         justify-content: center; }
+  .track { display: flex; gap: 3px; background: var(--demo-bg); padding: 3px; border-radius: 4px; }
+
+  .arrowrow { display: flex; align-items: center; gap: 4px; font-size: 7.8pt; font-weight: 700;
+              color: var(--muted); font-family: Consolas, monospace; }
+
+  .ladder { display: flex; align-items: stretch; gap: 0; margin: 7px 0; text-align: center;
+            font-size: 8.4pt; }
+  .ladder > div { flex: 1; padding: 6px 3px; border: 1px solid var(--line); border-right: 0; }
+  .ladder > div:last-child { border-right: 1px solid var(--line); }
+  .ladder .lv { display: block; font-weight: 700; font-family: Consolas, monospace; }
+  .ladder .ln { display: block; font-size: 7.2pt; color: var(--muted); margin-top: 2px; }
+  .l1 { background: #f9fafb; } .l2 { background: #fef3c7; }
+  .l3 { background: #fed7aa; } .l4 { background: #fecaca; }
+
+  .kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px;
+         border-radius: 3px; padding: 0 4px; background: #fff; font-family: Consolas, monospace;
+         font-size: 8pt; }
+
+  .answer { color: var(--green); font-weight: 700; }
+  .wrong  { color: var(--red); text-decoration: line-through; }
+  .foot { margin-top: 7px; padding-top: 4px; border-top: 1px solid var(--line);
+          font-size: 7.6pt; color: var(--muted); display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ PAGE 1 ══════════════════════════════ -->
+<div class="page">
+
+  <h1>CSS Flexbox — Master Revision Notes
+    <span class="sub">Selva's hard copy · Lessons 54–57 (Display Flex · Flex Direction · Flex Layout · <b>Flex Sizing</b>)
+    · full notes in <code>.github/my_tasks/concepts/</code></span>
+  </h1>
+  <div class="hdr-rule"></div>
+
+  <div class="box b-key avoid">
+    <span class="t">⚡ The 8 lines that answer 90% of flexbox questions</span>
+    <table style="margin:2px 0 0">
+      <tr><td style="width:26px" class="c"><b>1</b></td><td><code>display: flex</code> goes on the <b>CONTAINER</b>. Its children's own <code>block</code>/<code>inline</code> rules are thrown away.</td></tr>
+      <tr><td class="c"><b>2</b></td><td><b>Main axis</b> = the direction items flow. <b>Cross axis</b> = perpendicular. Both flip with <code>flex-direction</code>.</td></tr>
+      <tr><td class="c"><b>3</b></td><td><code>justify-content</code> → <b>main</b> axis. <code>align-items</code> → <b>cross</b> axis. <code>align-content</code> → the <b>wrap lines</b>.</td></tr>
+      <tr><td class="c"><b>4</b></td><td>Sizing priority: <code>content&nbsp;width</code> &lt; <code>width</code> &lt; <code>flex-basis</code> &lt; <code>min/max-width</code>. Clamping is <b>last</b>.</td></tr>
+      <tr><td class="c"><b>5</b></td><td><code>flex: &lt;grow&gt; &lt;shrink&gt; &lt;basis&gt;</code> — "can I get bigger / can I get smaller / where do I start".</td></tr>
+      <tr><td class="c"><b>6</b></td><td>Default = <code>flex: 0 1 auto</code> → <b>shrink YES, grow NO.</b></td></tr>
+      <tr><td class="c"><b>7</b></td><td><code>flex: 1</code> = <code>1 1 0%</code> = <b>equal columns.</b> The one you'll type most.</td></tr>
+      <tr><td class="c"><b>8</b></td><td>grow/shrink are <b>RATIOS</b>, not pixels. <code>1 : 2 : 3</code> in 600px → <b>100 : 200 : 300</b>.</td></tr>
+    </table>
+  </div>
+
+  <h2><span class="n">A</span>The property map — parent or child?</h2>
+  <p>Getting this wrong is the most common beginner mistake. Learn the two columns, not 12 properties.</p>
+
+  <div class="cols2">
+    <div class="avoid">
+      <h3>🟪 CONTAINER (parent) properties</h3>
+      <table>
+        <tr><th>Property</th><th>Job</th></tr>
+        <tr><td><code>display</code></td><td><code>flex</code> / <code>inline-flex</code> — switch it on</td></tr>
+        <tr><td><code>flex-direction</code></td><td><code>row</code>* / <code>row-reverse</code> / <code>column</code> / <code>column-reverse</code></td></tr>
+        <tr><td><code>flex-wrap</code></td><td><code>nowrap</code>* / <code>wrap</code> / <code>wrap-reverse</code></td></tr>
+        <tr><td><code>flex-flow</code></td><td>shorthand: <code>direction wrap</code></td></tr>
+        <tr><td><code>justify-content</code></td><td>space along the <b>main</b> axis</td></tr>
+        <tr><td><code>align-items</code></td><td>position along the <b>cross</b> axis</td></tr>
+        <tr><td><code>align-content</code></td><td>space between <b>wrap lines</b></td></tr>
+        <tr><td><code>gap</code></td><td>gutter between items (<code>row-gap</code>/<code>column-gap</code>)</td></tr>
+      </table>
+    </div>
+    <div class="avoid">
+      <h3>🟧 ITEM (child) properties</h3>
+      <table>
+        <tr><th>Property</th><th>Job</th></tr>
+        <tr><td><code>order</code></td><td>visual position. Default <code>0</code>, low → high</td></tr>
+        <tr><td><code>flex-grow</code></td><td>share of <b>spare</b> space. Default <code>0</code></td></tr>
+        <tr><td><code>flex-shrink</code></td><td>share of the <b>overflow</b>. Default <code>1</code></td></tr>
+        <tr><td><code>flex-basis</code></td><td>starting size on the main axis. Default <code>auto</code></td></tr>
+        <tr><td><code>flex</code></td><td>shorthand for the three above</td></tr>
+        <tr><td><code>align-self</code></td><td>override <code>align-items</code> for <b>one</b> item</td></tr>
+        <tr><td><code>margin: auto</code></td><td>eats free space → pushes items apart</td></tr>
+      </table>
+      <p style="font-size:8pt;color:var(--muted);margin-top:3px">* = default value.
+      There is no <code>justify-self</code> / <code>justify-items</code> in flexbox — use <code>margin: auto</code>.</p>
+    </div>
+  </div>
+
+  <h2><span class="n">B</span>Main axis vs cross axis</h2>
+  <div class="cols2">
+    <div class="avoid">
+      <table>
+        <tr><th></th><th class="c"><code>flex-direction: row</code> (default)</th><th class="c"><code>flex-direction: column</code></th></tr>
+        <tr><td><b>Main axis</b></td><td class="c">horizontal →</td><td class="c">vertical ↓</td></tr>
+        <tr><td><b>Cross axis</b></td><td class="c">vertical ↓</td><td class="c">horizontal →</td></tr>
+        <tr><td><code>justify-content</code></td><td class="c">left ⇄ right</td><td class="c">top ⇅ bottom</td></tr>
+        <tr><td><code>align-items</code></td><td class="c">top ⇅ bottom</td><td class="c">left ⇄ right</td></tr>
+        <tr><td><code>flex-basis</code> sets</td><td class="c"><b>width</b></td><td class="c"><b>height</b></td></tr>
+        <tr><td>untouched</td><td class="c"><code>height</code> still normal</td><td class="c"><code>width</code> still normal</td></tr>
+      </table>
+    </div>
+    <div class="avoid">
+      <div class="box b-key" style="margin-top:6px">
+        <span class="t">🔑 Why this matters</span>
+        Every alignment property is defined <b>relative to the axes</b>, not to "left/right/top/bottom".
+        Change <code>flex-direction</code> and <code>justify-content: center</code> silently switches from
+        horizontal centering to <b>vertical</b> centering. Nothing else in your CSS changed.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 1 of 8</span><span>Property map &amp; axes</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 2 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">C</span>Turning it on — <code>flex</code> vs <code>inline-flex</code></h2>
+  <div class="cols2">
+    <div class="avoid">
+<pre><span class="k">.container</span> {
+  <span class="k">display</span>: <span class="v">flex</span>;      <span class="c">/* or inline-flex */</span>
+  <span class="k">gap</span>: <span class="v">10px</span>;          <span class="c">/* or 1rem — scales */</span>
+}</pre>
+      <table>
+        <tr><th></th><th><code>flex</code></th><th><code>inline-flex</code></th></tr>
+        <tr><td>Container box</td><td><b>full width</b> (like <code>block</code>)</td><td><b>hugs content</b> (like <code>inline-block</code>)</td></tr>
+        <tr><td>Line flow</td><td>own line</td><td>sits inline with text</td></tr>
+        <tr><td>Children</td><td colspan="2" class="c">identical either way</td></tr>
+      </table>
+    </div>
+    <div class="avoid">
+      <div class="box b-you">
+        <span class="t">🗣️ Your words — keep them</span>
+        <ul style="margin-top:2px">
+          <li><b>"Rules meera padum."</b> The second a parent goes <code>display: flex</code>, the children's own
+              display rules are overruled and discarded. Flexbox is a <b>separate system</b> — stop reasoning
+              about it with block/inline instincts.</li>
+          <li>Normal <code>flex</code> = <b>100% block</b>. <code>inline-flex</code> = <b>inline-block</b>.</li>
+          <li><b>Use <code>float</code> only for floating images around text — NOT for layouts.</b></li>
+          <li><code>list-style: none</code> kills the bullets when you flex a <code>&lt;ul&gt;</code> into a nav bar.</li>
+        </ul>
+      </div>
+      <div class="box b-tip">
+        <span class="t">✅ Targeting the items</span>
+        <code>.c&nbsp;div</code> = any depth · <code>.c&nbsp;&gt;&nbsp;div</code> = direct child divs ·
+        <b><code>.c&nbsp;&gt;&nbsp;*</code> = every direct child, any tag</b> ← safest default.
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">D</span>Layout — <code>order</code>, <code>flex-wrap</code>, <code>justify-content</code></h2>
+
+  <h3>1 · <code>order</code> — rearrange without touching the HTML <span style="color:var(--muted);font-weight:400">(child property)</span></h3>
+  <div class="cols2">
+    <div>
+      <ul>
+        <li>Every item defaults to <code>order: 0</code>. Flexbox sorts <b>lowest → highest</b>.</li>
+        <li>Ties break by <b>HTML source order</b>.</li>
+        <li>Negative values are allowed — <code>order: -1</code> jumps to the front.</li>
+        <li><b>Purely visual.</b> The DOM never moves, so screen readers and <span class="kbd">Tab</span>
+            order still follow the HTML. Don't use it to fix real content order.</li>
+      </ul>
+    </div>
+    <div>
+<pre><span class="k">.rainbow</span> &gt; <span class="k">.green</span> { <span class="k">order</span>: <span class="v">1</span>; } <span class="c">/* rest stay 0 */</span></pre>
+      <div class="demolabel">order: default 0 0 0 0 &nbsp;→&nbsp; then .green { order: 1 }</div>
+      <div class="demo" style="gap:3px"><i class="w1">R</i><i class="w1" style="background:#22c55e;color:#fff">G</i><i class="w1">Y</i><i class="w1">B</i></div>
+      <div class="demo" style="gap:3px;margin-top:3px"><i class="w1">R</i><i class="w1">Y</i><i class="w1">B</i><i class="w1" style="background:#22c55e;color:#fff">G</i></div>
+    </div>
+  </div>
+
+  <h3>2 · <code>flex-wrap</code> — what happens when you run out of room <span style="color:var(--muted);font-weight:400">(container property)</span></h3>
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th>Value</th><th>Behaviour</th></tr>
+        <tr><td><code>nowrap</code> <b>(default)</b></td><td>Items squeeze to fit one line; once they can't squeeze more, they <b>overflow</b> off the page</td></tr>
+        <tr><td><code>wrap</code></td><td>Items that don't fit drop to a <b>new line</b>: top-left → bottom-right</td></tr>
+        <tr><td><code>wrap-reverse</code></td><td>Same, but new lines stack the <b>other way</b>: bottom-right → top-left</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="box b-you" style="margin-top:0">
+        <span class="t">🗣️ Your words</span>
+        <b><code>flex-wrap</code> = word wrap in WordPad.</b> Line's full → drop to the next one.
+        It is a <b>CONTAINER</b> property — never on the child.
+        <p style="margin-bottom:0"><b>Watch the spelling:</b> <code>nowrap</code> has <b>no hyphen</b>.
+        <code>no-wrap</code> is silently invalid — the browser ignores it and you get the default anyway.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>3 · <code>justify-content</code> — spacing along the MAIN axis <span style="color:var(--muted);font-weight:400">(container property · needs leftover space to show up)</span></h3>
+
+  <div class="cols2">
+    <div>
+      <div class="demolabel">flex-start &nbsp;— packed at the start (DEFAULT)</div>
+      <div class="demo" style="justify-content:flex-start;gap:3px"><i class="w1">A</i><i class="w1">B</i><i class="w1">C</i></div>
+      <div class="demolabel">flex-end &nbsp;— packed at the end</div>
+      <div class="demo" style="justify-content:flex-end;gap:3px"><i class="w1">A</i><i class="w1">B</i><i class="w1">C</i></div>
+      <div class="demolabel">center &nbsp;— packed as a group, equal space each side</div>
+      <div class="demo" style="justify-content:center;gap:3px"><i class="w1">A</i><i class="w1">B</i><i class="w1">C</i></div>
+    </div>
+    <div>
+      <div class="demolabel">space-between &nbsp;— edges touch, NO space at the ends</div>
+      <div class="demo" style="justify-content:space-between"><i class="w1">A</i><i class="w1">B</i><i class="w1">C</i></div>
+      <div class="demolabel">space-around &nbsp;— equal space BOTH SIDES of each item (edges look half)</div>
+      <div class="demo" style="justify-content:space-around"><i class="w1">A</i><i class="w1">B</i><i class="w1">C</i></div>
+      <div class="demolabel">space-evenly &nbsp;— every gap identical, edges included</div>
+      <div class="demo" style="justify-content:space-evenly"><i class="w1">A</i><i class="w1">B</i><i class="w1">C</i></div>
+    </div>
+  </div>
+
+<pre><span class="c">flex-start:     [A][B][C]____________        space-between:  [A]______[B]______[C]</span>
+<span class="c">flex-end:       ____________[A][B][C]        space-around:   __[A]____[B]____[C]__</span>
+<span class="c">center:         _____[A][B][C]_____          space-evenly:   ___[A]___[B]___[C]___</span></pre>
+
+  <div class="box b-key avoid">
+    <span class="t">🔑 <code>space-around</code> vs <code>space-evenly</code> — the exam question</span>
+    <code>space-around</code> gives every item an equal margin on <b>both of its own sides</b>. Between two
+    items those two margins <b>add up</b>, so the middle gaps look <b>double</b> the edge gaps.
+    <code>space-evenly</code> ignores that and just makes <b>every gap identical</b>.
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 2 of 8</span><span>display:flex · order · flex-wrap · justify-content</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 3 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">E</span>Layout — <code>align-items</code>, <code>align-self</code>, <code>align-content</code></h2>
+
+  <h3>4 · <code>align-items</code> — position along the CROSS axis <span style="color:var(--muted);font-weight:400">(container property)</span></h3>
+  <p style="margin-top:0">In a <code>row</code> container the cross axis is <b>vertical</b>. It has nothing to work with until the
+  container is <b>taller than its items</b> — give it a <code>height</code> (e.g. <code>70vh</code>) or you'll swear it's broken.</p>
+
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th>Value</th><th>Effect (row container)</th></tr>
+        <tr><td><code>stretch</code> <b>(default)</b></td><td>Items stretch to fill the container's height — <i>unless</i> they have a fixed height</td></tr>
+        <tr><td><code>flex-start</code></td><td>Aligned to the <b>top</b></td></tr>
+        <tr><td><code>flex-end</code></td><td>Aligned to the <b>bottom</b></td></tr>
+        <tr><td><code>center</code></td><td>Centred vertically</td></tr>
+        <tr><td><code>baseline</code></td><td>Items' <b>text baselines</b> line up, whatever the box sizes</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="cols3" style="gap:6px">
+        <div>
+          <div class="demolabel">flex-start</div>
+          <div class="demo" style="align-items:flex-start;height:52px;gap:3px">
+            <i class="w1" style="height:14px">A</i><i class="w1" style="height:26px">B</i><i class="w1" style="height:20px">C</i></div>
+        </div>
+        <div>
+          <div class="demolabel">center</div>
+          <div class="demo" style="align-items:center;height:52px;gap:3px">
+            <i class="w1" style="height:14px">A</i><i class="w1" style="height:26px">B</i><i class="w1" style="height:20px">C</i></div>
+        </div>
+        <div>
+          <div class="demolabel">stretch (default)</div>
+          <div class="demo" style="align-items:stretch;height:52px;gap:3px">
+            <i class="w1" style="height:auto">A</i><i class="w1" style="height:auto">B</i><i class="w1" style="height:auto">C</i></div>
+        </div>
+      </div>
+      <div class="demolabel">baseline — different font sizes, one shared text line</div>
+      <div class="demo" style="align-items:baseline;height:36px;gap:3px;padding:6px">
+        <i class="w2" style="height:auto;font-size:7pt;padding:2px 0">text</i>
+        <i class="w2" style="height:auto;font-size:12pt;padding:2px 0">text</i>
+        <i class="w2" style="height:auto;font-size:9pt;padding:2px 0">text</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="box b-warn avoid">
+    <span class="t">⚠️ <code>flex-start</code> vs <code>baseline</code> — the difference that catches people</span>
+    <code>flex-start</code> lines up the <b>top edge of every box</b>, ignoring what's inside.
+    <code>baseline</code> lines up the <b>invisible line the text sits on</b>, ignoring the box edges.
+    They look identical <b>only</b> when every item shares the same font-size and padding — which is exactly
+    why the difference stays hidden until it bites you on a real design.
+  </div>
+
+  <h3>5 · <code>align-self</code> — one item opts out <span style="color:var(--muted);font-weight:400">(child property)</span></h3>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.container</span> { <span class="k">display</span>: <span class="v">flex</span>; <span class="k">align-items</span>: <span class="v">center</span>; }
+<span class="k">.container</span> &gt; <span class="k">.special</span> { <span class="k">align-self</span>: <span class="v">flex-start</span>; }
+<span class="c">/* only .special opts out of the centring */</span></pre>
+    </div>
+    <div>
+      <p style="margin-top:0">Same five values as <code>align-items</code>, plus <code>auto</code> (= "just follow the container", the default).
+      There is <b>no <code>justify-self</code></b> in flexbox — for that job use <code>margin-left: auto</code>.</p>
+    </div>
+  </div>
+
+  <h3>6 · <code>align-content</code> — spacing between WRAP LINES <span style="color:var(--muted);font-weight:400">(container property)</span></h3>
+  <div class="cols2">
+    <div>
+      <ul style="margin-top:0">
+        <li>Needs <code>flex-wrap: wrap</code> <b>AND</b> 2+ actual lines. On a single line it does
+            <b>absolutely nothing</b> — this is the #1 reason it "doesn't work".</li>
+        <li>Values: <code>flex-start</code> · <code>flex-end</code> · <code>center</code> ·
+            <code>space-between</code> · <code>space-around</code> · <code>space-evenly</code> · <code>stretch</code>(default).</li>
+      </ul>
+      <div class="box b-key" style="margin-top:5px">
+        <span class="t">🔑 The one-sentence difference</span>
+        <b><code>align-items</code> moves items INSIDE a line. <code>align-content</code> moves the LINES THEMSELVES.</b>
+        <br>One line → only <code>align-items</code> can do anything. Many lines → both can.
+      </div>
+    </div>
+    <div>
+      <div class="demolabel">align-content: space-between (2 wrap lines)</div>
+      <div class="demo" style="flex-wrap:wrap;align-content:space-between;height:58px;gap:3px">
+        <i class="w2">A</i><i class="w2">B</i><i class="w2">C</i><i class="w2">D</i><i class="w2">E</i></div>
+      <div class="demolabel">align-content: center</div>
+      <div class="demo" style="flex-wrap:wrap;align-content:center;height:58px;gap:3px">
+        <i class="w2">A</i><i class="w2">B</i><i class="w2">C</i><i class="w2">D</i><i class="w2">E</i></div>
+    </div>
+  </div>
+
+  <h3 class="plain">🧭 Alignment decision tree — read it top to bottom</h3>
+  <table class="avoid">
+    <tr><th style="width:44%">I want to…</th><th>Use</th><th class="c">Goes on</th></tr>
+    <tr><td>space items left↔right (in a row)</td><td><code>justify-content</code></td><td class="c">parent</td></tr>
+    <tr><td>move items up↕down (in a row)</td><td><code>align-items</code></td><td class="c">parent</td></tr>
+    <tr><td>move just <b>one</b> item up/down</td><td><code>align-self</code></td><td class="c">child</td></tr>
+    <tr><td>space the wrapped <b>rows</b> apart</td><td><code>align-content</code> (+ <code>flex-wrap: wrap</code>)</td><td class="c">parent</td></tr>
+    <tr><td>push one item to the far end</td><td><code>margin-left: auto</code></td><td class="c">child</td></tr>
+    <tr><td>perfectly centre something</td><td><code>justify-content: center</code> + <code>align-items: center</code></td><td class="c">parent</td></tr>
+  </table>
+
+  <div class="foot"><span>Flexbox Master Notes · page 3 of 8</span><span>align-items · align-self · align-content</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 4 ══════════════════════════════ -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">⚠️ FLEX SIZING — the weak area
+    <span class="sub">Slow down here. Everything below is one lesson: <code>flex-grow</code> / <code>flex-shrink</code> / <code>flex-basis</code>.</span></h1>
+  <div class="hdr-rule"></div>
+
+  <h2 style="margin-top:6px"><span class="n">F</span>The priority ladder — who overrides who</h2>
+  <p style="margin-top:0">The course's own formula slide, left = weakest, right = strongest:</p>
+
+  <div class="ladder avoid">
+    <div class="l1"><span class="lv">Content width</span><span class="ln">the fallback — as wide as the text/image needs</span></div>
+    <div class="l2"><span class="lv">width</span><span class="ln">normal CSS size — <b>ignored on the main axis</b> once a basis exists</span></div>
+    <div class="l3"><span class="lv">flex-basis</span><span class="ln">the <b>request</b> — the size the item asks for</span></div>
+    <div class="l4"><span class="lv">min-width / max-width</span><span class="ln">the <b>law</b> — hard floor / hard ceiling, applied LAST</span></div>
+  </div>
+  <div class="arrowrow" style="justify-content:center;margin:-2px 0 8px">
+    <span>weakest</span><span style="flex:1;height:2px;background:linear-gradient(90deg,#d1d5db,#b91c1c);border-radius:1px"></span><span>strongest — wins</span>
+  </div>
+
+  <div class="box b-you avoid">
+    <span class="t">🗣️ Say it your way</span>
+    The item <b>asks</b> (<code>flex-basis</code>) · the <b>law answers</b> (<code>min</code>/<code>max-width</code>) ·
+    <code>width</code> only speaks when <code>flex-basis</code> stays silent · and <b>content is the last man standing</b>.
+  </div>
+
+  <h2><span class="n">G</span><code>flex-basis</code> vs <code>width</code> — basis wins</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.item</span> {
+  <span class="k">width</span>: <span class="v">300px</span>;       <span class="c">/* ❌ ignored on main axis */</span>
+  <span class="k">flex-basis</span>: <span class="v">100px</span>;  <span class="c">/* ✅ the size used */</span>
+}</pre>
+      <ul>
+        <li>If <code>flex-basis</code> is set, <b><code>width</code> is completely ignored.</b></li>
+        <li>If the basis <b>can't be honoured</b> (no room), the item falls back down the ladder to its
+            <b>minimum content width</b> and stops there.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="box b-warn" style="margin-top:0">
+        <span class="t">⚠️ "Main axis only" is the catch</span>
+        <table style="margin:3px 0 0">
+          <tr><th>Container</th><th><code>flex-basis</code> controls</th><th>still normal</th></tr>
+          <tr><td><code>row</code> (default)</td><td><b>width</b></td><td><code>height</code></td></tr>
+          <tr><td><code>column</code></td><td><b>height</b></td><td><code>width</code></td></tr>
+        </table>
+        <p style="margin-bottom:0">In a column container, <code>width: 300px</code> is <b>not</b> ignored —
+        <code>flex-basis</code> never fights the cross axis.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">H</span><code>flex-basis</code> vs <code>min-width</code> / <code>max-width</code> — 4 scenarios, 1 rule</h2>
+  <p style="margin-top:0">The browser sizes the item <b>first</b> (basis → grow/shrink), <b>then</b> clamps it. Clamping is the last step:</p>
+<pre>final size = <span class="k">clamp</span>( min-width , size-from-basis/grow/shrink , max-width )</pre>
+
+  <table class="avoid">
+    <tr><th class="c" style="width:34px">#</th><th>Setup</th><th>Does the basis respect the limit?</th><th class="c">Final width</th><th>Why</th></tr>
+    <tr><td class="c"><b>S1</b></td><td><code>flex-basis: 200px</code> + <code>max-width: 100px</code></td><td>❌ breaks the <b>ceiling</b></td><td class="c answer">100px</td><td>basis overruled, clamped <b>down</b></td></tr>
+    <tr><td class="c"><b>S2</b></td><td><code>flex-basis: 50px</code> + <code>max-width: 200px</code></td><td>✅ under the ceiling</td><td class="c answer">50px</td><td>ceiling never used</td></tr>
+    <tr><td class="c"><b>S3</b></td><td><code>flex-basis: 200px</code> + <code>min-width: 300px</code></td><td>❌ breaks the <b>floor</b></td><td class="c answer">300px</td><td>basis overruled, clamped <b>up</b></td></tr>
+    <tr><td class="c"><b>S4</b></td><td><code>flex-basis: 400px</code> + <code>min-width: 300px</code></td><td>✅ above the floor</td><td class="c answer">400px</td><td>floor never used</td></tr>
+  </table>
+
+  <div class="cols2">
+    <div>
+      <div class="box b-key" style="margin-top:4px">
+        <span class="t">🔑 The one rule for all four</span>
+        If the requested size <b>already sits inside the allowed range</b>, <code>flex-basis</code> is the answer.
+        If it falls <b>outside</b>, <b>the limit it broke becomes the answer.</b>
+        <p style="margin-bottom:0">Shortcut: <b>vs <code>max-width</code> the smaller wins · vs <code>min-width</code> the larger wins.</b></p>
+      </div>
+    </div>
+    <div>
+      <div class="box b-you" style="margin-top:4px">
+        <span class="t">🗣️ Limits are NOT targets</span>
+        <ul style="margin:2px 0 0">
+          <li><b><code>max-width</code> = the potential to EXTEND</b> — how big it's <i>allowed</i> to get.</li>
+          <li><b><code>min-width</code> = the potential to SHRINK</b> — how small it's <i>allowed</i> to get.</li>
+          <li>Neither <b>asks</b> for anything. <code>max-width: 200px</code> will never stretch a 50px item to 200px.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="box b-warn avoid">
+    <span class="t">⚠️ The trap you will fall into</span>
+    Swap S4's <code>min-width</code> for <code>max-width: 300px</code> and the answer <b>flips to 300px</b> — that's
+    just S1 again. <b>Always name the limit out loud — "ceiling or floor?" — before you answer.</b><br>
+    Two more: <b>(1)</b> <code>max-width</code> also caps <code>flex-grow</code> — the item grows into free space then
+    stops dead, and the leftover goes to the others. <b>(2)</b> <code>min-width</code> <b>beats</b> <code>max-width</code>:
+    <code>min-width:300px; max-width:100px</code> → <b>300px</b>, because the floor is checked last.
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 4 of 8</span><span>Priority ladder · basis vs width · basis vs limits</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 5 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">I</span>The three levers</h2>
+  <table class="avoid">
+    <tr><th style="width:88px">Property</th><th>The question it answers</th><th class="c" style="width:120px">Default</th><th class="c" style="width:105px">Unit</th></tr>
+    <tr><td><code>flex-grow</code></td><td><i>"If there's spare space, do I take a share of it?"</i></td><td class="c"><code>0</code> — <b>no</b></td><td class="c">ratio (unitless)</td></tr>
+    <tr><td><code>flex-shrink</code></td><td><i>"If we're overflowing, do I give up some of my size?"</i></td><td class="c"><code>1</code> — <b>yes</b></td><td class="c">ratio (unitless)</td></tr>
+    <tr><td><code>flex-basis</code></td><td><i>"What size do I start from, before any of that happens?"</i></td><td class="c"><code>auto</code></td><td class="c">length / % / <code>auto</code> / <code>0</code></td></tr>
+  </table>
+  <p style="margin-top:2px"><b>All three are CHILD properties.</b> And grow/shrink are <b>ratios, not pixels</b> —
+  <code>flex-grow: 5</code> means <i>"give me 5 shares of the leftover while a <code>1</code> item gets 1 share"</i>, not "5px".</p>
+
+  <h2><span class="n">J</span>The four grow/shrink scenarios — all with <code>flex-basis: 100px</code></h2>
+  <p style="margin-top:0">Only grow and shrink change. The whole <b>behaviour</b> of the item changes with them.</p>
+
+  <table class="avoid">
+    <tr><th class="c" style="width:44px">#</th><th style="width:110px">Shorthand</th><th class="c">Grow?</th><th class="c">Shrink?</th><th>Allowed range</th><th>The <code>100px</code> acts as…</th></tr>
+    <tr><td class="c"><b>gs-1</b></td><td><code>flex: 0 0 100px</code></td><td class="c">❌</td><td class="c">❌</td><td><b>exactly 100px</b> — constant</td><td>a <b>fixed</b> width. <b>Zero flexibility</b></td></tr>
+    <tr><td class="c"><b>gs-2</b></td><td><code>flex: 1 0 100px</code></td><td class="c">✅ freely</td><td class="c">❌</td><td><code>100px → available space</code></td><td>a <b>MINIMUM</b> (a floor)</td></tr>
+    <tr style="background:var(--blue-bg) !important"><td class="c"><b>gs-3</b></td><td><code>flex: 0 1 100px</code></td><td class="c">❌</td><td class="c">✅ to min-content</td><td><code>min-content → 100px</code></td><td>a <b>MAXIMUM</b> (a ceiling) ← <b>DEFAULT</b></td></tr>
+    <tr><td class="c"><b>gs-4</b></td><td><code>flex: 1 1 100px</code></td><td class="c">✅</td><td class="c">✅</td><td><code>min-content → available</code></td><td>only a <b>STARTING LINE</b></td></tr>
+  </table>
+
+<pre>gs-1   flex: 0 0 100px       [====100px====]                RIGID — a brick, whatever you do
+gs-2   flex: 1 0 100px       [====100px====]───────►        100px is the FLOOR
+gs-3   flex: 0 1 100px  ◄────[====100px====]                100px is the CEILING   ← the default
+gs-4   flex: 1 1 100px  ◄────[====100px====]───────►        100px is just the start line</pre>
+
+  <div class="cols2">
+    <div>
+      <div class="box b-key" style="margin-top:2px">
+        <span class="t">🔑 gs-3 is Flexbox's factory default</span>
+        <code>flex: 0 1 auto</code> is what every item does when you write <b>nothing at all</b>:
+        <p style="text-align:center;font-size:10pt;margin:4px 0"><b>"You are allowed to shrink.<br>You are NOT allowed to grow."</b></p>
+        That's exactly why a flex row <b>squeezes</b> when the window narrows but never <b>spreads out</b> to
+        fill a wide one — until you hand out a <code>flex-grow</code>.
+      </div>
+    </div>
+    <div>
+      <div class="box b-warn" style="margin-top:2px">
+        <span class="t">⚠️ gs-4 and "DUMMY PIECE BAAVA" — the honest version</span>
+        With <code>flex: 1 1 100px</code> the item grows <i>and</i> shrinks, so the <code>100px</code> never
+        survives as a final width. Calling it a dummy piece is the right instinct — <b>with one correction that
+        matters on the very next page:</b>
+        <p style="margin-bottom:0">👉 <b><code>flex-basis</code> is a dummy as a FINAL WIDTH. It is still very much
+        alive as the STARTING LINE.</b> Free space is measured <i>after</i> every basis is laid down, then shared out.
+        That's why <code>flex: 1 1 0</code> and <code>flex: 1 1 auto</code> give <b>completely different</b> results.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">K</span><code>flex-basis: auto</code> vs <code>0</code> — the switch you'll use most</h2>
+  <p style="margin-top:0">Same grow, same shrink. Only the <b>starting line</b> moves — and that changes everything.</p>
+
+  <div class="cols2">
+    <div>
+<pre><span class="c">/* CONTENT PRIORITY — big content keeps room */</span>
+<span class="k">.item</span> { <span class="k">flex</span>: <span class="v">1 1 auto</span>; }  <span class="c">/* share the LEFTOVER */</span>
+
+<span class="c">/* EQUAL COLUMNS — content is irrelevant */</span>
+<span class="k">.item</span> { <span class="k">flex</span>: <span class="v">1 1 0</span>; }     <span class="c">/* share EVERYTHING */</span></pre>
+      <div class="demolabel">flex: 1 1 auto — real measured widths, 600px row</div>
+      <div class="track"><div class="bar" style="width:30.3%">short · 182px</div><div class="bar" style="width:69.7%">a much longer sentence · 418px</div></div>
+      <div class="demolabel">flex: 1 1 0 — same markup, same container</div>
+      <div class="track"><div class="bar" style="width:50%">short · 300px</div><div class="bar" style="width:50%">a much longer sentence · 300px</div></div>
+    </div>
+    <div>
+      <table>
+        <tr><th></th><th><code>flex-basis: auto</code></th><th><code>flex-basis: 0</code></th></tr>
+        <tr><td>Starting size</td><td>each item's own content / <code>width</code></td><td><code>0</code> for everyone</td></tr>
+        <tr><td>A 10-word sentence</td><td>gets <b>maximum</b> room</td><td>gets the <b>same</b> room as everyone</td></tr>
+        <tr><td>A single word</td><td>gets <b>minimum</b> room</td><td>gets the <b>same</b> room as everyone</td></tr>
+        <tr><td>Use it for</td><td>navbars, tag lists, "size me to my content"</td><td><b>equal columns</b>, card grids, pricing tables</td></tr>
+      </table>
+      <div class="box b-tip" style="margin-top:5px">
+        <span class="t">💡 Mnemonic</span>
+        <code>auto</code> = <b>"share the leftovers."</b><br>
+        <code>0</code> &nbsp;&nbsp;&nbsp;= <b>"share everything."</b>
+        <p style="margin-bottom:0">If your columns "should be equal but aren't", the basis is <code>auto</code> when you wanted <code>0</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 5 of 8</span><span>3 levers · gs-1…gs-4 · basis auto vs 0</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 6 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">L</span>The <code>flex</code> shorthand</h2>
+
+  <div class="cols2">
+    <div>
+<pre><span class="k">flex</span>: &lt;flex-grow&gt; &lt;flex-shrink&gt; &lt;flex-basis&gt;;
+
+<span class="c">/* longhand */            /* shorthand */</span>
+<span class="k">flex-grow</span>:   <span class="v">1</span>;            <span class="k">flex</span>: <span class="v">1 1 0</span>;
+<span class="k">flex-shrink</span>: <span class="v">1</span>;    ═══►    <span class="c">/* shortened further */</span>
+<span class="k">flex-basis</span>:  <span class="v">0</span>;            <span class="k">flex</span>: <span class="v">1</span>;</pre>
+      <table>
+        <tr><th>Shorthand</th><th>Expands to</th><th>Meaning</th></tr>
+        <tr style="background:var(--blue-bg) !important"><td><code>flex: 1</code></td><td><code>1 1 0%</code></td><td><b>equal columns.</b> The workhorse</td></tr>
+        <tr><td><code>flex: 2</code></td><td><code>2 1 0%</code></td><td>takes <b>2 shares</b> of the space</td></tr>
+        <tr><td><code>flex: auto</code></td><td><code>1 1 auto</code></td><td>grows &amp; shrinks, content-weighted</td></tr>
+        <tr><td><code>flex: none</code></td><td><code>0 0 auto</code></td><td>rigid, sized to content</td></tr>
+        <tr><td><code>flex: initial</code></td><td><code>0 1 auto</code></td><td>the default: shrink yes, grow no</td></tr>
+        <tr><td><code>flex: 0 0 250px</code></td><td>—</td><td>a hard 250px sidebar</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="box b-warn" style="margin-top:0">
+        <span class="t">⚠️ Correction to lock in — <code>flex: 2</code> is NOT <code>2 2 0</code></span>
+        A single number sets <b><code>flex-grow</code> only</b>. <code>flex-shrink</code> stays at its default
+        <b><code>1</code></b>, and <code>flex-basis</code> becomes <b><code>0%</code></b>.
+<pre style="margin:5px 0 3px;background:#fff"><span class="wrong">flex: 2  →  grow 2, shrink 2, basis 0</span>
+<span class="answer">flex: 2  →  grow 2, shrink 1, basis 0%</span></pre>
+        <p style="margin-bottom:0">Verified with <code>getComputedStyle</code> in Chrome. It doesn't change the
+        1:2:3 result at all — with a basis of <code>0</code> there's <b>nothing to shrink</b> — but say it right in an interview.</p>
+      </div>
+      <div class="box b-warn">
+        <span class="t">⚠️ The shorthand quietly resets the basis</span>
+<pre style="margin:3px 0;background:#fff"><span class="k">.a</span> { <span class="k">flex-grow</span>: <span class="v">1</span>; }  <span class="c">/* basis stays AUTO */</span>
+<span class="k">.b</span> { <span class="k">flex</span>: <span class="v">1</span>; }       <span class="c">/* basis becomes 0% */</span></pre>
+        <p style="margin:2px 0">→ <code>.a</code> gives <b>content-weighted</b> widths, <code>.b</code> gives <b>equal</b> widths.</p>
+        Same intent, different result. <b>Any omitted <code>flex-basis</code> in the shorthand defaults to
+        <code>0</code>, not <code>auto</code>.</b> This one line explains most <i>"why aren't my columns equal?"</i> bugs.
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">M</span>Ratios in action — <code>flex: 1</code> / <code>2</code> / <code>3</code></h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.one</span>   { <span class="k">flex</span>: <span class="v">1</span>; }
+<span class="k">.two</span>   { <span class="k">flex</span>: <span class="v">2</span>; }
+<span class="k">.three</span> { <span class="k">flex</span>: <span class="v">3</span>; }</pre>
+      <ul>
+        <li>Total shares = <b>1 + 2 + 3 = 6</b>. In a <b>600px</b> container (basis <code>0</code>, so all 600px is up for grabs) one share = <b>100px</b>.</li>
+        <li><b>The ratios are respected: 1x : 2x : 3x.</b></li>
+        <li>Resize the window and they <b>grow and shrink together, still 1:2:3</b>. The <code>3</code> item moves
+            <b>3px for every 1px</b> the <code>1</code> item moves.</li>
+        <li>Add a 4th <code>flex: 1</code> item → 7 shares → <code>600/7</code> each. The ratio re-balances by itself.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="demolabel">600px container · 6 shares · 100px per share</div>
+      <div class="track" style="gap:4px">
+        <div class="bar" style="width:16.66%">1 → 100px</div>
+        <div class="bar" style="width:33.33%">2 → 200px</div>
+        <div class="bar" style="width:50%">3 → 300px</div>
+      </div>
+      <div class="demolabel">same rule, narrower window — ratio unchanged</div>
+      <div class="track" style="gap:4px;width:66%">
+        <div class="bar" style="width:16.66%;font-size:6.5pt">1</div>
+        <div class="bar" style="width:33.33%;font-size:6.5pt">2</div>
+        <div class="bar" style="width:50%;font-size:6.5pt">3</div>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">N</span>How the browser actually computes it — the 5 steps</h2>
+  <table class="avoid">
+    <tr><th class="c" style="width:30px">#</th><th style="width:150px">Step</th><th>What happens</th></tr>
+    <tr><td class="c"><b>1</b></td><td><b>Lay down the basis</b></td><td>Every item takes its <code>flex-basis</code> (or <code>width</code>, or its content size)</td></tr>
+    <tr><td class="c"><b>2</b></td><td><b>Measure free space</b></td><td><code>free = container − Σ(basis) − Σ(<b>gaps</b>) − margins</code></td></tr>
+    <tr><td class="c"><b>3</b></td><td><b>Distribute</b></td><td>Positive free space → share by <b><code>flex-grow</code> ratio</b>.<br>Negative (overflow) → claw back by <b><code>flex-shrink</code> × <code>flex-basis</code></b></td></tr>
+    <tr><td class="c"><b>4</b></td><td><b>Clamp</b></td><td>Each item is squeezed into its <code>min-width</code> / <code>max-width</code> range</td></tr>
+    <tr><td class="c"><b>5</b></td><td><b>Position</b></td><td><code>justify-content</code> places whatever space is <i>still</i> left over</td></tr>
+  </table>
+
+  <div class="cols2">
+    <div>
+      <div class="box b-tip" style="margin-top:3px">
+        <span class="t">💡 <code>gap</code> is eaten in step 2</span>
+        It's subtracted <b>before</b> anything is shared. A 600px row with <code>gap: 20px</code> and 3 items
+        only has <b>560px</b> to distribute → each <code>flex: 1</code> item is <b>186.67px</b>, not 200px.
+      </div>
+    </div>
+    <div>
+      <div class="box b-key" style="margin-top:3px">
+        <span class="t">🔑 The asymmetry nobody mentions: shrink is weighted by basis</span>
+        <b>Grow</b> is a plain ratio. <b>Shrink</b> is <code>shrink × basis</code> — a bigger item loses
+        proportionally more. Verified: <code>basis 200px</code> + <code>basis 400px</code> squeezed into
+        <b>300px</b> → <b>100px and 200px</b>, <i>not</i> 50px and 250px.
+        <p style="margin-bottom:0"><i>Makes sense — a big item can afford a bigger haircut.</i></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 6 of 8</span><span>shorthand · ratios · the algorithm</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 7 ══════════════════════════════ -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">O</span>Real-world gotchas — these <i>will</i> bite you in projects</h2>
+
+  <div class="box b-warn avoid">
+    <span class="t">🐛 #1 — "My item refuses to shrink" / "my text overflows" / "ellipsis doesn't work"</span>
+    Every flex item silently carries <b><code>min-width: auto</code></b>, which resolves to its
+    <b>min-content size</b> — the longest unbreakable word, or an image's intrinsic width.
+    <b><code>flex-shrink</code> cannot cross that floor.</b>
+    <div class="cols2" style="margin-top:4px">
+      <div>
+<pre style="background:#fff;margin-top:0"><span class="k">.item</span> {
+  <span class="k">flex</span>: <span class="v">1</span>;
+  <span class="k">min-width</span>: <span class="v">0</span>;        <span class="c">/* ✅ THE FIX */</span>
+  <span class="c">/* overflow: hidden; also unlocks it */</span>
+}</pre>
+      </div>
+      <div style="font-size:8.6pt">
+        <b>Verified:</b> a 100px container holding <code>Antidisestablishmentarianism</code> stayed
+        <b>190px</b> wide — refusing the container — until <code>min-width: 0</code> was added. Then it
+        obeyed at <b>100px</b>.<br>
+        <b>This is the single most common flexbox bug in real code</b> (long URLs, <code>&lt;pre&gt;</code> blocks,
+        truncation that mysteriously fails).
+      </div>
+    </div>
+  </div>
+
+  <div class="cols2">
+    <div>
+      <div class="box b-warn" style="margin-top:0">
+        <span class="t">🐛 #2 — <code>box-sizing</code></span>
+        <code>flex-basis</code> sizes the <b>content box</b> by default, so padding and border are added
+        <i>on top</i>. Set <code>box-sizing: border-box</code> (usually globally on <code>*</code>) so
+        <code>flex-basis: 200px</code> really means <b>200px total</b>.
+      </div>
+      <div class="box b-warn">
+        <span class="t">🐛 #3 — Images don't shrink politely</span>
+        They carry an intrinsic size. Use <code>min-width: 0</code> + <code>max-width: 100%</code> to let
+        them shrink, or <code>flex-shrink: 0</code> if you want them untouchable.
+      </div>
+      <div class="box b-warn">
+        <span class="t">🐛 #4 — Percentage basis</span>
+        <code>flex-basis: 50%</code> is a percentage of the <b>container's main size</b> — not of the item,
+        not of the viewport. Handy: <code>flex: 1 1 50%</code> + <code>flex-wrap: wrap</code> = a 2-column
+        responsive grid.
+      </div>
+    </div>
+    <div>
+      <div class="box b-tip" style="margin-top:0">
+        <span class="t">💡 #5 — <code>margin: auto</code> eats free space</span>
+        <code>margin-left: auto</code> on one item pushes it (and everything after it) to the far end.
+        The classic "logo left, links right" navbar trick — no <code>justify-content</code> gymnastics.
+<pre style="background:#fff;margin-bottom:0"><span class="k">.navbar</span> { <span class="k">display</span>: <span class="v">flex</span>; }
+<span class="k">.navbar .login</span> { <span class="k">margin-left</span>: <span class="v">auto</span>; }</pre>
+      </div>
+      <div class="box b-tip">
+        <span class="t">💡 #6 — Debug with DevTools</span>
+        In the Elements panel, every flex container has a little <span class="kbd">flex</span> badge.
+        Click it to overlay the axes, the gaps and the free space. The <b>Computed</b> tab shows the real
+        resolved <code>flex-grow</code>/<code>shrink</code>/<code>basis</code> — the fastest way to catch a
+        shorthand that reset your basis to <code>0</code>.
+      </div>
+      <div class="box b-tip">
+        <span class="t">💡 #7 — Flexbox is 1-dimensional</span>
+        It lays out a <b>row</b> or a <b>column</b>. When you need rows <b>and</b> columns to line up with
+        each other in a real 2-D grid, that's <b>CSS Grid's</b> job — the next topic. They're partners,
+        not rivals.
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">P</span>The patterns you'll actually type</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="c">/* Equal-width columns */</span>
+<span class="k">.row</span> &gt; * { <span class="k">flex</span>: <span class="v">1</span>; }
+
+<span class="c">/* Fixed sidebar + fluid content */</span>
+<span class="k">.sidebar</span> { <span class="k">flex</span>: <span class="v">0 0 250px</span>; }
+<span class="k">.content</span> { <span class="k">flex</span>: <span class="v">1</span>; <span class="k">min-width</span>: <span class="v">0</span>; }
+
+<span class="c">/* Holy grail: middle column twice as wide */</span>
+<span class="k">.left</span>, <span class="k">.right</span> { <span class="k">flex</span>: <span class="v">1</span>; }
+<span class="k">.middle</span>       { <span class="k">flex</span>: <span class="v">2</span>; }</pre>
+    </div>
+    <div>
+<pre><span class="c">/* Responsive cards: min 250px, grow, wrap */</span>
+<span class="k">.cards</span> {
+  <span class="k">display</span>: <span class="v">flex</span>; <span class="k">flex-wrap</span>: <span class="v">wrap</span>; <span class="k">gap</span>: <span class="v">1rem</span>;
+}
+<span class="k">.cards</span> &gt; * { <span class="k">flex</span>: <span class="v">1 1 250px</span>; }
+
+<span class="c">/* Perfect centring — the famous one */</span>
+<span class="k">.hero</span> {
+  <span class="k">display</span>: <span class="v">flex</span>;
+  <span class="k">justify-content</span>: <span class="v">center</span>;   <span class="c">/* main axis  */</span>
+  <span class="k">align-items</span>: <span class="v">center</span>;       <span class="c">/* cross axis */</span>
+  <span class="k">height</span>: <span class="v">100vh</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="box b-key avoid">
+    <span class="t">🔑 Sanity checklist when a flex layout misbehaves</span>
+    <b>1.</b> Is <code>display: flex</code> on the <b>parent</b>? &nbsp;·&nbsp;
+    <b>2.</b> Which is the <b>main axis</b> right now? &nbsp;·&nbsp;
+    <b>3.</b> Is the property a <b>parent</b> or <b>child</b> one? &nbsp;·&nbsp;
+    <b>4.</b> Is there any <b>free space</b> for <code>justify-content</code> to distribute? &nbsp;·&nbsp;
+    <b>5.</b> Does the container have a <b>height</b> for <code>align-items</code>? &nbsp;·&nbsp;
+    <b>6.</b> Is <code>align-content</code> waiting on a <b>wrap</b>? &nbsp;·&nbsp;
+    <b>7.</b> Did a shorthand reset your <b>basis to 0</b>? &nbsp;·&nbsp;
+    <b>8.</b> Is <code>min-width: auto</code> blocking the shrink?
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 7 of 8</span><span>gotchas · patterns · debugging</span></div>
+</div>
+
+<!-- ══════════════════════════════ PAGE 8 ══════════════════════════════ -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">🎯 Rapid-fire self test
+    <span class="sub">Cover the right-hand column. Target: all 20 in under 3 minutes, no notes.</span></h1>
+  <div class="hdr-rule"></div>
+
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th class="c" style="width:26px">#</th><th>Question</th><th style="width:96px">Answer</th></tr>
+        <tr><td class="c">1</td><td><code>width:300px; flex-basis:100px</code> (row)</td><td class="answer">100px</td></tr>
+        <tr><td class="c">2</td><td><code>flex-basis:200px; max-width:100px</code></td><td class="answer">100px</td></tr>
+        <tr><td class="c">3</td><td><code>flex-basis:50px; max-width:200px</code></td><td class="answer">50px</td></tr>
+        <tr><td class="c">4</td><td><code>flex-basis:200px; min-width:300px</code></td><td class="answer">300px</td></tr>
+        <tr><td class="c">5</td><td><code>flex-basis:400px; min-width:300px</code></td><td class="answer">400px</td></tr>
+        <tr><td class="c">6</td><td><code>flex-basis:400px; max-width:300px</code></td><td class="answer">300px</td></tr>
+        <tr><td class="c">7</td><td><code>min-width:300px; max-width:100px</code></td><td class="answer">300px — floor wins</td></tr>
+        <tr><td class="c">8</td><td><code>flex: 0 0 100px</code>, window resized</td><td class="answer">100px always</td></tr>
+        <tr><td class="c">9</td><td><code>flex: 1 0 100px</code>, tiny window</td><td class="answer">100px — can't shrink</td></tr>
+        <tr><td class="c">10</td><td><code>flex: 0 1 100px</code>, huge window</td><td class="answer">100px — can't grow</td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <tr><th class="c" style="width:26px">#</th><th>Question</th><th style="width:96px">Answer</th></tr>
+        <tr><td class="c">11</td><td>Expand <code>flex: 1</code></td><td class="answer">1 1 0%</td></tr>
+        <tr><td class="c">12</td><td>Expand <code>flex: 2</code></td><td class="answer">2 <b>1</b> 0%</td></tr>
+        <tr><td class="c">13</td><td>Expand <code>flex: none</code></td><td class="answer">0 0 auto</td></tr>
+        <tr><td class="c">14</td><td>The default flex value</td><td class="answer">0 1 auto</td></tr>
+        <tr><td class="c">15</td><td><code>flex: 1/2/3</code> in 600px</td><td class="answer">100/200/300</td></tr>
+        <tr><td class="c">16</td><td><code>flex-grow:1</code> vs <code>flex:1</code></td><td class="answer">basis auto vs 0</td></tr>
+        <tr><td class="c">17</td><td>Which property is applied <b>last</b>?</td><td class="answer">min/max-width</td></tr>
+        <tr><td class="c">18</td><td>Long word won't shrink — fix?</td><td class="answer">min-width: 0</td></tr>
+        <tr><td class="c">19</td><td><code>align-content</code> does nothing — why?</td><td class="answer">no wrap / 1 line</td></tr>
+        <tr><td class="c">20</td><td>Which axis does <code>align-items</code> use?</td><td class="answer">cross</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2><span class="n">Q</span>Write it from memory — the blank-page drill</h2>
+  <p style="margin-top:0">Once a week, on a blank sheet, reproduce these five things <b>without looking</b>. If you can do all five, you own flexbox.</p>
+  <table class="avoid">
+    <tr><th class="c" style="width:26px">1</th><td>The <b>priority ladder</b>, weakest to strongest, all four levels.</td></tr>
+    <tr><th class="c">2</th><td>The <b>gs-1 → gs-4</b> table: grow, shrink, allowed range, and what the basis acts as. Circle the default.</td></tr>
+    <tr><th class="c">3</th><td>All six <b><code>justify-content</code></b> values as ASCII sketches, plus all five <b><code>align-items</code></b> values.</td></tr>
+    <tr><th class="c">4</th><td>The <b>five presets</b>: <code>flex: 1</code> / <code>2</code> / <code>auto</code> / <code>none</code> / <code>initial</code> in longhand.</td></tr>
+    <tr><th class="c">5</th><td>The <b>5-step algorithm</b>, and the one place <code>gap</code> is subtracted.</td></tr>
+  </table>
+
+  <h2><span class="n">R</span>Keep practising</h2>
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th>Resource</th><th>Why</th></tr>
+        <tr><td><b>Flexbox Froggy</b><br><span class="mono" style="font-size:7.4pt">appbrewery.github.io/flexboxfroggy</span></td><td>24 levels, Intermediate difficulty (no hints)</td></tr>
+        <tr><td><b>Flexbox Defense</b><br><span class="mono" style="font-size:7.4pt">flexboxdefense.com</span></td><td>Drills alignment under time pressure</td></tr>
+        <tr><td><b>Flex Layout playground</b><br><span class="mono" style="font-size:7.4pt">appbrewery.github.io/flex-layout</span></td><td>Toggle every property live</td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <tr><th>Reference</th><th>Why</th></tr>
+        <tr><td><b>CSS-Tricks — Complete Guide to Flexbox</b><br><span class="mono" style="font-size:7.4pt">css-tricks.com/snippets/css/a-guide-to-flexbox</span></td><td>The lookup sheet. Splits parent vs child properties</td></tr>
+        <tr><td><b>Josh Comeau — Interactive Guide to Flexbox</b><br><span class="mono" style="font-size:7.4pt">joshwcomeau.com/css/interactive-guide-to-flexbox</span></td><td>Best visual explanation of grow/shrink anywhere</td></tr>
+        <tr><td><b>MDN — Controlling ratios of flex items</b></td><td>The authoritative grow/shrink/basis page</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="box b-you avoid" style="margin-top:8px">
+    <span class="t">🗣️ The five sentences to leave with</span>
+    <ol style="margin:3px 0 0">
+      <li><b>Container decides the layout, items decide their own size.</b></li>
+      <li><b><code>flex-basis</code> asks. <code>min</code>/<code>max-width</code> decides. Clamping is always last.</b></li>
+      <li><b>Default = shrink yes, grow no.</b> Nothing spreads out until you hand out a <code>flex-grow</code>.</li>
+      <li><b><code>flex: 1</code> means equal columns</b> because it secretly sets the basis to <code>0</code>.</li>
+      <li><b>Grow and shrink are ratios, not pixels.</b> 1 : 2 : 3, every time, at every window size.</li>
+    </ol>
+  </div>
+
+  <div class="foot"><span>Flexbox Master Notes · page 8 of 8</span><span>Self test · drills · resources</span></div>
+</div>
+
+</body>
+</html>

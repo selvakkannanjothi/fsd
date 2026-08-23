@@ -143,6 +143,22 @@ one item opt out of the group behavior.
 
 ---
 
+---
+
+## 🗣️ Selva-speak — the one-line versions
+
+- **`flex-wrap` = word wrap in WordPad.** Run out of room on the line → drop to the next one. Container
+  property, never on the child.
+- **`order` is a child property** — and it goes **lowest value first, highest value last**.
+- **`justify-content` = main axis. `align-items` = perpendicular (cross) axis.** If you can only
+  remember one sentence about alignment, make it this one.
+- **`align-content` = the spacing between the WRAP LINES.** Needs a wrap. Does nothing on a single line.
+  `align-items` moves items *inside* a line; `align-content` moves the *lines themselves*.
+- **`flex-start` aligns box tops. `baseline` aligns the text baselines.** Identical only when every item
+  shares the same font-size/padding.
+
+---
+
 ## Key takeaways
 
 - Six properties split into two camps: container (`flex-wrap`, `justify-content`, `align-items`,

@@ -90,6 +90,60 @@ This file is the persistent store for the FSD self-quiz. It is NOT study notes.
 **Correct:** C — a floor is a limit, not a target; the basis respects it, so `flex-basis` wins → **400px**. (Swap the floor for `max-width: 300px` and the answer flips to **300px**.)
 **Missed on:** Self-flagged as a weak area (not yet quizzed)
 
+### WQ9 · 🔴 Difficult · Topic: Flexbox Sizing — the `flex` shorthand ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** What does `flex: 2` expand to in longhand?
+- A. `flex-grow: 2; flex-shrink: 2; flex-basis: 0;`
+- B. `flex-grow: 2; flex-shrink: 1; flex-basis: 0%;`
+- C. `flex-grow: 2; flex-shrink: 1; flex-basis: auto;`
+- D. `flex-grow: 0; flex-shrink: 2; flex-basis: 2px;`
+**Correct:** B — a single number sets **`flex-grow` only**; `flex-shrink` stays at its default `1` and `flex-basis` becomes `0%`
+**Missed on:** Self-flagged (originally noted as `2 2 0`)
+
+### WQ10 · 🔴 Difficult · Topic: Flexbox Sizing — longhand vs shorthand ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** Container A's children have `flex-grow: 1`. Container B's children have `flex: 1`. Both hold one short word and one long sentence. Why aren't the results identical?
+- A. They are identical — `flex: 1` is just shorthand for `flex-grow: 1`
+- B. `flex: 1` also sets `flex-basis: 0%`, so widths become equal; `flex-grow: 1` leaves the basis at `auto`, so the longer content stays wider
+- C. `flex-grow: 1` also sets `flex-shrink: 0`, which blocks shrinking
+- D. `flex: 1` only works when `flex-wrap: wrap` is set
+**Correct:** B — the shorthand resets any omitted `flex-basis` to `0`, the longhand doesn't (verified in Chrome: 300/300 vs 182/418)
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
+### WQ11 · 🔴 Difficult · Topic: Flexbox Sizing — default behaviour ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** You write `display: flex` on a container and nothing else. What are the children's effective flex values, and what does that mean?
+- A. `flex: 1 1 auto` — they grow and shrink freely
+- B. `flex: 0 1 auto` — they may **shrink** but will **not grow** to fill the row
+- C. `flex: 1 0 auto` — they grow but never shrink
+- D. `flex: 0 0 auto` — they are completely rigid
+**Correct:** B — `flex: initial` = `0 1 auto`. Shrink yes, grow no. That's why a flex row squeezes on a narrow window but never spreads out on a wide one.
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
+### WQ12 · 🔴 Difficult · Topic: Flexbox Sizing — grow/shrink scenarios ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** An item is `flex: 1 0 100px`. The window is dragged very narrow, then very wide. What is its width range?
+- A. Always exactly 100px — the basis is fixed
+- B. `min-content → 100px` — it can shrink but not grow
+- C. `100px → whatever space is available` — 100px acts as a **floor**
+- D. `0 → 100px` — it collapses when there's no room
+**Correct:** C — `flex-shrink: 0` blocks shrinking so 100px is the minimum; `flex-grow: 1` lets it expand freely. (Flip the two numbers, `flex: 0 1 100px`, and 100px becomes the **ceiling** instead — that's the default behaviour.)
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
+### WQ13 · 🔴 Difficult · Topic: Flexbox Sizing — the priority ladder ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** Order these from **weakest to strongest** when a flex item's main-axis size is decided: `flex-basis`, `min-width`/`max-width`, content width, `width`.
+- A. `width` → content width → `flex-basis` → `min`/`max-width`
+- B. content width → `width` → `flex-basis` → `min`/`max-width`
+- C. content width → `flex-basis` → `width` → `min`/`max-width`
+- D. `min`/`max-width` → `flex-basis` → `width` → content width
+**Correct:** B — content width < `width` < `flex-basis` < `min`/`max-width`. The clamp is applied **last**, which is exactly why it always wins.
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
+### WQ14 · 🔴 Difficult · Topic: Flexbox Sizing — the hidden shrink floor ⚠️ SELF-FLAGGED WEAK AREA
+**Q:** A `flex: 1` box containing one very long unbreakable word refuses to shrink below ~190px, and `text-overflow: ellipsis` does nothing. Why, and what's the fix?
+- A. `flex-shrink` defaults to `0`, so it can't shrink — set `flex-shrink: 1`
+- B. Flex items have an implicit `min-width: auto` (= min-content size) that shrinking can't cross — set `min-width: 0` (or `overflow: hidden`)
+- C. `flex-basis: 0` is missing — add it
+- D. The container needs `flex-wrap: wrap`
+**Correct:** B — the automatic minimum size. `min-width: 0` unlocks it (verified: 190px → 100px). This is the single most common flexbox bug in real code.
+**Missed on:** Self-flagged as a weak area (not yet quizzed)
+
 ---
 
 ## Resolved (previously wrong, now answered correctly)

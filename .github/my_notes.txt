@@ -73,8 +73,11 @@ Topic: FLEXBOX - Flex Layout (order, flex-wrap, justify-content, align-items, al
 - Resources: CSS-Tricks Flexbox cheat sheet (separates parent vs child properties - look up, don't memorize), Flexbox Froggy game (Intermediate difficulty) and the flex-layout demo playground.
 - Next lesson: Flexbox sizing (flex-grow/flex-shrink/flex-basis).
 
-Topic: FLEXBOX - Flex Sizing (flex-basis vs max-width)  *** WEAK AREA - REVISE EVERY TIME ***
+Topic: FLEXBOX - Flex Sizing (flex-grow / flex-shrink / flex-basis)  *** WEAK AREA - REVISE EVERY TIME ***
+- PRIORITY LADDER (course formula slide): Content width < width < flex-basis < min-width/max-width. Rightmost = strongest, applied last.
 - flex-basis = the REQUESTED/starting size of a flex item. max-width = a HARD CEILING, min-width = a HARD FLOOR. They are not the same kind of property.
+- If flex-basis is set, WIDTH IS COMPLETELY IGNORED - but only on the MAIN axis. Row container -> basis = width (height still works). Column container -> basis = HEIGHT (width still works).
+- If the basis can't be honoured, the item falls back down the ladder to its MINIMUM CONTENT WIDTH and stops there.
 - Order of operations: browser sizes the item first (flex-basis, then flex-grow/flex-shrink), THEN clamps it between min-width and max-width. Clamping happens last.
 - Scenario 1: flex-basis:200px + max-width:100px -> basis BREAKS the ceiling, so flex-basis is overruled -> FINAL WIDTH = 100px.
 - Scenario 2: flex-basis:50px + max-width:200px -> basis RESPECTS the ceiling, so max-width never kicks in -> FINAL WIDTH = 50px.
@@ -86,4 +89,22 @@ Topic: FLEXBOX - Flex Sizing (flex-basis vs max-width)  *** WEAK AREA - REVISE E
   * flex-basis DOES respect the limit -> the limit stays out of it and flex-basis becomes the final width (basis<max-width or basis>min-width -> basis wins).
 - Shortcut: final width = clamp(min-width, size-from-flex-basis/grow/shrink, max-width) -> vs max-width the SMALLER wins, vs min-width the LARGER wins.
 - Traps: (1) max-width also caps flex-grow (item grows into free space then stops dead at the ceiling); (2) min-width BEATS max-width (min-width:300px + max-width:100px -> 300px, floor is applied last).
-- Full notes: .github/my_tasks/concepts/concept_flex_sizing.md
+- THE 3 LEVERS (all are CHILD properties): flex-grow "do I take a share of spare space?" (default 0 = NO) / flex-shrink "do I give up size when overflowing?" (default 1 = YES) / flex-basis "what size do I start from?" (default auto).
+- grow & shrink are RATIOS, not pixels. flex-grow:5 = "give me 5 shares of the leftover while a 1-item gets 1 share".
+- gs-1 flex:0 0 100px -> RIGID. Cannot grow, cannot shrink. Width is constant 100px, no flexibility.
+- gs-2 flex:1 0 100px -> 100px is the FLOOR. Grows unlimited into available space, but will NOT shrink below 100px.
+- gs-3 flex:0 1 100px -> 100px is the CEILING. Shrinks freely down to min-content, but will NOT grow past 100px. *** THIS IS THE DEFAULT (flex: 0 1 auto) - you are allowed to shrink, you are NOT allowed to grow. ***
+- gs-4 flex:1 1 100px -> fully fluid, range = min-content to available space. The 100px never survives as a final width ("dummy piece") BUT it is still the STARTING LINE - free space is measured after every basis is laid down.
+- Proof the basis is not truly ignored in gs-4: same 2 items (short word + long sentence) in 600px -> flex:1 1 auto gives 182/418, flex:1 1 0 gives 300/300.
+- flex-basis:auto = CONTENT PRIORITY (10-word sentence gets max room, single word gets min room) - share the LEFTOVERS. flex-basis:0 = EQUAL WIDTH for all - share EVERYTHING.
+- SHORTHAND: flex: <grow> <shrink> <basis>;  e.g. grow1/shrink1/basis0 -> flex: 1 1 0 -> shortened further to just flex: 1 (most commonly used).
+- Presets: flex:1 = 1 1 0% | flex:2 = 2 1 0% | flex:auto = 1 1 auto | flex:none = 0 0 auto | flex:initial = 0 1 auto (default) | flex: 0 0 250px = hard 250px sidebar.
+- CORRECTION worth remembering: flex:2 is NOT "2 2 0". One number sets flex-GROW only; shrink stays 1 and basis becomes 0%. (Verified in Chrome.) The 1:2:3 result is unaffected because with basis 0 there is nothing to shrink.
+- GOTCHA: the shorthand resets basis to 0, the longhand doesn't. flex-grow:1 alone -> basis stays auto (content-weighted widths). flex:1 -> basis 0% (equal widths). This explains most "why aren't my columns equal" bugs.
+- RATIOS: flex:1 / flex:2 / flex:3 in a 600px row -> 100px / 200px / 300px (6 shares total). They grow AND shrink together, always keeping 1x : 2x : 3x.
+- The 5-step algorithm: (1) lay down every basis (2) free space = container - sum(basis) - GAPS - margins (3) positive free space -> share by grow ratio; negative -> claw back by shrink x basis (4) clamp to min/max-width (5) justify-content positions whatever is left.
+- Asymmetry: grow is a plain ratio, shrink is WEIGHTED BY BASIS. Verified: basis 200 + basis 400 squeezed into 300px -> 100px and 200px (not 50/250) - the bigger item can afford the bigger haircut.
+- #1 REAL-WORLD BUG: every flex item silently has min-width:auto = its min-content size, so flex-shrink cannot cross it. Verified: a 100px box holding "Antidisestablishmentarianism" stayed 190px wide until min-width:0 was added. Fix = min-width:0 (or overflow:hidden). Causes the classic "text-overflow ellipsis doesn't work" issue.
+- Other gotchas: flex-basis sizes the CONTENT BOX (use box-sizing:border-box); flex-basis:50% is a % of the CONTAINER's main size; images don't shrink politely (min-width:0 + max-width:100%); margin-left:auto shoves an item to the far end (navbar trick).
+- Patterns: equal columns .row>*{flex:1} | sidebar .sidebar{flex:0 0 250px}+.content{flex:1;min-width:0} | responsive cards {flex:1 1 250px}+flex-wrap:wrap | centering justify-content:center + align-items:center.
+- Full notes: .github/my_tasks/concepts/concept_flex_sizing.md | Tasks: .github/my_tasks/tasks/flex_sizing_tasks.md | Hard copy: flexbox_master_notes.pdf
