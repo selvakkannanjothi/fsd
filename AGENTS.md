@@ -66,7 +66,9 @@ Regenerate the flexbox PDF after editing the HTML:
 - [x] CSS — Flexbox layout: `order`, `flex-wrap`, `justify-content`, `align-items`, `align-self`, `align-content` (main vs cross axis); Flexbox Froggy game (see `flexlayout_transcript.txt`)
 - [x] CSS — Flexbox sizing: priority ladder, `flex-basis` vs `width` vs `min`/`max-width`, the four grow/shrink scenarios, the `flex` shorthand & ratios (⚠️ weak area — see `concept_flex_sizing.md` + `flexbox_master_notes.pdf`)
 - [x] CSS — **Flexbox section COMPLETE** — capstone `EX 9.4 Flexbox Pricing Table Project` built and corrected (centring recipe, `flex: 1` + `max-width` card pattern, media query `flex-direction: column`; see `concept_pricing_table_project.md`)
-- [ ] CSS — Grid, responsive design
+- [x] CSS — Grid basics: `display: grid`, `grid-template-columns`/`-rows`, the `fr` unit, `gap`, `repeat()`, 1D vs 2D vs Flexbox; `EX 10.0 Display Grid` chessboard **10/10** (see `concept_grid_display.md`)
+- [ ] CSS — Grid sizing & placement (`10.1`, `10.2`), Mondrian project (`10.3`)
+- [ ] CSS — responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
 
@@ -147,3 +149,15 @@ Regenerate the flexbox PDF after editing the HTML:
   - **Axis discipline for units:** `max-width: 50vh` (a *width* capped by screen *height*) was a real submission — valid CSS, wrong axis, no warning. `vh` for height, `px`/`%`/`vw` for width. `rem` for spacing/`gap` so it scales with zoom.
   - Selector hygiene: use the classes the HTML already provides (`.plan-features`, `.plan-button`), not bare `li` / `button`. Media-query hygiene: override only what changes.
   - **Selva's own error pattern here:** layout thinking was right every time; the misses were *which element owns a property* and *which axis a unit belongs to*. Worth probing on future projects.
+- **CSS Grid — `display: grid`** (lesson done 2026-08-27; full notes in `.github/my_tasks/concepts/concept_grid_display.md`, tasks in `.github/my_tasks/tasks/grid_display_tasks.md`):
+  - **Flexbox = 1D (a row *or* a column). Grid = 2D (rows *and* columns together).** If the design has an X and a Y, use Grid. **Not** either/or — real sites nest them (the lesson's Swiss weather site is a grid with a `flex-direction: column` flexbox inside one panel).
+  - **On resize:** Grid snaps items to shared row/column lines so every gap stays dead straight; Flexbox squishes/adapts, so items line up only by accident. Demo: <https://appbrewery.github.io/grid-vs-flexbox/>.
+  - `display: grid` goes on the **container** (same muscle memory as `display: flex`). Container props: `grid-template-columns`, `grid-template-rows`, `gap` (the same `gap` from Flexbox; spaces both axes). One value per track, space-separated.
+  - **`fr` = a fraction of the *available* space — a ratio, not a size.** Essentially `flex-grow` with its own unit (`1fr 2fr 3fr` ≡ `flex: 1 / 2 / 3`).
+  - **⚠️ TRAP (Selva's actual bug this lesson): `1fr` of nothing is nothing.** `grid-template-rows: 1fr×8` with no container `height` → `0px` rows → **completely blank page** despite 64 coloured divs. Cause: a grid container's defaults are **asymmetric** — *full width* (block-level, so `1fr` columns get real space) but *content height* (empty divs = 0 content = 0 space to divide). Same family as `align-items` needing a container height. **Check the container's height before blaming the grid.**
+  - **Grid infers:** declare only 8 columns, drop in 64 divs → you already get the chessboard (rows auto-created). Declaring rows anyway is clearer.
+  - `repeat(n, size)` replaces repeated track values. **Grid items stretch to fill their cell on *both* axes** by default (`align-items: stretch` applied twice) — that's why empty unstyled divs work.
+  - **EX 10.0 Chessboard — graded 10/10.** Two valid, pixel-identical solutions in opposite directions: **(a) size the children** (official: container `width: 800px` only, `.white/.black { width/height: 100px }` — rows size to content) vs **(b) size the container** (Selva's: `width: 800px; height: 800px`, children get only colours — items stretch). (b) is more idiomatic grid: let the *grid* dictate sizes to children; also resizes the whole board from one line.
+  - `width: 800px` on the container matters because otherwise it fills the window, `1fr` cells get wider than the 100px squares, and "mystery gaps" appear between them — the squares are 100px but their *cells* aren't.
+  - Selva-speak: *"Flexbox = one line, Grid = a table"* · *"fr is flex-grow with a unit"* · *"fr of nothing is nothing"* · *"Grid container is greedy sideways, shy downwards"* · *"You don't size chess squares, you size the board."*
+  - **Encouraging pattern:** unlike EX 9.4, this time the miss was *not* which element owns a property — it was a missing container size, diagnosed and fixed in one step.

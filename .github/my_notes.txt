@@ -138,3 +138,31 @@ Topic: FLEXBOX - EX 9.4 Pricing Table Project (section capstone, built 2026-08-2
 - MY ITERATION LOG: #1 flex-basis:440px (rigid) -> #2 flex:1 + max-width:50vh (right idea, wrong axis) -> #3 flex:1 + max-width:400px (sizing correct) -> final: + height:100%, .plan-features reset, scoped selectors, border-radius:5px.
 - PATTERN IN MY OWN MISTAKES: the layout thinking was right every time. What tripped me up was WHICH ELEMENT owns a property (ul vs li) and WHICH AXIS a unit belongs to (vh vs width). Both are "read the property, not the vibe" errors.
 - Full notes: .github/my_tasks/concepts/concept_pricing_table_project.md | Tasks: .github/my_tasks/tasks/pricing_table_project_tasks.md
+
+Topic: GRID - Display Grid (EX 10.0 Chessboard)
+- Problem: Flexbox aligns along ONE line. A magazine/dashboard layout needs BOTH axes at once - doable in Flexbox only by nesting containers inside containers. Grid was built for 2D layouts.
+- THE DISTINCTION: Flexbox = 1D (a row OR a column), Grid = 2D (rows AND columns together). If the design has an X and a Y, use Grid.
+- NOT an either/or. Real sites nest them: a Flexbox INSIDE a grid cell (the transcript's Swiss weather site does exactly this - a flex-direction:column flexbox inside a grid panel), or a Grid inside a Flexbox. Flexbox was not wasted learning.
+- BEHAVIOUR DIFFERENCE on resize: Grid snaps everything to shared row/column lines so all gaps stay dead straight. Flexbox squishes/adapts content, so items only line up by accident. Demo: https://appbrewery.github.io/grid-vs-flexbox/
+- You CAN make a 1D grid, it just behaves differently to a flexbox.
+- Turn it on with display:grid on the CONTAINER (same muscle memory as display:flex).
+- Container props: grid-template-columns (how many cols + how wide), grid-template-rows (how many rows + how tall), gap (gutter between tracks - the SAME gap property from Flexbox, spaces both rows and columns).
+- Syntax = one value per track, space separated. "1fr 2fr" = 2 columns, 2nd twice as wide. "1fr 1fr 1fr 1fr" = 4 equal columns.
+- fr = FRACTION OF THE AVAILABLE SPACE. It's a RATIO, not a size. 1fr 2fr -> if col1 is 100px, col2 is 200px.
+- fr is basically flex-grow with its own unit - same ratio thinking as flex:1 / flex:2 / flex:3 -> 100/200/300 in a 600px row.
+- *** TRAP (my actual bug this lesson) - 1fr OF NOTHING IS NOTHING. *** grid-template-rows with 1fr + no height on the container = 0px rows = COMPLETELY BLANK PAGE, even though all 64 divs and their background-colors were there.
+  * WHY the columns worked but the rows didn't: a grid container's defaults are ASYMMETRIC. "The default behavior for a grid container is to try and take up the full width, but only have as much height as it allows to fit the content." Width = block-level so it fills the parent (real space for 1fr to split). Height = shrinks to content, and empty divs have 0 content -> 0.
+  * Same trap family as align-items needing a container height in Flexbox. Check the CONTAINER's height before blaming the grid.
+- GRID INFERS: declare only 8 columns and drop in 64 divs and you ALREADY get the chessboard - grid auto-creates rows (items 1-8 = row 1, 9-16 = row 2...). Declaring grid-template-rows anyway is clearer + gives you control.
+- repeat(n, size) = shorthand for identical tracks. repeat(8, 1fr) == 1fr x8. repeat(8, 100px) for fixed.
+- GRID ITEMS STRETCH TO FILL THEIR CELL by default, on BOTH axes (same idea as align-items:stretch in Flexbox, applied twice). That's why empty unstyled divs work - size the CELL and the square fills it. Also why a background-color paints the whole cell.
+- EX 10.0 CHESSBOARD: 64 pre-written .white/.black divs -> 8x8 board, 100x100px squares, #f0d9b5 / #b58863.
+- TWO VALID SOLUTIONS, opposite directions:
+  * (a) SIZE THE CHILDREN (official solution): .container{width:800px; display:grid; repeat(8,1fr) both} + .white,.black{width:100px;height:100px}. Columns = 800/8. Rows have no container height so they size to CONTENT - and the content is 100px tall, so rows become 100px and the container grows to 800px by itself.
+  * (b) SIZE THE CONTAINER (my solution): .container{width:800px; height:800px; display:grid; repeat(8,1fr) both} + only background-colors on the squares. Both axes have 800px for 1fr to split -> 100px tracks -> items stretch to fill. No size needed on the children at all.
+  * Pixel-identical output. (b) is the more idiomatic grid approach - let the GRID dictate sizes to the children instead of forcing sizes on children and letting grid infer itself. Bonus: change 800px to 640px in ONE place and the whole board resizes.
+- WHY width:800px on the container at all: without it the container fills the full window, so 1fr columns get much wider than 100px. The squares stay 100px but their CELLS don't - that's the "mystery gaps between squares" effect. 8 x 100px = 800px makes cells exactly square-sized. (Instructor: not setting the width is fine, the exercise is really about display:grid + grid-template-columns.)
+- GRADED 10/10. Only debugging step needed was the missing container height. Approach chosen was the more scalable of the two.
+- Say it out loud: "Flexbox = one line, Grid = a table." / "fr is flex-grow with a unit." / "fr of nothing is nothing." / "Grid container is greedy sideways, shy downwards." / "You don't size chess squares, you size the board."
+- Next: 10.1 Grid Sizing -> 10.2 Grid Placement -> 10.3 Mondrian Project.
+- Full notes: .github/my_tasks/concepts/concept_grid_display.md | Tasks: .github/my_tasks/tasks/grid_display_tasks.md

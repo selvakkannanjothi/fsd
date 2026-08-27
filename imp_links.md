@@ -29,6 +29,19 @@ Running collection of reference/useful links gathered while working through the 
 - [MDN: Centering in CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_alignment/Box_alignment_in_flexbox) — box alignment in flexbox, the "centre anything" recipe
 - [Google Font: Sono](https://fonts.google.com/specimen/Sono) — the font used by the pricing table starter file
 
+## CSS Grid
+- [Grid vs Flexbox side-by-side demo (appbrewery)](https://appbrewery.github.io/grid-vs-flexbox/) — **the lesson's own demo**: resize the window and watch grid snap to lines while flexbox squishes, from `grid_display.txt`
+- [A Complete Guide to CSS Grid (CSS-Tricks)](https://css-tricks.com/snippets/css/complete-guide-grid/) — the Grid counterpart to the flexbox cheat sheet; separates container vs item properties
+- [MDN: CSS grid layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) — the module landing page, start here for anything grid
+- [MDN: `grid-template-columns`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns) · [`grid-template-rows`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows)
+- [MDN: the `<flex>` (`fr`) unit](https://developer.mozilla.org/en-US/docs/Web/CSS/flex_value) — what `1fr` actually resolves to, and why it needs available space
+- [MDN: `repeat()`](https://developer.mozilla.org/en-US/docs/Web/CSS/repeat) — `repeat(8, 1fr)` instead of writing `1fr` eight times
+- [MDN: `gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/gap) — same property as in flexbox, spaces both rows and columns in a grid
+- [Josh Comeau — An Interactive Guide to CSS Grid](https://www.joshwcomeau.com/css/interactive-guide-to-grid/) — best visual explanation of grid anywhere, the grid twin of his flexbox guide
+- [Grid Garden](https://cssgridgarden.com/) — the Grid equivalent of Flexbox Froggy, drills `grid-template-*` and placement
+- [Grid by Example (Rachel Andrew)](https://gridbyexample.com/) — copy-paste layout patterns from one of the spec authors
+- [Can I Use — CSS Grid](https://caniuse.com/css-grid) — browser support check
+
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
 - [MDN: `<img>` element (height attribute)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height) — from `EX 4.3 HTML Portfolio Project`

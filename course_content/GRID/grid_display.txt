@@ -1,0 +1,456 @@
+Hey guys.
+
+In this module we're going to be learning all about CSS Grid, the CSS tool that's going to make it
+
+easier for us to create two dimensional layouts.
+
+After learning about Flexbox, you would probably look at a layout like this and think that you could
+
+have a horizontal row based Flexbox system with multiple divs inside and you can define their widths
+
+and also their alignment and so on and so forth.
+
+Now how about a layout like this?
+
+Can you think of how to create this using Flexbox?
+
+It would be pretty hard, right?
+
+Well, you'll be relieved to hear that it's not just you,
+
+web designers thought creating these kind of complex layouts is pretty difficult, too, which is why
+
+they created Grid.
+
+And Grid is here to make our lives a lot easier.
+
+So if we look at the Swiss website where they've got the weather forecast for Bern, you can see that
+
+it's actually created using grid and we can divide up the layout to see what the grid actually looks
+
+like.
+
+You've got all of these different sections and you can imagine just how hard this would be to make using
+
+just Flexbox or floats.
+
+And on top of that, look at how beautifully responsive this website is.
+
+It shrinks and preserves the grid format, and everything is more or less proportional depending on
+
+how the designer wanted it to look.
+
+At this point, you might be wondering, well, what exactly is the difference between Flexbox and Grid
+
+then?
+
+Do I just pick one of them or is one of them better than the other one?
+
+Well, here's how I tend to think of Flexbox.
+
+I tend to think of it as a tool that helps me align content along a one dimensional line.
+
+So this is a horizontal Flexbox, and it's really easy to use it to place our items and define how we
+
+want them aligned on our page.
+
+Now with Grid, however, on the other hand, I think of it as a tool for laying out content along a
+
+two dimensional grid.
+
+So maybe I would want a navbar over to the right.
+
+Maybe I would want some content over here.
+
+Maybe I'd want a footer down here. Depending on how my design looks, if it is in a 2D,
+
+so there's an X and a Y, then in most cases, you're going to be better off using grid.
+
+Generally, Flexbox is really great for one dimensional alignment and Grid is really good for 2D layouts
+
+where you have almost like a table structure with columns and rows.
+
+But that makes it sound like as if you're going to be choosing between one of these,
+
+it's either going to be Flexbox or Grid and some of you might be wondering, well, why did you teach
+
+us Flexbox anyways?
+
+It seems like grid is far more powerful.
+
+If I can do things in 2D, it's obviously better than 1D, right?
+
+Why did I bother learning Flexbox?
+
+Well, in reality, these tools have different strengths and they have different weaknesses.
+
+Most web developers would use a combination of these two tools alongside other things such as floats
+
+or bootstraps or other frameworks in order to create their design.
+
+In this case, you can see we've got a grid style 2D layout, but within the grid one of these containers
+
+is actually laid out using Flexbox.
+
+This is really, really common.
+
+Even in that example I showed you earlier where I said this is a really beautiful example of grid in
+
+action.
+
+You can see that actually there are components of Flexbox in this.
+
+For example, this is a Flexbox.
+
+It's laid out in a Flexbox column,
+
+and it's a really good way of setting the alignment for each of these items.
+
+So this column-based Flexbox is sitting within this grid.
+
+So sometimes you might have a Flexbox inside a grid and other times you might have a grid inside a Flexbox.
+
+So it really, really just depends on what it is that you want to create,
+
+and knowing how to use different tool sets gives you the flexibility to create things exactly the way
+
+you want it to.
+
+And as my grandad says, the only thing that doesn't weigh you on your travels in life are skills.
+
+So the more skills we have, the better we'll be able to adapt to situations and the easier things will
+
+be. In order for you to better compare Grid versus Flexbox,
+
+because I know right now it seems a little bit abstract, this idea,
+
+I created a website to demo the two of them side by side.
+
+If you head over to appbrewery.github.io/grid-vs-flexbox/
+
+then
+
+you can see this example that I've created for you.
+
+Just because I said grid is for two dimensional layouts and Flexbox is for one dimensional layouts,
+
+it doesn't mean that you can't create a one-dimensional grid, but it does behave a little bit differently.
+
+Let's take a look at this grid we've got, and I want you to watch how it behaves when I try to make
+
+this page smaller.
+
+Notice how grids, natural inclination is to create a grid and everything lines up with each other on
+
+a column and row basis.
+
+So we have a column here and we have a row right here.
+
+And notice how the gaps between all the items pretty much all match up with each other.
+
+They're completely straight along, a very nice grid.
+
+Now, Flexbox behaves very differently.
+
+It's actually very difficult to get the Flexbox items to line up with each other like this because it's
+
+flexible, right?
+
+It tries to actually adapt and squish the content so that everything gets placed on the screen. As I
+
+expand,
+
+this may be occasionally some items will line up with each other kind of like this, but it's not perfect
+
+alignment, right?
+
+Depending on the kind of behavior you want your items to have, do you want them to prioritize spacing
+
+out content and aligning content, or do you want everything to be boxy like a grid?
+
+Have a play around with this website and see what other things you can spot that are different between
+
+Grid and Flexbox.
+
+Now that we've seen how Grid behaves, it's time to show you how to create an actual grid.
+
+Here
+
+I've got a div that contains four paragraph elements.
+
+Now these four paragraph elements are going to be my grid items.
+
+And on the outside of these items I've got a container which is going to act as my grid. In order to
+
+style this HTML so that it looks like this,
+
+all I have to do is target my container using the container class and then set the display to grid.
+
+Now, this should be familiar to you because previously, in order to use Flexbox, we had to set the
+
+display to flex.
+
+In this case, we're using grids,
+
+so we set it to grid.
+
+Next, I have to create some "grid-template-columns" and some "grid-template-rows".
+
+Now, we're going to go into this notation in a lot more detail in the coming lessons, but it's also
+
+pretty easy to understand.
+
+What I'm doing here is I'm saying I want to create columns that have a fractional ratio of 1 to 2.
+
+This side should be 1.
+
+So the first column, if it had a width of 1, then I want the second column to be twice that width.
+
+If this was 100px wide then this would be 200px wide.
+
+But then for my rows, I've said I want it to be 1 to 1, two equal fractions.
+
+And that's exactly what I get.
+
+I get two rows that are pretty much equal in their heights.
+
+And then finally, I've defined a gap of 10px so that this little distance between the columns
+
+and between the rows is 10px.
+
+And that allows my paragraphs to separate from each other without any sort of margin or padding, just
+
+using these few lines of code.
+
+I've managed to create a relatively complex layout for my website.
+
+Let's go ahead and try this and write some code ourselves to see what happens when we set something
+
+to display grid.
+
+Go ahead and download the starting code for this exercise 10.0 Display Grid,
+
+and if you take a look inside index.html, you'll see that there are a whole bunch of divs that
+
+I've created for you.
+
+Now, the goal that we're trying to achieve here is to create a chess board.
+
+And as you can imagine, if you had to do this using Float or Flexbox, it's a little bit painful,
+
+especially if you wanted each of these divs to line up perfectly with each other,
+
+but as we know, this is the strong suit of grid. Using the index.html and what you've learned about
+
+CSS grid,
+
+see if you can style this container to set it to use grid and create this kind of outcome.
+
+There's a couple of things to note.
+
+Each of the squares, white or black, should be 100px by 100px.
+
+So they're squares.
+
+And I've chosen some colors for a more modern, I guess, sort of chess board.
+
+You can just make that white and black if you want to,
+
+it's totally up to you.
+
+But the outcome is to create something like this using our index.html and you should write your code
+
+just below the comments here.
+
+Pause the video and see if you can complete this challenge.
+
+All right.
+
+Hopefully you've given that a go and let's run through the solution together.
+
+Now, the first thing we want to do is to open up our preview so that we can see what's happening as
+
+we're doing things.
+
+And because everything is invisible, because our divs have no size and they have no color, let's fix
+
+that first.
+
+So if I go ahead and target all of the white squares and set them to have a height of 100px and
+
+a width of 100px, then if I go ahead and give them a background color.
+
+So let's use the one that I've got in the example, then they should hopefully show up.
+
+There are huge stack kind of just stacked along here, but we won't worry about that too much right
+
+now.
+
+Let's go ahead and do the same for our black squares to give them a size,
+
+and to give them a background color.
+
+And I'm going to use this color I've defined here.
+
+Now we've got our white and black squares.
+
+Now, unfortunately, they're all along one line at the moment because this is remember the default
+
+layout of HTML flow.
+
+All divs are set as display: block.
+
+So they're going to try and occupy the full width of the screen.
+
+And even though we've defined the width and the height, they're not going to come up and sit next to
+
+each other unless we add some more CSS, which is exactly what I'm going to do right now.
+
+So I'm going to target the container that contains all of these divs and I'm going to set it to display:
+
+grid.
+
+Now, this is not going to do too much just yet because we need to define our template-rows and our
+
+template-columns.
+
+If you look at the goal example, you'll see that a chess board is made up of eight by eight squares
+
+and you can count these if you want.
+
+And in total there are 64 squares and there are 64 divs that I've already included in the starting code.
+
+So we don't have to worry about the HTML,
+
+we just have to set up our grid.
+
+Let's go ahead and set our grid-template-columns so we know we need eight equal-sized columns.
+
+So we have one, two, three, four, five, six, seven, eight,
+
+and once we've created all the columns, then you can see even if we didn't create any rows, we've
+
+already got ourselves a bit of a chess board that's created.
+
+Now we're going to explain why Grid is able to automatically infer what we want.
+
+But just in case you did this and it's totally fine, we can add in the grid-template-rows just so that
+
+it's really clear what it is that we want.
+
+Eight equal size columns and eight equal size rows.
+
+One thing you might notice with our solution is if you had extra width, then there's all these gaps
+
+that show up between each of our columns.
+
+Well, the reason for this is because our container is trying to take up the full width of the screen.
+
+What we can do is we can set the width to 800px to fit all of our items.
+
+And then this way we actually get a compact chess board that doesn't split up because it's trying to
+
+be responsive.
+
+Now, the default behavior for a grid container is to try and take up the full width, but only have
+
+as much height as it allows to fit the content so we don't have to change the height.
+
+Now, don't worry too much if you didn't set the width, it doesn't matter because this exercise is
+
+all about you being able to figure out how to use the grid-template-columns and how to set the display
+
+to grid so that we can turn our divs into our chess board.
+
+As long as you've achieved that, then I'm happy that you've passed this challenge.
+
+Now let's head over to the next lesson where we learn more about how to customize our grid.
+
+
+Completed
+Play
+Not completed
+Play
+Not completed
+Play
+Not completed
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
