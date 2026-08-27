@@ -42,6 +42,13 @@ Running collection of reference/useful links gathered while working through the 
 - [Grid by Example (Rachel Andrew)](https://gridbyexample.com/) — copy-paste layout patterns from one of the spec authors
 - [Can I Use — CSS Grid](https://caniuse.com/css-grid) — browser support check
 
+### Grid Sizing (fixed / auto / fr / minmax / repeat / implicit tracks)
+- [Grid Sizing demo (appbrewery)](https://appbrewery.github.io/grid-sizing) — **the lesson's own demo**: fixed/auto/fractional/minmax/repeat playground + the "Test" page exercise (`EX 10.1`), from `grid_sizing.txt`
+- [MDN: `grid-template`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template) — the `rows / columns` shorthand (recognise it, don't write it yet)
+- [MDN: `minmax()`](https://developer.mozilla.org/en-US/docs/Web/CSS/minmax) — one function combining a track's floor and ceiling
+- [MDN: `grid-auto-rows`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows) · [`grid-auto-columns`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns) — sizing implicitly-created tracks
+- [Chrome DevTools — Inspect CSS grid layouts](https://developer.chrome.com/docs/devtools/css/grid/) — the "grid" badge, overlay, and **Show track sizes** to read exact computed pixel values
+
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
 - [MDN: `<img>` element (height attribute)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height) — from `EX 4.3 HTML Portfolio Project`

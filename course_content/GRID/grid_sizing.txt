@@ -1,0 +1,1281 @@
+Now, one of the most important things to figure out using Grid is how to size our columns and rows
+
+to conform to our design.
+
+If we start out with a grid-container that has four grid items like this and we go ahead and add some
+
+CSS, so we create some template-rows and template-columns,
+
+and in this case, we're defining the rows and columns by giving them fixed sizes 100px and 200px
+
+rows, 400px and 800px columns.
+
+So when we run this code, this is what we will end up with.
+
+We have 100px high for the first row and 200px high for the second row.
+
+For the first column we said it would be 400px and the second column should be twice as wide at 800px.
+
+The thing you have to realize about the fixed size grids like this one is they are not responsive.
+
+That means that if you go ahead and change the width or the height, it's not going to change at all.
+
+It's going to stay fixed to these sizes that you have specified.
+
+In addition to using pixels, we can also use rem.
+
+So you could use the 1rem and then maybe 2rem.
+
+Now this is still fixed because the rem sizing, as we learned in previous lessons, is relative to
+
+the root of your HTML.
+
+If your body has a certain size or your HTML has a certain size specified and you change that size,
+
+then the rem size will go up and down with it,
+
+but this does not make it responsive to the screen size.
+
+Now another way you might see this being represented is instead of having grid-template-rows and
+
+grid-template-columns is you can combine the two of these into one property, which is just called grid-template.
+
+And you define all of your rows first and then you add a forward slash (/) and then you define your columns.
+
+So if you had a lot of grids to define, if you had a lot of things and you wanted this shorthand,
+
+this is how you would do it.
+
+I don't recommend us to write code like this at this stage because I think it's much better when you're
+
+learning for everything to be more explicit so that when you're reviewing your code and you're trying
+
+to spot problems, it's much easier when you've got the rows defined and your columns defined and you
+
+can see exactly what's going wrong.
+
+This just makes it a little bit more hidden as to what's going on.
+
+But it's really important for you to know this,
+
+if you see it in the wild in other people's code so you know what's going on.
+
+Another way that we can define our grid-template-rows and columns is to use this "auto" keyword.
+
+Now, what this is going to do is it's going to give us a little bit of responsiveness.
+
+Each row is going to try and fit to 100% of the horizontal available space.
+
+If this was your browser window, maybe it would look something like this,
+
+and then you've got your window size like this,
+
+then your grid is automatically going to try and take up 100% of that width.
+
+So now if you go ahead and define your first column as 200px wide.
+
+Like what we have here.
+
+And then you say the next column should be auto,
+
+what this means is the second column is going to be extensible.
+
+It can be as wide or as narrow as it needs in order to take up 100% of the width.
+
+Now, be careful here, because if you do the same thing with the rows, it doesn't behave like what
+
+you might think it does.
+
+It doesn't try to take up 100% of your screen's height.
+
+Instead, what it does is it tries to fit to the content.
+
+If this is set in this case, it's 100px, then that div is 100px,
+
+now, this one, however, is not set in height and it's just given to be auto.
+
+Now, what that's going to do is it's just going to try and fit whatever content is in there.
+
+And in this case, it's this number 3.
+
+So as long as number 3 fits in there perfectly, then it will automatically adjust the height to
+
+fit that.
+
+So just be aware that when you use auto on a row, it's going to fit content.
+
+And when you use auto on a column, then it's going to try and go to 100%.
+
+This is another case where it's quite good to play around with an actual example.
+
+So I've created a demo website for you at appbrewery.github.io/grid-sizing.
+
+And here we've got a menu of different ways of sizing Grid.
+
+You've seen the Fixed Size where the grid is not responsive at all to the size of the screen.
+
+It doesn't matter how wide or how narrow it is.
+
+And then we've got the Auto Size that I showed you just now.
+
+This first column, as we said, has to be 200px wide, but then the second column is set to auto.
+
+So it's shrinking as I'm shrinking my screen and it's expanding as I expand my screen.
+
+But even though the second row is also set to auto, it only is high enough to fit the content and it
+
+doesn't grow and shrink with the size of the screen.
+
+So have a play around with that and come back and we'll talk more about the next one, which is Fractional
+
+Sizing.
+
+Frequently what you might want in your layout is to define the different areas of your layout with ratios
+
+for sizes.
+
+Maybe you would want the first row to be half the size of the second row and maybe you would want your
+
+columns in the same way.
+
+This is where the fractional unit comes in with the "fr", and this unit basically defines the ratios.
+
+If we run this code, this is what we would get.
+
+This first row is half the size of the second row,
+
+and similarly, this first column is half the size of the second column.
+
+You can of course go for any sort of fractions you want.
+
+You could have the first row be 1fr and the second one be 2.5 fr, or you could have the first column
+
+be 3fr and the second one be 5fr, any sort of ratios you want, essentially.
+
+And what it's going to do is it's going to grow and shrink depending on the width available for the
+
+horizontal and also the content size for the vertical.
+
+Again, going back to our demo, if you take a look at the fractional size, you can see that no matter
+
+how much I shrink my screen, the first column is always going to try and stay half the size of the
+
+second column.
+
+And if I go ahead and select this and then Inspect and I add a whole bunch of content to this bit of
+
+HTML.
+
+So let's say instead of 3, I just add a whole bunch of text like this,
+
+then you can see that the first row expands as well, and it's all done just so that we maintain
+
+that fractional ratio, so that this one is always half the size of this one.
+
+So have a play around with this example and then we'll talk about the MinMax Size.
+
+Sometimes you want to define how your Grid is responsive, especially on the horizontal.
+
+One of the functions we can use is called minmax, and here we can define the minimum width and the
+
+maximum width we want our column to be.
+
+This is what it might look like. In this case,
+
+what we're saying is that when we have enough space on the horizontal, we want to give this second
+
+column more space so it can go all the way up to 800px and all the way down to 400px wide.
+
+And this essentially sets a limit because sometimes we have certain types of content.
+
+We don't want it to be too narrow like an image or we don't want it to be too wide because it might
+
+change the scaling.
+
+So this is another way of limiting the size of columns inside your grid.
+
+Right now you can see that this second column here is 800px wide
+
+from edge to edge.
+
+If I go ahead and reduce the size of this,
+
+so if I go ahead and make this window a little bit smaller, you'll see that second column being responsive,
+
+reducing in size until it will refuse.
+
+And that is because it's hit 400px right here.
+
+We're essentially setting a stop at 400px and another at 800px to further define how we want
+
+our website to be responsive.
+
+Remember previously, when we created our chess board, we had to write 1fr, 1fr, 1fr eight times,
+
+and that's a lot of repetition.
+
+And remember, we're programmers, so we're inherently lazy and we want to save ourselves work.
+
+We can do that in grid by using the repeat function.
+
+So we're saying repeat this size this many times.
+
+This is how many times you want to repeat it, and this is the size.
+
+And similarly with our columns, we can do the same thing.
+
+What this is equivalent to is defining the rows as 200px space, 200px,
+
+and for our columns, this code is the same as saying 100px, space 100px,
+
+but we didn't have to write all of that out.
+
+And as you can imagine, if the repeat was eight or 10 or 100, that's going to save you a lot of time.
+
+And as you would expect, this would create exactly the same layout as if you had defined the size of
+
+each column and each row.
+
+It works exactly the same,
+
+it's just time saving.
+
+Now, what if you defined a Grid that is larger than you have items for?
+
+So here you can see in our HTML we have four items, but here we're creating a two by three grid.
+
+So we have two rows and three columns.
+
+If we only have four items, they're fitted into our grid from the top left all the way to the bottom
+
+right.
+
+So that means once we've laid out the first row, it's going to double back and continue along the second
+
+row.
+
+But if we don't have any items for number 5 and number 6, then it's just not going to add them
+
+in there,
+
+and you have this style of layout.
+
+Now what happens if you don't define enough rows and columns?
+
+So in this case, we're defining a 2*2 grid with each item being 200px tall and wide.
+
+Now I've added in a third div, Item Number 5, because that doesn't fit within the templated row and
+
+column, which is only 2*2.
+
+So this is the defined template grid.
+
+Well then anything that gets added afterwards will get an automatic size based on its height and also
+
+any existing column sizes.
+
+So it will try to match the previous columns width, but it will try to fit the height to the height
+
+of the content.
+
+If you want to change this, let's say you have some code that will create more divs in the future,
+
+or maybe you have a game that's going to add more squares, something like that,
+
+you can actually use the grid-auto-rows and grid-auto-columns to define this.
+
+So in this case, I'm saying when we create a new row that doesn't fit within our grid because our grid
+
+actually ends here, then give each of them 300px in height.
+
+And this just allows you to control your styling no matter how many items gets added to the grid.
+
+This is a good time to go back to our demo and click on the Repeat title to see our repeated grid.
+
+As you might imagine, this is a very simple grid which is repeated by having 2 rows which are 200px
+
+each and two columns which are 100px each.
+
+If I go ahead and change this so that I have 3 columns, then you can see we have that layout we
+
+had before where we've got some missing items, but it's only going to lay out as many items as we have
+
+in our HTML.
+
+Similarly, if I change this to only 1 column, then we've got some extra items that are not defined
+
+using our template rows and columns, which is a two-by-one.
+
+So two rows, one column and all these extra ones get an automatic size based on the size of their content.
+
+But we can of course change this by using that property we learned, which is grid-auto-rows,
+
+and if we set this to be say, 300px, then you can see every new automatically added item gets
+
+that particular height.
+
+Have a play around with this and once you're done, I want you to come back and I want to talk more
+
+about how we can use the Chrome Developer Tools to investigate and debug our CSS Grid.
+
+As you can imagine, as we're fiddling around with Flexbox or Grid, it can be quite hard to know exactly
+
+what's happening behind the scenes.
+
+So we're going to learn more about how we can use the Chrome Developer Tools to see exactly what's going
+
+on in our CSS Grid.
+
+As you remember, you can bring up the Chrome Developer Tools either by right-click to go to inspect
+
+or simply to go to the three dots, go to More Tools and then go to Developer Tools.
+
+It will do exactly the same thing.
+
+Basically bring up this panel.
+
+One of the cool things that you'll see is when you have defined a grid,
+
+so this is when you set display grid onto a particular item in your HTML,
+
+in the Chrome Developer Tools, you see this little chip show up and it says "grid",
+
+if you click on it, it will offer you a whole bunch of information, which is really handy.
+
+Now we can change the layout of the overlaid stuff by going into Layout here,
+
+and you can see, for example, if I don't want to have a pink sort of outline, let me change this
+
+to black.
+
+Then you can see it maybe a little bit more clearly.
+
+I can also change whether if we show each of the sizes of the columns and the rows or if I want to extend
+
+the grid lines to see what's happening or if I want to show the line numbers, I can basically show
+
+and hide all of these things.
+
+But normally by default, you'll see the line numbers and you'll see the sizes of the rows and the columns.
+
+Here,
+
+if we look at the first number, you can see that each of the columns are 100px wide,
+
+and if we look at the first number for the second part, each of the rows are 200px high.
+
+So now that we've learned how to size items in our CSS Grid and use the Chrome Developer Tools to inspect
+
+and see exactly what's going on with our sizing, it's time for us to try an exercise.
+
+So I've created a Grid Sizing Exercise in the website and to access it, all you have to do is go back
+
+to the main menu of the grid sizing website and then go to the Test page.
+
+Y ou can see this is the grid that we want you to recreate,
+
+and I've added in the width and height requirements to most of them.
+
+There's just a couple of things to note, which is how this website responds when we resize it.
+
+If I go ahead and reduce the width, you can see that the first column will expand to fill the space
+
+and reduce until a certain point.
+
+Now, when I continue reducing the size, you can see that the third column will also start to reduce
+
+in size,
+
+but the second column stays that particular fixed size always.
+
+The other thing to note is that our final item here is only 50px high, and it's actually even
+
+shorter than how much it should be allocated based on the content.
+
+So this is a grid item that's put in automatically.
+
+So now if you scroll down, you'll see the area that you're working with and right now it's just a div
+
+without any styling.
+
+I want you to go ahead and write your CSS code below.
+
+Only write code that is going to target the grid container, which is this gray box around all of our
+
+grid items.
+
+And I want your code to make this purple section exactly the same as the green section and also responsive
+
+in exactly the same way.
+
+Pause the video.
+
+Have a think about this problem, write your code and then click
+
+"Apply CSS" to see it applied and make sure to see that you've got the right code working.
+
+Pause the video now and give that a go.
+
+All right.
+
+So the first thing we need to do in order to create a grid is of course, set our display to grid,
+
+which is not going to do very much to our code because we need to set the template.
+
+So we're going to use our grid-template-rows.
+
+Now, how should our rows look?
+
+Well, if we look at this first row, it seems to be as high as is required to fit the content.
+
+And similar with the second one, they're exactly the same height, but the third one seems to be double
+
+the size of these two.
+
+So we can use our fractional units with 1fr, 1fr and 2fr to define our rows.
+
+Notice the third one is completely different from any of the other ones.
+
+If we look at the last row, you can see it's only 50px high,
+
+so we could, if we wanted to, to define it right here as a fourth row.
+
+But I'm actually going to leave it because I'm going to use the grid-auto-rows to set the height for
+
+that last one
+
+instead. Let's go ahead and apply our CSS and see what happens.
+
+First row is 1fr.
+
+Second row is 1fr.
+
+Third row is twice as high.
+
+Now, what about all of these other ones?
+
+Well, we need them to become columns.
+
+So let's define our grid-template-columns.
+
+And it's really important that we don't make any typos here because otherwise our code is not going
+
+to work.
+
+If you have any strange errors or anything that's not working, I want you to make sure that you check
+
+the spelling of each of these grid-template-rows.
+
+Remember, there's an S at the end and grid-template-columns.
+
+Make sure that you haven't spelt anything wrong because that happens a lot.
+
+And that's a really simple way to fix your problems.
+
+So how do we want our columns to be laid out?
+
+Well, this first one is going to expand to fill any available space,
+
+and even when it's hit the size of the content, it will continue to reduce until the minimum size.
+
+This is actually done using our auto value.
+
+So this is going to expand to fill any available space and shrink until it can no longer shrink.
+
+The second column is easy.
+
+It's a fixed 400px wide column and the final one has a minimum and maximum value so it can be defined
+
+using our minmax function, minimum 200px and maximum 500px.
+
+Let's create our three columns down here.
+
+auto: 400px and then minmax,
+
+200px and 500px.
+
+Let's apply our CSS and we can see our purple ones are now looking pretty much the same as our green
+
+ones.
+
+And when we try to expand and contract our grid, you can see that it behaves exactly the same way in
+
+terms of responsiveness. For the final, final row it's being put in with the height
+
+that is enough to fit its content.
+
+But remember, we learned about this concept of the grid-auto-row so we could use grid-auto-rows...
+
+So again, we have an S at the end to define how high each new automatically created row that is outside
+
+of the template should be.
+
+So we can change that to 50px.
+
+And when we apply that, you can see that this which is outside our template grid, gets added in with
+
+50px of height.
+
+Hopefully you managed to do this.
+
+If you didn't go back and check to see if you have made any typos, any spelling mistakes,
+
+and with what we've spoken about in the solution, see if you can fix your code.
+
+Once you're ready, head over to the next lesson where we're going to learn more about how to place
+
+items inside a CSS Grid.
+
+So for all of that and more, I'll see you on the next lesson.
+
+
+Completed
+Play
+Completed
+Play
+Not completed
+Play
+Not completed
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14:53
+10. Grid
+61. Grid Sizing
+when content gets out of the grid ---> more content - less space
+
+
+
+and if you want to control the elements which are out of the grid
+
+use grid-auto-rows: 300px
+13:09
+10. Grid
+61. Grid Sizing
+what if : more content : less grid spaces,
+
+row----> accomodate based on the content height
+
+column -----> try to align based on the existing column width
+
+12:18
+10. Grid
+61. Grid Sizing
+understand the repeat keyword:-
+
+grid-template-rows: repeat(2, 200px);
+
+grid-template-columns: repeat(2,100px)
+
+meaning ---> repeat("no of times","values")
+
+[200px 200px]
+
+[100px 100px]
+
+
+
+lets say only 4 content --- grid has 6 spaces ----> understand the way how the content is organised---> left to right ----> and next row
+
+8:33
+10. Grid
+61. Grid Sizing
+fr ---> fractions or ratios
+
+column limit ---> up to browser width
+
+row limit ---> based on content ----> if content increased ----> that particular box height increased ---> it will alter the first box height tooo
+
+
+
+All situations --> the ratios will be maintained !!!
+5:21
+10. Grid
+61. Grid Sizing
+auto on the grid-template-row -----> tries to fit the content ---? expands to accomaodate the content
+
+
+
+auto on the grid-template-column -----> extends up to the browser window ---> occupies all the space till the end
+
+2:31
+10. Grid
+61. Grid Sizing
+ccombine grid-template-rows and grid-template-columns in to grid-template,
+
+
+
+grid-template: 100px 200px / 400px 800px;
+
+2:15
+10. Grid
+61. Grid Sizing
+if you apply specific width and height to the grid-template-rows and grid-template-columns
+
+that wont be responsive
+
+
+
+even if you apply something like 1rem or 2rem - that wont also responsive
+
+6:49
+10. Grid
+60. Display: Grid
+scenario - one dimensional grid vs one dimensional flexbox
+
+
+
+grid behaves like a grid -- meaning it acts like a proper row column, the gaps are aligned straight --> both horizonatlly and vertically
+
+flex behaves like a flex ---> dont maintain such gap alignments with repspect to before/after rows/columns --- it just adapt to space availability
+
+2:42
+10. Grid
+60. Display: Grid
+use flex box----> alignment in one dimensional layouts
+
+use grid ----> for 2d layouts
+
+20:26
+9. Flexbox
+57. Flex Sizing
+lets say you have three items lined up with the main axis on the row based
+first item ---> flex: 1
+second item --> flex: 2
+third item --> flex:3
+flex: 1 ---> grow-1 shrink-1 flex-basis-0
+flex:2 --->grow-2 shrink-2 flex-basis-0
+flex:3 --->grow-3 shrink-3 flex-basis-0
+it is going to respect the RATIOS
+100x 200x 300x
+growing and shrinking also based on the ratios
+1x expand/shrink | 2x expand/shrink | 3x expand/shrink
+19:31
+9. Flexbox
+57. Flex Sizing
+we can further shrink the most commonly used flex: 1 1 0
+
+flex: 1
+
+19:11
+9. Flexbox
+57. Flex Sizing
+short hand way of writing flex:
+flex-basis: 0;
+flex-grow: 1;
+flex-shrink: 1;
+flex : 1 1 0;
+flex: grow shrink flex-basis;
+19:06
+9. Flexbox
+57. Flex Sizing
+gs - scenario 4 :- types of flex-basis
+
+flex-basis: auto;
+
+flex-grow: 1;
+
+flex-shrink: 1:
+
+
+
+- maximum flexibiity or proiority to the items with more content (one sentence with 10 words)
+
+- less or min flexibiity given the items with less content (one single word)
+
+
+
+Instead if you want to give equal width to the all the items, then you can switch to 0
+
+flex-basis: 0
+
+18:05
+9. Flexbox
+57. Flex Sizing
+gs - scenario 4 :-
+
+flex-basis: 100px;
+
+flex-grow: 1;
+
+flex-shrink: 1:
+
+
+
+in this scenario,
+
+the flexbox is allowed to shrink - up to min content width
+
+the flexbox is allowed to expand - up to available space
+
+
+
+flex-basis is completely ignored here ----- DUMMY PIECE BAAVA
+17:20
+9. Flexbox
+57. Flex Sizing
+gs - scenario 3 :-
+
+flex-basis: 100px;
+
+flex-grow: 0;
+
+flex-shrink: 1:
+
+
+
+in this scenario,
+
+the flexbox is allowed to shrink
+
+initial width should be 100px - flex-basis
+
+the range is minimum content wdth --------> 100px
+
+100px is considered as the maximum width/ default width of item
+
+
+
+can shrink freely up to min content width
+
+but when you try to expand- it wont expand beyond the 100px.
+
+
+
+Note that : this is default behavior of flex box - even if you don't mention anything
+you are allowed to shrink
+you are not allowed to expand
+
+
+16:35
+9. Flexbox
+57. Flex Sizing
+gs - scenario 2 :-
+
+flex-basis: 100px;
+
+flex-grow: 1;
+
+flex-shrink: 0:
+
+
+
+in this scenario,
+
+the flexbox is allowed grow
+
+initial width should be 100px - flex-basis
+
+the range is 100px -------> N px (based on the space availability)
+
+
+
+can expand unlimitedly based on the available space - freely
+
+but when you try to shrink - it wont shrink beyond 100px.
+
+15:12
+9. Flexbox
+57. Flex Sizing
+gs - scenario 1 :-
+
+flex-basis: 100px;
+
+flex-grow: 0;
+
+flex-shrink: 0:
+
+
+
+in this scenario,
+
+the flexbox cannot grow
+
+the flexbox cannot shrink
+
+
+
+whatever you do expand or shrink -- the width is constant 100px --- no flexibility
+
+13:33
+9. Flexbox
+57. Flex Sizing
+max-width --- tells the potential of item how much it can extend
+
+min-width --- tells the potential of item how much it can shrink
+
+13:28
+9. Flexbox
+57. Flex Sizing
+scenario 4:
+
+flex-basis : 400px;
+
+min-width: 300px;
+
+
+
+in this case, flex-basis > min-width, so
+
+flex-basis is completely considered
+
+width is applied to defined flex-basis
+
+final width --- 400px
+
+13:23
+9. Flexbox
+57. Flex Sizing
+scenario 3:
+
+flex-basis : 200px;
+
+min-width: 300px;
+
+
+
+in this case, flex-basis < min-width, so
+
+flex-basis is completely ignored
+
+width is applied to defined min-width
+
+final width --- 300px
+
+14:17
+9. Flexbox
+57. Flex Sizing
+selva, you need to unserstand this,
+min-width just tells the potential --- indicating the limit
+if some attributes such as flex-basis not respecting the min-width meaning if flex-width is smaller than the min-width, min-width comes in to the scene and it will be defined.
+if flex-basis respecting the max-width meaning if flex-width is lager than the max-width, min-width DONT comes in to the scene and FLEX-BASIS will be defined as final width.
+12:09
+9. Flexbox
+57. Flex Sizing
+selva, you need to unserstand this,
+max-width just tells the potential --- indicating the limit
+if some attributes such as flex-basis not repecting the max-width meaning if flex-width is larger than the max-width, max-width comes in to the scene and it will be defined.
+if flex-basis respecting the max-width meaning if flex-width is smaller than the max-width, max-width DONT comes in to the scene and FLEX-BASIS will be defined as final width.
+10:59
+9. Flexbox
+57. Flex Sizing
+scenario 2:
+
+flex-basis : 50px;
+
+max-width: 200px;
+
+
+
+in this case, flex-basis < max-width, so
+
+flex-basis is completely considered
+
+width is applied to defined flex-basis
+
+final width --- 50px
+
+11:15
+9. Flexbox
+57. Flex Sizing
+scenario 1:
+
+flex-basis : 200px;
+
+max-width: 100px;
+
+
+
+in this case, flex-basis > max-width, so
+
+flex-basis is completely ignored
+
+width is applied to defined max-width
+
+final width --- 100px
+
+9:38
+9. Flexbox
+57. Flex Sizing
+when we have both width and the flex-basis,
+flex-basis is considered ---- width is completely ignored
+when it could not accomaodate flex-basis value---> it falls back to follow minimum content width
+9:58
+9. Flexbox
+57. Flex Sizing
+if you have flex-basis it will ignore width;
+
+3:58
+9. Flexbox
+57. Flex Sizing
+!!!! IMP !!!!
+
+1. min-width/max-width
+
+2. flex-basis
+
+3. width
+
+4. Content width
+
+19:11
+9. Flexbox
+56. Flex Layout
+align-content ---> determines the spaces between the wrap lines.
+
+
+
+can be applied when there is a wrap.
+
+
+
+cannot be applied at the single line.
+
+19:10
+9. Flexbox
+56. Flex Layout
+understand clearly the diffrence between the align-content and the align items.
+12:54
+9. Flexbox
+56. Flex Layout
+align-items controls how flex items are aligned along the cross axis (vertical, in a row-direction container).
+
+flex-start — items aligned to the start of the cross axis (top, in a row).
+
+flex-end — items aligned to the end of the cross axis (bottom, in a row).
+
+center — items centered along the cross axis.
+
+baseline — items aligned so their text baselines line up with each other, regardless of box size.
+
+stretch — items stretch to fill the container's cross-axis size (default, if no fixed height is set on items).
+
+flex-start vs baseline — the key difference:
+
+flex-start aligns the top edge (box) of every item, ignoring what's inside them.
+
+baseline aligns the text baseline (the invisible line text "sits" on) of every item, ignoring box edges.
+
+They look identical only when all items have the same font-size/padding, so their box-tops happen to match their baselines too.
+
+10:46
+9. Flexbox
+56. Flex Layout
+understand the diff between the justify-content & align-items.
+
+justify contents ----> main axis
+
+align-items ---> perpendicular to the main axis
+
+
+
+9:59
+9. Flexbox
+56. Flex Layout
+justify-content controls how flex items are spaced along the main axis (horizontal by default, in a row).
+
+flex-start — items packed at the start of the container. Default behavior.
+
+flex-end — items packed at the end of the container.
+
+center — items packed together in the center, equal space on both sides of the whole group.
+
+space-between — first item touches the start, last item touches the end, remaining space split evenly between items. No space at the edges.
+
+space-around — each item gets equal space on both its sides. So gaps between items look double the gap at the edges (since two items' side-spaces combine there).
+
+space-evenly — all gaps (including edges) are exactly equal — start, between each item, and end.
+
+Quick visual (container with 3 boxes):
+
+flex-start:     [A][B][C]____________
+flex-end:       ____________[A][B][C]
+center:         _____[A][B][C]_____
+space-between:  [A]______[B]______[C]
+space-around:   __[A]____[B]____[C]__
+space-evenly:   ___[A]___[B]___[C]___
+7:10
+9. Flexbox
+56. Flex Layout
+flex-wrap: nowrap/wrap; -------> container property -- not the child ones
+5:05
+9. Flexbox
+56. Flex Layout
+flex-wrap: nowrap/wrap;
+
+this is similar to the wordwrap in the wordpad.
+
+3:05
+9. Flexbox
+56. Flex Layout
+its important to know the difference where the changes are applicable to : either parent or child
+
+
+
+in this case, the property order is applied to the child elements.
+
+
+
+lower values comes first-------------higher value comes last
+
+9:35
+9. Flexbox
+55. Flex Direction
+flex basis is intended for the child class of the container
+5:01
+9. Flexbox
+55. Flex Direction
+flexing along main axis
+4:29
+9. Flexbox
+55. Flex Direction
+flex basis ----> width of elements if main axis is row
+
+
+
+flex basis ----> heightof elements if main axis is column
+
+3:19
+9. Flexbox
+55. Flex Direction
+undertstand main axis and the cross axis.
+
+
+
+1:25
+9. Flexbox
+55. Flex Direction
+default -----> flex-directoion:row
+
+
+
+12:07
+9. Flexbox
+54. Display: Flex
+list-style: none -----> remove bullet points
+
+
+
+10:06
+9. Flexbox
+54. Display: Flex
+other display properties such as inline, block, inline-block, none are completely different
+
+think flex in a different perspective,
+
+
+
+when apply flex, whatever the elements inside the container with the properties such as block, inline..... will be ignored. rules meera padum.
+
+
+
+normal flex go on x axis.
+
+
+
+normal flex is a 100 percent block and occupies complete width.
+
+
+
+we have one more property called inline-flex. acts like a inline-block.
+
+5:29
+9. Flexbox
+54. Display: Flex
+use float only for floating the images around the text.
+
+not for the layouts !!!!
+10:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about flex is here !!!
+
+7:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about grid is here !!!
+
+2:12
+8. Advanced CSS
+50. How to Create Responsive Websites
+4 ways of doing the responsiveness.
+
+11:34
+8. Advanced CSS
+49. CSS Float
+important concept to learn. but dont use in real time - we have other options such as flexbox, grid & bootstrap. only use when you want to wrap the para p around the image.
+
+14:06
+7. Intermediate CSS
+45. CSS Positioning
+understand the map da Raaja
+
+position is beyond the margin.
+
+13:17
+7. Intermediate CSS
+45. CSS Positioning
+Fixed positioning - interesting guy:-
+
+seems similar to the position:static until you scroll.
+
+
+
+positioned to the browser window not the page. even if you scroll horizontally or vertically, the position will same --- looks like its glued to the monitor screen !!!
+
+12:10
+7. Intermediate CSS
+45. CSS Positioning
+z-index --- all bout z axis,
+
+by default all z-index is 0, when all are zero, the element with position:absolute will be moved to the top - thats the behaviour by default.
+
+But if you want to override that make z-index -1.
+
+note: if you are changing this using dev console inspect, refer element.syle --> which is nothing but the inline style element.
+
+7:07
+7. Intermediate CSS
+45. CSS Positioning
+Absolue positioning --->
+
+1st priority:
+
+Position relative to nearest positioned ancestor - must have this --> position : relative
+And target will have position: absolute and align based on the ancestor.
+
+
+
+2nd priority:
+
+if no ancestor have the position: relative, the alignment fall backs to top left corner of the web page. if target has left 50 top 50, the target will move from the top 50 and left 50.
+
+3:14
+7. Intermediate CSS
+45. CSS Positioning
+as said, Relative Position ---> position relative to default position. compared to its original static positive, how much it should move or align with the given inputs like left 50 top 100.
+
+0:56
+7. Intermediate CSS
+45. CSS Positioning
+static - one after other !!!! defaut behaviour - no need to mention it position: static
+19:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+combining combiners !!!!
+15:08
+7. Intermediate CSS
+44. Combining CSS Selectors
+CHAINING !!!!
+
+13:07
+7. Intermediate CSS
+44. Combining CSS Selectors
+descendent selector !!!!
+
+9:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+parent child selector !!!!
+
+5:25
+7. Intermediate CSS
+44. Combining CSS Selectors
+you can group different selectors !!!!
+
+25:09
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+position of styles in the style.css. heirarchy. last one will apply.
+
+18:19
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css cascade
+
+11:41
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css rules - overrides
+
+9:45
+6. CSS Properties
+41. The CSS Box Model - Margin, Padding and Border
+understand margin, border and padding.

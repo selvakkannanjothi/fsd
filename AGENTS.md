@@ -67,7 +67,8 @@ Regenerate the flexbox PDF after editing the HTML:
 - [x] CSS — Flexbox sizing: priority ladder, `flex-basis` vs `width` vs `min`/`max-width`, the four grow/shrink scenarios, the `flex` shorthand & ratios (⚠️ weak area — see `concept_flex_sizing.md` + `flexbox_master_notes.pdf`)
 - [x] CSS — **Flexbox section COMPLETE** — capstone `EX 9.4 Flexbox Pricing Table Project` built and corrected (centring recipe, `flex: 1` + `max-width` card pattern, media query `flex-direction: column`; see `concept_pricing_table_project.md`)
 - [x] CSS — Grid basics: `display: grid`, `grid-template-columns`/`-rows`, the `fr` unit, `gap`, `repeat()`, 1D vs 2D vs Flexbox; `EX 10.0 Display Grid` chessboard **10/10** (see `concept_grid_display.md`)
-- [ ] CSS — Grid sizing & placement (`10.1`, `10.2`), Mondrian project (`10.3`)
+- [x] CSS — Grid sizing concepts: fixed/`auto`/`fr`/`minmax()`/`repeat()`, implicit rows via `grid-auto-rows`/`-columns`, DevTools grid inspector (see `concept_grid_sizing.md`); `EX 10.1 Grid Sizing` hands-on practice still to attempt
+- [ ] CSS — Grid placement (`10.2`), Mondrian project (`10.3`)
 - [ ] CSS — responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
@@ -161,3 +162,12 @@ Regenerate the flexbox PDF after editing the HTML:
   - `width: 800px` on the container matters because otherwise it fills the window, `1fr` cells get wider than the 100px squares, and "mystery gaps" appear between them — the squares are 100px but their *cells* aren't.
   - Selva-speak: *"Flexbox = one line, Grid = a table"* · *"fr is flex-grow with a unit"* · *"fr of nothing is nothing"* · *"Grid container is greedy sideways, shy downwards"* · *"You don't size chess squares, you size the board."*
   - **Encouraging pattern:** unlike EX 9.4, this time the miss was *not* which element owns a property — it was a missing container size, diagnosed and fixed in one step.
+- **CSS Grid — Sizing tracks** (lesson done 2026-08-27; full notes in `.github/my_tasks/concepts/concept_grid_sizing.md`, tasks in `.github/my_tasks/tasks/grid_sizing_tasks.md`):
+  - Fixed `px`/`rem` tracks are **never responsive** to window resize — `rem` only reacts to root font-size (zoom/`html{font-size}`), not to screen width. `grid-template: rows / columns` is valid shorthand, deliberately avoided while learning so rows/columns stay explicit and easy to debug.
+  - **⚠️ TRAP — `auto` behaves differently per axis, same family as `EX 10.0`'s blank-page trap:** `auto` on a **column** stretches/shrinks so columns always total 100% of width; `auto` on a **row** does NOT fill height — it only fits its own content. Width-greedy, height-shy — the same asymmetry as a grid container's own defaults, just behind an explicit keyword this time.
+  - **`fr` is a live ratio, not a locked-in size:** growing the content in ONE `fr` row can grow a *sibling* `fr` row too (its own content unchanged) purely to preserve the ratio — verified in the transcript's own demo (adding text to row 2 grows row 1).
+  - **`minmax(min, max)`** = Flexbox's `min-width` + `max-width` (Selva's ⚠️ weak area) merged into a single grid-track function — grows to the ceiling, shrinks to the floor, never crosses either line.
+  - **`repeat(count, value)`** works for any track size, not just `fr` (e.g. `repeat(2, 200px)`).
+  - **Item-count mismatches:** too few items → leftover cells stay empty, no phantom boxes. Too many items → Grid adds an implicit row sized by *existing column width* (for width) + *the new item's own content* (for height), unless `grid-auto-rows`/`grid-auto-columns` overrides the height.
+  - Chrome DevTools: the "grid" badge + Layout pane's **Show track sizes** reads out every track's exact computed pixel size — no manual math needed.
+  - `EX 10.1 Grid Sizing` ("Test" page, `course_content/GRID/EX 10.1 Grid Sizing/test.html`) spec captured but **not yet attempted**: rows `1fr 1fr 2fr` + `grid-auto-rows: 50px` for an out-of-template 4th row; columns `auto 400px minmax(200px, 500px)`. Next step: write it myself in `test.html` before checking the concept notes' worked solution.
