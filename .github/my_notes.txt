@@ -182,3 +182,34 @@ Topic: GRID - Grid Sizing (Fixed / Auto / Fractional / MinMax / Repeat)
 - Say it out loud: "auto column stretches, auto row just fits." / "fr rows are a ratio, not a fixed size - grow one, and its siblings may grow too." / "minmax = Flexbox's min/max-width, merged into one grid function." / "Too few items = empty cells. Too many items = implicit rows, sized by column width + content height, unless grid-auto-rows says otherwise."
 - Next: 10.2 Grid Placement -> 10.3 Mondrian Project.
 - Full notes: .github/my_tasks/concepts/concept_grid_sizing.md | Tasks: .github/my_tasks/tasks/grid_sizing_tasks.md
+
+Topic: GRID - Grid Placement + Grid Garden (28/28)
+- Problem: the template draws rows/columns, but real layouts still need addresses for headers, sidebars, spans, and 2D rectangles.
+- Count GRID LINES, not boxes: 3 columns have 4 vertical lines; outside edges are lines too.
+- Parent creates the map (`display:grid`, templates, gap); child chooses an address (`grid-column`, `grid-row`, `grid-area`, `order`).
+- Line numbers answer WHERE; `span` answers HOW MANY tracks. `grid-column:2/5` uses destination lines; `2/span 3` uses a start plus count.
+- Negative grid lines count from the far edge: `-1` = final line, `-2` = line before it. Useful when track count may change.
+- End may be numerically smaller than start (`5 / 2` is valid); Grid selects the area between the two lines.
+- `grid-area` order = ROW-start / COLUMN-start / ROW-end / COLUMN-end. Say row-column-row-column before typing numbers.
+- Auto-placement fills source-order items left-to-right, then row-by-row. `order` changes that visual queue only - not width, line address, DOM, reading order, or Tab order.
+- Explicit items can overlap. Source/painting order and `z-index` decide which is on top.
+- EX10.2 pattern = GRID outside, FLEXBOX inside: Grid sizes/places the emoji boxes; each `.item` uses Flexbox centering internally.
+- EX10.2 audit (source kept unchanged): exercise1 correct; exercise2 still needs `.astronaut { grid-column: span 2; }` because `order:1` changes sequence, not size; exercise3 correct with `grid-row:span 2`.
+- GRID GARDEN COMPLETED 28/28 on 2026-08-29; final "You win!" screen verified.
+- Grid Garden 1-9 = start/end lines, reverse end, negative lines, span. 10-17 = column/row shorthands + `grid-area`. 18-19 = order. 20-28 = track definitions.
+- `grid-template` shorthand = ROWS / COLUMNS (different from grid-area). L27: `60% 40% / 200px`; L28: `1fr 50px / 20% 1fr`.
+- Fixed tracks and gaps eat space first; `fr` shares what is left. L25 `75px 3fr 2fr` = reserve 75px, divide remainder into 5 shares, give 3 + 2.
+- Full Grid Garden solution notes: .github/my_tasks/concepts/concept_grid_garden.md | Tasks: .github/my_tasks/tasks/grid_garden_tasks.md
+- Full placement notes: .github/my_tasks/concepts/concept_grid_placement.md | Tasks: .github/my_tasks/tasks/grid_placement_tasks.md
+
+Topic: GRID - EX 10.3 Mondrian Project (Capstone Review)
+- Problem: convert a measured visual design into tracks, gaps, rectangular spans, colours, and final viewport alignment.
+- Workflow: draw every boundary -> count tracks -> write sizes/gaps -> one div per visual region -> merge with span/area -> colours -> DevTools -> center last.
+- Frame = 748px square. Columns `320 198 153 50`; rows `414 130 155 22`; gap `9px`. Tracks + 3 gaps must total 748 on each axis.
+- Black-line trick: grid lines cannot be painted; use `background:#000` on the CONTAINER and `gap:9px` so the parent's black shows through between items.
+- Base `.item` owns the common off-white; red/blue/yellow/black classes override exceptions. Geometry first, colours second.
+- Major merges: `.white1{grid-column:span 3}`, `.white2{grid-row:span 2}`, `.white3{grid-area:2/2/4/4}`, `.white4{grid-row:span 2}`.
+- Blue's special 10px line is its own `border-bottom`; normal 9px seams still come from the container's gap.
+- Grid makes the painting; Flexbox hangs it on the wall: body Flexbox + `min-height:100vh` + both centering properties.
+- Local attempt status (course_content left unchanged): layout is close, but the body-centering rule is missing and final row is 20px instead of 22px. Capstone remains hands-on incomplete until I fix those myself.
+- Full notes: .github/my_tasks/concepts/concept_mondrian_project.md | Tasks: .github/my_tasks/tasks/mondrian_project_tasks.md | Hard copy: grid_master_notes.pdf

@@ -68,7 +68,8 @@ Regenerate the flexbox PDF after editing the HTML:
 - [x] CSS — **Flexbox section COMPLETE** — capstone `EX 9.4 Flexbox Pricing Table Project` built and corrected (centring recipe, `flex: 1` + `max-width` card pattern, media query `flex-direction: column`; see `concept_pricing_table_project.md`)
 - [x] CSS — Grid basics: `display: grid`, `grid-template-columns`/`-rows`, the `fr` unit, `gap`, `repeat()`, 1D vs 2D vs Flexbox; `EX 10.0 Display Grid` chessboard **10/10** (see `concept_grid_display.md`)
 - [x] CSS — Grid sizing concepts: fixed/`auto`/`fr`/`minmax()`/`repeat()`, implicit rows via `grid-auto-rows`/`-columns`, DevTools grid inspector (see `concept_grid_sizing.md`); `EX 10.1 Grid Sizing` hands-on practice still to attempt
-- [ ] CSS — Grid placement (`10.2`), Mondrian project (`10.3`)
+- [x] CSS — Grid placement concepts: line numbers, negative lines, `span`, `grid-column`/`grid-row`, `grid-area`, overlap, visual `order`; **Grid Garden 28/28 complete** (see `concept_grid_placement.md`, `concept_grid_garden.md`); `EX 10.2` exercise 2 still needs Selva's one-line correction
+- [x] CSS — Mondrian capstone concepts: measured fixed tracks, gap-as-black-lines trick, spans/areas, Flexbox centring (see `concept_mondrian_project.md`); local project still needs Selva to add body centring and change the last row from `20px` to `22px`
 - [ ] CSS — responsive design
 - [ ] JavaScript fundamentals — variables, functions, DOM manipulation, events
 - [ ] Frontend frameworks (e.g. React) basics
@@ -171,3 +172,24 @@ Regenerate the flexbox PDF after editing the HTML:
   - **Item-count mismatches:** too few items → leftover cells stay empty, no phantom boxes. Too many items → Grid adds an implicit row sized by *existing column width* (for width) + *the new item's own content* (for height), unless `grid-auto-rows`/`grid-auto-columns` overrides the height.
   - Chrome DevTools: the "grid" badge + Layout pane's **Show track sizes** reads out every track's exact computed pixel size — no manual math needed.
   - `EX 10.1 Grid Sizing` ("Test" page, `course_content/GRID/EX 10.1 Grid Sizing/test.html`) spec captured but **not yet attempted**: rows `1fr 1fr 2fr` + `grid-auto-rows: 50px` for an out-of-template 4th row; columns `auto 400px minmax(200px, 500px)`. Next step: write it myself in `test.html` before checking the concept notes' worked solution.
+- **CSS Grid — Placement + Grid Garden** (reviewed 2026-08-29; full notes in `concept_grid_placement.md` and `concept_grid_garden.md`; tasks in matching task files):
+  - **The template draws the map; placement gives items addresses.** A grid with `n` tracks has `n + 1` lines. Count grid lines, not boxes.
+  - Parent properties create the map (`display`, templates, auto tracks, `gap`); item properties choose the address (`grid-column`, `grid-row`, `grid-area`, `order`).
+  - **Line numbers answer where; `span` answers how many.** `2 / 5` names two destination lines; `2 / span 3` names one line plus a track count.
+  - Negative lines count from the far edge (`-1` = final line). Start/end may run in either numeric direction; Grid selects the area between them.
+  - **`grid-area` order:** row-start / column-start / row-end / column-end. Selva mnemonic: *"row, column, row, column — walk around the rectangle."*
+  - `order` changes the visual auto-placement queue only. It does not change item size, explicit line address, DOM/reading order, or keyboard focus order.
+  - Explicit areas can overlap; painting/source order and `z-index` control the top layer.
+  - **Grid Garden completed 28/28 on 2026-08-29**, with the final "You win!" screen verified. Levels 1-17 cover placement, 18-19 `order`, 20-28 track sizing and `grid-template`.
+  - `grid-template` is **rows / columns**, not the four-value `grid-area` order. Final verified level: `grid-template: 1fr 50px / 20% 1fr`.
+  - Fixed tracks and gaps resolve first; `fr` shares the remainder. Example: `75px 3fr 2fr` reserves 75px, then divides remaining width into five shares.
+  - **EX 10.2 audit (source preserved):** exercise 1 correct; exercise 2 incomplete because `order: 1` changes sequence but not width — add `grid-column: span 2`; exercise 3 correct with `grid-row: span 2`.
+- **CSS Grid — Mondrian capstone** (reviewed 2026-08-29; full notes in `concept_mondrian_project.md`, tasks in `mondrian_project_tasks.md`):
+  - Design-to-grid workflow: draw every boundary → count tracks → write sizes/gaps → add one div per region → merge with spans/areas → colours → DevTools → centre last.
+  - Reference frame is `748px × 748px`: columns `320 198 153 50`, rows `414 130 155 22`, `gap: 9px`. Track sums plus three gaps must equal the frame.
+  - Grid lines cannot be coloured. The project uses a black grid-container background and transparent `gap` so black seams show between coloured items.
+  - Major merges: `white1` column span 3; `white2` row span 2; `white3` area `2 / 2 / 4 / 4`; `white4` row span 2.
+  - Normal black seams belong to the container gap; the extra `10px` line below the blue block belongs to the blue item's `border-bottom`.
+  - **Grid makes the painting; Flexbox hangs it on the wall.** Body Flexbox centring is the outer layout layer; prefer `min-height: 100vh` for safe growth.
+  - Local attempt is close but not final: missing body centring and last row uses `20px` instead of the exact-fit `22px`. Keep the capstone hands-on incomplete until Selva fixes these himself.
+  - Master hard copy generated from `grid_master_notes.html` as `grid_master_notes.pdf`; includes the full 28-level solution ladder and honest remaining-practice checklist.

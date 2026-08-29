@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Grid - Master Revision Notes</title>
+<style>
+  @page { size: A4; margin: 11mm 10mm 12mm 10mm; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root {
+    --ink:#111827; --muted:#4b5563; --line:#d1d5db;
+    --blue:#1d4ed8; --blue-bg:#eff6ff; --red:#b91c1c; --red-bg:#fef2f2;
+    --green:#047857; --green-bg:#ecfdf5; --amber:#b45309; --amber-bg:#fffbeb;
+    --purple:#6d28d9; --purple-bg:#f5f3ff; --code-bg:#f3f4f6;
+    --grid-a:#60a5fa; --grid-b:#c4b5fd; --grid-c:#fbbf24;
+  }
+  body { font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif; font-size:9.9pt; line-height:1.39; color:var(--ink); margin:0; }
+  code, pre, .mono { font-family:"Cascadia Mono",Consolas,"Courier New",monospace; }
+  code { background:var(--code-bg); padding:.5px 3px; border-radius:3px; font-size:.93em; }
+  pre { background:var(--code-bg); border-left:3px solid var(--blue); padding:5.5px 8px; margin:4.5px 0;
+        border-radius:0 4px 4px 0; font-size:8.6pt; line-height:1.39; white-space:pre-wrap; overflow:hidden; }
+  pre .c { color:#6b7280; } pre .k { color:var(--blue); } pre .v { color:var(--purple); }
+  .page { page-break-after:always; } .page:last-child { page-break-after:auto; }
+  .avoid { break-inside:avoid; page-break-inside:avoid; }
+  h1 { font-size:21pt; margin:0 0 3px; letter-spacing:-.5px; }
+  h1 .sub { display:block; font-size:9.6pt; font-weight:400; color:var(--muted); letter-spacing:0; margin-top:3px; }
+  h2 { font-size:12.6pt; margin:9.5px 0 4.5px; padding-bottom:2px; border-bottom:2px solid var(--ink); }
+  h2 .n { display:inline-block; background:var(--ink); color:#fff; border-radius:3px; padding:0 6px; margin-right:6px; font-size:10.1pt; }
+  h3 { font-size:10.2pt; margin:6.5px 0 3.5px; color:var(--blue); } h3.plain { color:var(--ink); }
+  .hdr-rule { height:4px; background:linear-gradient(90deg,#1d4ed8 0 25%,#6d28d9 25% 50%,#b45309 50% 75%,#047857 75% 100%); margin:6px 0 7px; border-radius:2px; }
+  table { border-collapse:collapse; width:100%; margin:4.5px 0; font-size:8.9pt; }
+  th,td { border:1px solid var(--line); padding:2.8px 5px; text-align:left; vertical-align:top; }
+  th { background:#f9fafb; font-weight:700; } td.c,th.c { text-align:center; } tbody tr:nth-child(even) td { background:#fcfcfd; }
+  .tight td,.tight th { padding:1.9px 4.2px; }
+  .box { border:1px solid var(--line); border-left-width:4px; border-radius:0 5px 5px 0; padding:5.7px 9px; margin:5.5px 0; background:#fff; }
+  .box .t { font-weight:700; display:block; margin-bottom:1.5px; font-size:9.5pt; }
+  .box p:last-child,.box ul:last-child { margin-bottom:0; } .box p:first-of-type { margin-top:0; }
+  .b-key { border-color:var(--blue); background:var(--blue-bg); } .b-key .t { color:var(--blue); }
+  .b-warn { border-color:var(--red); background:var(--red-bg); } .b-warn .t { color:var(--red); }
+  .b-tip { border-color:var(--green); background:var(--green-bg); } .b-tip .t { color:var(--green); }
+  .b-you { border-color:var(--amber); background:var(--amber-bg); } .b-you .t { color:var(--amber); }
+  ul,ol { margin:3.5px 0 4.5px; padding-left:17px; } li { margin:.7px 0; } p { margin:3.5px 0; }
+  .cols2 { display:flex; gap:11px; } .cols2 > * { flex:1; min-width:0; }
+  .cols3 { display:flex; gap:9px; } .cols3 > * { flex:1; min-width:0; }
+  .foot { margin-top:7.5px; padding-top:4.5px; border-top:1px solid var(--line); font-size:7.8pt; color:var(--muted); display:flex; justify-content:space-between; }
+  .answer { color:var(--green); font-weight:700; } .status { font-weight:700; }
+  .mini-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(3,25px); gap:3px; background:var(--purple-bg); padding:4px; border-radius:4px; }
+  .mini-grid i { background:var(--grid-a); border-radius:2px; display:flex; align-items:center; justify-content:center; font-style:normal; font:700 7pt Consolas; color:#172554; }
+  .mini-grid .wide { grid-column:span 3; background:var(--grid-b); }
+  .mini-grid .tall { grid-row:span 2; background:var(--grid-c); }
+  .trackbar { display:flex; height:29px; border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:4px 0; }
+  .trackbar span { display:flex; align-items:center; justify-content:center; font:700 7.4pt Consolas; border-right:1px solid #fff; }
+  .trackbar span:last-child { border-right:0; }
+  .line-map { display:grid; grid-template-columns:18px 1fr 18px 1fr 18px 1fr 18px; align-items:center; text-align:center; margin:5px 0; font:700 7.6pt Consolas; }
+  .line-map .ln { background:var(--ink); color:#fff; border-radius:10px; padding:1px 0; }
+  .line-map .cell { height:29px; display:flex; align-items:center; justify-content:center; background:var(--blue-bg); border-top:2px solid var(--blue); border-bottom:2px solid var(--blue); color:var(--muted); }
+  .board { width:155px; height:155px; border:1px solid #b58863; background-color:#f0d9b5;
+           background-image:conic-gradient(#b58863 25%,#f0d9b5 0 50%,#b58863 0 75%,#f0d9b5 0);
+           background-size:38.75px 38.75px; }
+  .area-demo { position:relative; display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:repeat(4,26px); gap:2px; background:#e5e7eb; padding:3px; border-radius:4px; }
+  .area-demo i { background:#fff; border:1px solid #cbd5e1; }
+  .area-demo b { grid-area:1 / 2 / 4 / 6; display:flex; align-items:center; justify-content:center; background:rgba(96,165,250,.84); color:#172554; font:700 7.3pt Consolas; z-index:2; border:2px solid var(--blue); }
+  .mondrian { width:235px; height:235px; display:grid; background:#000; gap:3px;
+              grid-template-columns:320fr 198fr 153fr 50fr; grid-template-rows:414fr 130fr 155fr 22fr; }
+  .mondrian i { background:#F0F1EC; } .mondrian .red { background:#E72F24; }
+  .mondrian .w1 { grid-column:span 3; } .mondrian .w2 { grid-row:span 2; }
+  .mondrian .w3 { grid-area:2 / 2 / 4 / 4; } .mondrian .blue { background:#004592; border-bottom:3px solid #000; }
+  .mondrian .w4 { grid-row:span 2; } .mondrian .yellow { background:#F9D01E; } .mondrian .black { background:#232629; }
+  .pill { display:inline-block; padding:1px 5px; border-radius:8px; font-size:7.6pt; font-weight:700; }
+  .done { background:var(--green-bg); color:var(--green); border:1px solid #a7f3d0; }
+  .todo { background:var(--amber-bg); color:var(--amber); border:1px solid #fde68a; }
+  .compact { font-size:9.1pt; line-height:1.34; }
+  .compact h1 { font-size:19pt; }
+  .compact h1 .sub { font-size:8.8pt; }
+  .compact h2 { font-size:11.7pt; margin:8px 0 3.5px; }
+  .compact h2 .n { font-size:9.2pt; }
+  .compact h3 { font-size:9.3pt; margin:5px 0 2.5px; }
+  .compact table { font-size:8.15pt; margin:3px 0; }
+  .compact th, .compact td { padding:2px 4px; }
+  .compact pre { font-size:7.8pt; line-height:1.31; padding:4px 7px; margin:3px 0; }
+  .compact .box { padding:4.5px 8px; margin:4px 0; }
+  .compact .box .t { font-size:8.9pt; }
+  .compact .foot { margin-top:5px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <h1>CSS Grid - Master Revision Notes
+    <span class="sub">Selva's hard copy - Module 10 (Display Grid - Sizing - Placement - Grid Garden 28/28 - Mondrian Project) - full notes in <code>.github/my_tasks/</code></span>
+  </h1>
+  <div class="hdr-rule"></div>
+
+  <div class="box b-key avoid">
+    <span class="t">The 8 lines that answer 90% of Grid questions</span>
+    <table style="margin:2px 0 0">
+      <tr><td class="c" style="width:26px"><b>1</b></td><td><code>display: grid</code> goes on the <b>container</b>; direct children become grid items.</td></tr>
+      <tr><td class="c"><b>2</b></td><td>Flexbox = <b>one dimension</b>. Grid = <b>rows and columns together</b>. Real sites nest both.</td></tr>
+      <tr><td class="c"><b>3</b></td><td><code>grid-template-columns</code> / <code>-rows</code> draw the map; item placement gives boxes addresses.</td></tr>
+      <tr><td class="c"><b>4</b></td><td><code>fr</code> is a <b>ratio of available space</b>, not a pixel size. Fixed tracks and gaps are removed first.</td></tr>
+      <tr><td class="c"><b>5</b></td><td>A grid with <b>n tracks has n + 1 lines</b>. Count lines, not boxes.</td></tr>
+      <tr><td class="c"><b>6</b></td><td>Line numbers answer <b>where</b>; <code>span</code> answers <b>how many tracks</b>.</td></tr>
+      <tr><td class="c"><b>7</b></td><td><code>grid-area</code> = row-start / column-start / row-end / column-end.</td></tr>
+      <tr><td class="c"><b>8</b></td><td>Debug size first: Grid is <b>greedy sideways, shy downwards</b>. <code>1fr</code> of no height is no height.</td></tr>
+    </table>
+  </div>
+
+  <h2><span class="n">A</span>The property map - container or item?</h2>
+  <div class="cols2">
+    <div class="avoid">
+      <h3>CONTAINER (parent) - creates the map</h3>
+      <table>
+        <tr><th>Property</th><th>Job</th></tr>
+        <tr><td><code>display: grid</code></td><td>switch Grid on</td></tr>
+        <tr><td><code>grid-template-columns</code></td><td>column count and widths</td></tr>
+        <tr><td><code>grid-template-rows</code></td><td>row count and heights</td></tr>
+        <tr><td><code>grid-template</code></td><td>shorthand: <b>rows / columns</b></td></tr>
+        <tr><td><code>grid-auto-rows</code></td><td>size implicit rows</td></tr>
+        <tr><td><code>grid-auto-columns</code></td><td>size implicit columns</td></tr>
+        <tr><td><code>gap</code></td><td>gutter between tracks</td></tr>
+      </table>
+    </div>
+    <div class="avoid">
+      <h3>ITEM (child) - chooses an address</h3>
+      <table>
+        <tr><th>Property</th><th>Job</th></tr>
+        <tr><td><code>grid-column-start/end</code></td><td>vertical start/end lines</td></tr>
+        <tr><td><code>grid-row-start/end</code></td><td>horizontal start/end lines</td></tr>
+        <tr><td><code>grid-column</code></td><td>column start / end shorthand</td></tr>
+        <tr><td><code>grid-row</code></td><td>row start / end shorthand</td></tr>
+        <tr><td><code>grid-area</code></td><td>four-line rectangle</td></tr>
+        <tr><td><code>order</code></td><td>visual auto-placement sequence</td></tr>
+        <tr><td><code>z-index</code></td><td>layer order when areas overlap</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2><span class="n">B</span>Grid vs Flexbox - choose the layer, not a winner</h2>
+  <div class="cols2">
+    <table>
+      <tr><th></th><th>Flexbox</th><th>Grid</th></tr>
+      <tr><td><b>Dimensions</b></td><td>1D: row <i>or</i> column</td><td>2D: rows <i>and</i> columns</td></tr>
+      <tr><td><b>Instinct</b></td><td>squish and adapt</td><td>keep shared lines aligned</td></tr>
+      <tr><td><b>Use</b></td><td>nav, card row, centering</td><td>page regions, gallery, dashboard</td></tr>
+      <tr><td><b>Together</b></td><td colspan="2">Grid builds a dashboard cell; Flexbox aligns content inside it.</td></tr>
+    </table>
+    <div>
+      <div class="mini-grid" style="margin-top:4px"><i class="wide">GRID: shared lines</i><i>A</i><i>B</i><i class="tall">C</i><i>D</i><i>E</i><i>F</i><i>G</i></div>
+      <div class="box b-you"><span class="t">Say it your way</span><b>Flexbox = one line. Grid = a table.</b> If the design has an X and a Y, start with Grid. Then use Flexbox inside a cell when the smaller problem is one-dimensional.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 1 of 11</span><span>Property map - Grid vs Flexbox</span></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">C</span>Turning Grid on - tracks, <code>fr</code>, <code>gap</code></h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.container</span> {
+  <span class="k">display</span>: <span class="v">grid</span>;
+  <span class="k">grid-template-columns</span>: <span class="v">1fr 2fr</span>;
+  <span class="k">grid-template-rows</span>: <span class="v">1fr 1fr</span>;
+  <span class="k">gap</span>: <span class="v">10px</span>;
+}</pre>
+      <ul>
+        <li>One space-separated value = one track.</li>
+        <li><code>1fr 2fr</code> makes two columns in a 1:2 ratio.</li>
+        <li><code>gap</code> spaces rows and columns; it is the same property from Flexbox.</li>
+        <li>Grid items stretch to fill their cell on both axes by default.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="trackbar"><span style="flex:1;background:var(--grid-a)">1fr</span><span style="flex:2;background:var(--grid-b)">2fr</span></div>
+      <div class="box b-key"><span class="t"><code>fr</code> is ratio thinking</span>In a 600px container with no gap, <code>1fr 2fr</code> becomes 200px + 400px. Same mental model as <code>flex:1</code> and <code>flex:2</code>.</div>
+      <div class="box b-tip"><span class="t">Grid infers rows</span>Declare 8 columns and add 64 items: Grid fills items 1-8, then creates an implicit row for 9-16, and continues.</div>
+    </div>
+  </div>
+
+  <h2><span class="n">D</span>The width/height asymmetry - the blank-page trap</h2>
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th>Axis</th><th>Grid container default</th><th>Result</th></tr>
+        <tr><td><b>Width</b></td><td>block-level, fills parent</td><td><code>fr</code> columns have space</td></tr>
+        <tr><td><b>Height</b></td><td>only tall enough for content</td><td>empty content can mean 0px</td></tr>
+      </table>
+      <div class="box b-warn"><span class="t">Selva's actual EX 10.0 bug</span><code>grid-template-rows: repeat(8,1fr)</code> plus no container height and empty divs produced 0px rows - a completely blank page.</div>
+    </div>
+    <div>
+<pre><span class="c">/* Fix A: size the board */</span>
+<span class="k">.board</span> { <span class="k">width</span>:<span class="v">800px</span>; <span class="k">height</span>:<span class="v">800px</span>; }
+
+<span class="c">/* Fix B: size the squares */</span>
+<span class="k">.white</span>, <span class="k">.black</span> {
+  <span class="k">width</span>:<span class="v">100px</span>; <span class="k">height</span>:<span class="v">100px</span>;
+}</pre>
+      <div class="box b-you"><span class="t">Memory line</span><b><code>fr</code> of nothing is nothing.</b> Check the container's size on the affected axis before blaming Grid.</div>
+    </div>
+  </div>
+
+  <h2><span class="n">E</span>EX 10.0 Chessboard - two correct solutions</h2>
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th>Official: size children</th><th>Selva: size container</th></tr>
+        <tr><td><code>.container{width:800px}</code><br><code>.cell{width:100px;height:100px}</code></td><td><code>.container{width:800px;height:800px}</code><br>cells only need colours</td></tr>
+        <tr><td>Rows grow from 100px child content.</td><td>Rows divide the known 800px height.</td></tr>
+        <tr><td>Valid</td><td><b>More idiomatic Grid</b>: size the board; items stretch.</td></tr>
+      </table>
+      <div class="box b-key"><span class="t">Why container width matters</span>Without <code>800px</code>, the cells' tracks can be wider than the fixed 100px squares. The whitespace belongs to oversized cells, not to <code>gap</code>.</div>
+    </div>
+    <div class="cols2" style="align-items:center">
+      <div class="board"></div>
+      <div>
+<pre><span class="k">.container</span> {
+  <span class="k">width</span>: <span class="v">800px</span>;
+  <span class="k">height</span>: <span class="v">800px</span>;
+  <span class="k">display</span>: <span class="v">grid</span>;
+  <span class="k">grid-template</span>:
+    <span class="v">repeat(8,1fr)</span> /
+    <span class="v">repeat(8,1fr)</span>;
+}</pre>
+        <p><span class="pill done">EX 10.0 - 10/10</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 2 of 11</span><span>Display Grid - fr - chessboard - blank-page trap</span></div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">GRID SIZING - choose each track's behaviour
+    <span class="sub">Fixed - auto - fr - minmax() - repeat() - then test the layout by resizing and changing content.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+
+  <h2 style="margin-top:6px"><span class="n">F</span>The sizing toolbox</h2>
+  <table>
+    <tr><th>Tool</th><th>Meaning</th><th>Responsive to window?</th><th>Use</th></tr>
+    <tr><td><code>px</code></td><td>fixed track</td><td><b>No</b></td><td>hard measurement</td></tr>
+    <tr><td><code>rem</code></td><td>root-font-relative fixed track</td><td><b>No</b> - reacts to zoom/root font, not width</td><td>scalable fixed size</td></tr>
+    <tr><td><code>auto</code></td><td>automatic size</td><td>axis-dependent</td><td>leftover width or content height</td></tr>
+    <tr><td><code>fr</code></td><td>share of available space</td><td><b>Yes</b></td><td>ratios</td></tr>
+    <tr><td><code>minmax(a,b)</code></td><td>floor + ceiling</td><td><b>Yes, clamped</b></td><td>flexible but protected track</td></tr>
+    <tr><td><code>repeat(n,x)</code></td><td>repeat x, n times</td><td>same as x</td><td>remove repetition</td></tr>
+  </table>
+
+  <h2><span class="n">G</span><code>auto</code> - same word, different axis</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">grid-template-columns</span>: <span class="v">200px auto</span>;
+<span class="c">/* auto column eats leftover WIDTH */</span>
+
+<span class="k">grid-template-rows</span>: <span class="v">100px auto</span>;
+<span class="c">/* auto row fits its CONTENT height */</span></pre>
+      <div class="trackbar"><span style="width:28%;background:var(--grid-a)">200px</span><span style="flex:1;background:var(--grid-b)">auto - leftover</span></div>
+    </div>
+    <div>
+      <div class="box b-warn"><span class="t">The lesson's main trap</span><b>Auto column stretches; auto row just fits.</b> This is the same width-greedy / height-shy asymmetry as the blank chessboard, now behind an explicit keyword.</div>
+      <p>An auto row grows from one text line to a full paragraph, but it does not stretch merely because the viewport is tall.</p>
+    </div>
+  </div>
+
+  <h2><span class="n">H</span><code>fr</code>, <code>minmax()</code>, and <code>repeat()</code></h2>
+  <div class="cols3">
+    <div class="box b-key">
+      <span class="t"><code>fr</code> is a live ratio</span>
+      <code>1fr 2fr</code> protects 1:2. Add lots of content to row 2 and row 1 may also grow, even when row 1's content never changed.
+    </div>
+    <div class="box b-key">
+      <span class="t"><code>minmax(min,max)</code></span>
+      Grid's one-function version of Flexbox's <code>min-width</code> + <code>max-width</code>: grow to the ceiling, shrink to the floor, never cross either.
+    </div>
+    <div class="box b-tip">
+      <span class="t"><code>repeat(count,value)</code></span>
+      Works for any value: <code>repeat(8,1fr)</code>, <code>repeat(2,200px)</code>, or repeated <code>minmax()</code> tracks.
+    </div>
+  </div>
+
+  <div class="cols2">
+    <div>
+      <h3>Clamp examples</h3>
+      <table class="tight">
+        <tr><th>Rule</th><th>Unclamped wish</th><th>Final</th></tr>
+        <tr><td rowspan="3"><code>minmax(400px,800px)</code></td><td>300px</td><td class="answer">400px - floor</td></tr>
+        <tr><td>550px</td><td class="answer">550px</td></tr>
+        <tr><td>900px</td><td class="answer">800px - ceiling</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3><code>grid-template</code> shorthand</h3>
+<pre><span class="k">grid-template</span>: <span class="v">100px 200px / 400px 800px</span>;
+<span class="c">/* rows first / columns second */</span></pre>
+      <div class="box b-you"><span class="t">Learning rule</span>Recognise it, but prefer explicit <code>-rows</code> and <code>-columns</code> until debugging the two axes feels automatic.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 3 of 11</span><span>Fixed - auto - fr - minmax - repeat</span></div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">I</span>Explicit vs implicit tracks - when item counts do not match</h2>
+  <div class="cols2">
+    <div>
+      <h3>Too few items</h3>
+      <table>
+        <tr><th>Template</th><th>Items</th><th>Outcome</th></tr>
+        <tr><td>2 rows x 3 cols = 6 cells</td><td>4</td><td>items fill row 1, then row 2 cell 1; final 2 cells stay empty</td></tr>
+      </table>
+      <div class="mini-grid" style="grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,29px)"><i>1</i><i>2</i><i>3</i><i>4</i></div>
+    </div>
+    <div>
+      <h3>Too many items</h3>
+      <table>
+        <tr><th>Axis</th><th>Implicit-row default</th></tr>
+        <tr><td>Width</td><td>follows existing column tracks</td></tr>
+        <tr><td>Height</td><td>fits the new item's content</td></tr>
+      </table>
+<pre><span class="k">.container</span> {
+  <span class="k">grid-template</span>: <span class="v">repeat(2,200px) / repeat(2,200px)</span>;
+  <span class="k">grid-auto-rows</span>: <span class="v">150px</span>; <span class="c">/* take control */</span>
+}</pre>
+    </div>
+  </div>
+
+  <h2><span class="n">J</span>EX 10.1 Grid Sizing - the exact specification</h2>
+  <div class="cols2">
+    <div>
+      <table>
+        <tr><th>Track</th><th>Requirement</th></tr>
+        <tr><td>Rows 1-3</td><td><code>1fr 1fr 2fr</code></td></tr>
+        <tr><td>Implicit row 4</td><td><code>grid-auto-rows: 50px</code></td></tr>
+        <tr><td>Column 1</td><td><code>auto</code> - fill leftover width</td></tr>
+        <tr><td>Column 2</td><td><code>400px</code> fixed</td></tr>
+        <tr><td>Column 3</td><td><code>minmax(200px,500px)</code></td></tr>
+      </table>
+      <p><span class="pill todo">Hands-on still to attempt</span></p>
+      <p>Write this yourself in the local Test page before using the worked solution.</p>
+    </div>
+    <div>
+<pre><span class="k">.grid-container</span> {
+  <span class="k">display</span>: <span class="v">grid</span>;
+  <span class="k">grid-template-rows</span>: <span class="v">1fr 1fr 2fr</span>;
+  <span class="k">grid-template-columns</span>:
+    <span class="v">auto 400px minmax(200px,500px)</span>;
+  <span class="k">grid-auto-rows</span>: <span class="v">50px</span>;
+}</pre>
+      <div class="box b-warn"><span class="t">Silent typo trap</span>The real properties end in <code>s</code>: <code>grid-template-rows</code> and <code>grid-template-columns</code>. Unknown singular spellings are ignored with no visible error message.</div>
+    </div>
+  </div>
+
+  <h2><span class="n">K</span>DevTools - see the grid the browser computed</h2>
+  <div class="cols2">
+    <div>
+      <ol>
+        <li>Inspect the grid container.</li>
+        <li>Click the small <b>grid</b> badge in Elements.</li>
+        <li>Open the Layout pane.</li>
+        <li>Enable line numbers, extend grid lines, and <b>Show track sizes</b>.</li>
+        <li>Read exact computed pixel sizes instead of guessing.</li>
+      </ol>
+    </div>
+    <div>
+      <div class="box b-key"><span class="t">Debug in this order</span><b>1. Is Grid on?</b> <b>2. Does this axis have size?</b> <b>3. Are property names valid?</b> <b>4. Which tracks are explicit vs implicit?</b> <b>5. What does the overlay report?</b></div>
+      <div class="box b-you"><span class="t">Memory line</span><b>Too few = empty cells. Too many = implicit tracks.</b> Use <code>grid-auto-*</code> when dynamic content must be predictable.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 4 of 11</span><span>Implicit tracks - EX 10.1 - DevTools</span></div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">GRID PLACEMENT - give every item an address
+    <span class="sub">The template draws the map. Lines, spans, shorthands, and areas choose the occupied rectangle.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+
+  <h2 style="margin-top:6px"><span class="n">L</span>Tracks vs lines - count the borders</h2>
+  <div class="cols2">
+    <div>
+      <div class="line-map"><span class="ln">1</span><span class="cell">column 1</span><span class="ln">2</span><span class="cell">column 2</span><span class="ln">3</span><span class="cell">column 3</span><span class="ln">4</span></div>
+      <p>Three columns create four vertical lines. An item covering columns 1 and 2 uses <code>grid-column: 1 / 3</code>.</p>
+    </div>
+    <div>
+      <table>
+        <tr><th>Syntax</th><th>Read it as</th></tr>
+        <tr><td><code>2 / 5</code></td><td>start at line 2, stop at line 5</td></tr>
+        <tr><td><code>5 / 2</code></td><td>same area, reverse numeric direction</td></tr>
+        <tr><td><code>-3 / -1</code></td><td>final two tracks from the far edge</td></tr>
+        <tr><td><code>2 / span 3</code></td><td>start line 2, occupy 3 tracks</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="box b-key avoid"><span class="t">Where vs how many</span><b>Line numbers answer where. <code>span</code> answers how many.</b> <code>span</code> is a positive track count; negative numbers are for line addresses from the far edge.</div>
+
+  <h2><span class="n">M</span>Longhand and the two-axis shorthands</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.hero</span> {
+  <span class="k">grid-column-start</span>: <span class="v">2</span>;
+  <span class="k">grid-column-end</span>: <span class="v">5</span>;
+  <span class="k">grid-row-start</span>: <span class="v">1</span>;
+  <span class="k">grid-row-end</span>: <span class="v">3</span>;
+}</pre>
+    </div>
+    <div>
+<pre><span class="k">.hero</span> {
+  <span class="k">grid-column</span>: <span class="v">2 / 5</span>;
+  <span class="k">grid-row</span>: <span class="v">1 / 3</span>;
+}
+
+<span class="k">.book</span> { <span class="k">grid-row</span>: <span class="v">span 2</span>; }</pre>
+    </div>
+  </div>
+
+  <h2><span class="n">N</span><code>grid-area</code> - the four-number rectangle</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">grid-area</span>:
+  <span class="v">row-start / column-start /
+  row-end   / column-end</span>;
+
+<span class="k">.water</span> {
+  <span class="k">grid-area</span>: <span class="v">1 / 2 / 4 / 6</span>;
+}</pre>
+      <div class="box b-you"><span class="t">Mnemonic</span><b>Row, column, row, column - walk around the rectangle.</b> Say the labels before typing values.</div>
+    </div>
+    <div>
+      <div class="area-demo"><i></i><b>grid-area: 1 / 2 / 4 / 6</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <table class="tight">
+        <tr><th>Value</th><th>Address</th></tr>
+        <tr><td>1</td><td>row start</td></tr><tr><td>2</td><td>column start</td></tr>
+        <tr><td>4</td><td>row end</td></tr><tr><td>6</td><td>column end</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2><span class="n">O</span>Placement decision table</h2>
+  <table>
+    <tr><th>I know...</th><th>Use</th><th>Example</th></tr>
+    <tr><td>start and destination line</td><td><code>grid-column</code> / <code>grid-row</code></td><td><code>2 / 5</code></td></tr>
+    <tr><td>start and number of tracks</td><td>line + <code>span</code></td><td><code>2 / span 3</code></td></tr>
+    <tr><td>only the size; auto-placement can choose start</td><td><code>span n</code></td><td><code>grid-row: span 2</code></td></tr>
+    <tr><td>all four rectangle edges</td><td><code>grid-area</code></td><td><code>2 / 1 / 3 / 3</code></td></tr>
+    <tr><td>the far edge but not track count</td><td>negative lines</td><td><code>-3 / -1</code></td></tr>
+  </table>
+  <div class="foot"><span>Grid Master Notes - page 5 of 11</span><span>Lines - negative lines - span - row/column - grid-area</span></div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page">
+  <h2 style="margin-top:0"><span class="n">P</span>Auto-placement, <code>order</code>, and overlap</h2>
+  <div class="cols2">
+    <div>
+      <h3><code>order</code> changes the visual queue</h3>
+<pre><span class="k">.water</span>  { <span class="k">order</span>: <span class="v">0</span>; } <span class="c">/* default */</span>
+<span class="k">.poison</span> { <span class="k">order</span>: <span class="v">1</span>; } <span class="c">/* after */</span>
+<span class="k">.poison</span> { <span class="k">order</span>: <span class="v">-1</span>; } <span class="c">/* before */</span></pre>
+      <div class="box b-warn"><span class="t">Accessibility warning</span>Visual order does not change DOM reading order or keyboard focus order. Keep meaningful content order correct in the HTML.</div>
+    </div>
+    <div>
+      <h3>Explicit items may overlap</h3>
+<pre><span class="k">.a</span> { <span class="k">grid-area</span>: <span class="v">1 / 1 / 3 / 3</span>; }
+<span class="k">.b</span> {
+  <span class="k">grid-area</span>: <span class="v">2 / 2 / 4 / 4</span>;
+  <span class="k">z-index</span>: <span class="v">2</span>;
+}</pre>
+      <p>Grid allows both claims. Source/paint order and <code>z-index</code> decide the visible layer.</p>
+    </div>
+  </div>
+
+  <h2><span class="n">Q</span>Grid outside, Flexbox inside</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.container</span> {
+  <span class="k">display</span>: <span class="v">grid</span>;
+  <span class="k">grid-template-columns</span>: <span class="v">1fr 1fr 1.5fr</span>;
+  <span class="k">grid-template-rows</span>: <span class="v">1fr 1fr</span>;
+}
+<span class="k">.item</span> {
+  <span class="k">display</span>: <span class="v">flex</span>;
+  <span class="k">justify-content</span>: <span class="v">center</span>;
+  <span class="k">align-items</span>: <span class="v">center</span>;
+}</pre>
+    </div>
+    <div>
+      <div class="box b-key"><span class="t">Different layers, different jobs</span>Grid decides the emoji boxes' rows, columns, and spans. Flexbox centers one emoji inside each box. Neither tool replaces the other.</div>
+      <table class="tight">
+        <tr><th>Question</th><th>Answer</th></tr>
+        <tr><td>Where is the box?</td><td>Grid item placement</td></tr>
+        <tr><td>How wide/tall is it?</td><td>Grid tracks + spans</td></tr>
+        <tr><td>Where is content inside it?</td><td>Flexbox alignment</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2><span class="n">R</span>EX 10.2 source audit - preserve honest status</h2>
+  <table>
+    <tr><th>File</th><th>Goal</th><th>Status</th><th>Reason / next action</th></tr>
+    <tr><td><code>exercise1.html</code></td><td>center every emoji</td><td><span class="pill done">Correct</span></td><td>Flexbox centering is present.</td></tr>
+    <tr><td><code>exercise2.html</code></td><td>astronaut fills row 2 cols 1-2</td><td><span class="pill todo">One line missing</span></td><td><code>order:1</code> changes sequence; add <code>grid-column:span 2</code> for width.</td></tr>
+    <tr><td><code>exercise3.html</code></td><td>book spans both rows on right</td><td><span class="pill done">Correct</span></td><td><code>grid-row:span 2</code> is valid.</td></tr>
+  </table>
+  <div class="box b-you"><span class="t">The debugging lesson from exercise 2</span><b>Position, size, and internal alignment are separate questions.</b> <code>order</code> cannot change a span; <code>span</code> cannot center content; Flexbox centering cannot choose a grid line.</div>
+
+  <h2><span class="n">S</span>Three placement recipes</h2>
+  <div class="cols3">
+    <div><h3>Header across all</h3><pre><span class="k">.header</span> { <span class="k">grid-column</span>:<span class="v">1 / -1</span>; }</pre></div>
+    <div><h3>Right sidebar</h3><pre><span class="k">.side</span> { <span class="k">grid-column</span>:<span class="v">-3 / -1</span>; }</pre></div>
+    <div><h3>Known rectangle</h3><pre><span class="k">.hero</span> { <span class="k">grid-area</span>:<span class="v">2 / 2 / 5 / 6</span>; }</pre></div>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 6 of 11</span><span>order - overlap - Grid + Flexbox - EX 10.2 audit</span></div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">GRID GARDEN - verified solutions 1-14
+    <span class="sub">Completed in the App Brewery course version. Every accepted rule advanced to the next numbered level.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+  <h2 style="margin-top:6px"><span class="n">T</span>Lines, negative lines, <code>span</code>, rows, and shorthands</h2>
+  <table class="tight">
+    <tr><th class="c" style="width:30px">#</th><th style="width:38%">What the level drills</th><th>Verified CSS</th><th style="width:28%">Memory check</th></tr>
+    <tr><td class="c">1</td><td>start at vertical line 3</td><td><code>grid-column-start: 3;</code></td><td rowspan="3">Start/end values name <b>grid lines</b>.</td></tr>
+    <tr><td class="c">2</td><td>start at vertical line 5</td><td><code>grid-column-start: 5;</code></td></tr>
+    <tr><td class="c">3</td><td>end at vertical line 4</td><td><code>grid-column-end: 4;</code></td></tr>
+    <tr><td class="c">4</td><td>end before the start number</td><td><code>grid-column-end: 2;</code></td><td>End need not be numerically larger.</td></tr>
+    <tr><td class="c">5</td><td>end from the right edge</td><td><code>grid-column-end: -2;</code></td><td rowspan="2"><code>-1</code> is the final line.</td></tr>
+    <tr><td class="c">6</td><td>start from the right edge</td><td><code>grid-column-start: -3;</code></td></tr>
+    <tr><td class="c">7</td><td>span 2 toward the end</td><td><code>grid-column-end: span 2;</code></td><td rowspan="3"><code>span</code> is a positive track count.</td></tr>
+    <tr><td class="c">8</td><td>span 5 toward the end</td><td><code>grid-column-end: span 5;</code></td></tr>
+    <tr><td class="c">9</td><td>span 3 backward from the end</td><td><code>grid-column-start: span 3;</code></td></tr>
+    <tr><td class="c">10</td><td>column shorthand</td><td><code>grid-column: 4 / 6;</code></td><td>start / end</td></tr>
+    <tr><td class="c">11</td><td>column shorthand + span</td><td><code>grid-column: 2 / span 3;</code></td><td>where / how many</td></tr>
+    <tr><td class="c">12</td><td>row start line</td><td><code>grid-row-start: 3;</code></td><td>same idea on vertical axis</td></tr>
+    <tr><td class="c">13</td><td>row shorthand</td><td><code>grid-row: 3 / 6;</code></td><td>row start / row end</td></tr>
+    <tr><td class="c">14</td><td>place on both axes</td><td><code>grid-column: 2;</code><br><code>grid-row: 5;</code></td><td>one value = one-track default span</td></tr>
+  </table>
+
+  <div class="cols2">
+    <div class="box b-key"><span class="t">Levels 1-6: addresses</span>Positive lines count from left/top. Negative lines count from right/bottom. Either numeric direction is valid.</div>
+    <div class="box b-key"><span class="t">Levels 7-14: size + two axes</span><code>span</code> measures tracks. Column and row shorthands transfer the same start/end idea across both axes.</div>
+  </div>
+
+  <h2><span class="n">T+</span>Fast recall drill</h2>
+  <div class="cols2">
+    <table class="tight">
+      <tr><th>Prompt</th><th>Answer</th></tr>
+      <tr><td>last line</td><td class="answer"><code>-1</code></td></tr>
+      <tr><td>start at 2, cover 3</td><td class="answer"><code>2 / span 3</code></td></tr>
+      <tr><td>columns between 2 and 5</td><td class="answer"><code>2 / 5</code></td></tr>
+      <tr><td>row starts at 3</td><td class="answer"><code>grid-row-start:3</code></td></tr>
+    </table>
+    <div class="box b-you"><span class="t">Say it in six seconds</span><b>Where? Lines. How many? Span. Other wall? Negative. Two axes? Column + row.</b></div>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 7 of 11</span><span>Grid Garden levels 1-14</span></div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">GRID GARDEN - verified solutions 15-28
+    <span class="sub">Areas - order - percentages - mixed units - fr arithmetic - grid-template shorthand - final win.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+  <h2 style="margin-top:6px"><span class="n">U</span>Areas, ordering, and track design</h2>
+  <table class="tight">
+    <tr><th class="c" style="width:30px">#</th><th style="width:39%">What the level drills</th><th>Verified CSS</th><th style="width:25%">Memory check</th></tr>
+    <tr><td class="c">15</td><td>large 2D area, two shorthands</td><td><code>grid-column: 2 / 6;</code><br><code>grid-row: 1 / 6;</code></td><td>column + row</td></tr>
+    <tr><td class="c">16</td><td>four-value area</td><td><code>grid-area: 1 / 2 / 4 / 6;</code></td><td>row / col / row / col</td></tr>
+    <tr><td class="c">17</td><td>second overlapping area</td><td><code>grid-area: 2 / 3 / 5 / 6;</code></td><td>overlap is allowed</td></tr>
+    <tr><td class="c">18</td><td>poison after normal items</td><td><code>order: 1;</code></td><td rowspan="2">visual queue only</td></tr>
+    <tr><td class="c">19</td><td>poison before normal items</td><td><code>order: -1;</code></td></tr>
+    <tr><td class="c">20</td><td>first column = half</td><td><code>grid-template-columns: 50%;</code></td><td>one explicit column</td></tr>
+    <tr><td class="c">21</td><td>8 equal percentage columns</td><td><code>repeat(8, 12.5%)</code></td><td>8 x 12.5 = 100</td></tr>
+    <tr><td class="c">22</td><td>mixed units</td><td><code>100px 3em 40%</code></td><td>mixing is valid</td></tr>
+    <tr><td class="c">23</td><td>whole width split 1:5</td><td><code>1fr 5fr</code></td><td>6 total shares</td></tr>
+    <tr><td class="c">24</td><td>fixed edges, flexible middle</td><td><code>50px 1fr 1fr 1fr 50px</code></td><td>subtract 100px first</td></tr>
+    <tr><td class="c">25</td><td>75px fixed, remainder 3:2</td><td><code>75px 3fr 2fr</code></td><td>5 flexible shares</td></tr>
+    <tr><td class="c">26</td><td>5 rows; only row 5 fills remainder</td><td><code>grid-template-rows: 50px 0 0 0 1fr;</code></td><td>zero tracks intentional</td></tr>
+    <tr><td class="c">27</td><td>rows / columns shorthand</td><td><code>grid-template: 60% 40% / 200px;</code></td><td>rows before slash</td></tr>
+    <tr><td class="c">28</td><td>final garden: 2 rows x 2 cols</td><td><code>grid-template: 1fr 50px / 20% 1fr;</code></td><td><span class="pill done">WIN verified</span></td></tr>
+  </table>
+
+  <h2><span class="n">V</span>Subtract first, share second</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="c">/* 1075px container, no gap */</span>
+<span class="k">grid-template-columns</span>: <span class="v">75px 3fr 2fr</span>;
+
+1075 - 75 = 1000px remaining
+3fr + 2fr = 5 shares
+1000 / 5 = 200px per share
+final = 75px | 600px | 400px</pre>
+    </div>
+    <div>
+      <div class="trackbar"><span style="width:10%;background:#94a3b8">75</span><span style="flex:3;background:var(--grid-a)">3fr</span><span style="flex:2;background:var(--grid-b)">2fr</span></div>
+      <div class="box b-key"><span class="t">Gap-aware version</span>Subtract every fixed track <b>and every gap</b> before dividing remaining space by total <code>fr</code> shares.</div>
+    </div>
+  </div>
+
+  <div class="box b-tip"><span class="t">Completion evidence</span>All 28 submitted rules were accepted; each successful rule advanced to the next level; level 28 produced the final <b>You win!</b> screen and carrot-cake illustration on 2026-08-29.</div>
+  <div class="foot"><span>Grid Master Notes - page 8 of 11</span><span>Grid Garden levels 15-28 - 28/28 complete</span></div>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">MONDRIAN PROJECT - design to Grid
+    <span class="sub">Capstone: fixed track geometry - black gaps - spans/areas - colour ownership - Flexbox centering.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+
+  <h2 style="margin-top:6px"><span class="n">W</span>Frame geometry and the black-line trick</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.container</span> {
+  <span class="k">width</span>: <span class="v">748px</span>; <span class="k">height</span>: <span class="v">748px</span>;
+  <span class="k">display</span>: <span class="v">grid</span>;
+  <span class="k">background</span>: <span class="v">#000</span>;
+  <span class="k">grid-template-columns</span>:
+    <span class="v">320px 198px 153px 50px</span>;
+  <span class="k">grid-template-rows</span>:
+    <span class="v">414px 130px 155px 22px</span>;
+  <span class="k">gap</span>: <span class="v">9px</span>;
+}</pre>
+      <p><b>Width:</b> 320 + 198 + 153 + 50 + (3 x 9) = 748.<br><b>Height:</b> 414 + 130 + 155 + 22 + (3 x 9) = 748.</p>
+      <div class="box b-key"><span class="t">Why gaps become black lines</span>Grid lines are coordinates, not paintable objects. <code>gap</code> is transparent, so the black container background shows between the coloured items.</div>
+    </div>
+    <div style="display:flex;justify-content:center;align-items:flex-start">
+      <div class="mondrian"><i class="red"></i><i class="w1"></i><i class="w2"></i><i class="w3"></i><i class="blue"></i><i class="w4"></i><i></i><i class="yellow"></i><i class="black"></i></div>
+    </div>
+  </div>
+
+  <h2><span class="n">X</span>Merging the nine visual regions</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">.item</span> { <span class="k">background</span>: <span class="v">#F0F1EC</span>; }
+<span class="k">.white1</span> { <span class="k">grid-column</span>: <span class="v">span 3</span>; }
+<span class="k">.white2</span> { <span class="k">grid-row</span>: <span class="v">span 2</span>; }
+<span class="k">.white3</span> { <span class="k">grid-area</span>: <span class="v">2 / 2 / 4 / 4</span>; }
+<span class="k">.white4</span> { <span class="k">grid-row</span>: <span class="v">span 2</span>; }</pre>
+    </div>
+    <div>
+      <table class="tight">
+        <tr><th>Colour</th><th>Hex</th></tr>
+        <tr><td>off-white</td><td><code>#F0F1EC</code></td></tr>
+        <tr><td>red</td><td><code>#E72F24</code></td></tr>
+        <tr><td>blue</td><td><code>#004592</code></td></tr>
+        <tr><td>yellow</td><td><code>#F9D01E</code></td></tr>
+        <tr><td>dark block</td><td><code>#232629</code></td></tr>
+      </table>
+      <p>Normal seams belong to the container gap. The special line below blue belongs to <code>.blue { border-bottom:10px solid #000; }</code>.</p>
+    </div>
+  </div>
+
+  <h2><span class="n">Y</span>Grid makes the painting; Flexbox hangs it on the wall</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="k">body</span> {
+  <span class="k">margin</span>: <span class="v">0</span>;
+  <span class="k">min-height</span>: <span class="v">100vh</span>;
+  <span class="k">display</span>: <span class="v">flex</span>;
+  <span class="k">justify-content</span>: <span class="v">center</span>;
+  <span class="k">align-items</span>: <span class="v">center</span>;
+}</pre>
+    </div>
+    <div>
+      <div class="box b-warn"><span class="t">Local attempt - two remaining corrections</span>
+        <ol><li>Add the body centering rule.</li><li>Change final row from <code>20px</code> to <code>22px</code> for the exact 748px sum.</li></ol>
+        <b>Source files remain unchanged. Selva should make these hands-on fixes.</b>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="n">Z</span>Design-to-grid workflow</h2>
+  <table class="tight">
+    <tr><td class="c">1</td><td>Draw every boundary over the reference.</td><td class="c">6</td><td>Merge regions with <code>span</code> or <code>grid-area</code>.</td></tr>
+    <tr><td class="c">2</td><td>Count tracks; remember tracks + 1 = lines.</td><td class="c">7</td><td>Apply colours after geometry matches.</td></tr>
+    <tr><td class="c">3</td><td>Write container width, height, tracks, gap.</td><td class="c">8</td><td>Inspect track sizes in DevTools.</td></tr>
+    <tr><td class="c">4</td><td>Add one div per visual region.</td><td class="c">9</td><td>Prove tracks + gaps equal frame size.</td></tr>
+    <tr><td class="c">5</td><td>Let auto-placement handle simple cells.</td><td class="c">10</td><td>Center the finished component last.</td></tr>
+  </table>
+  <div class="foot"><span>Grid Master Notes - page 9 of 11</span><span>Mondrian capstone - geometry - ownership - audit</span></div>
+</div>
+
+<!-- PAGE 10 -->
+<div class="page compact">
+  <h1 style="font-size:16pt;margin-bottom:4px">DEBUGGING CLINIC - symptom, cause, fix
+    <span class="sub">Read the property, the owner, and the axis. Grid bugs are often valid CSS with the wrong mental model.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+
+  <h2 style="margin-top:6px"><span class="n">AA</span>The failures most likely to bite</h2>
+  <table>
+    <tr><th>Symptom</th><th>Likely cause</th><th>Fast check / fix</th></tr>
+    <tr><td>Blank grid; items exist</td><td><code>fr</code> rows have no height to divide</td><td>Inspect container height; size container or children.</td></tr>
+    <tr><td>Columns respond, rows do not</td><td><code>auto</code> axis asymmetry</td><td>Auto column fills width; auto row fits content.</td></tr>
+    <tr><td>Rule silently does nothing</td><td>misspelled property, often missing final <code>s</code></td><td>Check Styles for ignored rule; spell <code>-rows</code> / <code>-columns</code>.</td></tr>
+    <tr><td>Item in wrong rectangle</td><td>counted cells instead of lines or swapped <code>grid-area</code> values</td><td>Enable line numbers; say row/column/row/column.</td></tr>
+    <tr><td>Item in correct sequence but too narrow</td><td>used <code>order</code>, forgot <code>span</code></td><td>Separate sequence from size.</td></tr>
+    <tr><td>Fixed squares show mystery whitespace</td><td>tracks wider than the fixed children</td><td>Inspect track size; size the board or use stretch.</td></tr>
+    <tr><td>Extra items have odd height</td><td>implicit row fits content</td><td>Set <code>grid-auto-rows</code>.</td></tr>
+    <tr><td>Artwork is 2px off</td><td>track + gap arithmetic mismatch</td><td>Sum every track and every gap.</td></tr>
+  </table>
+
+  <h2><span class="n">AB</span>Property ownership - ask before editing</h2>
+  <table class="tight">
+    <tr><th>Visual question</th><th>Owner</th><th>Typical property</th></tr>
+    <tr><td>How many columns?</td><td>container</td><td><code>grid-template-columns</code></td></tr>
+    <tr><td>Where does this box start/end?</td><td>item</td><td><code>grid-column</code>, <code>grid-row</code>, <code>grid-area</code></td></tr>
+    <tr><td>How much space is between cells?</td><td>container</td><td><code>gap</code></td></tr>
+    <tr><td>How tall are newly created rows?</td><td>container</td><td><code>grid-auto-rows</code></td></tr>
+    <tr><td>Which overlapping item is on top?</td><td>item</td><td><code>z-index</code></td></tr>
+    <tr><td>Where is text inside one cell?</td><td>item as a new layout container</td><td><code>display:flex</code> + alignment</td></tr>
+  </table>
+
+  <h2><span class="n">AC</span>Reusable patterns you will actually type</h2>
+  <div class="cols2">
+    <div>
+<pre><span class="c">/* Equal responsive columns */</span>
+<span class="k">.cards</span> {
+  <span class="k">display</span>:<span class="v">grid</span>;
+  <span class="k">grid-template-columns</span>:<span class="v">repeat(3,1fr)</span>;
+  <span class="k">gap</span>:<span class="v">1rem</span>;
+}
+
+<span class="c">/* Fixed sidebar + fluid content */</span>
+<span class="k">.layout</span> {
+  <span class="k">display</span>:<span class="v">grid</span>;
+  <span class="k">grid-template-columns</span>:<span class="v">250px 1fr</span>;
+}</pre>
+    </div>
+    <div>
+<pre><span class="c">/* Flexible tracks with a floor */</span>
+<span class="k">.gallery</span> {
+  <span class="k">display</span>:<span class="v">grid</span>;
+  <span class="k">grid-template-columns</span>:
+    <span class="v">repeat(3,minmax(200px,1fr))</span>;
+}
+
+<span class="c">/* Full-width header/footer */</span>
+<span class="k">header</span>, <span class="k">footer</span> {
+  <span class="k">grid-column</span>:<span class="v">1 / -1</span>;
+}</pre>
+    </div>
+  </div>
+
+  <h2><span class="n">AD</span>Three questions before writing CSS</h2>
+  <div class="cols3">
+    <div class="box b-key"><span class="t">1. Map or address?</span>Container track definition, or item placement?</div>
+    <div class="box b-key"><span class="t">2. Where or how many?</span>Line destination, or <code>span</code> count?</div>
+    <div class="box b-key"><span class="t">3. Fixed or flexible?</span>px/rem, auto, fr, or minmax?</div>
+  </div>
+  <div class="box b-you"><span class="t">Selva's full debugging sentence</span><b>Check the owner, check the axis, check whether I am positioning or sizing, then let DevTools show the computed tracks.</b></div>
+  <div class="foot"><span>Grid Master Notes - page 10 of 11</span><span>Debugging - ownership - reusable patterns</span></div>
+</div>
+
+<!-- PAGE 11 -->
+<div class="page">
+  <h1 style="font-size:16pt;margin-bottom:4px">RAPID-FIRE SELF TEST
+    <span class="sub">Cover the answer columns. Target: all 20 in under 4 minutes, then write the two shorthands from memory.</span>
+  </h1>
+  <div class="hdr-rule"></div>
+  <div class="cols2">
+    <table class="tight">
+      <tr><th>#</th><th>Question</th><th>Answer</th></tr>
+      <tr><td>1</td><td>Flexbox vs Grid dimensions</td><td class="answer">1D vs 2D</td></tr>
+      <tr><td>2</td><td><code>display:grid</code> goes on?</td><td class="answer">container</td></tr>
+      <tr><td>3</td><td>3 columns have how many lines?</td><td class="answer">4</td></tr>
+      <tr><td>4</td><td><code>fr</code> means?</td><td class="answer">share of available space</td></tr>
+      <tr><td>5</td><td>Auto column does?</td><td class="answer">fills leftover width</td></tr>
+      <tr><td>6</td><td>Auto row does?</td><td class="answer">fits content height</td></tr>
+      <tr><td>7</td><td>Too many items create?</td><td class="answer">implicit tracks</td></tr>
+      <tr><td>8</td><td>Control implicit row height</td><td class="answer"><code>grid-auto-rows</code></td></tr>
+      <tr><td>9</td><td>Final line from far edge</td><td class="answer"><code>-1</code></td></tr>
+      <tr><td>10</td><td>Start 2, cover 3 columns</td><td class="answer"><code>2 / span 3</code></td></tr>
+    </table>
+    <table class="tight">
+      <tr><th>#</th><th>Question</th><th>Answer</th></tr>
+      <tr><td>11</td><td><code>grid-area</code> order</td><td class="answer">row/col/row/col</td></tr>
+      <tr><td>12</td><td><code>grid-template</code> order</td><td class="answer">rows / columns</td></tr>
+      <tr><td>13</td><td><code>order</code> changes?</td><td class="answer">visual queue</td></tr>
+      <tr><td>14</td><td><code>minmax(200px,500px)</code></td><td class="answer">floor 200, ceiling 500</td></tr>
+      <tr><td>15</td><td><code>repeat(8,1fr)</code></td><td class="answer">eight equal tracks</td></tr>
+      <tr><td>16</td><td>Blank <code>fr</code> rows: first check?</td><td class="answer">container height</td></tr>
+      <tr><td>17</td><td>Grid line colour trick</td><td class="answer">parent background + gap</td></tr>
+      <tr><td>18</td><td>Mondrian final row</td><td class="answer">22px</td></tr>
+      <tr><td>19</td><td>Grid Garden completed?</td><td class="answer">28/28</td></tr>
+      <tr><td>20</td><td>Show exact track pixels</td><td class="answer">DevTools Show track sizes</td></tr>
+    </table>
+  </div>
+
+  <h2><span class="n">AE</span>Honest remaining-practice checklist</h2>
+  <table>
+    <tr><th>Work</th><th>Status</th><th>Next action</th></tr>
+    <tr><td>EX 10.0 Chessboard</td><td><span class="pill done">10/10</span></td><td>Rebuild from memory once.</td></tr>
+    <tr><td>EX 10.1 Grid Sizing Test</td><td><span class="pill todo">Not attempted by Selva</span></td><td>Type the five container rules before checking notes.</td></tr>
+    <tr><td>EX 10.2 exercise 2</td><td><span class="pill todo">One correction</span></td><td>Add astronaut's two-column span yourself.</td></tr>
+    <tr><td>Grid Garden</td><td><span class="pill done">28/28 verified</span></td><td>Reset and repeat without this solution table.</td></tr>
+    <tr><td>EX 10.3 Mondrian</td><td><span class="pill todo">Near complete</span></td><td>Add body centering and use a 22px final row.</td></tr>
+  </table>
+
+  <h2><span class="n">AF</span>Notes, tasks, and references</h2>
+  <div class="cols2">
+    <div>
+      <h3 class="plain">Notes and practice files</h3>
+      <ul>
+        <li><code>concept_grid_display.md</code> + <code>grid_display_tasks.md</code></li>
+        <li><code>concept_grid_sizing.md</code> + <code>grid_sizing_tasks.md</code></li>
+        <li><code>concept_grid_placement.md</code> + <code>grid_placement_tasks.md</code></li>
+        <li><code>concept_grid_garden.md</code> + <code>grid_garden_tasks.md</code></li>
+        <li><code>concept_mondrian_project.md</code> + <code>mondrian_project_tasks.md</code></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="plain">Practice and lookup</h3>
+      <ul>
+        <li>Grid Garden - <code>appbrewery.github.io/gridgarden/</code></li>
+        <li>Grid vs Flexbox - <code>appbrewery.github.io/grid-vs-flexbox/</code></li>
+        <li>Grid Sizing - <code>appbrewery.github.io/grid-sizing/</code></li>
+        <li>MDN CSS Grid Layout + Chrome DevTools Grid overlay</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box b-you avoid">
+    <span class="t">The five sentences to leave with</span>
+    <ol>
+      <li><b>Flexbox aligns a line; Grid coordinates rows and columns.</b></li>
+      <li><b>The container draws the map; each item may choose an address.</b></li>
+      <li><b>Count lines for where, use <code>span</code> for how many.</b></li>
+      <li><b>Fixed tracks and gaps eat first; <code>fr</code> shares the leftovers.</b></li>
+      <li><b>When Grid looks wrong, check owner, axis, size, spelling, then the DevTools overlay.</b></li>
+    </ol>
+  </div>
+  <div class="foot"><span>Grid Master Notes - page 11 of 11</span><span>Self test - remaining practice - references</span></div>
+</div>
+
+</body>
+</html>

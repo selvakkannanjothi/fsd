@@ -38,7 +38,8 @@ Running collection of reference/useful links gathered while working through the 
 - [MDN: `repeat()`](https://developer.mozilla.org/en-US/docs/Web/CSS/repeat) — `repeat(8, 1fr)` instead of writing `1fr` eight times
 - [MDN: `gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/gap) — same property as in flexbox, spaces both rows and columns in a grid
 - [Josh Comeau — An Interactive Guide to CSS Grid](https://www.joshwcomeau.com/css/interactive-guide-to-grid/) — best visual explanation of grid anywhere, the grid twin of his flexbox guide
-- [Grid Garden](https://cssgridgarden.com/) — the Grid equivalent of Flexbox Froggy, drills `grid-template-*` and placement
+- [Grid Garden - App Brewery course version](https://appbrewery.github.io/gridgarden/) — **completed 28/28 on 2026-08-29**; drills line placement, negative lines, `span`, `grid-area`, `order`, track sizing, `fr`, and `grid-template`
+- [Grid Garden - original](https://cssgridgarden.com/) — the original Grid equivalent of Flexbox Froggy
 - [Grid by Example (Rachel Andrew)](https://gridbyexample.com/) — copy-paste layout patterns from one of the spec authors
 - [Can I Use — CSS Grid](https://caniuse.com/css-grid) — browser support check
 
@@ -48,6 +49,13 @@ Running collection of reference/useful links gathered while working through the 
 - [MDN: `minmax()`](https://developer.mozilla.org/en-US/docs/Web/CSS/minmax) — one function combining a track's floor and ceiling
 - [MDN: `grid-auto-rows`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows) · [`grid-auto-columns`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns) — sizing implicitly-created tracks
 - [Chrome DevTools — Inspect CSS grid layouts](https://developer.chrome.com/docs/devtools/css/grid/) — the "grid" badge, overlay, and **Show track sizes** to read exact computed pixel values
+
+### Grid Placement + Grid Garden
+- [MDN: `grid-column`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column) · [`grid-row`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row) — line-based start/end shorthands and `span`
+- [MDN: `grid-area`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area) — `row-start / column-start / row-end / column-end`
+- [MDN: `order`](https://developer.mozilla.org/en-US/docs/Web/CSS/order) — visual auto-placement order and the accessibility warning about DOM/focus order
+- [Flexbox Froggy](https://codepip.com/games/flexbox-froggy/) — linked from the Grid Garden completion screen; companion practice for one-dimensional layout
+- [Codepip coding games](https://codepip.com/) — additional CSS/HTML coding games linked from the Grid Garden completion screen
 
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
