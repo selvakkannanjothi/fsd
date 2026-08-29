@@ -1,0 +1,1247 @@
+Hey, guys.
+
+In this section, we're going to be learning about the Bootstrap Framework.
+
+And this is one of many external CSS layout systems, but this is probably one of the most popular and
+
+the one that you'll most likely to come across out in the wild.
+
+Bootstrap, as I said, is a CSS framework created in 2010 by two Twitter developers Mark Otto and Jacob
+
+Thornton.
+
+Now the power of Bootstrap and the reason why it became so popular is it contained pre-made CSS files,
+
+which you can simply include into your project in order to use their pre-built components and styling.
+
+For example, if you wanted to have some tags in your website, you could create a look like this by
+
+simply adding a few classes to your HTML.
+
+On top of that, one of the biggest reasons why Bootstrap took off is because of their 12-column layout
+
+system built on top of Flexbox
+
+that makes it really easy to create responsive websites and websites that simply just work and look
+
+great on mobile as well as desktop, the so-called, Mobile First approach.
+
+So how exactly does it work?
+
+Well, let's say you had a button which just said "Home",
+
+you can see that the standard button rendered from HTML doesn't look fantastic.
+
+But if we included just five classes which come from the Bootstrap CSS, so we include the pre-built
+
+CSS into our project and we add the styling and the components by adding these classes to our HTML,
+
+then all of a sudden what you'll end up with is something that looks beautiful and pre-styled like this.
+
+And because we don't have to worry about writing all of the CSS code, all we need to know is which
+
+classes we need to add to our HTML,
+
+then it makes everything so much easier and so much quicker when we want to build components into our
+
+website.
+
+Now, as I mentioned, bootstrap is a type of CSS Framework,
+
+what exactly are these?
+
+Well, they're pre-made CSS files which you can include into your projects.
+
+If we had a look at the Bootstrap GitHub and because Bootstrap is completely open-source, then all
+
+of the code is visible. And you can see it's got styling defined for all of the different components,
+
+for example, this is inside the Card Component and it's got classes that define what a card body should
+
+look like, what kind of layout it should have, what kind of color it should have, as well as what
+
+the card title should look like, subtitle,
+
+and it's got all of this predefined CSS, which we can simply insert straight into our HTML.
+
+Now, the two most popular external CSS frameworks are Bootstrap and Foundation, but there are lots
+
+more like MUI and Tailwind and a whole bunch more.
+
+And the reason why they're so great is because they allow us to add in pre-built components and develop
+
+websites quickly and efficiently.
+
+If we look at the usage percentages across the Internet, you can see that the biggest CSS external
+
+framework is still Bootstrap with close to 80% of the market share.
+
+But just because we learn about Bootstrap, it doesn't mean that everything we learned about CSS is
+
+null and void.
+
+In fact, if you look at the top here, when we look at the absolute usage percentages of all of the
+
+different frameworks across the Internet, you can see the largest percentage are still websites that
+
+don't use any external CSS frameworks.
+
+What does it mean when there are no CSS frameworks being used?
+
+Well, it means you're probably using native CSS like Flexbox and Grid and Float and all of the great
+
+things that we learnt before.
+
+So Bootstrap doesn't replace any of that knowledge and in fact, we should be in a situation where we
+
+don't actually need to depend on any sort of external framework. But, they are really useful when we
+
+want to develop websites quickly and easily and we don't want to spend a ton of time designing our websites,
+
+because it comes with all of the pre-made styling and all of the styling rules that we can easily conform
+
+to by using their components.
+
+So what are the pros of external CSS frameworks?
+
+Well, they're easy and they're fast to use and you get a ton of pre-built components like this Pricing
+
+Plan, which took us ages to build ourselves.
+
+And you also get really consistent styling across your website.
+
+It's almost like you hired a professional developer who kept everything looking on-brand. And finally
+
+you have really good browser compatibility because they've tested all of the different browsers Safari,
+
+Chrome, Brave and whichever browsers that
+
+your user might be using.
+
+So you don't actually have to do all of this complicated testing.
+
+You can just trust that it works out of the box.
+
+Now, what are some of the downsides of CSS frameworks?
+
+Well, one of the biggest downsides is something called, Class Bloat.
+
+Remember previously we mentioned that it's a really good idea to separate structure from style, where
+
+we said that HTML is for structure,
+
+so adding in elements that describe what the purpose is, and CSS is for style. Using external CSS frameworks,
+
+because we're adding everything into the classes, then very quickly you end up with what's called class
+
+bloat, where you have a lot of styling going into the actual HTML file and it looks a lot less clean
+
+than if we had just used something like Grid or Flexbox, where we have all of our predefined classes and
+
+we go easy on the classes that we add in to our HTML file.
+
+The other downside is customization.
+
+If you want to build a website where you want to have full control over every pixel and layout and everything
+
+to be exactly the way you designed it, then external CSS frameworks is probably not the way to go because
+
+in order to customize each and every component, it can be really time consuming.
+
+So when should you use the CSS frameworks like Bootstrap and when should you not?
+
+Well, when you are building a mobile-first responsive website that you want to put online very quickly
+
+and access beautiful components designed by professional designers, keeping everything on your website
+
+looking slick and uniform, then you probably want to consider using Bootstrap.
+
+But if you're building a very simple website, where you just need HTML and CSS and you can quickly throw
+
+it up, or if you're building a really complex custom design website and you want complete control over
+
+the design, then it's probably not a good idea to use an external CSS framework like Bootstrap.
+
+So we've spoken so much about the pros and cons, when to use, when not to use, but how do you actually
+
+use it?
+
+Well, one of the easiest ways is to include it via a CDN link.
+
+We've seen how we can use the link tag in order to add our stylesheets,
+
+and in a similar way, we can use these link tags that simply gets hold of the stylesheet from an external
+
+resource.
+
+So in this case it's through CDN, which stands for Content Delivery Network.
+
+And what these are is little hubs all across the entire world and it knows where your users are located.
+
+So when they load up your website and try to access this particular CSS file that contains all of the
+
+Bootstrap code, then it can find the closest location with the shortest distance to the server that
+
+has that content.
+
+And that just means that even though this has to be downloaded from somewhere, it can be delivered
+
+to your user and rendered very, very quickly.
+
+And from our point of view as developers, all we need to do is simply include this link into the head
+
+section of our HTML.
+
+And if we want any of the functionality like dropdown menus or clickable buttons, then we want to include
+
+the Bootstrap script just before the end of the body section.
+
+So somewhere right about here.
+
+Now let's go ahead and try an exercise and see if we can upgrade our website quickly by using Bootstrap.
+
+Download 11.0 Bootstrap Intro, and if you open it inside of VS Code, open the index.html, you can see
+
+there are four TODO's for you to complete.
+
+And once you've completed all of these four steps, you should end up with a card that displays a sunflower
+
+image.
+
+And this is one of the pre-built Bootstrap components.
+
+Now how are you going to do this?
+
+Well, firstly, you're going to head over to getbootstrap.com, which is the main bootstrap website,
+
+and then I want you to include the bootstrap files using CDN.
+
+You only need the CSS file through this link element for now.
+
+And then I want you to go into the documentation if you want to look up anything regarding the Card
+
+Component, which is all the way down here in Components under the Card Section.
+
+Now you know what the goal should look like.
+
+You've got all of the resources to get started and you should be able to work through each of the TODOs
+
+one by one.
+
+Pause the video and see if you can complete this challenge.
+
+All right.
+
+Hopefully, you've given that a go and you've seen that the Bootstrap Card has some example code, which
+
+you can straight up just drop into your file.
+
+If you haven't given this a go, pause the video now,
+
+don't continue because things will get harder and harder as we go on in the course,
+
+and if you just watch the videos, eventually, at some point things are not going to make sense because
+
+you haven't had the practice.
+
+Make things easy for your future self by putting in lots of effort and practice now.
+
+All right, enough said.
+
+First thing, let's walk through the solution together and hopefully you can check it against your work.
+
+Now the first thing we're going to do is add the bootstrap link, which comes from the homepage,
+
+and we just want this first link that is going to include the stylesheet.
+
+And you can see this is a link with a relationship of stylesheet.
+
+So instead of using our own stylesheet, we're now using the bootstrap CSS.
+
+And if you're wondering what that "min" stands for, it's basically a file where all of the spaces are
+
+taken away so that it's as short as possible.
+
+So it loads up quicker because there's no spaces and everything's all jumbled, which is impossible
+
+for humans to read,
+
+but it works just fine for the computer.
+
+TODO Number 2 is to add the bootstrap pre-built card.
+
+So if we go into our docs and find our Card Component, you can see the first example is pretty much
+
+the card we want to build.
+
+If we look at the goal, we've got our Card title, some example text, a button and an image, and
+
+this is exactly the same as this example.
+
+So let's copy the HTML and paste it into here, under TODO Number 2.
+
+Now let's check our work, let's show it in preview and see what it looks like.
+
+It looks pretty good
+
+other than the fact that the image is pretty much completely broken.
+
+So step three is to change the image source to display the flower JPEG image.
+
+The image is right here and right now the source is completely empty because it's an example.
+
+Let's go ahead and change it to our image, which is flower.jpeg.
+
+You see it show up immediately and as always with images, let's add an alt text so that people with
+
+screen readers know what it's all about.
+
+All right.
+
+Now the final step is a little bit of a revision step because I wanted you to use Flexbox to center
+
+the card in the vertical and horizontal center.
+
+If we take a look at this URL on our browser, you can see it's stuck all the way to the top left,
+
+which is default HTML layout,
+
+but if we want it right here in the middle, then we're going to need to use some Flexbox magic and
+
+we're going to do that inside an internal style element right here under TODO Number 4.
+
+What do we need to target?
+
+Well, we need to target the entire card,
+
+and the topmost level is this "flex-container."
+
+The reason why it's of class, flex-container, is because this comes from the Bootstrap CSS and it's got
+
+some styling in there that defines that container,
+
+but we can always override it.
+
+And this is really, really important when we want to override a particular Bootstrap style, we have
+
+to make sure that it's more specific.
+
+So either it goes inside an internal style element or it goes inside an inline style property, or if
+
+we're using our standard external CSS and we use a link linking to, I don't know, say,
+
+./css/style.css and we have style.css file somewhere in our project, then you've got to make sure
+
+that your custom CSS file occurs below the Bootstrap link.
+
+That way this is first looked at, and then the browser looks at your custom style sheet, and you can override
+
+any of the classes that come from B ootstrap.
+
+So this is an important point to remember for the future when you're creating your own custom style
+
+sheets.
+
+All right, so now in order to override the style here, now we might be building on top of existing
+
+Bootstrap styles or we might be specifying something they don't even care about, and it's not defined
+
+in the bootstrap CSS at all.
+
+In our case, we want to change this flex-container to "display: flex" because we know that this is one
+
+of the simplest ways to center anything in CSS.
+
+And the first thing we need to change is the justify-content set to center,
+
+and the second one is align-items set to center,
+
+and finally, we need to make sure that the entire container takes up the full height and not just some
+
+proportion
+
+of the height
+
+that's enough for the content.
+
+So let's set the height to 100vh,
+
+and now you can see our card is perfectly centered in the middle using Flexbox.
+
+It's a component that we've borrowed and customized from Bootstrap, and you can see how easy it was,
+
+and quick to create this layout by leveraging the power of Bootstrap.
+
+In the next lesson, we're going to dive deeper into Bootstrap, and we're going to look at how the Bootstrap
+
+12-column layout system actually works in practice.
+
+So for all of that and more, I'll see you in the next lesson.
+
+
+Completed
+Play
+Not completed
+Play
+Not completed
+Play
+Not completed
+Play
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14:07
+11. Bootstrap
+64. What is Bootstrap?
+min in bootsrap url --- explore
+
+
+
+always locate yout external stylesheet under the bootstrap link.
+
+
+
+so yours can override the bootstrap
+
+24:17
+10. Grid
+62. Grid Placement
+learn transparency on the hexcode -----> last two digits ----> overlay la will be used.
+
+21:48
+10. Grid
+62. Grid Placement
+imp : if you use grid area for one grid ----> then use the same for all the grids ---> so everything behaves normally.
+
+21:10
+10. Grid
+62. Grid Placement
+order of the grid-area
+
+1 grid-row-start
+
+2 grid-column-start
+
+3 grid-row-end
+
+4 grid-column-end
+
+
+
+grid-area : 1 / 2 / 3 / 4;
+
+20:38
+10. Grid
+62. Grid Placement
+use grid-row and the grid-column directly with the help of order attribute. this is one way.
+
+
+
+another way is to use the coordinates/ positions:
+
+
+
+grid-column-start: 1;
+
+grid-column-end: 3;
+
+grid-row-start: 2;
+
+grid-row-end: 3;
+
+
+
+combine all these in to something like,
+
+grid-area: 2 / 1 / 3 / 3;
+
+17:05
+10. Grid
+62. Grid Placement
+default order is zero
+
+14:36
+10. Grid
+62. Grid Placement
+left to right
+
+right to left
+
+
+
+we can fill in the both way
+
+12:35
+10. Grid
+62. Grid Placement
+grid column ----> split
+
+grid-column-start: 2
+
+grid-column-end: 4
+
+3:37
+10. Grid
+62. Grid Placement
+by default,
+
+grid width is set to available browser window width
+
+grid height ---> we need to define ---> here we define 100vh ---view port height of browser
+
+
+
+3:27
+10. Grid
+62. Grid Placement
+understand all these grid terms :
+
+lines,
+
+tracks,
+
+cells,
+
+items,
+
+container
+
+14:53
+10. Grid
+61. Grid Sizing
+when content gets out of the grid ---> more content - less space
+
+
+
+and if you want to control the elements which are out of the grid
+
+use grid-auto-rows: 300px
+13:09
+10. Grid
+61. Grid Sizing
+what if : more content : less grid spaces,
+
+row----> accomodate based on the content height
+
+column -----> try to align based on the existing column width
+
+12:18
+10. Grid
+61. Grid Sizing
+understand the repeat keyword:-
+
+grid-template-rows: repeat(2, 200px);
+
+grid-template-columns: repeat(2,100px)
+
+meaning ---> repeat("no of times","values")
+
+[200px 200px]
+
+[100px 100px]
+
+
+
+lets say only 4 content --- grid has 6 spaces ----> understand the way how the content is organised---> left to right ----> and next row
+
+8:33
+10. Grid
+61. Grid Sizing
+fr ---> fractions or ratios
+
+column limit ---> up to browser width
+
+row limit ---> based on content ----> if content increased ----> that particular box height increased ---> it will alter the first box height tooo
+
+
+
+All situations --> the ratios will be maintained !!!
+5:21
+10. Grid
+61. Grid Sizing
+auto on the grid-template-row -----> tries to fit the content ---? expands to accomaodate the content
+
+
+
+auto on the grid-template-column -----> extends up to the browser window ---> occupies all the space till the end
+
+2:31
+10. Grid
+61. Grid Sizing
+ccombine grid-template-rows and grid-template-columns in to grid-template,
+
+
+
+grid-template: 100px 200px / 400px 800px;
+
+2:15
+10. Grid
+61. Grid Sizing
+if you apply specific width and height to the grid-template-rows and grid-template-columns
+
+that wont be responsive
+
+
+
+even if you apply something like 1rem or 2rem - that wont also responsive
+
+6:49
+10. Grid
+60. Display: Grid
+scenario - one dimensional grid vs one dimensional flexbox
+
+
+
+grid behaves like a grid -- meaning it acts like a proper row column, the gaps are aligned straight --> both horizonatlly and vertically
+
+flex behaves like a flex ---> dont maintain such gap alignments with repspect to before/after rows/columns --- it just adapt to space availability
+
+2:42
+10. Grid
+60. Display: Grid
+use flex box----> alignment in one dimensional layouts
+
+use grid ----> for 2d layouts
+
+20:26
+9. Flexbox
+57. Flex Sizing
+lets say you have three items lined up with the main axis on the row based
+first item ---> flex: 1
+second item --> flex: 2
+third item --> flex:3
+flex: 1 ---> grow-1 shrink-1 flex-basis-0
+flex:2 --->grow-2 shrink-2 flex-basis-0
+flex:3 --->grow-3 shrink-3 flex-basis-0
+it is going to respect the RATIOS
+100x 200x 300x
+growing and shrinking also based on the ratios
+1x expand/shrink | 2x expand/shrink | 3x expand/shrink
+19:31
+9. Flexbox
+57. Flex Sizing
+we can further shrink the most commonly used flex: 1 1 0
+
+flex: 1
+
+19:11
+9. Flexbox
+57. Flex Sizing
+short hand way of writing flex:
+flex-basis: 0;
+flex-grow: 1;
+flex-shrink: 1;
+flex : 1 1 0;
+flex: grow shrink flex-basis;
+19:06
+9. Flexbox
+57. Flex Sizing
+gs - scenario 4 :- types of flex-basis
+
+flex-basis: auto;
+
+flex-grow: 1;
+
+flex-shrink: 1:
+
+
+
+- maximum flexibiity or proiority to the items with more content (one sentence with 10 words)
+
+- less or min flexibiity given the items with less content (one single word)
+
+
+
+Instead if you want to give equal width to the all the items, then you can switch to 0
+
+flex-basis: 0
+
+18:05
+9. Flexbox
+57. Flex Sizing
+gs - scenario 4 :-
+
+flex-basis: 100px;
+
+flex-grow: 1;
+
+flex-shrink: 1:
+
+
+
+in this scenario,
+
+the flexbox is allowed to shrink - up to min content width
+
+the flexbox is allowed to expand - up to available space
+
+
+
+flex-basis is completely ignored here ----- DUMMY PIECE BAAVA
+17:20
+9. Flexbox
+57. Flex Sizing
+gs - scenario 3 :-
+
+flex-basis: 100px;
+
+flex-grow: 0;
+
+flex-shrink: 1:
+
+
+
+in this scenario,
+
+the flexbox is allowed to shrink
+
+initial width should be 100px - flex-basis
+
+the range is minimum content wdth --------> 100px
+
+100px is considered as the maximum width/ default width of item
+
+
+
+can shrink freely up to min content width
+
+but when you try to expand- it wont expand beyond the 100px.
+
+
+
+Note that : this is default behavior of flex box - even if you don't mention anything
+you are allowed to shrink
+you are not allowed to expand
+
+
+16:35
+9. Flexbox
+57. Flex Sizing
+gs - scenario 2 :-
+
+flex-basis: 100px;
+
+flex-grow: 1;
+
+flex-shrink: 0:
+
+
+
+in this scenario,
+
+the flexbox is allowed grow
+
+initial width should be 100px - flex-basis
+
+the range is 100px -------> N px (based on the space availability)
+
+
+
+can expand unlimitedly based on the available space - freely
+
+but when you try to shrink - it wont shrink beyond 100px.
+
+15:12
+9. Flexbox
+57. Flex Sizing
+gs - scenario 1 :-
+
+flex-basis: 100px;
+
+flex-grow: 0;
+
+flex-shrink: 0:
+
+
+
+in this scenario,
+
+the flexbox cannot grow
+
+the flexbox cannot shrink
+
+
+
+whatever you do expand or shrink -- the width is constant 100px --- no flexibility
+
+13:33
+9. Flexbox
+57. Flex Sizing
+max-width --- tells the potential of item how much it can extend
+
+min-width --- tells the potential of item how much it can shrink
+
+13:28
+9. Flexbox
+57. Flex Sizing
+scenario 4:
+
+flex-basis : 400px;
+
+min-width: 300px;
+
+
+
+in this case, flex-basis > min-width, so
+
+flex-basis is completely considered
+
+width is applied to defined flex-basis
+
+final width --- 400px
+
+13:23
+9. Flexbox
+57. Flex Sizing
+scenario 3:
+
+flex-basis : 200px;
+
+min-width: 300px;
+
+
+
+in this case, flex-basis < min-width, so
+
+flex-basis is completely ignored
+
+width is applied to defined min-width
+
+final width --- 300px
+
+14:17
+9. Flexbox
+57. Flex Sizing
+selva, you need to unserstand this,
+min-width just tells the potential --- indicating the limit
+if some attributes such as flex-basis not respecting the min-width meaning if flex-width is smaller than the min-width, min-width comes in to the scene and it will be defined.
+if flex-basis respecting the max-width meaning if flex-width is lager than the max-width, min-width DONT comes in to the scene and FLEX-BASIS will be defined as final width.
+12:09
+9. Flexbox
+57. Flex Sizing
+selva, you need to unserstand this,
+max-width just tells the potential --- indicating the limit
+if some attributes such as flex-basis not repecting the max-width meaning if flex-width is larger than the max-width, max-width comes in to the scene and it will be defined.
+if flex-basis respecting the max-width meaning if flex-width is smaller than the max-width, max-width DONT comes in to the scene and FLEX-BASIS will be defined as final width.
+10:59
+9. Flexbox
+57. Flex Sizing
+scenario 2:
+
+flex-basis : 50px;
+
+max-width: 200px;
+
+
+
+in this case, flex-basis < max-width, so
+
+flex-basis is completely considered
+
+width is applied to defined flex-basis
+
+final width --- 50px
+
+11:15
+9. Flexbox
+57. Flex Sizing
+scenario 1:
+
+flex-basis : 200px;
+
+max-width: 100px;
+
+
+
+in this case, flex-basis > max-width, so
+
+flex-basis is completely ignored
+
+width is applied to defined max-width
+
+final width --- 100px
+
+9:38
+9. Flexbox
+57. Flex Sizing
+when we have both width and the flex-basis,
+flex-basis is considered ---- width is completely ignored
+when it could not accomaodate flex-basis value---> it falls back to follow minimum content width
+9:58
+9. Flexbox
+57. Flex Sizing
+if you have flex-basis it will ignore width;
+
+3:58
+9. Flexbox
+57. Flex Sizing
+!!!! IMP !!!!
+
+1. min-width/max-width
+
+2. flex-basis
+
+3. width
+
+4. Content width
+
+19:11
+9. Flexbox
+56. Flex Layout
+align-content ---> determines the spaces between the wrap lines.
+
+
+
+can be applied when there is a wrap.
+
+
+
+cannot be applied at the single line.
+
+19:10
+9. Flexbox
+56. Flex Layout
+understand clearly the diffrence between the align-content and the align items.
+12:54
+9. Flexbox
+56. Flex Layout
+align-items controls how flex items are aligned along the cross axis (vertical, in a row-direction container).
+
+flex-start — items aligned to the start of the cross axis (top, in a row).
+
+flex-end — items aligned to the end of the cross axis (bottom, in a row).
+
+center — items centered along the cross axis.
+
+baseline — items aligned so their text baselines line up with each other, regardless of box size.
+
+stretch — items stretch to fill the container's cross-axis size (default, if no fixed height is set on items).
+
+flex-start vs baseline — the key difference:
+
+flex-start aligns the top edge (box) of every item, ignoring what's inside them.
+
+baseline aligns the text baseline (the invisible line text "sits" on) of every item, ignoring box edges.
+
+They look identical only when all items have the same font-size/padding, so their box-tops happen to match their baselines too.
+
+10:46
+9. Flexbox
+56. Flex Layout
+understand the diff between the justify-content & align-items.
+
+justify contents ----> main axis
+
+align-items ---> perpendicular to the main axis
+
+
+
+9:59
+9. Flexbox
+56. Flex Layout
+justify-content controls how flex items are spaced along the main axis (horizontal by default, in a row).
+
+flex-start — items packed at the start of the container. Default behavior.
+
+flex-end — items packed at the end of the container.
+
+center — items packed together in the center, equal space on both sides of the whole group.
+
+space-between — first item touches the start, last item touches the end, remaining space split evenly between items. No space at the edges.
+
+space-around — each item gets equal space on both its sides. So gaps between items look double the gap at the edges (since two items' side-spaces combine there).
+
+space-evenly — all gaps (including edges) are exactly equal — start, between each item, and end.
+
+Quick visual (container with 3 boxes):
+
+flex-start:     [A][B][C]____________
+flex-end:       ____________[A][B][C]
+center:         _____[A][B][C]_____
+space-between:  [A]______[B]______[C]
+space-around:   __[A]____[B]____[C]__
+space-evenly:   ___[A]___[B]___[C]___
+7:10
+9. Flexbox
+56. Flex Layout
+flex-wrap: nowrap/wrap; -------> container property -- not the child ones
+5:05
+9. Flexbox
+56. Flex Layout
+flex-wrap: nowrap/wrap;
+
+this is similar to the wordwrap in the wordpad.
+
+3:05
+9. Flexbox
+56. Flex Layout
+its important to know the difference where the changes are applicable to : either parent or child
+
+
+
+in this case, the property order is applied to the child elements.
+
+
+
+lower values comes first-------------higher value comes last
+
+9:35
+9. Flexbox
+55. Flex Direction
+flex basis is intended for the child class of the container
+5:01
+9. Flexbox
+55. Flex Direction
+flexing along main axis
+4:29
+9. Flexbox
+55. Flex Direction
+flex basis ----> width of elements if main axis is row
+
+
+
+flex basis ----> heightof elements if main axis is column
+
+3:19
+9. Flexbox
+55. Flex Direction
+undertstand main axis and the cross axis.
+
+
+
+1:25
+9. Flexbox
+55. Flex Direction
+default -----> flex-directoion:row
+
+
+
+12:07
+9. Flexbox
+54. Display: Flex
+list-style: none -----> remove bullet points
+
+
+
+10:06
+9. Flexbox
+54. Display: Flex
+other display properties such as inline, block, inline-block, none are completely different
+
+think flex in a different perspective,
+
+
+
+when apply flex, whatever the elements inside the container with the properties such as block, inline..... will be ignored. rules meera padum.
+
+
+
+normal flex go on x axis.
+
+
+
+normal flex is a 100 percent block and occupies complete width.
+
+
+
+we have one more property called inline-flex. acts like a inline-block.
+
+5:29
+9. Flexbox
+54. Display: Flex
+use float only for floating the images around the text.
+
+not for the layouts !!!!
+10:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about flex is here !!!
+
+7:52
+8. Advanced CSS
+50. How to Create Responsive Websites
+All about grid is here !!!
+
+2:12
+8. Advanced CSS
+50. How to Create Responsive Websites
+4 ways of doing the responsiveness.
+
+11:34
+8. Advanced CSS
+49. CSS Float
+important concept to learn. but dont use in real time - we have other options such as flexbox, grid & bootstrap. only use when you want to wrap the para p around the image.
+
+14:06
+7. Intermediate CSS
+45. CSS Positioning
+understand the map da Raaja
+
+position is beyond the margin.
+
+13:17
+7. Intermediate CSS
+45. CSS Positioning
+Fixed positioning - interesting guy:-
+
+seems similar to the position:static until you scroll.
+
+
+
+positioned to the browser window not the page. even if you scroll horizontally or vertically, the position will same --- looks like its glued to the monitor screen !!!
+
+12:10
+7. Intermediate CSS
+45. CSS Positioning
+z-index --- all bout z axis,
+
+by default all z-index is 0, when all are zero, the element with position:absolute will be moved to the top - thats the behaviour by default.
+
+But if you want to override that make z-index -1.
+
+note: if you are changing this using dev console inspect, refer element.syle --> which is nothing but the inline style element.
+
+7:07
+7. Intermediate CSS
+45. CSS Positioning
+Absolue positioning --->
+
+1st priority:
+
+Position relative to nearest positioned ancestor - must have this --> position : relative
+And target will have position: absolute and align based on the ancestor.
+
+
+
+2nd priority:
+
+if no ancestor have the position: relative, the alignment fall backs to top left corner of the web page. if target has left 50 top 50, the target will move from the top 50 and left 50.
+
+3:14
+7. Intermediate CSS
+45. CSS Positioning
+as said, Relative Position ---> position relative to default position. compared to its original static positive, how much it should move or align with the given inputs like left 50 top 100.
+
+0:56
+7. Intermediate CSS
+45. CSS Positioning
+static - one after other !!!! defaut behaviour - no need to mention it position: static
+19:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+combining combiners !!!!
+15:08
+7. Intermediate CSS
+44. Combining CSS Selectors
+CHAINING !!!!
+
+13:07
+7. Intermediate CSS
+44. Combining CSS Selectors
+descendent selector !!!!
+
+9:36
+7. Intermediate CSS
+44. Combining CSS Selectors
+parent child selector !!!!
+
+5:25
+7. Intermediate CSS
+44. Combining CSS Selectors
+you can group different selectors !!!!
+
+25:09
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+position of styles in the style.css. heirarchy. last one will apply.
+
+18:19
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css cascade
+
+11:41
+7. Intermediate CSS
+43. The Cascade - Specificity and Inheritance
+css rules - overrides
+
+9:45
+6. CSS Properties
+41. The CSS Box Model - Margin, Padding and Border
+understand margin, border and padding.
