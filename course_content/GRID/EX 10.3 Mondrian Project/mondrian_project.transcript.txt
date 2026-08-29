@@ -1,0 +1,175 @@
+All right, guys, it's time to use what we've learned about CSS grid to create a masterpiece.
+
+I want to introduce you to somebody who loves CSS grid probably more than anyone,
+
+and that is Piet Mondrian.
+
+He is a Dutch painter who has created masterpieces that you might have seen before.
+
+And they look like this one, Composition No. III with Red, Blue, Yellow and Black, which is not
+
+a very creative name, but it is a beautiful painting, especially if you're really into grids, which
+
+he is.
+
+But also it seems like a lot of other people are, because this piece was auctioned off for a whopping
+
+$50.6 million.
+
+So I hope you're glad that you started this section and learn about CSS Grid too.
+
+Now, I've created a graphic that breaks down all of the dimensions of each of the elements in this
+
+grid.
+
+And I've measured it everything up with a ruler so that we can create a realistic to-scale version of
+
+this painting using CSS grid.
+
+If you want to create a different painting because he's created lots of these compositions and you don't
+
+want to use my measurements, that's totally cool as well.
+
+You can simply Google Image Search: "Mondrian compositions" and if you look in the images tab, you'll
+
+see a whole bunch of different ones that he created and you can pick one that you like.
+
+There are ones which are super complicated and there are ones which are really, really simple.
+
+But if you're doing it this way, then you'll probably have to judge by eye the sizes of the tracks,
+
+for example, the rows and the columns.
+
+But remember, this is a project, so it's totally up to you whether if you want to do the version that
+
+I've measured up for you or do a completely separate one or do both, or make lots and lots of different
+
+paintings, it's totally up to you.
+
+Go ahead and download the starting files for the Mondrian Project, and if you take a look inside the
+
+index.html, you'll see that I've added some of the hex codes for the colors in this image, and that
+
+way you can actually get a more realistic version of the painting.
+
+So everything should be pixel-perfect measured colors,
+
+and this is what you would end up with if you followed all of the colors in here and the dimensions
+
+in this
+
+dimensions.png.
+
+Using what you've learned about grid, either use my dimensions and colors to create this final goal
+
+website, which you'll notice is actually even centered on screen.
+
+So think about how you might do that.
+
+Or you can pick one of the other paintings, any of his paintings, and use CSS grid to see if you can
+
+figure out how to recreate it,
+
+but in a website.
+
+Pause the video now and give this project a go.
+
+All right.
+
+So the first thing you'll notice is that there's no HTML written for you and there's no CSS.
+
+So you're going to have to write everything completely yourself.
+
+If we take a look at our solution, you can see that we've created as many divs as there are squares
+
+on the painting.
+
+If I go ahead and Show Preview and I open this up as a website, you'll see this is our final solution
+
+code masterpiece, which I actually think looks really, really pleasant.
+
+I may just print out a copy and put it on my wall because it is really beautiful.
+
+If we look at this, there's one, two, three, four, five, six, seven, eight, nine divs in total.
+
+And that's exactly how many I've added into the CSS grid container.
+
+Now, because some of them are different colors, I've added some classes onto them, but most of the
+
+layout actually occurs in the container class.
+
+I specified a height and width according to the dimensions in the dimensions image and then set it to
+
+display grid.
+
+Now I gave the whole thing a background color because remember I said we can't actually change the color
+
+of the lines, but we can create a gap so that the background actually shows up.
+
+That's a little trick that I figured out.
+
+There's probably other ways of doing this, but hopefully you've seen that hint from me,
+
+and if you didn't, maybe you've worked it out yourself.
+
+Next, I created the columns and the rows and specified fixed sizes because these dimensions are super
+
+crazy
+
+and basically I looked at all of the different columns.
+
+So this is column Number one's width.
+
+This is column Number 2, Number 3 and Number 4, four columns in total, because these are
+
+actually going to be two different items.
+
+So I had to split this into two columns.
+
+And this spans two columns and this spans three columns.
+
+That's how I figured it out. Row-wise,
+
+we've got one row here, another one here, another one here, and finally the last one here.
+
+So four rows and four columns.
+
+And then I specified a gap of 9px, which will show up as the black lines.
+
+And then I gave everything by default, the background color of the white and each individual item,
+
+if they were colored differently, I would give them the colors that they needed. Based on the positioning
+
+of some of these,
+
+for example, this big white block actually needs to span three columns,
+
+so these 3 columns and I used the grid-column property to create that look.
+
+And then the second white one, spans 2rows vertically because we have these 4 rows. Taking up these
+
+two is a grid-row: span 2 job. For the third white cube,
+
+I decided to use a grid-area because it seemed easier to define, but you might have used something
+
+else.
+
+And the rest of the solution code should be pretty straightforward.
+
+Now hopefully you managed to achieve this.
+
+This involved a little bit of remembering how we size our grid tracks, how we lay out and position
+
+our items in our grid container,
+
+and finally, how to center an item inside the middle of the screen using Flexbox.
+
+Hopefully you managed to figure out all of these things.
+
+If not, be sure to review the relevant pieces of content in this section.
+
+And now you should know how to use Flexbox, how to use grid and how to use them together in order to
+
+create beautiful masterpieces, but also complex web layouts.
+
+So hope you had fun in this section and I'll see you in the next one.
