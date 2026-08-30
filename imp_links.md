@@ -57,6 +57,21 @@ Running collection of reference/useful links gathered while working through the 
 - [Flexbox Froggy](https://codepip.com/games/flexbox-froggy/) — linked from the Grid Garden completion screen; companion practice for one-dimensional layout
 - [Codepip coding games](https://codepip.com/) — additional CSS/HTML coding games linked from the Grid Garden completion screen
 
+## Bootstrap
+
+### 11.0 Layout — the 12-column system
+- [Bootstrap Layout Exercises (appbrewery)](https://appbrewery.github.io/bootstrap-layout/) — **the lesson's own exercise**: three demo rows to reverse-engineer with `col-*` classes. **Completed 2026-08-30, verified 18/18** (3 exercises × 6 breakpoint bands). From `11.0 bootsrap_layout_url.txt`
+- [Bootstrap 5 — Layout overview](https://getbootstrap.com/docs/5.3/layout/breakpoints/) — the docs section the instructor points at when you get stuck
+- [Bootstrap 5 — Breakpoints](https://getbootstrap.com/docs/5.3/layout/breakpoints/) — the six breakpoints and *why they are all `min-width`* (the "breakpoints go up, never down" rule)
+- [Bootstrap 5 — Containers](https://getbootstrap.com/docs/5.3/layout/containers/) — the `container` / `-sm` / `-md` / `-lg` / `-xl` / `-xxl` / `-fluid` table, answers the "explore!!!" note in the transcript
+- [Bootstrap 5 — Grid system](https://getbootstrap.com/docs/5.3/layout/grid/) — `col`, `col-N`, `col-auto`, stacking breakpoints, gutters
+- [Bootstrap 5 — Columns](https://getbootstrap.com/docs/5.3/layout/columns/) — alignment, ordering and offsetting columns (beyond what the lesson covers)
+- [Bootstrap 5 — Gutters](https://getbootstrap.com/docs/5.3/layout/gutters/) — the `g-*` classes; use these instead of putting your own `margin` on a `col`
+- [Bootstrap 5.3.0-alpha2 CSS CDN](https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css) — the exact build the exercise page loads; read `.row`, `.row > *`, `.col` in here to see the Flexbox underneath
+- [MDN: `min-width` media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/min-width) — why `col-sm-6` means "576px **and up**", and why the boundary is inclusive
+- [MDN: Cascade, specificity and inheritance](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade) — the tie-break that makes `col-lg-4` beat `col-sm-12`: equal specificity, **source order wins**
+- [Chrome DevTools — Device Mode / responsive ruler](https://developer.chrome.com/docs/devtools/device-mode) — the instructor's own tip: drag the handle and read the width at the top to find which breakpoint fired
+
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
 - [MDN: `<img>` element (height attribute)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height) — from `EX 4.3 HTML Portfolio Project`
