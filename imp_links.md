@@ -72,6 +72,27 @@ Running collection of reference/useful links gathered while working through the 
 - [MDN: Cascade, specificity and inheritance](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade) — the tie-break that makes `col-lg-4` beat `col-sm-12`: equal specificity, **source order wins**
 - [Chrome DevTools — Device Mode / responsive ruler](https://developer.chrome.com/docs/devtools/device-mode) — the instructor's own tip: drag the handle and read the width at the top to find which breakpoint fired
 
+### 11.2 Components, Examples & Spacing Utilities
+The four "shops" the lesson moves between without ever naming them:
+- [Bootstrap — home](https://getbootstrap.com/) — the jumping-off point for Docs / Examples / Icons / Themes
+- [Bootstrap 5 — Components index](https://getbootstrap.com/docs/5.3/components/buttons/) — **shop 1: one component at a time**, with every variant and its API
+- [**Bootstrap 5 — Examples**](https://getbootstrap.com/docs/5.3/examples/) — **shop 2: whole page sections**, already laid out and spaced. The one beginners never find (not in the main docs nav) and the better shop for building fast. Move It's navbar layout, hero, features and footer all came from here
+- [Bootstrap Icons](https://icons.getbootstrap.com/) — **shop 3: ~2000 free SVG icons**, royalty-free even for paid/commercial work. Source of `box-seam`, `briefcase`, `bus-front`, `chat-square-heart`, `chevron-right`
+- [Bootstrap Themes](https://themes.getbootstrap.com/) — **shop 4: whole paid site templates** (one-off cost, vs Squarespace's monthly fee — the lesson's comparison)
+- [W3Schools Bootstrap templates](https://www.w3schools.com/bootstrap5/bootstrap_templates.php) — free, layout-focused starting points (blog, portfolio, sidebar+main); "mostly for getting the big structure done"
+
+Per-component docs used in the Move It build:
+- [Buttons](https://getbootstrap.com/docs/5.3/components/buttons/) — `btn` (shape) + `btn-success` (colour role); source of the warm-up green "Ok" button
+- [Navbar](https://getbootstrap.com/docs/5.3/components/navbar/) — the search-bar variant Move It starts from; `navbar-expand-lg` collapses to a hamburger below 992px
+- [Carousel](https://getbootstrap.com/docs/5.3/components/carousel/) — **the lesson's exercise**: the with-indicators variant, then wrapped in a `container` so it stops being full-bleed
+- [Card](https://getbootstrap.com/docs/5.3/components/card/) — mentioned as the copy-paste-and-replace-the-src example
+- [Bootstrap 5 — Spacing utilities](https://getbootstrap.com/docs/5.3/utilities/spacing/) — **the `{property}{sides}-{size}` table.** Read this rather than trusting the video: **`x` = left+right (horizontal), `y` = top+bottom (vertical)** — the transcript states it backwards. Scale: `0 · .25 · .5 · 1 · 1.5 · 3` rem, and **5 is the maximum that exists**
+- [Bootstrap 5 — Color modes / dark mode](https://getbootstrap.com/docs/5.3/customize/color-modes/) — `data-bs-theme="dark"`, the one attribute that repaints the whole site; works on any element, not just `<html>`
+- [Bootstrap 5 — Utilities overview](https://getbootstrap.com/docs/5.3/utilities/api/) — the third toolbox alongside Layout and Components; every utility is `!important` on purpose
+- [MDN: CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values) — why Bootstrap 5 uses `s`/`e` (start/end) instead of Bootstrap 4's `l`/`r`, so layouts mirror themselves in RTL languages
+- [MDN: `<img>` and SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/SVG_In_HTML_Introduction) — why an SVG loaded via `<img>` is an **isolated document** your CSS cannot reach: no `fill` from the parent, no `.bi` sizing rule, hence the hand-written `height="30"` on every icon
+- [Popper.js](https://popper.js.org/) — what the `bundle` in `bootstrap.bundle.min.js` includes; without it dropdowns/tooltips have nothing to position them
+
 ## HTML Reference
 - [MDN: `<a>` anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a) — from `html_part6.txt`
 - [MDN: `<img>` element (height attribute)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height) — from `EX 4.3 HTML Portfolio Project`
